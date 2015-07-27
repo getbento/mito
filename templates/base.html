@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- POWERED BY BENTOBOX | http://getbento.com -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{{ account.site_title }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ account.meta_description }}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{{ account.meta_keywords }}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if theme.options.typography.font_family or theme.options.typography.h1.font_family or theme.options.typography.h2.font_family %}
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: [
+            {% if theme.options.typography.font_family %}'{{ theme.options.typography.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+            {% if theme.options.typography.h1.font_family %}'{{ theme.options.typography.h1.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+            {% if theme.options.typography.h2.font_family %}'{{ theme.options.typography.h2.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+            ]
+        }
+      });
+    </script>
+    {% endif %}
+    <link rel="stylesheet" href="{{ scss('style.scss') }}" />
+    <!--[if lt IE 10]>
+      <link rel="stylesheet" href="{{ static('css/ie9.css') }}" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" href="{{ static('css/ie8.css') }}" />
+    <![endif]-->
+    <script src="{{ static('js/dist/modernizr.min.js') }}"></script>    
+    <link rel="icon" href="{{ account.favicon_url }}" />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{ account.ga_code }}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}">
+    </script>
+  </head>
+
+  <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile">
+    {% if theme.options.address_bar.show %}
+      {% include 'address_bar/address_bar.html' %}
+    {% endif %}
+    
+    {% include 'header/header.html' %}
+
+    {% for section in navs.main|rejectattr("homepage")|selectattr("template_file_path") %}
+      {% include section.template_file_path with context %}
+    {% endfor %}
+
+    {% include 'footer/footer.html' %}
+
+    <script src="{{ static('js/dist/main.min.js') }}"></script>
+  </body>
+</html>

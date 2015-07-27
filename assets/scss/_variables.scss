@@ -1,0 +1,428 @@
+// @import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+/*
+  SECTION IDs
+*/
+
+// Important: Use '-' not '_' for 2 word ids, e.g. YES: '#private-events', NO: '#private_events'
+// these should correspond to the template_key value in site_admin
+// $locations-id: '#locations';
+// $menus-id:  '#menus';
+// $faqs-id: '#faqs';
+$news-id: '#news';
+// $press-id: '#links';
+// $private-events-id: '#private-dining';
+// $team-id:  '#about';
+// $contact-id: '#contact';
+
+/*
+  GLOBAL
+*/
+
+// BODY
+//$body-bg: #eff1eb;
+//$body-bg-image: false; // true or false. uses images/body-bg.png
+//$body-max-width: 1100px; // 100% for full-width
+
+// FONTS //
+// Available Fonts. Set fonts to true/false in theme.options:
+//$lato: 'Lato', sans-serif;
+//$raleway: 'Raleway', sans-serif;
+//$droid-serif: 'Droid Serif', serif;
+//$roboto: 'Roboto', sans-serif;
+//$oswald: 'Oswald', sans-serif;
+//$volkhov: 'Volkhov', serif;
+//$open-sans: 'Open Sans', sans-serif;
+//$gentium: 'Gentium Basic', serif;
+//$playfair-display:'Playfair Display', serif;
+//$shadows-into-light: 'Shadows Into Light', cursive;
+//$pt-serif: 'PT Serif', serif;
+//$bree-serif: 'Bree Serif', serif;
+//$cardo: 'Cardo', serif;
+//$pt-sans-narrow: 'PT Sans Narrow', sans-serif;
+//$kalam: 'Kalam', cursive;
+//$libre-baskerville: 'Libre Baskerville', cursive;
+//$josefin_sans: 'Josefin Sans', sans-serif;
+//$rokkitt: 'Rokkitt', serif;
+//$josefin_slab: 'Josefin Slab', serif;
+//$source_code_pro: 'Source Code Pro', sans-serif;
+//$jura: 'Jura', sans-serif;
+//$montserrat: 'Montserrat', sans-serif;
+
+//body
+//$body-font: $montserrat;
+//$body-font-weight: 400;
+//$body-font-style: normal;
+//$body-font-align: left;
+//$body-font-size: 14px;
+//$body-font-color: #726659;
+//$body-font-spacing: .6px; // normal, Xpx/-Xpx, initial, inherit
+//$p-line-height: 2;
+
+// nav
+//$nav-font: $montserrat;
+//$nav-font-weight: 400;
+//$nav-font-style: normal;
+//$nav-align: center;
+//$nav-font-transform: uppercase;
+//$nav-font-size: 15px;
+//$nav-font-spacing: 1.5px;
+//$nav-font-color: #726659;
+//$nav-font-color-hover: #d0112b;
+//$nav-font-text-decoration: none;
+//$nav-font-text-decoration-hover: none;
+//$nav-mobile-height: 56px;
+// sticky nav
+//$sticky-nav-font-size: 13px;
+//$sticky-nav-font-spacing: .5px;
+
+// section headers
+//$h1-font: $rokkitt;
+//$h1-font-color: #d0112b;
+//$h1-font-weight: 700;
+//$h1-font-style: normal;
+//$h1-align: center;
+//$h1-font-transform: uppercase; //none, uppercase, capitalize
+//$h1-font-size: 50px;
+//$h1-font-spacing: 1.2px;
+
+// section subheaders
+//$h2-font: $rokkitt;
+//$h2-font-color: #d0112b;
+//$h2-font-weight: 700;
+//$h2-font-style: normal;
+//$h2-align: center;
+//$h2-font-transform: uppercase;
+//$h2-font-size: 21px;
+//$h2-font-spacing: normal;
+
+// links
+//$link-font: $montserrat;
+//$link-color: #726659;
+//$link-hover-color: #d0112b;
+//$link-font-weight: 400;
+//$link-font-style: normal;
+//$link-font-transform: none;
+//$link-text-decoration: underline; // underline or none
+//$link-hover-text-decoration: none; // underline or none
+
+// buttons
+//$btn-font: $rokkitt;
+//$btn-font-color: #ffffff;
+//$btn-font-color-hover: white;
+//$btn-font-weight: 700;
+//$btn-font-style: normal;
+//$btn-font-transform: uppercase; // none, uppercase, capitalize
+//$btn-font-align: center;
+//$btn-font-size: 16px;
+//$btn-font-spacing: 1.5px;
+
+// btn links, e.g. see all and print/download
+//$btn-link-font: $montserrat;
+//$btn-link-font-weight: 400;
+//$btn-link-font-style: normal;
+//$btn-link-font-align: center;
+//$btn-link-font-size: 10px;
+//$btn-link-font-spacing: 1px;
+//$btn-link-font-transform: uppercase;
+//$btn-link-font-color: #726659;
+//$btn-link-hover-color: #d0112b;
+//$btn-link-font-color-hover: white;
+//$btn-link-text-decoration: none; // underline or none
+//$btn-link-hover-text-decoration: none; // underline or none
+
+// form inputs
+//$form-font: $montserrat;
+//$form-color: #2a2a2a;
+//$form-placeholder-color: #a9a9a9;
+//$form-font-weight: 300;
+//$form-font-style: italic;
+//$form-font-transform: none;
+//$form-font-size: 14px;
+//$form-font-spacing: .5px;
+//$form-error-color: red;
+//$form-error-border: red;
+//$form-success-color: green;
+
+// hero
+//$hero-text-align: center;
+
+// hero line 1
+//$hero-line1-font: $rokkitt;
+//$hero-line1-font-color: white;
+//$hero-line1-font-weight: 700;
+//$hero-line1-font-style: normal;
+//$hero-line1-font-transform: uppercase;
+//$hero-line1-font-size-mobile: 24px;
+//$hero-line1-font-size: 55px;
+//$hero-line1-font-spacing: normal;
+//$hero-line1-text-shadow: false; // true of false
+//$hero-line1-margin-bottom: 10px;
+
+// hero line 2
+//$hero-line2-font: $montserrat;
+//$hero-line2-font-color: white;
+//$hero-line2-link-color: white;
+//$hero-line2-font-weight: 300;
+//$hero-line2-font-style: none;
+//$hero-line2-font-transform: none;
+//$hero-line2-font-size-mobile: 12px;
+//$hero-line2-font-size: 38px;
+//$hero-line2-font-spacing: normal;
+//$hero-line2-text-shadow: false; // true of false
+//$hero-line2-margin-bottom: 10px;
+//$hero-line2-line-height: 1.3;
+
+// hero button
+//$hero-button-margin-top: 20px;
+//$hero-button-margin-top-mobile: 10px;
+//$hero-button-font-size-mobile: 11px;
+//$hero-button-height-mobile: 30px;
+
+// END FONTS //
+
+// TABS
+//$tab-font: 'Montserrat';
+//$tab-bg: transparent;
+//$tab-bg-active: transparent;
+//$tab-border-color: transparent; // color of divider lines for tabs. user "transparent" to hide
+//$tab-color: #282828;
+//$tab-color-active: #d0112b;
+//$tab-vpadding: 15px;
+//$tab-width: 200px; // px, %, auto
+//$tab-dropdown-width: 100px; // px, %, auto
+//$tab-align: center; // left, center, right
+
+// BUTTONS
+//$button-font: $rokkitt;
+//$btn-bg: #726659;
+//$btn-hover-lighten: false; // lightens btns 10% on hover if true
+//$btn-hover-darken: true; // darkens btns 10% on hover if true
+//$btn-hover-bgcolor: false; // uses custom bg color on hover if true
+//$btn-bg-hover: #d0112b; // hover background color if $btn-hover-color is true
+//$btn-height: 50px;
+//$btn-h-padding: 40px;
+//$btn-bg-image: false; // true or false. uses images/btn-bg.png
+//$btn-bg-hide-wide: true; // hide background on wide btns
+//$btn-cancel-bg: #808080;
+//$btn-cancel-bg-hover: #A9A9A9;
+// CAROUSELS
+//$carousel-text-align: center;
+//$carousel-icon-set: '1'; // images/carousel-icons/<$carousel-icon-set>/...
+//$carousel-fade: true; // false creates a slide transition
+
+//$carousel-hero-height: 500px;
+//$carousel-hero-parallax-diff: 300px; // must be less than height. Larger the number the more pronounced the parallax. Experiment to get just right for each site
+//$carousel-hero-mobile-height: 300px;
+
+//$carousel-height: 600px;
+//$carousel-parallax-diff: 500px;
+//$carousel-mobile-height: 300px;
+
+// FORMS
+//$form-bg: white;
+//$form-border: solid 1px #dbd8cf;
+//$form-height: 56px;
+//$form-group-margin-bottom: 30px;
+
+//$checkbox-size: 25px;
+//$checkbox-background-color: white;
+//$checkbox-border-color: #dbd8cf;
+//$checkbox-border-width: 1px;
+//$checkbox-border-radius: 0px;
+//$checkbox-check-size: 7px;
+//$checkbox-check-color: #d0112b;
+
+/*
+  SECTIONS
+*/
+
+//$section-padding-top: 80px;
+//$section-padding-bottom:40px;
+//$section-margin-bottom: 0px;
+//$section-margin-bottom-mobile: 0px;
+//$center-column-spacing: 50px; // center gutter spacing for contact, private events, locations, and team
+
+//$section-header-underlines: true; // true of false
+//$section-header-underlines-image: true; // true or false. Uses images/section-underline.png
+//$section-header-underline-image-height: 30px; // height of image
+//$section-header-underlines-color: #ccc;
+//$section-header-underlines-height: 2px;
+//$section-header-underlines-margin-top: 5px;
+//$section-header-underlines-margin-bottom: 25px;
+
+// ADDRESS BLOCK
+//$address-height: 42px;
+//$address-mobile-height: 90px;
+//$icon-size: 26px; // icons must be square. Also determines margin-top for social icons
+//$icon-image-size: 50px; // size of actual images. ie8 fix
+//$icon-bg-size: 25px; // icon background
+//$icon-font-size: 24px;
+//$address-font-color: white;
+//$address-bgcolor: #726659;
+//$address-bgimage: false; // images/address-block-bg.png
+//$address-shadow: false;
+//$social-icon-set: '3'; // images/social-icons/<$social-icon-set>/...
+//$social-icon-color: white;
+//$social-icon-hover: #5a6817;
+//$address-spacing: 5px; // in pixels
+//$address-align-mobile: center;
+//$address-link-color: white;
+//$address-link-color-hover: white;
+//$address-mobile-btn: rgba(0,0,0,.3);
+//$address-mobile-btn-hover: rgba(0,0,0,.6);
+
+// HEADER
+//$header-bg: transparent;
+//$header-bg-image: false; // true or false. uses images/header-bg.png
+//$header-shadow: false;
+//$header-font-color: white;
+//$header-font-color-hover: #428bca;
+//$logo-width: 320px; // all layouts
+//$logo-margin-bottom: 5px; // centered layout (space between logo and nav below it)
+//$header-v-margin-top: 42px; // moves logo, nav and background down all together as one unit
+//$header-v-margin-bottom: 0px;
+//$header-v-padding: 20px; // space from bottom of address bar to top of logo
+//$header-hero-logo-height: 80%; // with hero image layout - really not sure what this does
+//$header-height: 170px; // height of header, covers hero image. Can be set to "auto"
+//$nav-v-margin: 0px; // vertical offset from top of nav section. use to align nav with logo
+//$nav-h-padding: 20px; // space between navigation items (words)
+//$nav-mobile-height: 54px; // minimum height of 50px
+//$nav-mobile-toggle-width: 40px;
+//$nav-mobile-logo-height: 28px;
+//$header-overlay-mobile-offset-top: 0px;
+
+// STICKY HEADER
+//$sticky-bg: #ffffff;
+//$sticky-bg-image: false; // true or false. uses images/header-bg.png
+//$sticky-font-color: #282828;
+//$sticky-font-color-hover: #d0112b;
+//$sticky-logo-height: 40px; // size of smaller logo
+//$sticky-logo-margin-top: 10px;
+
+// HERO
+//$hero-bg: transparent;
+//$alert-bg: white;
+//$alert-color: black;
+//$alert-lightbox-color: rgba(0,0,0,.6);
+//$hero-btn-override: false; // option to override default button style settings with below
+// button overrides. optional.
+//$hero-btn-bg: gray;
+//$hero-btn-bg-hover: gray;
+//$hero-btn-color: white;
+//$hero-btn-color-hover: white;
+//$hero-btn-height: 40px;
+//$hero-alert-offset-top: 250px; // offset from top when header nav is overlaid over hero carousel
+//$hero-alert-mobile-offset-top: 50px;
+//$hero-alert-width: 600px;
+
+// locations/LOCATIONS
+//$locations-bg: transparent;
+//$locations-bg-image: false; // true or false. uses images/locations-bg.png
+//$locations-map-height-mobile: 300px;
+//$locations-map-fullwidth-mobile-zoom: 2; // multiplier, e.g. 1.5 = 150% original size. Minimum of 1. Set to 1 for no zoom.
+//$locations-map-height: 400px;
+//$locations-map-zoom-bg: rgb(211, 104, 104); // don't include opacity, rgb (or hex) only
+//$locations-line-break: solid 1px black;
+//$locations-line-break-image: true; // images/locations-line-break.png
+//$locations-tab-override: false; // option to override default tab style settings with below
+//$locations-btn-override: false; // option to override default button style settings with below
+//$map-btn-width: 300px;
+// tab overrides. optional.
+//$locations-tab-bg: #999999;
+//$locations-tab-bg-active: #6c92b5;
+//$locations-tab-color: white;
+//$locations-tab-color-active: white;
+//$locations-tab-vpadding: 15px;
+//$locations-tab-width: 200px; // px, %, auto
+//$locations-tab-dropdown-width: 100px; // px, %, auto
+//$locations-tab-align: center; // left, center, right
+// button overrides. optional.
+//$locations-btn-bg: #6c92b5;
+//$locations-btn-bg-hover: #6c92b5;
+//$locations-btn-color: #efefef;
+//$locations-btn-color-hover: white;
+//$locations-btn-height: 50px;
+
+// MENUS
+//$menus-bg: transparent;
+//$menus-bg-image: false; // true or false. uses images/menus-bg.png
+//$menus-description-align: center;
+//$menus-description-v-spacing: 15px 0 15px; // top padding, left/right padding (should be 0), bottom padding
+//$menus-intro-align: center; // left, center, right
+//$menus-text-align: center; // left, center, right
+//$menu-caption-height: 300px; // px, min-height to handle full height of captions
+//$menus-tab-override: false; // option to override default tab style settings with below
+// tab overrides. optional.
+//$menus-tab-bg: white;
+//$menus-tab-bg-active: #90a624;
+//$menus-tab-color: #90a624;
+//$menus-tab-color-active: white;
+//$menus-tab-vpadding: 50px;
+//$menus-tab-width: 200px; // px, %, auto
+//$menus-tab-dropdown-width: 100px; // px, %, auto
+//$menus-tab-align: center; // left, center, right
+//$menus-thumbs-h-padding: 30px;
+//$menus-thumbs-margin-top: 40px;
+
+// FAQS
+// $faqs-bg: transparent;
+// $faqs-bg-image: false; // true or false. uses images/faqs-bg.png
+
+// NEWS: pulls from events
+$news-bg: transparent;
+$news-bg-image: false; // true or false. uses images/news-bg.png
+$news-hr-border: none;
+$news-text-align: center; // left, center, right
+$news-withimage-text-align: left;
+$news-modal-title-text-align: center; // left, center, right
+$news-modal-text-align: center; // left, center, right
+
+// PRESS
+//$press-bg: transparent;
+//$press-bg-image: false; // true or false. uses images/press-bg.png
+//$press-text-align: left; // left, center, right
+//$press-group-margin-top: 20px;
+//$press-thumbnail-max-width: 500px;
+//$press-thumbnail-mobile-height: 200px;
+//$press-thumbnail-height: 250px;
+//$press-thumbnail-padding: 0;
+
+// PRIVATE EVENTS
+//$private-events-bg: transparent;
+//$private-events-bg-image: false; // true or false. uses images/private-events-bg.png
+
+// TEAM member needs to be in category even if not using categories
+//$team-bg: transparent;
+//$team-bg-image: false; // true or false. uses images/team-bg.png
+//$team-text-align: left; // left, center, right
+//$team-wysiwyg-text-align: left; // left, center, right
+//$team-description-align: center; // left, center, right
+//$team-description-v-spacing: 10px 0 25px; // top padding, left/right padding (should be 0), bottom padding
+//$team-social-icon-color: #726659;
+//$team-social-icon-hover: #d0112b;
+//$team-image-height: 260px;
+//$team-image-mobile-height: 400px;
+
+// CONTACT
+// $contact-bg: transparent;
+// $contact-bg-image: false; // true or false. uses images/contact-bg.png
+// $contact-location-header-margin-bottom: 5px;
+// $contact-location-margin-bottom: 10px;
+// $contact-header-align: left;
+
+// FOOTER
+//$footer-height: 90px;
+//$footer-content-margin-top: 0px;
+//$footer-color: #726659;
+//$footer-bg: #726659;
+//$footer-bg-image: false; // true or false. uses images/footer-bg.png
+//$footer-btn-override: true; // option to override default button style settings with below
+// button overrides. optional.
+//$footer-btn-text-align: left;
+//$footer-btn-bg: #61574c;
+//$footer-btn-bg-hover: #d0112b;
+//$footer-btn-color: #ffffff;
+//$footer-btn-color-hover: white;
+//$footer-social-icon-color: white;
+//$footer-social-icon-hover: #d0112b;

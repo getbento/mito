@@ -1,0 +1,156 @@
+<!-- Menus -->
+<section id="{{ section.url|replace("/","") }}" class="menus-section">
+  <div class="container-fluid max-width">
+    {% if theme.options.menus.header %}
+      {% include "section-header.html" %}
+    {% endif %}
+
+    {% if section.fields.description and section.fields.description.text %}
+      {% include "section-description.html" %}
+    {% endif %}
+
+    {% if theme.options.menus.thumbnails %}
+      <!-- Thumbnails -->
+      <div class="row thumbs">
+        {% for menu in boxes.menus.all %}
+          <div class="col-md-{{12 // theme.options.menus.columns }}">
+            <!-- mobile -->
+            <a class="visible-xs" href="{{ menu.file }}" target="_blank">
+              <h2>{{menu.name}}</h2>
+              {% if menu.image %}
+                <img src="{{ menu.image }}" alt="{{ menu.name }}">
+              {% endif %}
+            </a>
+
+            <!-- desktop -->
+            <div class="hidden-xs">
+              <h2><a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">{{ menu.name }}</a></h2>
+              
+              {% if menu.image %}
+                <a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">
+                  <img src="{{ menu.image }}" alt="{{ menu.name }}">
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- end Thumbnails -->
+    {% endif %}
+
+    {% if not theme.options.menus.thumbnails and boxes.menus.all|length > 1 %}
+      <!-- Tabs -->
+      <div class="row hidden-xs">
+        <div class="col-xs-12">
+          <ul class="nav nav-pills nav-justified" role="tablist">
+            {% for menu in boxes.menus.all %}
+              {% if loop.index0 < theme.options.menus.columns %}
+                {% if menu.file %}
+                  <li><a target="_blank" href="{{ menu.file }}">{{menu.name}}</a></li>
+                {% else %}
+                  <li {% if loop.first %}class="active"{% endif %}><a href="#{{menu.slug}}" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+                {% endif %}
+              {% else %}
+                <li class="visible-xs"><a href="#{{menu.slug}}" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+              {% endif %}
+            {% endfor %}
+
+
+            {% if boxes.menus.all|length > theme.options.menus.columns %}
+              <li class="dropdown hidden-xs">
+                <a class="dropdown-toggle" data-toggle="dropdown">{{theme.options.menus.tabs.dropdown_text}} <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                  {% for menu in boxes.menus.all %}
+                    {% if loop.index > theme.options.menus.columns %}
+                      <li><a href="#{{menu.slug}}" tabindex="-1" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+                      {% endif %}
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <!-- end Tabs -->
+
+      <!-- Select Menu for Mobile Devices -->
+      <div class="row visible-xs hidden-print">
+        <div class="col-xs-12">
+          {% if boxes.menus.all|rejectattr('file')|list|length > 0 %}
+            <select class="form-control tab-select">
+              {% for menu in boxes.menus.all %}
+                <option value="{{menu.slug}}" {% if menu.file %}file="{{ menu.file }}"{% endif %}>{{menu.name}}</option>
+              {% endfor %}
+            </select>
+          {% else %}
+            {% for menu in boxes.menus.all %}
+              <p>
+                <a href="{{ menu.file }}" target="_blank">
+                  {{menu.name}}
+                </a>
+              </p>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <!-- end Select Menu -->
+
+      <!-- Print Header -->
+      <div class="visible-print-block text-center">
+        {% if theme.options.menus.print_logo %}
+          <img class="print-logo" src="{{ theme.options.menus.print_logo }}" alt="{{ account.site_title }}">
+        {% else %}
+          <img class="print-logo" src="{{ account.logo }}" alt="{{ account.site_title }}">
+        {% endif %}
+        <br/><br/>
+        <h1 class="font-h2">{{ account.site_title }}</h1>
+
+        {% if boxes.locations.all|length > 1 %}
+          {% for location in boxes.locations.all %}
+            <p>{{location.name}}{% if location.address %}<br/>{{location.address}}{% endif %}{% if location.phone_number %}<br/>{{location.phone_number}}{% endif %}</p>
+          {% endfor %}
+        {% else %}
+          <p>{% if boxes.locations.all.0.address %}{{boxes.locations.all.0.address}}{% endif %}{% if boxes.locations.all.0.phone_number %}<br/>{{boxes.locations.all.0.phone_number}}{% endif %}</p>
+        {% endif %}
+      </div>
+      <!-- end Print Header -->
+
+      <!-- Tab Panes -->
+      <div class="row tab-content">
+        {% for menu in boxes.menus.all %}
+          {% if not menu.file %}
+            <div class="tab-pane {% if loop.first %}active{% endif %}" id="{{menu.slug}}">
+              <div class=" col-xs-12 visible-print-block text-center">
+                <h2>{{menu.name}}</h2>
+              </div>
+
+              <div class="col-xs-12 text-right hidden-print hidden-xs">
+                <a href="javascript:window.print();" class="ss-print print-link">Print/Download</a>
+              </div>
+
+              <div class="info-wrapper">
+                <div class="col-sm-12 wysiwyg">
+                  {{menu.contents|safe}}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <!-- end Tab Panes -->
+    {% endif %}
+  </div>
+</section>
+<!-- end Menus -->
+
+<!-- Menus Carousel -->
+{% if theme.options.menus.gallery %}
+  <div id="menus-carousel" class="carousel-wrapper">
+    {% for gallery in boxes.galleries.all %}
+      {% if gallery.name|lower == "menus" %}
+        {% include "carousel.html" %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<!-- end Menus Carousel -->

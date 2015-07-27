@@ -1,0 +1,81 @@
+{% import 'forms.html' as forms with context %}
+{% call forms.email_form('info') %}
+  <input id="recipient" type="hidden" name="recipient" value="{{ theme.options.private_events.contact_email }}">
+
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="email" class="sr-only">Email</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="Email*">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="firstName" class="sr-only">First Name</label>
+      <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name*">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="lastName" class="sr-only">Last Name</label>
+      <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name*">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="phone" class="sr-only">Phone Number</label>
+      <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone Number">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="number-people" class="sr-only">Number of People</label>
+      <input type="text" class="form-control" id="number-people" placeholder="Number of people">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <label for="date" class="sr-only">Date</label>
+      <input type='text' name="date" class="form-control" id="datepicker" placeholder="Date" />
+      <!-- <input type="date" class="form-control" id="date" placeholder="Date"> -->
+    </div>
+    <div class="col-sm-6">
+      <label for="date" class="sr-only">Time</label>
+      <input type='text' name="time" class="form-control" id="timepicker" placeholder="Time" />
+      <!-- <label for="time" class="sr-only">Time</label>
+      <input type="time" class="form-control" id="time" placeholder="time"> -->
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="event-type" class="sr-only">Type of Event</label>
+      <div class="input-icon-wrapper">
+        <b class="caret"></b>
+        <select name="event-type" class="form-control">
+          <option selected="selected" disabled>Type of event</b></option>
+          {% for option in theme.options.private_events.form.event_types %}
+            <option value="{{option}}">{{option}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="additional" class="sr-only">Additional Info</label>
+      <textarea name="additional-info" id="additional" class="form-control" placeholder="Additional information"></textarea>
+    </div>
+  </div>
+  <div class="form-group row checkbox">
+    <div class="col-sm-12">
+      <input type="checkbox" value="Yes" id="get_updates" name="get_udpates" />
+      <label for="get_updates"><span class="box"></span><span class="label-text">Sign up to get the latest updates</span></label>
+    </div>
+  </div>
+  <div class="form-group row submit-group">
+    <div class="col-sm-12">
+      <p class="error-msg">An error occurred.</p>
+      <p class="success-msg">Success! Thank you for your inquiry. Someone will be in touch with you shortly.</p>
+      <button type="button" class="btn btn-default submit">Send <b class="caret-right"></b></button>
+    </div>
+  </div>
+{% endcall %}

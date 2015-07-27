@@ -1,0 +1,49 @@
+<div class="google-map transparent{% if full_width == 'true' %} map-full-width{% endif %}">
+  {% if location.custom_map_image %}
+    <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=15" target="_blank">
+      <img src="{{ location.map_image_xlarge.url }}" alt="{{location.name}} Map" />
+    </a>
+  {% else %}
+    <div id="map-canvas-{{ location.slug }}" class="map-canvas"></div>
+    <div id="cd-zoom-in"></div>
+    <div id="cd-zoom-out"></div>
+
+    <script type="text/javascript">
+      function initialize () {
+        geocoder = new google.maps.Geocoder();
+        var address = "{{ location.name }}" + " " + "{{ location.address }}";
+
+        geocoder.geocode( {'address': address}, function (results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            var map_location = results[0].geometry.location;
+            
+            function onLoad () {
+              $('#map-canvas-{{ location.slug }}').parents('.google-map').removeClass('transparent');
+            }
+
+            loadMap({
+              canvas_id: "map-canvas-{{ location.slug }}",
+              map_location: map_location,
+              map_zoom: 15,
+              main_color: "{{TEMPLATE_OPTIONS.locations.map_color}}",
+              saturation_value: -20,
+              brightness_value: 5,
+              onLoad: onLoad
+              {% if TEMPLATE_OPTIONS.locations.map_icon %}
+                , marker_url: "{{ TEMPLATE_OPTIONS.locations.map_icon }}"
+              {% endif %},
+            });
+          } else {
+            $('#map-canvas-{{ location.slug }}').parents('.google-map').addClass('hidden');
+          }
+        });
+      }
+
+      google.maps.event.addDomListener(window, "load", initialize);
+    </script>
+  {% endif %}
+
+  <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=17" target="_blank">
+    <button class="btn wide">Get Directions</button>
+  </a>
+</div>

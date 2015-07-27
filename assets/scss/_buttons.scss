@@ -1,0 +1,45 @@
+.btn, .btn-font, a.btn {
+  @include border-radius(0);
+  background-color: {{ theme.options.buttons.bg_color }};
+  height: 50px;
+  line-height: 50px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  {% if theme.options.header.nav.font_family %}
+    font-family: {{ theme.options.header.nav.font_family }};
+  {% endif %}
+  font-weight: 400;
+  font-size: 16px !important;
+  font-style: normal !important;
+  color: {{ theme.options.buttons.color }};
+  border-style: solid;
+  border-color: {{ theme.options.buttons.border_color }};
+  border-width: {{ theme.options.buttons.border_width }} !important;
+  text-decoration: none;
+  outline: none!important;
+
+  {% if theme.options.buttons.bg_image %}
+    background-image: url('{{ theme.options.buttons.bg_image }}') !important;
+  {% endif %}
+
+  {% if theme.options.buttons.rounded %}
+    border-radius: 4px;
+  {% endif %}
+
+  &:hover, &:focus, &:active {
+    color: {{ theme.options.buttons.color }} !important;
+    
+    {% if theme.options.buttons.bg_color %}
+      background-color: darken({{ theme.options.buttons.bg_color }}, 10%) !important;
+    {% endif %}
+  }
+}
+
+.btn-wrapper {
+  text-align: center;
+  a {
+    display: inline-block !important;
+  }
+}

@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Homepage Alert",
+        "show_title": true,
+        "show_text": true,
+        "display_on_homepage": true
+    },
+    {
+        "name": "Footer",
+        "show_text": true,
+        "display_on_homepage": true
+    }
+]

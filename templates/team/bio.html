@@ -1,0 +1,46 @@
+<article class="team-member col-md-{{12 // theme.options.team.columns }}">
+  <div {% if theme.options.team.columns == 1 %}class="col-sm-4"{% endif %}>
+    {% if person.image %}
+      <div class="person-image" style="background-image: url('{{person.image}}')">
+      </div>
+    {% endif %}
+
+    {% if person.button_target %}
+      <a target="_blank" href="{{ person.button_target }}"><img src="{{ ACCOUNT_STATIC_URL }}img/aprildotcom.png" alt="{{ person.button_text }}" /></a>
+    {% endif %}
+  </div>
+
+  <div {% if theme.options.team.columns == 1 %}class="col-sm-8"{% endif %}>
+    <h2>{{ person.name }}</h2>
+
+    {% if person.title %}
+      <h4>{{ person.title }}</h4>
+    {% endif %}
+
+    {% if theme.options.team.bio %}
+      <div class="wysiwyg">{{ person.bio|safe }}</div>
+    {% endif %}
+
+    {% if theme.options.team.icons %}
+      <div class="social-links">
+        <ul class="list-inline">
+          {% if person.facebook_link %}
+            <li><a class="ss-facebook ss-icon ss-social-circle" target="_blank" href="{{ person.facebook_link }}"></a></li>
+          {% endif %}
+
+          {% if person.twitter_link %}
+            <li><a class="ss-twitter ss-icon ss-social-circle" target="_blank" href="{{ person.twitter_link }}"></a></li>
+          {% endif %}
+
+          {% if person.instagram_link %}
+            <li><a class="ss-instagram ss-icon ss-social-circle" target="_blank" href="{{ person.instagram_link }}"></a></li>
+          {% endif %}
+
+          {% if person.vine_link %}
+            <li><a class="ss-vine ss-icon ss-social-circle" target="_blank" href="{{ person.vine_link }}"></a></li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</article>

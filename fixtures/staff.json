@@ -1,0 +1,20 @@
+[
+    {
+        "name": "The Chef",
+        "title": "Executive Chef",
+        "image": "accounts/625bc6d02c88547eaf5bfe5e446298c3/mediausers/images/bhxT5W2OTpqS6KOjJaNK_2776bcde76c843d1c3c5955f8936e80b.jpg",
+        "bio": "Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam quis risus eget urna mollis ornare vel eu leo."
+    },
+    {
+        "name": "The Silent Partner",
+        "title": "Partner",
+        "image": "accounts/625bc6d02c88547eaf5bfe5e446298c3/mediausers/images/Ct9QgJuSaOcaEWuSgHSo_9d03ec19662a51a749b4010a75d82dd1.jpg",
+        "bio": "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Aenean lacinia bibendum nulla sed consectetur. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. "
+    },
+    {
+        "name": "The Front of House",
+        "title": "Mastermind",
+        "image": "accounts/625bc6d02c88547eaf5bfe5e446298c3/mediausers/images/nlfrxDfKQDqsyk6Gowq5_9a3974f868e70b46dfeee2c6033e0561.jpg",
+        "bio": "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Aenean lacinia bibendum nulla sed consectetur. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
+    }
+]

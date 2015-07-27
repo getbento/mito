@@ -1,0 +1,81 @@
+.private-events-section {
+  background-color: {{ theme.options.private_events.bg_color }} !important;
+
+  {% if theme.options.private_events.bg_image %}
+    background-image: url('{{ theme.options.private_events.bg_image }}');
+  {% endif %}
+
+  h2 {
+    text-align: left;
+  }
+
+  .venue {
+    margin-bottom: 45px;
+    margin-top: 10px;
+
+    .carousel {
+      top: 20px;
+      height: 500px;
+
+      .carousel-inner {
+        height: 500px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      margin-bottom: 0px;
+
+      .carousel {
+        top: 0px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  .single-venue-inquiry {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .push-down {
+    margin-top: 65px;
+
+    @media (max-width: 767px) {
+      margin-top: 10px;
+    }
+  }
+
+  .text-left-right {
+    text-align: left;
+
+    @media (min-width: 768px) {
+      text-align: right;
+    }
+  }
+
+  button.btn:first-of-type {
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 767px) {
+    button.btn {
+      margin-top: 10px;
+      display: block;
+    }
+  }
+
+  #event_inquiry {
+    // text-align: left;
+
+    &.collapse {
+      .btn.submit {
+        float: left;
+      }
+
+      .btn.cancel {
+        margin-left: 15px;
+        float: left;
+      }
+    }
+  }
+}

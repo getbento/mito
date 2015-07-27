@@ -1,0 +1,13 @@
+{
+  "name": "Press Template",
+  "fields": {
+    "description": {
+      "title": "Description",
+      "type":"section",
+      "items": {
+        "text":"wysiwyg"
+      }
+    }   
+  },
+  "wireframe": "section-description"
+}

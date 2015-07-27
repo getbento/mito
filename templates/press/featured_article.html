@@ -1,0 +1,33 @@
+<div class="col-md-{{ 12 // theme.options.press.columns }}">
+    {% if article.image %}
+      {% if article.file %}
+        <div class="thumbnail">
+          <a class="lightbox" href="{{ article.file }}" data-slug="{{ article.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">
+            <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')"></div>
+          </a>
+        </div>
+      {% elif article.url %}
+        <a href="{{article.url}}" target="_blank">
+          <div class="thumbnail">
+            <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')"></div>
+          </div>
+        </a>
+      {% else %}
+        <div class="thumbnail">
+          <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}'')"></div>
+        </div>
+      {% endif %}
+    {% endif %}
+    <div class="caption">
+      {% if article.file %}
+        <h3><a class="lightbox" href="{{article.file}}" data-slug="{{ article.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">{{ article.title }}</a></h3>
+      {% elif article.url %}
+        <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+      {% else %}
+        <h3>{{ article.title }}</h3>
+      {% endif %}
+      <p>
+        {% if article.source %}<span class="source">{{ article.source }}</span>{% endif %} {% if article.date %}| <span class="date">{{ article.date }}</span>{% endif %}
+      <p>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{% extends 'bento_admin/base_minimal.html' %}
+
+{% block title %}Press Kit{% endblock %}
+
+{% block body_class %}presskit-login{% endblock %}
+
+{% block content %}
+<div class="container">
+			<div class="login-container">
+				<form action="" method="post">
+					{% csrf_token %}
+					<div class="login-form">
+						<div class="login-form-content">
+							{% for item in press_kit_documents %}
+								{% if item.name == "Intro Text" %}
+									<img src="{{item.image_url}}">
+								{% endif %}
+							{% endfor %}
+							<p>
+								Please enter a password to view the media kit.
+							</p>
+								{% if authentication_failed %}
+								<div class="login-msg warning">
+									<span class="ss-icon">&#x26A0;</span>
+								    <span class="msg">Sorry, we could not verify this password.</span>
+								</div>
+								{% endif %}
+							<div class="text-wrap">
+								<label for="txt_pwd" class="left-icon"><span class="ss-icon">&#x1F511;</span></label>
+								<input type="password" name="password" class="regular-text" id="password" placeholder="Password" />
+							</div>
+							<!-- <a target="_blank" href="mailto:pr@monumentlane.com">Email pr@monumentlane.com to obtain a password</a> -->
+						</div>
+					</div><!--login-form-->
+					<div class="button-wrap">
+						<input type="submit" class="regular-button red-button" value="Submit" id="submit" />
+					</div>
+				</form>
+			</div>
+
+		</div><!--container-->
+
+{% endblock %}

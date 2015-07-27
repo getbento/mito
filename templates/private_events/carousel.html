@@ -1,0 +1,19 @@
+<div id="carousel-venue-{{ venue.slug }}" class="carousel slide hidden-print no-parallax" data-ride="carousel" data-interval="4000" data-pause="false">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    {% for image in venue.images %}
+      <div class="item {% if loop.index0 == 0 %}active{% endif %}" style="background-image: url('{{ image }}')">
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if venue.images > 1 %}
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-team" data-slide="prev">
+      <span></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-team" data-slide="next">
+      <span></span>
+    </a>
+  {% endif %}
+</div>

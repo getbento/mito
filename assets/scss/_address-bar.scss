@@ -1,0 +1,91 @@
+#address-bar {
+  background-color: {{ theme.options.address_bar.bg_color }};
+  margin-bottom: 0;
+  max-width: 100%;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 0;
+  color: {{ theme.options.address_bar.color }};
+  height:  auto;
+  text-align: center;
+
+  {% if theme.options.address_bar.bg_image %}
+    background-image: url('{{ theme.options.address_bar.bg_image }}');
+  {% endif %}
+
+  {% if theme.options.address_bar.shadow %}
+    @include box-shadow(0 1px 6px rgba(0,0,0,0.4));
+  {% endif %}
+
+  @media (min-width: 768px) {
+    height: 42px;
+    padding: 0;
+
+    {% if theme.options.address_bar.social_icons %}
+      text-align: left;
+    {% endif %}
+  }
+
+  a:not(.btn) {
+    {% if theme.options.typography.font_family %}
+      font-family: {{ theme.options.typography.font_family }};
+    {% endif %}
+    color: {{ theme.options.address_bar.color }};
+    line-height: 42px;
+    margin-right: 10px;
+    display: block;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover, &:active, &:focus {
+      color: {{ theme.options.address_bar.hover_color }};
+    }
+
+    @media (min-width: 768px) {
+      display: inline-block;
+    }
+  }
+
+  .social-links {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 15px;
+    margin: 0;
+    z-index: 10;
+
+    a {
+      cursor: pointer;
+      line-height: normal;
+      margin-top: 6px;
+      display: inline-block;
+      font-size: 24px;
+      text-decoration: none !important;
+      @include transition(all .4s);
+      color: {{ theme.options.address_bar.color }};
+
+      &:hover, &:focus, &:active {
+        color: {{ theme.options.address_bar.hover_color }};
+      }
+    }
+  }
+
+  .btn {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}
+
+.address-bar-sticky {
+  #address-bar {
+    @media (min-width: 768px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      width: 100%;
+    }
+  }
+}

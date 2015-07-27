@@ -1,0 +1,27 @@
+<section id="address-bar" class="hidden-print {% if boxes.locations.all|length > 1 or (not theme.options.address_bar.mobile_address and not theme.options.address_bar.mobile_phone_number and not theme.options.address_bar.mobile_reservation_btn) %}hidden-xs{% endif %}">
+  <div class="container-fluid max-width">
+    <div class="row">
+      {% if theme.options.address_bar.social_icons %}
+        <div class="social-links hidden-xs">
+          {% include "social-icons.html" %}
+        </div>
+      {% endif %}
+      {% if boxes.locations.all|length == 1 %}
+        {% set location=boxes.locations.all.0 %}
+        <div class="col-sm-12{% if not theme.options.address_bar.social_icons %} text-center{% endif %}">
+          {% if location.address %}
+            <a class="address {% if not theme.options.address_bar.mobile_address %}hidden-xs{% endif %}" href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{ location.address }}</a>
+          {% endif %}
+
+          {% if location.phone_number %}
+            <a class="phone-number {% if not theme.options.address_bar.mobile_phone_number %}hidden-xs{% endif %}" href="tel:{{ location.phone_number }}" target="_blank">{{ location.phone_number }}</a>
+          {% endif %}
+
+          {% if theme.options.address_bar.mobile_reservation_btn %}
+            <a href="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism" target="_blank" class="btn visible-xs">Make a Reservation</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

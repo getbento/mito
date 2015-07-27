@@ -1,0 +1,9 @@
+<section id="{{ section.url|replace("/","") }}" class="news-section hidden-print">
+  {% if theme.options.news.header %}
+    {% include "section-header.html" %}
+  {% endif %}
+
+  {% if section.fields.description and section.fields.description.text %}
+    {% include "section-description.html" %}
+  {% endif %}
+</section>

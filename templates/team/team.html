@@ -1,0 +1,45 @@
+<section id="{{ section.url|replace("/","") }}" class="team-section hidden-print">
+  <div class="container-fluid max-width">
+    {% if theme.options.team.header %}
+      {% include "section-header.html" %}
+    {% endif %}
+
+    {% if section.fields.description and section.fields.description.text %}
+      {% include "section-description.html" %}
+    {% endif %}
+
+    <!-- Staff -->
+    {% with categories = boxes.team.by_category_slug %}
+    {% for category in categories %}
+      {% if categories[category].all|list|length > 0 %}
+        {% if theme.options.team.categories and categories[category].slug != 'uncategorized' %}
+        <div class="row">
+          <h2 class="col-sm-12">{{categories[category].name}}</h2>
+        </div>
+        {% endif %}
+
+        {% for group in categories[category].all|batch(theme.options.team.columns) %}
+          <div class="row">
+            {% for person in group %}
+              {% include "team/bio.html" with context %}
+            {% endfor %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    {% endwith %}
+    <!-- End Staff -->
+  </div>
+</section>
+
+<!-- Team Carousel -->
+{% if theme.options.team.gallery %}
+  <div id="team-carousel" class="carousel-wrapper">
+    {% for gallery in boxes.galleries.all %}
+      {% if gallery.name|lower == "team" %}
+        {% include "carousel.html" %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<!-- end Team Carousel -->

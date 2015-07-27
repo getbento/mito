@@ -1,0 +1,48 @@
+.press-section {
+  background-color: {{ theme.options.press.bg_color }} !important;
+
+  {% if theme.options.press.bg_image %}
+    background-image: url('{{ theme.options.press.bg_image }}');
+  {% endif %}
+
+  .thumbnail {
+    padding: 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pressthumb {
+    width: 100%;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    background-size: cover;
+    background-position: top;
+
+    @media (min-width: 768px) {
+      height: 250px;
+      background-position: center;
+    }
+  }
+
+  .print-link {
+    .closed {
+      display: none;
+    }
+
+    &.collapsed {
+      .open {
+        display: none;
+      }
+      .closed {
+        display: block;
+      }
+    }
+  }
+
+  .press-group {
+    margin-top: 20px;
+  }
+}

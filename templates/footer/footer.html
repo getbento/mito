@@ -1,0 +1,109 @@
+<!-- Opentable Modal -->
+<div id="footer-modals">
+  <div class="modal fade opentable" id="modal-opentable" tabindex="-1" role="dialog" aria-labelledby="modal-opentable-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <iframe src="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism" width="auto" height="auto" frameBorder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer" class="hidden-print">
+  <div class="container-fluid max-width">
+    <div id="main-footer-content">
+      {% if theme.options.footer.custom_text %}
+        <div id="footer-text" class="wysiwyg">
+          {{ theme.options.footer.custom_text }}
+        </div>
+      {% endif %}
+
+      {% if theme.options.footer.reservations_btn %}
+        <!-- Opentable -->
+        {% if account.services.opentable.id %}
+          <div class="OTButton">
+            <script type="text/javascript" src="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism"></script>
+          </div>
+          
+          <!-- Desktop -->
+          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable">Make a Reservation</button>
+
+          <!-- Mobile -->
+          <div class="btn-wrapper visible-xs">
+            <a href="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism" target="_blank" class="btn">Make a Reservation</a>
+          </div>
+        {% endif %}
+        <!-- end Opentable -->
+
+        <!-- Resy -->
+        {% if account.resy_api_key %}
+            <div id="BookWithResy"></div>
+            <script src="https://widgets.resy.com/embed.js"></script>
+            <script>resyWidget.addButton(document.getElementById('BookWithResy'), { 'venueId': {{ account.resy_venue_id }}, 'apiKey': '{{ account.resy_api_key }}' });
+            </script>
+        {% endif %}
+        <!-- end Resy -->
+      {% endif %}
+
+      <div class="left-content">
+        {% if theme.options.footer.email_signup %}
+          <button id="signup-btn" class="btn" data-toggle="collapse" data-target="#footerform">
+            Sign up for the latest updates
+          </button>
+        {% endif %}
+
+        {% if theme.options.footer.social_links %}
+          <div class="social-links hidden-xs">
+            {% include "social-icons.html" %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div id="footerform" class="collapse">
+      <div class="row">
+        <div class="col-sm-12">
+          <button type="button" class="close" data-toggle="collapse" data-target="#footerform"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div>
+      </div>
+
+      {% import 'forms.html' as forms with context %}
+      {% call forms.email_form('info') %}
+        {% csrf_token %}
+        <input type="hidden" name="group_id" value="67476"/>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-4">
+              <label for="first_name" class="sr-only">First Name</label>
+              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+            </div>
+            <div class="col-sm-4">
+              <label for="last_name" class="sr-only">Last Name</label>
+              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+            </div>
+            <div class="col-sm-4">
+              <label for="email" class="sr-only">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email*">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 col-sm-offset-9 send">
+            <p class="error-msg">An error occurred.</p>
+            <p class="success-msg text-right">Success! Thank you for signing up.</p>
+            <button type="button" class="btn btn-default wide submit">Send <b class="caret-right"></b></button>
+          </div>
+        </div>
+      {% endcall %}
+    </div>
+  </div>
+</footer>
+
+{% if theme.options.footer.powered_by_bento %}
+<div id="powered-by" class="hidden-print">
+  <div class="wrapper">
+    powered by <a href="http://getbento.com" target="_blank">Bentobox</a>
+  </div>
+</div>
+{% endif %}

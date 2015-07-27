@@ -1,0 +1,65 @@
+<section id="{{ section.url|replace("/","") }}" class="locations-section hidden-print">
+  <div class="container-fluid max-width">
+    {% if theme.options.locations.header %}
+      {% include "section-header.html" %}
+    {% endif %}
+
+    {% if section.fields.description and section.fields.description.text %}
+      {% include "section-description.html" %}
+    {% endif %}
+
+    {% if boxes.locations.all|length > 1 %}
+      <div class="multi-locations">
+        {% for group in boxes.locations.all|batch(theme.options.locations.columns) %}
+          <div class="row">
+            {% for location in group %}
+              <div class="col-md-{{12 // theme.options.locations.columns }}">
+                <h2>{{location.name}}</h2>
+                <p>{{location.address}}</p>
+                <div class="wysiwyg">{{location.description|safe}}</div>
+                <div class="wysiwyg">{{location.hours|safe}}</div>
+                {% if theme.options.locations.map  %}
+                  {% include "map.html" %}
+                {% endif %}
+              </div>
+            {% endfor%}
+          </div>
+        {% endfor %}
+      </div>
+    {% elif boxes.locations.all %}
+      {% set location = boxes.locations.all.0 %}
+      <div class="row">
+        <div class="{% if not theme.options.locations.map or theme.options.locations.map_full_width %}col-sm-12{% else %}col-sm-6{% endif %} wysiwyg">
+          {{location.hours|safe}}
+        </div>
+
+        {% if theme.options.locations.map and not theme.options.locations.map_full_width %}
+          <div class="col-sm-6">
+            {% include "map.html" %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if theme.options.locations.map and theme.options.locations.map_full_width %}
+        <div class="row">
+          {% with full_width="true" %}
+          {% include "map.html"  %}
+          {% endwith %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- Locations Carousel -->
+{% if theme.options.locations.gallery %}
+  <div id="locations-carousel" class="carousel-wrapper">
+    {% for gallery in boxes.galleries.all %}
+      {% if gallery.name|lower == "locations" %}
+        {% include "carousel.html" %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<!-- end Locations Carousel -->

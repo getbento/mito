@@ -1,0 +1,101 @@
+@import 'vendor/compass/css3';
+@import 'vendor/compass/css3/transition';
+@import 'vendor/compass/css3/opacity';
+
+.news-section {
+  background-color: $news-bg;
+
+  {% if theme.options.news.bg_image %}
+    background-image: url('{{ theme.options.news.bg_image }}');
+  {% endif %}
+
+  h2, p {
+    text-align: $news-text-align;
+    font-weight: normal;
+  }
+
+  .carousel-wrapper {
+    width: 70%;
+    margin: 0 auto;
+    min-width: 320px;
+  }
+
+  .carousel-control {
+    background-image: none;
+  }
+
+  #carousel-news {
+    top: 0;
+    margin: 40px 0 30px;
+    height: auto!important;
+
+    .carousel-inner {
+      height: 100%!important;
+    }
+
+    .with-image {
+      p, h2 {
+        text-align: $news-withimage-text-align;
+      }
+    }
+
+    .item {
+      cursor: pointer;
+
+      p, h2 {
+        margin: 0
+      }
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  hr {
+    border-top: $news-hr-border;
+  }
+
+  .modal-content {
+    padding: 40px 60px;
+
+    h2 {
+      margin-bottom: 40px;
+      text-align: $news-modal-title-text-align;
+    }
+
+    .wysiwyg {
+      text-align: $news-modal-text-align;
+    }
+  }
+}
+
+// #contact {
+//   background-color: $contact-bg;
+
+//   {% if theme.options.contact.bg_image %}
+//     background-image: url('{{ theme.options.contact.bg_image }}');
+//   {% endif %}
+
+//   .blurb {
+//     margin-bottom: 30px;
+//   }
+
+//   .pull-right {
+//     float: none!important;
+//     @media (min-width: 768px) {
+//       float: right!important;
+//     }
+//   }
+
+//   h2 {
+//     margin: 0;
+//     text-align: left;
+//     margin-bottom: $contact-location-header-margin-bottom;
+//   }
+
+//   p {
+//     margin: 0;
+//     margin-bottom: $contact-location-margin-bottom;
+//   }
+// }

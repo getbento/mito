@@ -1,0 +1,15 @@
+<header class="row hidden-print">
+  <div class="col-xs-12">
+    <h1>{{ section.name }}</h1>
+  </div>
+
+  {% if theme.options.layout.section_underlines %}
+    {% if theme.options.layout.section_underlines_image %}
+      <div class="section-underline-wrapper">
+        <img class="section-underline-image" src="{{ theme.options.layout.section_underlines_image }}" alt="header underline">
+      </div>
+    {% else %}
+      <hr class="section-underline">
+    {% endif %}
+  {% endif %}
+</header>

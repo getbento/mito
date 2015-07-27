@@ -1,0 +1,53 @@
+.team-section {
+  background-color: {{ theme.options.team.bg_color }} !important;
+
+  {% if theme.options.team.bg_image %}
+    background-image: url('{{ theme.options.team.bg_image }}');
+  {% endif %}
+
+  .container-fluid > .row {
+    margin-bottom: 20px;
+  }
+
+  .team-member {
+    @media (max-width: 767px) {
+      margin-bottom: 50px;
+    }
+  }
+
+  .person-image {
+    background-size: cover;
+    background-position: center;
+    height: 260px;
+
+    @media (max-width: 767px) {
+      height: 400px;
+    }
+  }
+
+  .category-name {
+    margin-top: 40px;
+  }
+
+  .description {
+    padding: 10px 0 25px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .social-links {
+    a {
+      color: {{ theme.options.team.icon_color }};
+
+      &:hover, &:focus, &:active {
+        color: {{ theme.options.team.icon_hover_color }};
+      }
+    }
+  }
+
+  img:not(.section-underline-image) {
+    width: 100%;
+  }
+}
