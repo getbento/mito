@@ -14,7 +14,7 @@
       <nav class="nav text-right">
         <ul class="list-inline">
           {% for item in navs.main|rejectattr("homepage") %}
-            <li><a href="#{{ item.url|replace("/","") }}">{{ item.name }}</a></li>
+            <li><a href="#{{ item.slug }}">{{ item.name }}</a></li>
           {% endfor %}
           {% if theme.options.header.nav.reservations_link %}
             <li><a data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>

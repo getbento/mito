@@ -52,6 +52,7 @@ footer {
 
   #signup-btn {
     display: inline-block;
+    margin-left: 0;
   }
 
   .social-links {
@@ -157,5 +158,11 @@ footer {
     &:hover, &:active, &:focus {
       color: {{ theme.options.address_bar.hover_color }};
     }
+  }
+}
+
+#BookWithResy {
+  span {
+    bottom: 0 !important;
   }
 }

@@ -5,11 +5,25 @@
     background-image: url('{{ theme.options.press.bg_image }}');
   {% endif %}
 
+  .featured-press, .unfeatured {
+    .row:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+
+  .unfeatured {
+    margin-top: 15px;
+  }
+
   .thumbnail {
     padding: 0;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+
+    @media (max-width: 767px) {
+      margin-top: 30px;
+    }
   }
 
   .pressthumb {
@@ -39,6 +53,17 @@
       .closed {
         display: block;
       }
+    }
+  }
+
+  .caption {
+    h3 {
+      margin: 0 0 7px;
+    }
+
+    p {
+      line-height: 1.2;
+      margin: 0;
     }
   }
 

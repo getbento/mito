@@ -5,6 +5,7 @@ $(document).ready(function () {
   var $carousel = $($carousels[0]);
   var $parallax_carousels = $('.parallax .carousel:not(.no-parallax)');
   var $headerSlidesText = $('.carousel-caption-wrapper');
+  var $hidden_carousels = $('.carousel-inner.transparent');
 
   // Hammer Gestures
   var hammer = {};
@@ -30,52 +31,10 @@ $(document).ready(function () {
 
   $carousels.each(initHammerGesture);
 
-  // Parallax
-  function isElementInView (el) {
-      //special bonus for those using jQuery
-      if (typeof jQuery === "function" && el instanceof jQuery) {
-          el = el[0];
-      }
+  // Parallax  
+  var s = skrollr.init({
+    forceHeight: false
+  });
 
-      var rect = el.getBoundingClientRect();
-
-      return (
-          rect.bottom >= 0 &&
-          rect.top <= $(window).height()
-      );
-  }
-
-  function parallaxCarousel () {
-    var scrollTop = $window.scrollTop();
-    var windowHeight = $window.height();
-    var diff = 500;
-
-    $parallax_carousels.each(function (index, el) {
-      if (isElementInView(el)) {
-        var $this = $(el);
-        var $inner = $this.find('.carousel-inner');
-
-        var carouselHeight = $this.height();
-        var carouselOffset = $this.offset().top;
-        
-        var position = (scrollTop - carouselOffset + windowHeight) / (carouselHeight + windowHeight);
-        position = Math.max(Math.min(position, 1), 0);
-        
-        var offset = -diff + diff*position;
-        $inner.css({'transform': 'translate3d(0px, ' + offset + 'px, 0px)'});
-
-        if ($this.attr('id') === 'header-carousel') {
-          $headerSlidesText.css('top', offset*-1);
-        }
-      }
-    });
-
-    $('.carousel-inner.transparent').removeClass('transparent');
-  }
-
-  if (!jQuery.browser.mobile) {
-    $window.on('load scroll resize', function() {
-       window.requestAnimationFrame(parallaxCarousel);
-    });
-  }
+  $hidden_carousels.removeClass('transparent');
 });

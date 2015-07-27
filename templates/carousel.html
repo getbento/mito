@@ -1,6 +1,6 @@
 <div id="{{gallery.slug}}-carousel" class="carousel slide hidden-print{% if parallax == 'false' %} no-parallax{%endif %}" data-ride="carousel" data-interval="4000" data-pause="false">
   <!-- Wrapper for slides -->
-  <div class="carousel-inner">
+  <div class="carousel-inner" data-top-bottom="transform:translate3d(0px, 250px, 0px);" data-bottom-top="transform:translate3d(0px, -250px, 0px)">
     {% for image in gallery.images %}
       <div id="{{gallery.slug}}-slide-{{loop.index0}}" class="item {% if loop.index0 == 0 %}active{% endif %}" style="background-image: url('{{ image }}')">
       </div>
@@ -9,10 +9,10 @@
 
   {% if gallery.images > 1 %}
     <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-team" data-slide="prev">
+    <a class="left carousel-control" href="#{{gallery.slug}}-carousel" data-slide="prev">
       <span></span>
     </a>
-    <a class="right carousel-control" href="#carousel-team" data-slide="next">
+    <a class="right carousel-control" href="#{{gallery.slug}}-carousel" data-slide="next">
       <span></span>
     </a>
   {% endif %}

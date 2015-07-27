@@ -25,12 +25,12 @@
               canvas_id: "map-canvas-{{ location.slug }}",
               map_location: map_location,
               map_zoom: 15,
-              main_color: "{{TEMPLATE_OPTIONS.locations.map_color}}",
+              main_color: "{{ theme.options.locations.map_color }}",
               saturation_value: -20,
               brightness_value: 5,
               onLoad: onLoad
               {% if TEMPLATE_OPTIONS.locations.map_icon %}
-                , marker_url: "{{ TEMPLATE_OPTIONS.locations.map_icon }}"
+                , marker_url: "{{ theme.options.locations.map_icon }}"
               {% endif %},
             });
           } else {

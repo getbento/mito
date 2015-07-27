@@ -1,4 +1,4 @@
-<section id="{{ section.url|replace("/","") }}" class="press-section hidden-print">
+<section id="{{ section.slug }}" class="press-section hidden-print">
   <div class="container-fluid thumbs max-width">
     {% if theme.options.press.header %}
       {% include "section-header.html" %}
@@ -8,7 +8,7 @@
       {% include "section-description.html" %}
     {% endif %}
 
-    {% if theme.options.press.see_all %}
+    {% if theme.options.press.see_all and boxes.press.all|length > boxes.press.featured|length %}
       <div class="row hidden-xs">
         <div class="col-sm-12">
           <a data-toggle="collapse" data-target=".unfeatured" class="print-link collapsed"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>
@@ -24,7 +24,7 @@
     </div>
     <!-- End Featured Press -->
 
-    {% if theme.options.press.see_all %}
+    {% if theme.options.press.see_all and boxes.press.all|length > boxes.press.featured|length %}
       <div class="row visible-xs">
         <div class="col-sm-12">
           <a data-toggle="collapse" data-target=".unfeatured" class="print-link collapsed {% if not theme.options.press.see_all %}in{% endif %}"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>

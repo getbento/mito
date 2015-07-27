@@ -1,4 +1,4 @@
-<section id="{{ section.url|replace("/","") }}" class="contact-section hidden-print">
+<section id="{{ section.slug }}" class="contact-section hidden-print">
   <div class="container-fluid max-width">
     {% if theme.options.contact.header %}
       {% include "section-header.html" %}
@@ -79,7 +79,7 @@
           {% for location in boxes.locations.all %}
             {% if boxes.locations.all|length > 1 %}
               <h2>{{location.name}}</h2>
-            {% else %}
+            {% elif boxes.locations.all %}
               <h2>Location</h2>
             {% endif %}
             <p>

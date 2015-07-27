@@ -1,9 +1,87 @@
-<section id="{{ section.url|replace("/","") }}" class="news-section hidden-print">
-  {% if theme.options.news.header %}
-    {% include "section-header.html" %}
-  {% endif %}
+<section id="{{ section.slug }}" class="news-section hidden-print">
+  <div class="container-fluid thumbs max-width">
+    {% if theme.options.news.header %}
+      {% include "section-header.html" %}
+    {% endif %}
 
-  {% if section.fields.description and section.fields.description.text %}
-    {% include "section-description.html" %}
-  {% endif %}
+    {% if section.fields.description and section.fields.description.text %}
+      {% include "section-description.html" %}
+    {% endif %}
+
+      {% if theme.options.news.see_all and boxes.news.all|length > boxes.news.featured|length %}
+        <div class="row hidden-xs">
+          <div class="col-sm-12">
+            <a data-toggle="collapse" data-target=".unfeatured" class="print-link collapsed"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Featured News -->
+      <div class="featured-news bucket-into-rows" data-columns="{{ theme.options.news.columns }}">
+        {% for item in boxes.news.featured %}
+          {% include "news/featured_item.html" with context %}
+        {% endfor %}
+      </div>
+      <!-- End Featured News -->
+
+      {% if theme.options.news.see_all and boxes.news.all|length > boxes.news.featured|length %}
+        <div class="row visible-xs">
+          <div class="col-sm-12">
+            <a data-toggle="collapse" data-target=".unfeatured" class="print-link collapsed {% if not theme.options.news.see_all %}in{% endif %}"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Unfeatured News -->
+      <div class="unfeatured collapse {% if not theme.options.news.see_all %}in{% endif %}">
+        {% with categories = boxes.news.by_category_slug %}
+        {% for category in categories %}
+          {% if categories[category].all|rejectattr("featured")|list|length > 0 %}
+            {% if theme.options.news.categories and categories[category].slug != 'uncategorized' %}
+            <div class="row">
+              <h2 class="col-sm-12">{{categories[category].name}}</h2>
+            </div>
+            {% endif %}
+            <div class="bucket-into-rows" data-columns="{{ theme.options.news.columns }}">
+              {% for item in categories[category].all|rejectattr("featured") %}
+                {% include "news/item.html" with context %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+        {% endwith %}
+      </div>
+      <!-- End Unfeatured News -->
+    </div>
+  </div>
 </section>
+
+<!-- News Modals -->
+{% for item in boxes.news.all %}
+  <div class="modal fade news" id="modal-news-{{item.slug}}" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h1>{{ item.title }}</h1>
+        {% if item.image %}
+          <img src="{{ item.image }}">
+        {% endif %}
+        {% if item.content %}
+          <div class="wysiwyg">{{ item.content|safe }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- News Carousel -->
+{% if theme.options.news.gallery %}
+  <div id="news-carousel" class="carousel-wrapper">
+    {% for gallery in boxes.galleries.all %}
+      {% if gallery.name|lower == "news" %}
+        {% include "carousel.html" %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<!-- end News Carousel -->

@@ -23,62 +23,32 @@ $(document).ready(function () {
       var hashArray = window.location.hash.split('/');
       var $section = $(hashArray[0]);
 
-      // scroll to section
-      var offset = $section.offset().top;
-      $body.scrollTop(Math.round(offset - 102));
+      if ($section.length > 0) {
+        // scroll to section
+        var offset = $section.offset().top;
+        $body.scrollTop(Math.round(offset - 102));
 
-      // make nav item active
-      $scrollspy.find('a[href="'+hashArray[0]+'"]').parent().addClass('active');
+        // make nav item active
+        $scrollspy.find('a[href="'+hashArray[0]+'"]').parent().addClass('active');
 
-      // if modal or tab link, open
-      if (hashArray[1]) {
-        var $modalLink = $section.find('.lightbox[data-slug="'+hashArray[1]+'"]');
-        
-        if ($modalLink.length > 0) {
-          $modalLink.click();
-          return;
-        }
+        // if modal or tab link, open
+        if (hashArray[1]) {
+          var $modalLink = $section.find('.lightbox[data-slug="'+hashArray[1]+'"]');
+          
+          if ($modalLink.length > 0) {
+            $modalLink.click();
+            return;
+          }
 
-        var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
-        
-        if ($tabLink.length > 0) {
-          $tabLink.click();
-          return;
+          var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
+          
+          if ($tabLink.length > 0) {
+            $tabLink.click();
+            return;
+          }
         }
       }
     }
-    // if (url.match('#')) {
-    //   var linkToArray = url.split('#')[1].split('_');
-    //   var $section = (linkToArray[0] === 'footer') ? $('#footer-modals') : $('#'+linkToArray[0]);
-
-    //   if ($section.length > 0) {
-    //     var header = $section.find('h1');
-    //     var offset = (header.length > 0) ? $section.find('h1').offset().top : $section.offset().top;
-
-    //     $('html, body').scrollTop(Math.round(offset - 120));
-
-    //     _gaq.push(["_set", "title", linkToArray.toString().substr(0, 1).toUpperCase() + linkToArray.toString().substr(1).replace(/-/g, " ")]);
-    //     _gaq.push(['_trackPageview', '/#' + linkToArray.toString()]);
-
-    //     if ($section.find('.tab-content').length > 0) {
-    //       $('.nav a[href=#'+linkToArray[1]+']').tab('show');
-
-    //       if ($section.find('.tab-select').length > 0) {
-    //         $section.find('.tab-select').val(linkToArray[1]);
-    //       }
-    //     } else if ($section.find('.carousel').length > 0) {
-    //       $section.find('.carousel').carousel($('#'+linkToArray[1]).index());
-    //     } else if ($section.find('.modal').length > 0) {
-    //       var $iframe = $section.find('#'+linkToArray[1]).find('iframe');
-
-    //       if ($(window).width() < 768 && $iframe.length > 0) {
-    //         window.open($iframe.attr('src'), '_blank');
-    //       } else {
-    //         $section.find('#'+linkToArray[1]).modal('show');
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   setTimeout(function () {

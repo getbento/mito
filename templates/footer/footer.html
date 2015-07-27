@@ -37,10 +37,10 @@
         <!-- end Opentable -->
 
         <!-- Resy -->
-        {% if account.resy_api_key %}
+        {% if account.services.resy.api_key %}
             <div id="BookWithResy"></div>
             <script src="https://widgets.resy.com/embed.js"></script>
-            <script>resyWidget.addButton(document.getElementById('BookWithResy'), { 'venueId': {{ account.resy_venue_id }}, 'apiKey': '{{ account.resy_api_key }}' });
+            <script>resyWidget.addButton(document.getElementById('BookWithResy'), { 'venueId': {{ account.services.resy.venue_id }}, 'apiKey': '{{ account.services.resy.api_key }}' });
             </script>
         {% endif %}
         <!-- end Resy -->

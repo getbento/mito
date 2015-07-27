@@ -9,10 +9,10 @@
 
   {% if venue.images > 1 %}
     <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-team" data-slide="prev">
+    <a class="left carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="prev">
       <span></span>
     </a>
-    <a class="right carousel-control" href="#carousel-team" data-slide="next">
+    <a class="right carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="next">
       <span></span>
     </a>
   {% endif %}

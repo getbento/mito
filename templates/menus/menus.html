@@ -1,5 +1,5 @@
 <!-- Menus -->
-<section id="{{ section.url|replace("/","") }}" class="menus-section">
+<section id="{{ section.slug }}" class="menus-section">
   <div class="container-fluid max-width">
     {% if theme.options.menus.header %}
       {% include "section-header.html" %}
@@ -109,7 +109,7 @@
           {% for location in boxes.locations.all %}
             <p>{{location.name}}{% if location.address %}<br/>{{location.address}}{% endif %}{% if location.phone_number %}<br/>{{location.phone_number}}{% endif %}</p>
           {% endfor %}
-        {% else %}
+        {% elif boxes.locations.all %}
           <p>{% if boxes.locations.all.0.address %}{{boxes.locations.all.0.address}}{% endif %}{% if boxes.locations.all.0.phone_number %}<br/>{{boxes.locations.all.0.phone_number}}{% endif %}</p>
         {% endif %}
       </div>

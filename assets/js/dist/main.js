@@ -20751,6 +20751,7 @@ $(document).ready(function () {
   var $carousel = $($carousels[0]);
   var $parallax_carousels = $('.parallax .carousel:not(.no-parallax)');
   var $headerSlidesText = $('.carousel-caption-wrapper');
+  var $hidden_carousels = $('.carousel-inner.transparent');
 
   // Hammer Gestures
   var hammer = {};
@@ -20776,54 +20777,12 @@ $(document).ready(function () {
 
   $carousels.each(initHammerGesture);
 
-  // Parallax
-  function isElementInView (el) {
-      //special bonus for those using jQuery
-      if (typeof jQuery === "function" && el instanceof jQuery) {
-          el = el[0];
-      }
+  // Parallax  
+  var s = skrollr.init({
+    forceHeight: false
+  });
 
-      var rect = el.getBoundingClientRect();
-
-      return (
-          rect.bottom >= 0 &&
-          rect.top <= $(window).height()
-      );
-  }
-
-  function parallaxCarousel () {
-    var scrollTop = $window.scrollTop();
-    var windowHeight = $window.height();
-    var diff = 500;
-
-    $parallax_carousels.each(function (index, el) {
-      if (isElementInView(el)) {
-        var $this = $(el);
-        var $inner = $this.find('.carousel-inner');
-
-        var carouselHeight = $this.height();
-        var carouselOffset = $this.offset().top;
-        
-        var position = (scrollTop - carouselOffset + windowHeight) / (carouselHeight + windowHeight);
-        position = Math.max(Math.min(position, 1), 0);
-        
-        var offset = -diff + diff*position;
-        $inner.css({'transform': 'translate3d(0px, ' + offset + 'px, 0px)'});
-
-        if ($this.attr('id') === 'header-carousel') {
-          $headerSlidesText.css('top', offset*-1);
-        }
-      }
-    });
-
-    $('.carousel-inner.transparent').removeClass('transparent');
-  }
-
-  if (!jQuery.browser.mobile) {
-    $window.on('load scroll resize', function() {
-       window.requestAnimationFrame(parallaxCarousel);
-    });
-  }
+  $hidden_carousels.removeClass('transparent');
 });
 
 $(document).ready(function () {
@@ -20851,62 +20810,32 @@ $(document).ready(function () {
       var hashArray = window.location.hash.split('/');
       var $section = $(hashArray[0]);
 
-      // scroll to section
-      var offset = $section.offset().top;
-      $body.scrollTop(Math.round(offset - 102));
+      if ($section.length > 0) {
+        // scroll to section
+        var offset = $section.offset().top;
+        $body.scrollTop(Math.round(offset - 102));
 
-      // make nav item active
-      $scrollspy.find('a[href="'+hashArray[0]+'"]').parent().addClass('active');
+        // make nav item active
+        $scrollspy.find('a[href="'+hashArray[0]+'"]').parent().addClass('active');
 
-      // if modal or tab link, open
-      if (hashArray[1]) {
-        var $modalLink = $section.find('.lightbox[data-slug="'+hashArray[1]+'"]');
-        
-        if ($modalLink.length > 0) {
-          $modalLink.click();
-          return;
-        }
+        // if modal or tab link, open
+        if (hashArray[1]) {
+          var $modalLink = $section.find('.lightbox[data-slug="'+hashArray[1]+'"]');
+          
+          if ($modalLink.length > 0) {
+            $modalLink.click();
+            return;
+          }
 
-        var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
-        
-        if ($tabLink.length > 0) {
-          $tabLink.click();
-          return;
+          var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
+          
+          if ($tabLink.length > 0) {
+            $tabLink.click();
+            return;
+          }
         }
       }
     }
-    // if (url.match('#')) {
-    //   var linkToArray = url.split('#')[1].split('_');
-    //   var $section = (linkToArray[0] === 'footer') ? $('#footer-modals') : $('#'+linkToArray[0]);
-
-    //   if ($section.length > 0) {
-    //     var header = $section.find('h1');
-    //     var offset = (header.length > 0) ? $section.find('h1').offset().top : $section.offset().top;
-
-    //     $('html, body').scrollTop(Math.round(offset - 120));
-
-    //     _gaq.push(["_set", "title", linkToArray.toString().substr(0, 1).toUpperCase() + linkToArray.toString().substr(1).replace(/-/g, " ")]);
-    //     _gaq.push(['_trackPageview', '/#' + linkToArray.toString()]);
-
-    //     if ($section.find('.tab-content').length > 0) {
-    //       $('.nav a[href=#'+linkToArray[1]+']').tab('show');
-
-    //       if ($section.find('.tab-select').length > 0) {
-    //         $section.find('.tab-select').val(linkToArray[1]);
-    //       }
-    //     } else if ($section.find('.carousel').length > 0) {
-    //       $section.find('.carousel').carousel($('#'+linkToArray[1]).index());
-    //     } else if ($section.find('.modal').length > 0) {
-    //       var $iframe = $section.find('#'+linkToArray[1]).find('iframe');
-
-    //       if ($(window).width() < 768 && $iframe.length > 0) {
-    //         window.open($iframe.attr('src'), '_blank');
-    //       } else {
-    //         $section.find('#'+linkToArray[1]).modal('show');
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   setTimeout(function () {
@@ -21289,49 +21218,7 @@ $(document).ready(function($){
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
     }
 });
-$(document).ready(function () {
-  // todo. switch over to nivo lightbox
-  // var $window = $(window);
-  // var $modals = $('.modal');
-
-  // function rescaleModal(){
-  //   var $target = $('.pdf .modal-dialog');
-
-  //   var size = {width: $(window).width() , height: $(window).height() }
-  //   /*CALCULATE SIZE*/
-  //   var offset = 60;
-  //   $target.css('height', size.height - offset );
-  // }
-
-  // $modals
-  //   .on('shown.bs.modal', function (e) {
-  //     var $target = $(e.target);
-  //     var targetId = $target.attr('id');
-
-  //     // if loading opentable modal, load iframe if not already loaded
-  //     if (targetId === 'modal-opentable') {
-  //       var $iframe = $target.find('iframe');
-  //       var source = $('.OTButton').find('.OTReserveNow > a').attr('href');
-
-  //       if ($iframe.attr('src') !== source) {
-  //         $iframe.attr('src', $('.OTButton').find('.OTReserveNow > a').attr('href'));
-  //       }
-  //     }
-
-  //     rescaleModal();
-
-  //     // get section id (or footer) and use for first part of hash
-  //     // var parentId = $target.parents('#footer-modals').length > 0 ? 'footer' : $target.parents('section').attr('id');
-  //     // window.location.hash = parentId+'_'+$target.attr('id');
-  //   })
-  //   .on('hidden.bs.modal', function (e) {
-  //     // var $target = $(e.target);
-  //     // var parentId = $target.parents('#footer-modals').length > 0 ? 'footer' : $target.parents('section').attr('id');
-  //     // window.location.hash = parentId;
-  //   });
-
-  // $window.on('resize', $.debounce(200, rescaleModal));
-
+$(document).ready(function () {  
   $('a.lightbox').nivoLightbox({
     beforeShowLightbox: function (e) {
       var $el = $(this)[0].$el;
@@ -21343,6 +21230,18 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  var $html = $('html, body');
+  var $window = $(window);
+  var $featured = $('.featured-news');
+  var $unfeatured = $('.news-group .unfeatured');
+
+  function scrollTo () {
+    $html.animate({scrollTop: $window.scrollTop() + $featured.height() + 100 }, '400');
+  }
+
+  $unfeatured.on('shown.bs.collapse', $.debounce(100, scrollTo));
+});
 $(document).ready(function () {
   var $html = $('html, body');
   var $window = $(window);

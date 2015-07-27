@@ -17,7 +17,7 @@
       <h4>{{ person.title }}</h4>
     {% endif %}
 
-    {% if theme.options.team.bio %}
+    {% if theme.options.team.bio and person.bio %}
       <div class="wysiwyg">{{ person.bio|safe }}</div>
     {% endif %}
 
