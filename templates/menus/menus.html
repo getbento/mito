@@ -98,12 +98,12 @@
       <!-- Print Header -->
       <div class="visible-print-block text-center">
         {% if theme.options.menus.print_logo %}
-          <img class="print-logo" src="{{ theme.options.menus.print_logo }}" alt="{{ account.site_title }}">
+          <img class="print-logo" src="{{ theme.options.menus.print_logo }}" alt="{{ account.site.title }}">
         {% else %}
-          <img class="print-logo" src="{{ account.logo }}" alt="{{ account.site_title }}">
+          <img class="print-logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
         {% endif %}
         <br/><br/>
-        <h1 class="font-h2">{{ account.site_title }}</h1>
+        <h1 class="font-h2">{{ account.site.title }}</h1>
 
         {% if boxes.locations.all|length > 1 %}
           {% for location in boxes.locations.all %}

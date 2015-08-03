@@ -4,9 +4,9 @@
     <!-- POWERED BY BENTOBOX | http://getbento.com -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}{{ account.site_title }}{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}{{ account.meta_description }}{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}{{ account.meta_keywords }}{% endblock %}">
+    <title>{% block title %}{{ account.site.title }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ account.site.meta_description }}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{{ account.site.meta_keywords }}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% if theme.options.typography.font_family or theme.options.typography.h1.font_family or theme.options.typography.h2.font_family %}
     <script src="//ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
@@ -30,10 +30,10 @@
       <link rel="stylesheet" href="{{ static('css/ie8.css') }}" />
     <![endif]-->
     <script src="{{ static('js/dist/modernizr.min.js') }}"></script>    
-    <link rel="icon" href="{{ account.favicon_url }}" />
+    <link rel="icon" href="{{ account.site.favicon }}" />
     <script type="text/javascript">
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '{{ account.ga_code }}']);
+      _gaq.push(['_setAccount', '{{ account.services.google_analytics.tracking_code }}']);
       _gaq.push(['_trackPageview']);
 
       (function() {

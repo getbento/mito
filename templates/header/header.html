@@ -4,7 +4,7 @@
   <div id="nav-wrapper" class="hidden-xs{% if theme.options.header.nav.overlay %} overlay{% endif %}{% if theme.options.header.nav.vertically_center %} vertically-center{% endif %}{% if not theme.options.header.nav.below_logo %} single-line{% endif %}">
     <nav>
       {% if theme.options.header.nav.below_logo %}
-        <img class="logo" src="{{ account.logo }}" alt="{{ account.site_title }}">
+        <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
         <ul class="list-inline">
           {% for item in navs.main|rejectattr("homepage") %}
             <li><a href="#{{ item.slug }}">{{ item.name }}</a></li>
@@ -14,7 +14,7 @@
           {% endif %}
         </ul>
       {% else %}
-        <img class="logo" src="{{ account.logo }}" alt="{{ account.site_title }}">
+        <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
         
         {% for group in navs.main|rejectattr("homepage")|slice(2) %}
           {% set outer_group = loop %}
