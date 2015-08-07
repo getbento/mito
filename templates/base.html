@@ -54,7 +54,7 @@
     
     {% include 'header/header.html' %}
 
-    {% for section in navs.main if section.template is not "base.html" %}
+    {% for section in navs.main|rejectattr("homepage")|selectattr("template") %}
       {% include section.template with context %}
     {% endfor %}
 
