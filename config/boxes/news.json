@@ -1,3 +1,5 @@
 {
-  "engine": "blog"
+  "engine": "blog",
+  "has_categories":true,
+  "has_featured":true
 }

@@ -2,13 +2,13 @@
   <div class="caption">
     {% if article.file %}
       <h3><a class="lightbox" href="{{article.file}}" data-slug="{{ article.slug }}" data-section="{{ section.slug }}" data-lightbox-type="iframe">{{ article.title }}</a></h3>
-    {% elif article.url %}
-      <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+    {% elif article._external_url %}
+      <h3><a href="{{ article.external_url }}" target="_blank">{{ article.title }}</a></h3>
     {% else %}
       <h3>{{ article.title }}</h3>
     {% endif %}
     <p>
-      {% if article.source %}<span class="source"><a href="{{ article.url }}" target="_blank">{{ article.source }}</a></span>{% endif %}{% if article.source and article.date %} | {% endif %}{% if article.date %}<span class="date">{{ article.date }}</span>{% endif %}
+      {% if article.source %}<span class="source"><a href="{{ article.external_url }}" target="_blank">{{ article.source }}</a></span>{% endif %}{% if article.source and article.date %} | {% endif %}{% if article.date %}<span class="date">{{ article.date }}</span>{% endif %}
     <p>
   </div>
 </div>

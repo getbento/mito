@@ -6,8 +6,8 @@
             <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')"></div>
           </a>
         </div>
-      {% elif article.url %}
-        <a href="{{article.url}}" target="_blank">
+      {% elif article.external_url %}
+        <a href="{{article.external_url}}" target="_blank">
           <div class="thumbnail">
             <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')"></div>
           </div>
@@ -21,8 +21,8 @@
     <div class="caption">
       {% if article.file %}
         <h3><a class="lightbox" href="{{article.file}}" data-slug="{{ article.slug }}" data-section="{{ section.slug }}" data-lightbox-type="iframe">{{ article.title }}</a></h3>
-      {% elif article.url %}
-        <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+      {% elif article.external_url %}
+        <h3><a href="{{ article.external_url }}" target="_blank">{{ article.title }}</a></h3>
       {% else %}
         <h3>{{ article.title }}</h3>
       {% endif %}

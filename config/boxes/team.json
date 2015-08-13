@@ -1,3 +1,4 @@
 {
-  "engine": "team"
+  "engine": "team",
+  "has_categories":true
 }
