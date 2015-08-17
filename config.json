@@ -300,7 +300,8 @@
                             "height": {
                                 "title": "Height",
                                 "type": "text",
-                                "default": "400px"
+                                "default": "400px",
+                                "display_logic": {"header.nav.overlay":false}
                             }, 
                             "logo_width": {
                                 "title": "Logo Width",
@@ -325,7 +326,8 @@
                             "bg_color": {
                                 "title": "Background Color",
                                 "type": "color",
-                                "default": "rgba(0,0,0,0)"
+                                "default": "rgba(0,0,0,0)",
+                                "display_logic": {"header.nav.overlay":false}
                             }, 
                             "bg_image": {
                                 "title": "Background Image",
