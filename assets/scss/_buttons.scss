@@ -11,7 +11,7 @@
     font-family: {{ theme.options.header.nav.font_family }};
   {% endif %}
   font-weight: 400;
-  font-size: 16px !important;
+  font-size: {{ theme.options.buttons.font_size }};
   font-style: normal !important;
   color: {{ theme.options.buttons.color }};
   border-style: solid;
@@ -26,6 +26,10 @@
 
   {% if theme.options.buttons.rounded %}
     border-radius: 4px;
+  {% endif %}
+
+  {% if theme.options.buttons.uppercase %}
+    text-transform: uppercase;
   {% endif %}
 
   &:hover, &:focus, &:active {

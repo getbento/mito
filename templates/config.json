@@ -291,7 +291,14 @@
                             "height": {
                                 "title": "Height",
                                 "type": "text",
-                                "default": "400px"
+                                "default": "400px",
+                                "display_logic": "!header.nav.overlay"
+                            }, 
+                            "bg_color": {
+                                "title": "Background Color",
+                                "type": "color",
+                                "default": "rgba(0,0,0,0)",
+                                "display_logic": "!header.nav.overlay"
                             }, 
                             "logo_width": {
                                 "title": "Logo Width",
@@ -312,11 +319,6 @@
                                 "title": "Reservations Link",
                                 "type": "boolean",
                                 "default": false
-                            }, 
-                            "bg_color": {
-                                "title": "Background Color",
-                                "type": "color",
-                                "default": "rgba(0,0,0,0)"
                             }, 
                             "bg_image": {
                                 "title": "Background Image",

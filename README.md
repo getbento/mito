@@ -37,3 +37,14 @@ Add nav items under Pages/Nav in admin
 ### Scaffolding Recommendations
 auto-generate nav items:
 Base, Menus, Private Events, About, Press, Locations
+
+## Push to Production
+Paste latest git commit hash into site_admin/themes/turnkey_2 (optional)
+Go to accounts/<site>
+Check box and select "force theme update" from dropdown
+
+## Dev Env
+launch postgres
+workon bentobox
+python manage.py runserver
+redis-server

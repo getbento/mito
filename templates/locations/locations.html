@@ -15,7 +15,7 @@
             {% for location in group %}
               <div class="col-md-{{12 // theme.options.locations.columns }}">
                 <h2>{{location.name}}</h2>
-                <p>{{location.address}}</p>
+                <p><a href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{ location.address }}</a></p>
                 <div class="wysiwyg">{{location.description|safe}}</div>
                 <div class="wysiwyg">{{location.hours|safe}}</div>
                 {% if theme.options.locations.map  %}

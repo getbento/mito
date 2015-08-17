@@ -92,15 +92,15 @@
       position: relative;
       text-align: center;
 
-      &:first-child a {
-        border-left: 0px;
-      }
+      // &:first-child a {
+      //   border-left: 0px;
+      // }
 
-      &:last-child a {
-        border-right: 0px;
-      }
+      // &:last-child a {
+      //   border-right: 0px;
+      // }
 
-      a {
+      a {        
         {% if theme.options.header.nav.font_family %}
           font-family: {{ theme.options.header.nav.font_family }};
         {% endif %}

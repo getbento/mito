@@ -32,9 +32,11 @@ $(document).ready(function () {
   $carousels.each(initHammerGesture);
 
   // Parallax  
-  var s = skrollr.init({
-    forceHeight: false
-  });
+  if(!(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i).test(navigator.userAgent || navigator.vendor || window.opera)){
+      var s = skrollr.init({
+        forceHeight: false
+      });
+  }
 
   $hidden_carousels.removeClass('transparent');
 });

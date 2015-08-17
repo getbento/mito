@@ -14,7 +14,7 @@ form {
     background: white !important;
     border: solid 1px #dbd8cf !important;
     font-weight: 300 !important;
-    font-style: italic !important;
+    font-style: normal !important;
     text-transform: none !important;
     font-size: 14px !important;
     letter-spacing: .5px !important;
@@ -116,6 +116,7 @@ form {
 
 .checkbox {
   margin-top: 0;
+  text-align: left;
   label {
     padding-left: 0;
     .box {
@@ -219,7 +220,6 @@ form {
 
 .select2-container, .select2-container .select2-selection--single {
   height: 56px;
-  border: solid 1px #dbd8cf !important;
   width: 100% !important;
   text-align: left;
   @include border-radius(0!important);
@@ -230,12 +230,16 @@ form {
   }
 }
 
+.select2-dropdown, .select2-container--default .select2-selection--single  {
+  border: solid 1px #dbd8cf !important;
+}
+
 .select2-container--default .select2-selection--single {
   .select2-selection__rendered {
     height: 56px;
     line-height: 56px;
     font-weight: 300 !important;
-    font-style: italic !important;
+    font-style: normal !important;
     text-transform: none !important;
     font-size: 14px !important;
     letter-spacing: .5px !important;

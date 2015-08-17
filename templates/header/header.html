@@ -4,7 +4,12 @@
   <div id="nav-wrapper" class="hidden-xs{% if theme.options.header.nav.overlay %} overlay{% endif %}{% if theme.options.header.nav.vertically_center %} vertically-center{% endif %}{% if not theme.options.header.nav.below_logo %} single-line{% endif %}">
     <nav>
       {% if theme.options.header.nav.below_logo %}
-        <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
+        {% if account.logo %}
+          <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
+        {% else %}
+          <h1 class="logo-font">{{ account.site.title }}</h1>
+        {% endif %}
+
         <ul class="list-inline">
           {% for item in navs.main|rejectattr("homepage") %}
             <li><a href="#{{ item.slug }}">{{ item.name }}</a></li>
@@ -41,7 +46,7 @@
   {% endif %}
   
   {% if boxes.header_gallery %}
-  <div id="header-carousel" class="carousel slide">
+  <div id="header-carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="false">
     <!-- Wrapper for slides -->
     <div class="carousel-inner transparent" data-top-bottom="transform:translate3d(0px, 250px, 0px);" data-bottom-top="transform:translate3d(0px, -250px, 0px)">
       {% for slide in boxes.header_gallery.all %}

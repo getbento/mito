@@ -194,6 +194,11 @@
                         "type": "color",
                         "default": "#FFFFFF"
                     }, 
+                    "font_size": {
+                        "title": "Font Size",
+                        "type": "text",
+                        "default": "16px"
+                    }, 
                     "border_color": {
                         "title": "Border Color",
                         "type": "color",
@@ -206,6 +211,10 @@
                     },
                     "rounded": {
                         "title": "Rounded Corners",
+                        "type": "boolean"
+                    },
+                    "uppercase": {
+                        "title": "Uppercase",
                         "type": "boolean"
                     }
                 }
@@ -913,9 +922,10 @@
                         "default": false
                     }, 
                     "powered_by_bento_sticky": {
-                        "title": "Powered by Bento Sticky",
+                        "title": "Sticky (powered by bento)",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "display_logic":"footer.powered_by_bento"
                     }, 
                     "bg_color": {
                         "title": "Background Color",

@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         root: '.',
-        dest: 'assets/turnkey_2',
+        dest: 'assets',
         siteName: siteName,
         currentPath: currentPath,
 
