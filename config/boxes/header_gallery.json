@@ -3,7 +3,7 @@
   "fields": {
     "image_url": {
       "title": "Image",
-      "type": "file"
+      "type": "image"
     },
     "title": {
       "title": "Headline",
