@@ -10,6 +10,9 @@
   {% if theme.options.header.nav.font_family %}
     font-family: {{ theme.options.header.nav.font_family }};
   {% endif %}
+  {% if theme.options.header.nav.letter_spacing %}
+    letter-spacing: {{ theme.options.header.nav.letter_spacing }};
+  {% endif %}
   font-weight: 400;
   font-size: {{ theme.options.buttons.font_size }};
   font-style: normal !important;

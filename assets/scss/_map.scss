@@ -125,3 +125,13 @@
 #cd-zoom-out {
   background-position: 50% -32px;
 }
+
+@media only screen and (max-width: 767px) {
+  .map-canvas {
+    pointer-events: none;
+  }
+
+  #cd-zoom-in, #cd-zoom-out {
+    display: none;
+  }
+}

@@ -7,7 +7,7 @@
     {% endfor %}
   </div>
 
-  {% if gallery.images > 1 %}
+  {% if gallery.images|length > 1 %}
     <!-- Controls -->
     <a class="left carousel-control" href="#{{gallery.slug}}-carousel" data-slide="prev">
       <span></span>

@@ -163,6 +163,10 @@ header {
       }
     }
 
+    .carousel-control {
+      display: block;
+    }
+
     .carousel-caption {
       display: inline-block;
       vertical-align: middle;
@@ -404,11 +408,9 @@ nav, .font-nav {
     font-weight: {{ theme.options.header.nav.font_weight }};
     font-size: {{ theme.options.header.nav.font_size }};
 
-    // todo. figure why this isn't working
-    // {% if theme.options.header.nav.letter_spacing %}
-    //   letter-spacing: {{ theme.options.header.nav.letter_spacing }};
-    // {% endif %}
-    letter-spacing: 1.5px;
+    {% if theme.options.header.nav.letter_spacing %}
+      letter-spacing: {{ theme.options.header.nav.letter_spacing }};
+    {% endif %}
     
     color: {{ theme.options.header.nav.color }};
     text-decoration: none;

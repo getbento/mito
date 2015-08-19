@@ -4,6 +4,7 @@
       <img src="{{ location.map_image_xlarge.url }}" alt="{{location.name}} Map" />
     </a>
   {% else %}
+    <!-- <div class="map-overlay" onClick="style.pointerEvents='none'"></div> -->
     <div id="map-canvas-{{ location.slug }}" class="map-canvas"></div>
     <div id="cd-zoom-in"></div>
     <div id="cd-zoom-out"></div>

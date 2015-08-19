@@ -106,7 +106,7 @@
                     "p_line_height": {
                         "title": "Paragraph Line Height",
                         "type": "number",
-                        "default": 1.2
+                        "default": 2
                     }, 
                     "h1": {
                         "title": "h1",
@@ -356,7 +356,7 @@
                             "letter_spacing": {
                                 "title": "Letter Spacing",
                                 "type": "text",
-                                "default": "1.5px"
+                                "default": ".5px"
                             }
                         }
                     }, 

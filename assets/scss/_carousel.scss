@@ -92,6 +92,7 @@
 
   .carousel-control, .carousel-indicators {
     display: none;
+    z-index: 200;
   }
 
   &:hover {

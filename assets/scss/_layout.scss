@@ -92,3 +92,8 @@ section {
     border-color: {{ theme.options.layout.image_stroke_color }};
   }
 {% endif %}
+
+.limit-width {
+  max-width: 800px;
+  margin: 0 auto;
+}
