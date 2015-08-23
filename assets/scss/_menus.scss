@@ -1,8 +1,14 @@
 .menus-section {
-  background-color: {{ theme.options.menus.bg_color }};
+  {% if theme.options.menus.custom_styles and theme.options.menus.bg_color %}
+    background-color: {{ theme.options.menus.bg_color }} !important;
+  {% endif %}
 
-  {% if theme.options.menus.bg_image %}
+  {% if theme.options.menus.custom_styles and theme.options.menus.bg_image %}
     background-image: url('{{ theme.options.menus.bg_image }}');
+  {% endif %}
+
+  {% if theme.options.menus.custom_styles and theme.options.menus.color %}
+    color: {{ theme.options.menus.color }};
   {% endif %}
 
   .thumbs {

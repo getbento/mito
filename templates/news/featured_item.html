@@ -8,7 +8,9 @@
     {% endif %}
 
     <div class="caption">
-      {% if item.content %}
+      {% if item.caption %}
+        <p>{{ item.caption|striptags }}</p>
+      {% elif item.content %}
         <p>{{ item.content|striptags|truncate(200) }}</p>
       {% endif %}
     </div>

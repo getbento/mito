@@ -481,6 +481,12 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "locations",
+                        "display_logic":"locations.gallery"
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
@@ -536,6 +542,12 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "menus",
+                        "display_logic":"menus.gallery"
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",

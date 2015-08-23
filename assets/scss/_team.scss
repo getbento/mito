@@ -1,8 +1,14 @@
 .team-section {
-  background-color: {{ theme.options.team.bg_color }} !important;
+  {% if theme.options.team.custom_styles and theme.options.team.bg_color %}
+    background-color: {{ theme.options.team.bg_color }} !important;
+  {% endif %}
 
-  {% if theme.options.team.bg_image %}
+  {% if theme.options.team.custom_styles and theme.options.team.bg_image %}
     background-image: url('{{ theme.options.team.bg_image }}');
+  {% endif %}
+
+  {% if theme.options.team.custom_styles and theme.options.team.color %}
+    color: {{ theme.options.team.color }};
   {% endif %}
 
   .container-fluid > .row {

@@ -316,7 +316,7 @@ header {
     }
 
     .icon-bar {
-      color: {{ theme.options.header.sticky.color }};
+      background-color: {{ theme.options.header.sticky.color }};
       height: 3px;
       width: 24px;
       position: relative;

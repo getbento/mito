@@ -56,7 +56,7 @@
 {% if theme.options.locations.gallery %}
   <div id="locations-carousel" class="carousel-wrapper">
     {% for gallery in boxes.galleries.all %}
-      {% if gallery.name|lower == "locations" %}
+      {% if gallery.name|lower == theme.options.locations.gallery_name %}
         {% include "carousel.html" %}
       {% endif %}
     {% endfor %}

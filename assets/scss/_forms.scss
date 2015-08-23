@@ -19,6 +19,9 @@ form {
     font-size: 14px !important;
     letter-spacing: .5px !important;
     height: 56px !important;
+    {% if theme.options.typography.font_family %}
+      font-family: {{ theme.options.typography.font_family }};
+    {% endif %}
     @include border-radius(0!important);
     @include box-shadow(none);
     &[type="checkbox"] {

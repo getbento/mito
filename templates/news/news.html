@@ -78,7 +78,7 @@
 {% if theme.options.news.gallery %}
   <div id="news-carousel" class="carousel-wrapper">
     {% for gallery in boxes.galleries.all %}
-      {% if gallery.name|lower == "news" %}
+      {% if gallery.name|lower == theme.options.news.gallery_name %}
         {% include "carousel.html" %}
       {% endif %}
     {% endfor %}

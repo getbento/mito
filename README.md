@@ -16,6 +16,8 @@ workon bentobox
 ~python manage.py migrate
 python manage.py runserver
 redis-server
+~clone site into clients_sites/
+	git clone git@git.getbento.com:<site-name>
 ~add site to etc/hosts
 	127.0.0.1 <site-name>.bento.dev
 http://<site-name>.bento.dev:8000/

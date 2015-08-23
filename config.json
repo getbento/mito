@@ -490,14 +490,32 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "locations",
+                        "display_logic":"locations.gallery"
+                    },
+                    "custom_styles": {
+                        "title": "Custom Styles",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
-                        "default": "rgba(0,0,0,0)"
+                        "default": "rgba(0,0,0,0)",
+                        "display_logic": "locations.custom_styles"
                     },
                     "bg_image": {
                         "title": "Background Image",
-                        "type": "image"
+                        "type": "image",
+                        "display_logic": "locations.custom_styles"
+                    },
+                    "color": {
+                        "title": "Color",
+                        "type": "color",
+                        "display_logic": "locations.custom_styles"
                     },
                     "map": {
                         "title": "Map",
@@ -545,14 +563,32 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "menus",
+                        "display_logic":"menus.gallery"
+                    },
+                    "custom_styles": {
+                        "title": "Custom Styles",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
-                        "default": "rgba(0,0,0,0)"
+                        "default": "rgba(0,0,0,0)",
+                        "display_logic": "menus.custom_styles"
                     },
                     "bg_image": {
                         "title": "Background Image",
-                        "type": "image"
+                        "type": "image",
+                        "display_logic": "menus.custom_styles"
+                    },
+                    "color": {
+                        "title": "Color",
+                        "type": "color",
+                        "display_logic": "menus.custom_styles"
                     },
                     "columns": {
                         "title": "Columns",
@@ -634,14 +670,32 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "private events",
+                        "display_logic":"private_events.gallery"
+                    },
+                    "custom_styles": {
+                        "title": "Custom Styles",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
-                        "default": "rgba(0,0,0,0)"
+                        "default": "rgba(0,0,0,0)",
+                        "display_logic": "private_events.custom_styles"
                     },
                     "bg_image": {
                         "title": "Background Image",
-                        "type": "image"
+                        "type": "image",
+                        "display_logic": "private_events.custom_styles"
+                    },
+                    "color": {
+                        "title": "Color",
+                        "type": "color",
+                        "display_logic": "private_events.custom_styles"
                     },
                     "pdf_button": {
                         "title": "Download PDF",
@@ -700,14 +754,32 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "press",
+                        "display_logic":"press.gallery"
+                    },
+                    "custom_styles": {
+                        "title": "Custom Styles",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
-                        "default": "rgba(0,0,0,0)"
+                        "default": "rgba(0,0,0,0)",
+                        "display_logic": "press.custom_styles"
                     },
                     "bg_image": {
                         "title": "Background Image",
-                        "type": "image"
+                        "type": "image",
+                        "display_logic": "press.custom_styles"
+                    },
+                    "color": {
+                        "title": "Color",
+                        "type": "color",
+                        "display_logic": "press.custom_styles"
                     },
                     "columns": {
                         "title": "Columns",
@@ -740,14 +812,32 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "team",
+                        "display_logic":"team.gallery"
+                    },
+                    "custom_styles": {
+                        "title": "Custom Styles",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
-                        "default": "rgba(0,0,0,0)"
+                        "default": "rgba(0,0,0,0)",
+                        "display_logic": "team.custom_styles"
                     },
                     "bg_image": {
                         "title": "Background Image",
-                        "type": "image"
+                        "type": "image",
+                        "display_logic": "team.custom_styles"
+                    },
+                    "color": {
+                        "title": "Color",
+                        "type": "color",
+                        "display_logic": "team.custom_styles"
                     },
                     "columns": {
                         "title": "Columns",
@@ -795,14 +885,32 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "news",
+                        "display_logic":"news.gallery"
+                    },
+                    "custom_styles": {
+                        "title": "Custom Styles",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
-                        "default": "rgba(0,0,0,0)"
+                        "default": "rgba(0,0,0,0)",
+                        "display_logic": "news.custom_styles"
                     },
                     "bg_image": {
                         "title": "Background Image",
-                        "type": "image"
+                        "type": "image",
+                        "display_logic": "news.custom_styles"
+                    },
+                    "color": {
+                        "title": "Color",
+                        "type": "color",
+                        "display_logic": "news.custom_styles"
                     },
                     "columns": {
                         "title": "Columns",
@@ -855,14 +963,32 @@
                         "type": "boolean",
                         "default": false
                     }, 
+                    "gallery_name": {
+                        "title": "Gallery Name",
+                        "type": "text",
+                        "default": "contact",
+                        "display_logic":"contact.gallery"
+                    },
+                    "custom_styles": {
+                        "title": "Custom Styles",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
-                        "default": "rgba(0,0,0,0)"
+                        "default": "rgba(0,0,0,0)",
+                        "display_logic": "contact.custom_styles"
                     },
                     "bg_image": {
                         "title": "Background Image",
-                        "type": "image"
+                        "type": "image",
+                        "display_logic": "contact.custom_styles"
+                    },
+                    "color": {
+                        "title": "Color",
+                        "type": "color",
+                        "display_logic": "contact.custom_styles"
                     },
                     "show_locations": {
                         "title": "Show Locations",
@@ -957,6 +1083,10 @@
                         "title": "Button Background Color",
                         "type": "color",
                         "default": "#282828"
+                    },
+                    "utm_slug": {
+                        "title": "UTM Slug",
+                        "type": "text"
                     }
                 }
             }

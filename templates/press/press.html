@@ -59,7 +59,7 @@
 {% if theme.options.press.gallery %}
   <div id="press-carousel" class="carousel-wrapper">
     {% for gallery in boxes.galleries.all %}
-      {% if gallery.name|lower == "press" %}
+      {% if gallery.name|lower == theme.options.press.gallery_name %}
         {% include "carousel.html" %}
       {% endif %}
     {% endfor %}

@@ -1,10 +1,14 @@
 .contact-section {
-  {% if theme.options.contact.bg_color %}
+  {% if theme.options.contact.custom_styles and theme.options.contact.bg_color %}
     background-color: {{ theme.options.contact.bg_color }} !important;
   {% endif %}
-  
-  {% if theme.options.contact.bg_image %}
+
+  {% if theme.options.contact.custom_styles and theme.options.contact.bg_image %}
     background-image: url('{{ theme.options.contact.bg_image }}');
+  {% endif %}
+
+  {% if theme.options.contact.custom_styles and theme.options.contact.color %}
+    color: {{ theme.options.contact.color }};
   {% endif %}
 
   h2 {
@@ -25,5 +29,11 @@
     &:last-child, &:first-child {
       margin-bottom: 0;
     }
+  }
+
+  .checkbox label .label-text {
+    {% if theme.options.contact.custom_styles and theme.options.contact.color %}
+      color: {{ theme.options.contact.color }} !important;
+    {% endif %}
   }
 }

@@ -1,8 +1,14 @@
 .news-section {
-  background-color: {{ theme.options.news.bg_color }} !important;
+  {% if theme.options.news.custom_styles and theme.options.news.bg_color %}
+    background-color: {{ theme.options.news.bg_color }} !important;
+  {% endif %}
 
-  {% if theme.options.news.bg_image %}
+  {% if theme.options.news.custom_styles and theme.options.news.bg_image %}
     background-image: url('{{ theme.options.news.bg_image }}');
+  {% endif %}
+
+  {% if theme.options.news.custom_styles and theme.options.news.color %}
+    color: {{ theme.options.news.color }};
   {% endif %}
 
   .featured-news, .unfeatured {

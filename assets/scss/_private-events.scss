@@ -1,8 +1,14 @@
 .private-events-section {
-  background-color: {{ theme.options.private_events.bg_color }} !important;
+  {% if theme.options.private_events.custom_styles and theme.options.private_events.bg_color %}
+    background-color: {{ theme.options.private_events.bg_color }} !important;
+  {% endif %}
 
-  {% if theme.options.private_events.bg_image %}
+  {% if theme.options.private_events.custom_styles and theme.options.private_events.bg_image %}
     background-image: url('{{ theme.options.private_events.bg_image }}');
+  {% endif %}
+
+  {% if theme.options.private_events.custom_styles and theme.options.private_events.color %}
+    color: {{ theme.options.private_events.color }};
   {% endif %}
 
   h2 {
@@ -77,5 +83,11 @@
         float: left;
       }
     }
+  }
+
+  .checkbox label .label-text {
+    {% if theme.options.private_events.custom_styles and theme.options.private_events.color %}
+      color: {{ theme.options.private_events.color }} !important;
+    {% endif %}
   }
 }

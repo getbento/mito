@@ -102,7 +102,7 @@
 {% if theme.options.team.gallery %}
   <div id="contact-carousel" class="carousel-wrapper">
     {% for gallery in boxes.galleries.all %}
-      {% if gallery.name|lower == "contact" %}
+      {% if gallery.name|lower == theme.options.contact.gallery_name %}
         {% include "carousel.html" %}
       {% endif %}
     {% endfor %}
