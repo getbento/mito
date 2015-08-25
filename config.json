@@ -487,14 +487,8 @@
                     }, 
                     "gallery": {
                         "title": "Gallery",
-                        "type": "boolean",
-                        "default": false
-                    }, 
-                    "gallery_name": {
-                        "title": "Gallery Name",
-                        "type": "text",
-                        "default": "locations",
-                        "display_logic":"locations.gallery"
+                        "type": "relationship",
+                        "box": "galleries"
                     },
                     "custom_styles": {
                         "title": "Custom Styles",
@@ -557,17 +551,11 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "gallery": {
                         "title": "Gallery",
-                        "type": "boolean",
-                        "default": false
-                    }, 
-                    "gallery_name": {
-                        "title": "Gallery Name",
-                        "type": "text",
-                        "default": "menus",
-                        "display_logic":"menus.gallery"
+                        "type": "relationship",
+                        "box": "galleries"
                     },
                     "custom_styles": {
                         "title": "Custom Styles",
@@ -664,17 +652,11 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "gallery": {
                         "title": "Gallery",
-                        "type": "boolean",
-                        "default": false
-                    }, 
-                    "gallery_name": {
-                        "title": "Gallery Name",
-                        "type": "text",
-                        "default": "private events",
-                        "display_logic":"private_events.gallery"
+                        "type": "relationship",
+                        "box": "galleries"
                     },
                     "custom_styles": {
                         "title": "Custom Styles",
@@ -748,17 +730,11 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },  
                     "gallery": {
                         "title": "Gallery",
-                        "type": "boolean",
-                        "default": false
-                    }, 
-                    "gallery_name": {
-                        "title": "Gallery Name",
-                        "type": "text",
-                        "default": "press",
-                        "display_logic":"press.gallery"
+                        "type": "relationship",
+                        "box": "galleries"
                     },
                     "custom_styles": {
                         "title": "Custom Styles",
@@ -806,17 +782,11 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },  
                     "gallery": {
                         "title": "Gallery",
-                        "type": "boolean",
-                        "default": false
-                    }, 
-                    "gallery_name": {
-                        "title": "Gallery Name",
-                        "type": "text",
-                        "default": "team",
-                        "display_logic":"team.gallery"
+                        "type": "relationship",
+                        "box": "galleries"
                     },
                     "custom_styles": {
                         "title": "Custom Styles",
@@ -879,17 +849,11 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    },
+                    }, 
                     "gallery": {
                         "title": "Gallery",
-                        "type": "boolean",
-                        "default": false
-                    }, 
-                    "gallery_name": {
-                        "title": "Gallery Name",
-                        "type": "text",
-                        "default": "news",
-                        "display_logic":"news.gallery"
+                        "type": "relationship",
+                        "box": "galleries"
                     },
                     "custom_styles": {
                         "title": "Custom Styles",
@@ -957,17 +921,11 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    },
+                    }, 
                     "gallery": {
                         "title": "Gallery",
-                        "type": "boolean",
-                        "default": false
-                    }, 
-                    "gallery_name": {
-                        "title": "Gallery Name",
-                        "type": "text",
-                        "default": "contact",
-                        "display_logic":"contact.gallery"
+                        "type": "relationship",
+                        "box": "galleries"
                     },
                     "custom_styles": {
                         "title": "Custom Styles",

@@ -35,11 +35,8 @@
 <!-- Team Carousel -->
 {% if theme.options.team.gallery %}
   <div id="team-carousel" class="carousel-wrapper">
-    {% for gallery in boxes.galleries.all %}
-      {% if gallery.name|lower == theme.options.team.gallery_name %}
-        {% include "carousel.html" %}
-      {% endif %}
-    {% endfor %}
+    {% set gallery = theme.options.team.gallery %}
+    {% include "carousel.html" %}
   </div>
 {% endif %}
 <!-- end Team Carousel -->

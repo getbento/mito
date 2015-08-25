@@ -146,11 +146,8 @@
 <!-- Menus Carousel -->
 {% if theme.options.menus.gallery %}
   <div id="menus-carousel" class="carousel-wrapper">
-    {% for gallery in boxes.galleries.all %}
-      {% if gallery.name|lower == theme.options.menus.gallery_name %}
-        {% include "carousel.html" %}
-      {% endif %}
-    {% endfor %}
+    {% set gallery = theme.options.menus.gallery %}
+    {% include "carousel.html" %}
   </div>
 {% endif %}
 <!-- end Menus Carousel -->
