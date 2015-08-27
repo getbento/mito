@@ -15,6 +15,20 @@
     text-align: left;
   }
 
+  .wysiwyg {
+    > p:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .sub-header {
+    @media (max-width: 767px) {
+      .text-right, .wysiwyg {
+        text-align: center !important;
+      }
+    }
+  }
+
   .venue {
     margin-bottom: 45px;
     margin-top: 10px;

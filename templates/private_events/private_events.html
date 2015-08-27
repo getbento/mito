@@ -4,39 +4,33 @@
       {% include "section-header.html" %}
     {% endif %}
 
-    {% if section.fields.description and section.fields.description.text %}
-      {% include "section-description.html" %}
-    {% endif %}
+    {% set showPdfBtn = theme.options.private_events.pdf_button and boxes.venues.all|length == 1 %}
+    {% set showInquiryBtn = not theme.options.private_events.form.no_form and theme.options.private_events.form.inquiry_button and ((boxes.venues.all|length == 1 and theme.options.private_events.form.hide) or (boxes.venues.all|length > 1 and not theme.options.private_events.form.inquiry_button_per_venue)) %}
 
-    <div class="row">
-      <div class="col-sm-4">
-        {% if section.fields.description and section.fields.description.text %}
-          <div class="wysiwyg">
-            {{ section.fields.description.text|safe }}
-          </div>
-        {% endif %}
-      </div>
-      <div class="col-sm-8 text-right">
-        {% if theme.options.private_events.pdf_button and boxes.venues.all|length == 1 %}
-          <button class="btn">Download PDF</button>
-        {% endif %}
-        
-        {% if not theme.options.private_events.form.no_form and theme.options.private_events.form.inquiry_button %}
-          <!-- if form and inquiry button -->
-          {% if boxes.venues.all|length == 1 %}
-            <!-- if one venue, show btn if form hidden -->
-            {% if theme.options.private_events.form.hide %}
-              <a href="#event_inquiry" class="btn">Inquiry Form</a>
-            {% endif %}
-          {% else %} 
-            {% if not theme.options.private_events.form.inquiry_button_per_venue %}
-              <!-- if multi venues, hide if btns per venue -->
-              <a href="#event_inquiry" class="btn">Inquiry Form</a>
-            {% endif %}
+    {% if showPdfBtn or showInquiryBtn %}
+      <div class="row sub-header">
+        <div class="col-sm-7">
+          {% if section.fields.description and section.fields.description.text %}
+            <div class="wysiwyg">
+              {{ section.fields.description.text|safe }}
+            </div>
           {% endif %}
-        {% endif %}
+        </div>
+        <div class="col-sm-5 text-right">
+          {% if showPdfBtn %}
+            <button class="btn">Download PDF</button>
+          {% endif %}
+          
+          {% if showInquiryBtn %}
+            <a href="#event_inquiry" class="btn">Inquiry Form</a>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% else %}
+      {% if section.fields.description and section.fields.description.text %}
+        {% include "section-description.html" %}
+      {% endif %} 
+    {% endif %}
     
     {% if boxes.venues.all|length == 1 %}
       {% for venue in boxes.venues.all %}

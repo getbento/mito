@@ -507,7 +507,7 @@
                         "display_logic": "locations.custom_styles"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "display_logic": "locations.custom_styles"
                     },
@@ -574,7 +574,7 @@
                         "display_logic": "menus.custom_styles"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "display_logic": "menus.custom_styles"
                     },
@@ -675,7 +675,7 @@
                         "display_logic": "private_events.custom_styles"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "display_logic": "private_events.custom_styles"
                     },
@@ -717,6 +717,16 @@
                                 "title": "Contact Email",
                                 "type": "text",
                                 "default": "info"
+                            },
+                            "event_types": {
+                                "title": "Event Types",
+                                "type": "repeater",
+                                "items": {
+                                    "option": {
+                                        "title": "Dropdown Option",
+                                        "type": "text"
+                                    }
+                                }
                             }
                         }
                     }
@@ -753,7 +763,7 @@
                         "display_logic": "press.custom_styles"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "display_logic": "press.custom_styles"
                     },
@@ -805,7 +815,7 @@
                         "display_logic": "team.custom_styles"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "display_logic": "team.custom_styles"
                     },
@@ -872,7 +882,7 @@
                         "display_logic": "news.custom_styles"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "display_logic": "news.custom_styles"
                     },
@@ -944,7 +954,7 @@
                         "display_logic": "contact.custom_styles"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "display_logic": "contact.custom_styles"
                     },
