@@ -45,6 +45,10 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}">
     </script>
+
+    {% if theme.options.other.head_code %}
+        {{ theme.options.other.head_code|safe }}
+    {% endif %}
   </head>
 
   <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile">
