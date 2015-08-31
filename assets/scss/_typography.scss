@@ -18,8 +18,16 @@ h1, .font-h1 {
   color: {{  theme.options.typography.h1.color }};
   font-size: 4em;
   margin: 0 0 20px;
-  text-transform: uppercase;
+  {% if theme.options.typography.h1.uppercase %}
+    text-transform: uppercase;
+  {% endif %}
+  {% if theme.options.typography.h1.uppercase %}
+    text-transform: uppercase;
+  {% endif %}
   text-align: center;
+  &.has-underline {
+    margin-bottom: 0px;
+  }
 }
 
 h2, .font-h2 {

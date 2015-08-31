@@ -19,8 +19,10 @@
           {% endif %}
         </ul>
       {% else %}
-        <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
-        
+        {% if not theme.options.header.nav.vertically_center %}
+          <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
+        {% endif %}
+
         {% for group in navs.main|rejectattr("homepage")|slice(2) %}
           {% set outer_group = loop %}
           <ul class="list-inline">
@@ -34,6 +36,10 @@
         {% endfor %}
       {% endif %}
     </nav>
+
+    {% if not theme.options.header.nav.below_logo and theme.options.header.nav.vertically_center %}
+      <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
+    {% endif %}
   </div>
 
   {% if theme.options.header.alert.text %}
@@ -48,7 +54,13 @@
   {% if boxes.header_gallery %}
   <div id="header-carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="false">
     <!-- Wrapper for slides -->
-    <div class="carousel-inner transparent" data-top-bottom="transform:translate3d(0px, 250px, 0px);" data-bottom-top="transform:translate3d(0px, -250px, 0px)">
+    <div 
+      class="carousel-inner transparent" 
+      {% if theme.options.layout.parallax %}
+      data-top-bottom="transform:translate3d(0px, 250px, 0px);" 
+      data-bottom-top="transform:translate3d(0px, -250px, 0px)"
+      {% endif %}
+      >
       {% for slide in boxes.header_gallery.all %}
         <div id="hero-slide-{{ loop.index0 }}" class="item {% if loop.first %}active{% endif %}" style="background-image: url('{{ slide.fields.image_url }}')">
           <div class="carousel-caption-wrapper">

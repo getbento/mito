@@ -52,9 +52,11 @@
         <b class="caret"></b>
         <select name="event-type" class="form-control">
           <option selected="selected" disabled>Type of event</b></option>
-          {% for option in theme.options.private_events.form.event_types %}
-            <option value="{{option}}">{{option}}</option>
-          {% endfor %}
+          {% if theme.options.private_events.form.event_types %}
+            {% for option in theme.options.private_events.form.event_types.split(',') %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          {% endif %}
         </select>
       </div>
     </div>

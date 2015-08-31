@@ -48,7 +48,8 @@
                     "section_underline_stroke": {
                         "title": "Section Underline Stroke",
                         "type": "text",
-                        "default": "2px"
+                        "default": "2px",
+                        "display_logic":"layout.section_underlines"
                     },
                     "fade_carousel": {
                         "title": "Fade Carousels",
@@ -99,7 +100,7 @@
                         "default": "14px"
                     }, 
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "default": "#FFFFFF"
                     },
@@ -122,9 +123,13 @@
                                 "default": 700
                             }, 
                             "color": {
-                                "title": "Color",
+                                "title": "Font Color",
                                 "type": "color",
                                 "default": "#000000"
+                            },
+                            "uppercase": {
+                                "title": "Uppercase",
+                                "type": "boolean"
                             }
                         }
                     }, 
@@ -142,7 +147,7 @@
                                 "default": 700
                             }, 
                             "color": {
-                                "title": "Color",
+                                "title": "Font Color",
                                 "type": "color",
                                 "default": "#333333"
                             }
@@ -153,7 +158,7 @@
                         "type": "section",
                         "items": {
                             "color": {
-                                "title": "Color",
+                                "title": "Font Color",
                                 "type": "color",
                                 "default": "#000000"
                             },
@@ -190,9 +195,13 @@
                         "type": "image"
                     },
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "default": "#FFFFFF"
+                    }, 
+                    "font_family": {
+                        "title": "Font Family",
+                        "type": "text"
                     }, 
                     "font_size": {
                         "title": "Font Size",
@@ -228,11 +237,6 @@
                         "type": "boolean",
                         "default": true
                     }, 
-                    "full_width": {
-                        "title": "Full Width",
-                        "type": "boolean",
-                        "default": false
-                    }, 
                     "sticky": {
                         "title": "Sticky",
                         "type": "boolean",
@@ -253,7 +257,7 @@
                         "type": "image"
                     }, 
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "default": "#FFFFFF"
                     }, 
@@ -339,7 +343,7 @@
                                 "default": false
                             }, 
                             "color": {
-                                "title": "Color",
+                                "title": "Font Color",
                                 "type": "color",
                                 "default": "#726659"
                             }, 
@@ -366,6 +370,10 @@
                                 "title": "Letter Spacing",
                                 "type": "text",
                                 "default": "1.5px"
+                            },
+                            "uppercase": {
+                                "title": "Uppercase",
+                                "type": "boolean"
                             }
                         }
                     }, 
@@ -402,6 +410,11 @@
                                 "title": "Line 2 Font Size",
                                 "type": "text",
                                 "default": "18px"
+                            },
+                            "text_shadow" : {
+                                "title": "Text Shadow",
+                                "type": "boolean",
+                                "default": false
                             }
                         }
                     }, 
@@ -459,7 +472,7 @@
                                 "default": "13px"
                             }, 
                             "color": {
-                                "title": "Color",
+                                "title": "Font Color",
                                 "type": "color",
                                 "default": "#222222"
                             }, 
@@ -519,17 +532,20 @@
                     "map_full_width": {
                         "title": "Map Full Width",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "display_logic": "locations.map"
                     }, 
                     "map_color": {
                         "title": "Map Color",
                         "type": "color",
-                        "default": "#2d313f"
+                        "default": "#2d313f",
+                        "display_logic": "locations.map"
                     },
                     "map_icon": {
                         "title": "Map Icon",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "display_logic": "locations.map"
                     },
                     "columns": {
                         "title": "Columns",
@@ -606,7 +622,7 @@
                                 "default": "More"
                             },
                             "color": {
-                                "title": "Color",
+                                "title": "Font Color",
                                 "type": "color",
                                 "default": "#FFFFFF"
                             },
@@ -720,13 +736,8 @@
                             },
                             "event_types": {
                                 "title": "Event Types",
-                                "type": "repeater",
-                                "items": {
-                                    "option": {
-                                        "title": "Dropdown Option",
-                                        "type": "text"
-                                    }
-                                }
+                                "type": "text",
+                                "default": "Alumni,Bachelor / Bachelorette,Birthday,Cocktail Reception,Corporate Lunch,Engagement,Fundraiser,Graduation,Holiday,Meeting / Presentation,Photo / Film Shoot,Private Dinner,Rehearsal Dinner,Shower,Sporting Event,Wedding,Other"
                             }
                         }
                     }
@@ -1033,7 +1044,7 @@
                         "type": "image"
                     }, 
                     "color": {
-                        "title": "Color",
+                        "title": "Font Color",
                         "type": "color",
                         "default": "#FFFFFF"
                     }, 
@@ -1051,6 +1062,16 @@
                         "title": "Button Background Color",
                         "type": "color",
                         "default": "#282828"
+                    },
+                    "btn_border_color": {
+                        "title": "Border Color",
+                        "type": "color",
+                        "default": "rgba(0,0,0,0)"
+                    }, 
+                    "btn_border_width": {
+                        "title": "Border Width",
+                        "type": "text",
+                        "default": "0px"
                     },
                     "utm_slug": {
                         "title": "UTM Slug",

@@ -26,7 +26,7 @@
   }
 
   .carousel-inner {
-    height: 1100px;
+    height: 600px;
     @include transition(height .5s, opacity 1s);
     position: relative;
 
@@ -39,9 +39,9 @@
       transform: translate3d(0,0,0) !important;
     }
 
-    &.parallax-off img {
-      transform: translate3d(0,0,0) !important;
-    }
+    // &.parallax-off img {
+    //   transform: translate3d(0,0,0) !important;
+    // }
 
     &.fill-height img {
       transform: translate3d(0,0,0) !important;
@@ -111,4 +111,14 @@
       .next { left:0; opacity:1; z-index:1; }
     }
   {% endif %}
+}
+
+@media (min-width: 768px) {
+  .parallax {
+    .carousel {
+      .carousel-inner {
+        height: 1100px;
+      }
+    }
+  }
 }

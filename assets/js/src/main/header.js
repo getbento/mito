@@ -57,7 +57,7 @@ $(document).ready(function () {
     var navHgt = $oneLineTopNav.height();
     var offset = (imgHgt - navHgt + 50) / 2;
 
-    $oneLineTopNav.css('padding-top', offset);
+    $oneLineTopNav.children('ul').css('padding-top', offset);
   }
 
   $window.load(toggleStickyHeader);

@@ -41,6 +41,8 @@ footer {
     white-space: normal;
     background: {{ theme.options.footer.btn_bg }} !important;
     color: {{ theme.options.footer.btn_color }} !important;
+    border-color: {{ theme.options.footer.btn_border_color }} !important;
+    border-width: {{ theme.options.footer.btn_border_width }} !important;
     margin: 0 15px;
 
     &:hover, &:focus {

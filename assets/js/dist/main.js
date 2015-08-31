@@ -20752,7 +20752,7 @@ $(document).ready(function () {
   var $parallax_carousels = $('.parallax .carousel:not(.no-parallax)');
   var $headerSlidesText = $('.carousel-caption-wrapper');
   var $hidden_carousels = $('.carousel-inner.transparent');
-
+  console.log($parallax_carousels)
   // Hammer Gestures
   var hammer = {};
 
@@ -21036,7 +21036,7 @@ $(document).ready(function () {
     var navHgt = $oneLineTopNav.height();
     var offset = (imgHgt - navHgt + 50) / 2;
 
-    $oneLineTopNav.css('padding-top', offset);
+    $oneLineTopNav.children('ul').css('padding-top', offset);
   }
 
   $window.load(toggleStickyHeader);
@@ -21110,7 +21110,6 @@ $(document).ready(function($){
                 featureType: "poi",
                 elementType: "geometry.fill",
                 stylers: [
-                    { hue: config.main_color },
                     { visibility: "off" },
                     { lightness: config.brightness_value },
                     { saturation: config.saturation_value }
@@ -21127,7 +21126,6 @@ $(document).ready(function($){
                 featureType: "transit",
                 elementType: "geometry.fill",
                 stylers: [
-                    { hue: config.main_color },
                     { visibility: "off" },
                     { lightness: config.brightness_value },
                     { saturation: config.saturation_value }
@@ -21135,11 +21133,12 @@ $(document).ready(function($){
             },
             {
                 featureType: "landscape",
+                elementType: "geometry.fill",
                 stylers: [
-                    { hue: config.main_color },
                     { visibility: "on" },
                     { lightness: config.brightness_value },
-                    { saturation: config.saturation_value }
+                    { saturation: config.saturation_value },
+                    { color: config.main_color }
                 ]
 
             },
@@ -21147,7 +21146,6 @@ $(document).ready(function($){
                 featureType: "road",
                 elementType: "geometry.fill",
                 stylers: [
-                    { hue: config.main_color },
                     { visibility: "on" },
                     { lightness: config.brightness_value },
                     { saturation: config.saturation_value }
@@ -21157,7 +21155,6 @@ $(document).ready(function($){
                 featureType: "water",
                 elementType: "geometry",
                 stylers: [
-                    { hue: config.main_color },
                     { visibility: "on" },
                     { lightness: config.brightness_value },
                     { saturation: config.saturation_value }

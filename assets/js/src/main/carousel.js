@@ -6,7 +6,7 @@ $(document).ready(function () {
   var $parallax_carousels = $('.parallax .carousel:not(.no-parallax)');
   var $headerSlidesText = $('.carousel-caption-wrapper');
   var $hidden_carousels = $('.carousel-inner.transparent');
-
+  console.log($parallax_carousels)
   // Hammer Gestures
   var hammer = {};
 

@@ -7,8 +7,8 @@
   padding-bottom: 0;
   padding-left: 20px;
   padding-right: 20px;
-  {% if theme.options.header.nav.font_family %}
-    font-family: {{ theme.options.header.nav.font_family }};
+  {% if theme.options.buttons.font_family %}
+    font-family: {{ theme.options.buttons.font_family }};
   {% endif %}
   {% if theme.options.header.nav.letter_spacing %}
     letter-spacing: {{ theme.options.header.nav.letter_spacing }};

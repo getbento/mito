@@ -1,6 +1,6 @@
 <header class="row hidden-print">
   <div class="col-xs-12">
-    <h1>{{ section.name }}</h1>
+    <h1 class="{% if theme.options.layout.section_underlines %}has-underline{% endif %}">{{ section.name }}</h1>
   </div>
 
   {% if theme.options.layout.section_underlines %}

@@ -2,6 +2,7 @@
 .google-map {
   opacity: 1;
   @include transition(opacity .5s);
+  margin-top: 1em;
 
   &.transparent {
     opacity: 0;
@@ -38,6 +39,7 @@
 
   &.map-full-width {
     position: relative;
+    margin-top: 0;
 
     .btn {
       position: absolute;
@@ -65,8 +67,9 @@
       margin-bottom: 0px;
 
       .btn {
-        bottom: 50px;
+        bottom: -50px;
         width: 100%;
+        border-radius: 0px;
       }
     }
   }
