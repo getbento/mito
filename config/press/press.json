@@ -1,5 +1,5 @@
 {
-  "name": "Press Template",
+  "name": "Press",
   "fields": {
     "description": {
       "title": "Description",
@@ -7,7 +7,14 @@
       "items": {
         "text":"wysiwyg"
       }
-    }   
+    }
   },
-  "wireframe": "section-description"
+  "wireframe": [
+    "section-description"
+    {
+      "boxes-press": {
+        "width": "columns-4"
+      }
+    }
+  ]
 }
