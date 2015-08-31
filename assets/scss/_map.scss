@@ -48,6 +48,17 @@
       left: 0;
       right: 0;
       margin: 0 auto;
+      
+      @media (min-width: 768px) {
+        {% if theme.options.locations.full_map_btn_color %}
+          color: {{ theme.options.locations.full_map_btn_color }};
+        {% endif %}
+        
+        {% if theme.options.locations.full_map_btn_bg_color %}
+          background-color: {{ theme.options.locations.full_map_btn_bg_color }};
+        {% endif %}
+      }
+      
     }
 
     img {

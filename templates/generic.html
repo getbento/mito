@@ -1,8 +1,10 @@
-<section id="{{ section.slug }}" class="contact-section hidden-print">
+<section id="{{ section.slug }}" class="generic-section hidden-print">
   <div class="container-fluid max-width">
     <div class="row">
-      <div class="col-sm-12">
-        {{ section.fields.description.text }}
+      <div class="col-sm-12 description">
+      	<div class="wysiwyg limit-width">
+      		{{ section.fields.description.text|safe }}
+      	</div>
       </div>
     </div>
   </div>

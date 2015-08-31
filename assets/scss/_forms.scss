@@ -233,6 +233,10 @@ form {
   }
 }
 
+.select2-dropdown {
+  z-index: 150;
+}
+
 .select2-dropdown, .select2-container--default .select2-selection--single  {
   border: solid 1px #dbd8cf !important;
 }

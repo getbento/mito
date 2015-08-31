@@ -29,8 +29,10 @@
     {% elif boxes.locations.all %}
       {% set location = boxes.locations.all.0 %}
       <div class="row">
-        <div class="{% if not theme.options.locations.map or theme.options.locations.map_full_width %}col-sm-12{% else %}col-sm-6{% endif %} wysiwyg limit-width">
-          {{location.hours|safe}}
+        <div class="{% if not theme.options.locations.map or theme.options.locations.map_full_width %}col-sm-12{% else %}col-sm-6{% endif %}">
+          <div class="wysiwyg limit-width">
+            {{location.hours|safe}}
+          </div>
         </div>
 
         {% if theme.options.locations.map and not theme.options.locations.map_full_width %}

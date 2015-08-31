@@ -535,6 +535,18 @@
                         "default": false,
                         "display_logic": "locations.map"
                     }, 
+                    "full_map_btn_bg_color": {
+                        "title": "Button Background Color",
+                        "type": "color",
+                        "default": "#000000",
+                        "display_logic": "locations.map_full_width"
+                    }, 
+                    "full_map_btn_color": {
+                        "title": "Button Font Color",
+                        "type": "color",
+                        "default": "#FFFFFF",
+                        "display_logic": "locations.map_full_width"
+                    }, 
                     "map_color": {
                         "title": "Map Color",
                         "type": "color",
