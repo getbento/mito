@@ -1078,6 +1078,13 @@
                         "type": "text"
                     }
                 }
+            },
+            "other": {
+              "title": "Other Settings",
+              "type": "section",
+              "items": {
+                "head_code": "code"
+              }
             }
         }
     },
