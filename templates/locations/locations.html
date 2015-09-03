@@ -8,7 +8,7 @@
       {% include "section-description.html" %}
     {% endif %}
 
-    {% if boxes.locations.all|length > 4 %}
+    {% if boxes.locations.all|length > 1 %}
       <div class="multi-locations">
         {% for group in boxes.locations.all|batch(theme.options.locations.columns) %}
           <div class="row">
