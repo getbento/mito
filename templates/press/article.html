@@ -8,7 +8,7 @@
       <h3>{{ article.title }}</h3>
     {% endif %}
     <p>
-      {% if article.source %}<span class="source"><a href="{{ article.external_url }}" target="_blank">{{ article.source }}</a></span>{% endif %}{% if article.source and article.date %} | {% endif %}{% if article.date %}<span class="date">{{ article.date }}</span>{% endif %}
+      {% if article.source %}<span class="source"><a href="{{ article.external_url }}" target="_blank">{{ article.source }}</a></span>{% endif %}{% if article.source and article.date %} | {% endif %}{% if article.date %}<span class="date">{{ article.date|date("%b %-d, %Y") }}</span>{% endif %}
     <p>
   </div>
 </div>

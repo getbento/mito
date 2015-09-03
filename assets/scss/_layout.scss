@@ -90,7 +90,7 @@ section {
 {% if theme.options.layout.image_stroke %}
   .image-stroke {
     border-style: solid;
-    border-weight: {{ theme.options.layout.image_stroke_weight }};
+    border-width: {{ theme.options.layout.image_stroke_weight }};
     border-color: {{ theme.options.layout.image_stroke_color }};
   }
 {% endif %}

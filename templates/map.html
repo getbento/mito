@@ -1,7 +1,7 @@
 <div class="google-map transparent{% if full_width == 'true' %} map-full-width{% endif %}">
   {% if location.custom_map_image %}
     <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=15" target="_blank">
-      <img src="{{ location.map_image_xlarge.url }}" alt="{{location.name}} Map" />
+      <img class="custom-map" src="{{ location.map_image_xlarge.url }}" alt="{{location.name}} Map" />
     </a>
   {% else %}
     <!-- <div class="map-overlay" onClick="style.pointerEvents='none'"></div> -->

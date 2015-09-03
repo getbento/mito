@@ -1,10 +1,6 @@
 {
   "name": "Landing",
   "wireframe": [
-    {
-      "boxes-header_gallery": {
-        "width": "columns-4"
-      }
-    }
+    "boxes-header_gallery"
   ]
 }

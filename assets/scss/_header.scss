@@ -26,7 +26,7 @@ header {
     nav {
       .logo {
         width: {{ theme.options.header.nav.logo_width }};
-        margin-bottom: 25px;
+        margin-bottom: 20px;
       }
 
       .logo-font {
@@ -100,6 +100,8 @@ header {
       }
 
       &.vertically-center {
+        position: relative;
+        
         .logo {
           width: {{ theme.options.header.nav.logo_width }};
           position: absolute;

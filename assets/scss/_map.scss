@@ -58,10 +58,9 @@
           background-color: {{ theme.options.locations.full_map_btn_bg_color }};
         {% endif %}
       }
-      
     }
 
-    img {
+    img.custom-map {
       max-width: 100%;
       max-height: none;
       height: auto;

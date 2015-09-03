@@ -21075,89 +21075,290 @@ JQuery required
 $(document).ready(function($){
     window.loadMap = function (config) {
         //we define here the style of the map
-        var style= [
-            {
-                //set saturation for the labels on the map
-                elementType: "labels",
-                stylers: [
-                    {saturation: config.saturation_value}
+        var style= [  
+            {  
+                "featureType":"administrative",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
                 ]
             },
-            {   //poi stands for point of interest - don't show these lables on the map
-                featureType: "poi",
-                elementType: "labels.text",
-                stylers: [
-                    {visibility: "off"}
+            {  
+                "featureType":"landscape",
+                "elementType":"geometry.fill",
+                "stylers":[  
+                    {  
+                        "color": config.main_color
+                    }
                 ]
             },
-            {   //poi stands for point of interest - don't show these lables on the map
-                featureType: "poi.business",
-                elementType: "all",
-                stylers: [
-                    {visibility: "off"}
+            {  
+                "featureType":"landscape",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
                 ]
             },
-            {
-                //don't show road lables on the map
-                featureType: "road",
-                elementType: "geometry.stroke",
-                stylers: [
-                    {visibility: "off"}
+            {  
+                "featureType":"landscape.man_made",
+                "elementType":"geometry",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
                 ]
             },
-            //style different elements on the map
-            {
-                featureType: "poi",
-                elementType: "geometry.fill",
-                stylers: [
-                    { visibility: "off" },
-                    { lightness: config.brightness_value },
-                    { saturation: config.saturation_value }
+            {  
+                "featureType":"landscape.man_made",
+                "elementType":"geometry.fill",
+                "stylers":[  
+                    {  
+                        "color":"#f3eacf"
+                    }
                 ]
             },
-            {
-                featureType: "transit",
-                elementType: "lables.text",
-                stylers: [
-                    { visibility: "off" },
+            {  
+                "featureType":"landscape.man_made",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
                 ]
             },
-            {
-                featureType: "transit",
-                elementType: "geometry.fill",
-                stylers: [
-                    { visibility: "off" },
-                    { lightness: config.brightness_value },
-                    { saturation: config.saturation_value }
+            {  
+                "featureType":"poi",
+                "elementType":"all",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
                 ]
             },
-            {
-                featureType: "landscape",
-                elementType: "geometry.fill",
-                stylers: [
-                    { visibility: "on" },
-                    { lightness: config.brightness_value },
-                    { saturation: config.saturation_value },
-                    { color: config.main_color }
-                ]
-
-            },
-            {
-                featureType: "road",
-                elementType: "geometry.fill",
-                stylers: [
-                    { visibility: "on" },
-                    { lightness: config.brightness_value },
-                    { saturation: config.saturation_value }
+            {  
+                "featureType":"poi",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
                 ]
             },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [
-                    { visibility: "on" },
-                    { lightness: config.brightness_value },
-                    { saturation: config.saturation_value }
+            {  
+                "featureType":"poi.attraction",
+                "elementType":"all",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"poi.attraction",
+                "elementType":"labels",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"poi.business",
+                "elementType":"all",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"poi.business",
+                "elementType":"labels",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"poi.government",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"poi.park",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.highway",
+                "elementType":"geometry.fill",
+                "stylers":[  
+                    {  
+                        "visibility":"on"
+                    },
+                    {  
+                        "color":"#e1e1e1"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.highway",
+                "elementType":"geometry.stroke",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.highway",
+                "elementType":"labels.icon",
+                "stylers":[  
+                    {  
+                        "visibility":"simplified"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.highway.controlled_access",
+                "elementType":"labels.icon",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.arterial",
+                "elementType":"geometry.stroke",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.arterial",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"on"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.arterial",
+                "elementType":"labels.text.fill",
+                "stylers":[  
+                    {  
+                        "lightness":"38"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.arterial",
+                "elementType":"labels.icon",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.local",
+                "elementType":"geometry.stroke",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.local",
+                "elementType":"labels.text.fill",
+                "stylers":[  
+                    {  
+                        "lightness":"23"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.local",
+                "elementType":"labels.text.stroke",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    },
+                    {  
+                        "lightness":"5"
+                    }
+                ]
+            },
+            {  
+                "featureType":"road.local",
+                "elementType":"labels.icon",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"transit",
+                "elementType":"all",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"transit.line",
+                "elementType":"all",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"transit.line",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"transit.station",
+                "elementType":"all",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {  
+                "featureType":"water",
+                "elementType":"labels.text",
+                "stylers":[  
+                    {  
+                        "visibility":"off"
+                    }
                 ]
             }
         ];

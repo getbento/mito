@@ -40,6 +40,11 @@
     cursor: pointer;
     background-size: cover;
     background-position: top;
+    @include transition(opacity .3s);
+
+    &:hover {
+      opacity: .8;
+    }
 
     @media (min-width: 768px) {
       height: 250px;
