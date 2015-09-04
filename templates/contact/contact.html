@@ -1,11 +1,11 @@
 <section id="{{ section.slug }}" class="contact-section hidden-print">
   <div class="container-fluid max-width">
     {% if theme.options.contact.header %}
-      {% include "section-header.html" %}
+      {% include "_section-header.html" %}
     {% endif %}
 
     {% if section.fields.description and section.fields.description.text %}
-      {% include "section-description.html" %}
+      {% include "_section-description.html" %}
     {% endif %}
 
     <div class="row">
@@ -103,7 +103,7 @@
   <div id="contact-carousel" class="carousel-wrapper">
     {% for gallery in boxes.galleries.all %}
       {% if gallery.name|lower == theme.options.contact.gallery_name %}
-        {% include "carousel.html" %}
+        {% include "_carousel.html" %}
       {% endif %}
     {% endfor %}
   </div>

@@ -4,7 +4,7 @@
         "author": "Christopher Sanson",
         "fields": {
             "layout": {
-                "title": "Layout",
+                "title": "Style Settings",
                 "type": "section",
                 "items": {
                     "primary_color": {

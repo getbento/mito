@@ -1,11 +1,11 @@
 <section id="{{ section.slug }}" class="locations-section hidden-print">
   <div class="container-fluid max-width">
     {% if theme.options.locations.header %}
-      {% include "section-header.html" %}
+      {% include "_section-header.html" %}
     {% endif %}
 
     {% if section.fields.description and section.fields.description.text %}
-      {% include "section-description.html" %}
+      {% include "_section-description.html" %}
     {% endif %}
 
     {% if boxes.locations.all|length > 1 %}
@@ -19,7 +19,7 @@
                 <div class="wysiwyg">{{location.description|safe}}</div>
                 <div class="wysiwyg">{{location.hours|safe}}</div>
                 {% if theme.options.locations.map  %}
-                  {% include "map.html" %}
+                  {% include "_map.html" %}
                 {% endif %}
               </div>
             {% endfor%}
@@ -37,7 +37,7 @@
 
         {% if theme.options.locations.map and not theme.options.locations.map_full_width %}
           <div class="col-sm-6">
-            {% include "map.html" %}
+            {% include "_map.html" %}
           </div>
         {% endif %}
       </div>
@@ -47,7 +47,7 @@
 
 {% if theme.options.locations.map and theme.options.locations.map_full_width %}
   {% with full_width="true" %}
-  {% include "map.html"  %}
+  {% include "_map.html"  %}
   {% endwith %}
 {% endif %}
 
@@ -55,7 +55,7 @@
 {% if theme.options.locations.gallery %}
   <div id="locations-carousel" class="carousel-wrapper">
     {% set gallery = theme.options.locations.gallery %}
-    {% include "carousel.html" %}
+    {% include "_carousel.html" %}
   </div>
 {% endif %}
 <!-- end Locations Carousel -->

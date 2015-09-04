@@ -55,16 +55,16 @@
 
   <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile">
     {% if theme.options.address_bar.show %}
-      {% include 'address_bar/address_bar.html' %}
+      {% include 'address_bar/_address_bar.html' %}
     {% endif %}
     
-    {% include 'header/header.html' %}
+    {% include 'header/_header.html' %}
 
     {% for section in navs.main|rejectattr("homepage")|selectattr("template") %}
       {% include section.template with context %}
     {% endfor %}
 
-    {% include 'footer/footer.html' %}
+    {% include 'footer/_footer.html' %}
 
     <script src="{{ static('js/dist/main.min.js') }}"></script>
   </body>

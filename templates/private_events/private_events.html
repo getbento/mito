@@ -1,7 +1,7 @@
 <section id="{{ section.slug }}" class="private-events-section hidden-print">
   <div class="container-fluid max-width">
     {% if theme.options.private_events.header %}
-      {% include "section-header.html" %}
+      {% include "_section-header.html" %}
     {% endif %}
     
     {% set description = section.fields.description and section.fields.description.text %}
@@ -49,7 +49,7 @@
                   <h2>{{ theme.options.private_events.form.header }}</h2>
                 {% endif %}
                 {% set recipient=theme.options.private_events.form.contact_email %}
-                {% include "private_events/form.html" %}
+                {% include "private_events/_form.html" %}
               </div>
             </div>
           {% endif %}
@@ -87,7 +87,7 @@
           </div>
           {% if venue.images|length > 0 %}
             <div class="col-sm-8">
-              {% include "private_events/carousel.html" %}
+              {% include "private_events/_carousel.html" %}
             </div>
           {% endif %}
         </div>
@@ -101,7 +101,7 @@
                 <h2>{{ theme.options.private_events.form.header }}</h2>
               {% endif %}
               {% set recipient=theme.options.private_events.form.contact_email %}
-              {% include "private_events/form.html" %}
+              {% include "private_events/_form.html" %}
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
 {% if theme.options.private_events.gallery %}
   <div id="private-events-carousel" class="carousel-wrapper">
     {% set gallery = theme.options.private_events.gallery %}
-    {% include "carousel.html" %}
+    {% include "_carousel.html" %}
   </div>
 {% endif %}
 <!-- end Private Events Carousel -->

@@ -1,11 +1,11 @@
 <section id="{{ section.slug }}" class="news-section hidden-print">
   <div class="container-fluid thumbs max-width">
     {% if theme.options.news.header %}
-      {% include "section-header.html" %}
+      {% include "_section-header.html" %}
     {% endif %}
 
     {% if section.fields.description and section.fields.description.text %}
-      {% include "section-description.html" %}
+      {% include "_section-description.html" %}
     {% endif %}
 
       {% if theme.options.news.see_all and boxes.news.all|length > boxes.news.featured|length %}
@@ -19,7 +19,7 @@
       <!-- Featured News -->
       <div class="featured-news bucket-into-rows" data-columns="{{ theme.options.news.columns }}">
         {% for item in boxes.news.featured %}
-          {% include "news/featured_item.html" with context %}
+          {% include "news/_featured_item.html" with context %}
         {% endfor %}
       </div>
       <!-- End Featured News -->
@@ -44,7 +44,7 @@
             {% endif %}
             <div class="bucket-into-rows" data-columns="{{ theme.options.news.columns }}">
               {% for item in categories[category].all|rejectattr("featured") %}
-                {% include "news/item.html" with context %}
+                {% include "news/_item.html" with context %}
               {% endfor %}
             </div>
           {% endif %}
@@ -78,7 +78,7 @@
 {% if theme.options.news.gallery %}
   <div id="news-carousel" class="carousel-wrapper">
     {% set gallery = theme.options.news.gallery %}
-    {% include "carousel.html" %}
+    {% include "_carousel.html" %}
   </div>
 {% endif %}
 <!-- end News Carousel -->

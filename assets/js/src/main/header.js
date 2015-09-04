@@ -7,7 +7,15 @@ $(document).ready(function () {
   var $nav_wrapper = $('#nav-wrapper');
   var $sticky_header = $('#sticky-header');
   var isSticky = $body.hasClass('address-bar-sticky');
-  var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)');
+  var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)')
+  var $mobile_nav_dropdown = $('#mobile-nav-dropdown')
+  var $hamburger = $('button.navbar-toggle');
+
+  function showHamburger () {
+    $hamburger.addClass('collapsed');
+  }
+
+  $mobile_nav_dropdown.on('hidden.bs.collapse', showHamburger);
 
   function newHash (hash) {
     // remove hash if undefined

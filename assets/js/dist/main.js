@@ -20986,7 +20986,15 @@ $(document).ready(function () {
   var $nav_wrapper = $('#nav-wrapper');
   var $sticky_header = $('#sticky-header');
   var isSticky = $body.hasClass('address-bar-sticky');
-  var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)');
+  var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)')
+  var $mobile_nav_dropdown = $('#mobile-nav-dropdown')
+  var $hamburger = $('button.navbar-toggle');
+
+  function showHamburger () {
+    $hamburger.addClass('collapsed');
+  }
+
+  $mobile_nav_dropdown.on('hidden.bs.collapse', showHamburger);
 
   function newHash (hash) {
     // remove hash if undefined
@@ -21456,7 +21464,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
   var $html = $('html, body');
-  var $inquiry_btn = $('a[href="#event_inquiry');
+  var $inquiry_btn = $('a[href="#event_inquiry"]');
   var $inquiry_form = $('#event_inquiry');
   var $inquiry_close = $inquiry_form.find('.cancel');
 
@@ -21469,6 +21477,7 @@ $(document).ready(function () {
 
   // show inquiry form
   function slideDown (duration) {
+    console.log('slide down');
     $inquiry_form.slideDown(duration, function () {
       $inquiry_form.addClass('in');
     });
@@ -21485,6 +21494,7 @@ $(document).ready(function () {
 
   // on inquiry btn clik
   function onClick (e) {
+    console.log('click');
     e.preventDefault();
 
     // if visible > hide
@@ -21492,10 +21502,11 @@ $(document).ready(function () {
       slideUp();
     } else {
       var timeout = 0;
-
+      console.log('not visible');
       // if collapsed, show
       if ($inquiry_form.hasClass('collapse')) {
         timeout = 300; // delay scroll to for animation
+        console.log('show');
         slideDown(timeout);
       }
 

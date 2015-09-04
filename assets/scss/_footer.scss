@@ -6,7 +6,7 @@ footer {
     background-image: url('{{ theme.options.footer.bg_image }}');
   {% endif %}
 
-  @media (min-width: 1000px) {
+  @media (min-width: 768px) {
     min-height: 75px;
   }
 
@@ -112,7 +112,7 @@ footer {
   }
 
   // mobile
-  @media (max-width: 999px) {
+  @media (max-width: 767px) {
     #main-footer-content {
       height: auto;
       padding-top: 20px;

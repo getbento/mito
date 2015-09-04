@@ -1,11 +1,11 @@
 <section id="{{ section.slug }}" class="generic-section hidden-print">
   <div class="container-fluid max-width">
-    <div class="row">
-      <div class="col-sm-12 description">
-      	<div class="wysiwyg limit-width">
-      		{{ section.fields.description.text|safe }}
-      	</div>
-      </div>
-    </div>
+    {% if section.fields.header and section.fields.header.show %}
+      {% include "_section-header.html" %}
+    {% endif %}
+
+    {% if section.fields.description and section.fields.description.text %}
+      {% include "_section-description.html" %}
+    {% endif %}
   </div>
 </section>

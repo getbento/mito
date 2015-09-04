@@ -118,7 +118,7 @@
     background-color: rgba({{ theme.options.buttons.bg_color }}, .95);
   {% endif %}
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   #cd-zoom-in, #cd-zoom-out {
     margin-left: 30px;
   }
@@ -129,7 +129,7 @@
   margin-top: 10px;
   margin-bottom: 1px;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   #cd-zoom-in {
     margin-top: 30px;
   }
@@ -139,7 +139,7 @@
   background-position: 50% -32px;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
   .map-canvas {
     pointer-events: none;
   }

@@ -27,7 +27,7 @@
     margin-left: auto;
     margin-right: auto;
 
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       margin-top: 30px;
     }
   }
@@ -46,7 +46,7 @@
       opacity: .8;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       height: 250px;
       background-position: center;
     }

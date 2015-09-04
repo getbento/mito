@@ -1,5 +1,5 @@
 <header id="home" class="hidden-print">
-  {% include 'header/mobile.html' %}
+  {% include 'header/_mobile.html' %}
 
   <div id="nav-wrapper" class="hidden-xs{% if theme.options.header.nav.overlay %} overlay{% endif %}{% if theme.options.header.nav.vertically_center %} vertically-center{% endif %}{% if not theme.options.header.nav.below_logo %} single-line{% endif %}">
     <nav>
@@ -94,5 +94,5 @@
   </div>
   {% endif %}
 
-  {% include 'header/sticky.html' %}
+  {% include 'header/_sticky.html' %}
 </header>

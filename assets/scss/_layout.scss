@@ -7,10 +7,8 @@ body {
     background-image: url('{{ theme.options.layout.bg_image }}');
   {% endif %}
 
-  // todo use if theme.options test. remove from base.html
   &.sticky-footer {
     @media (min-width: 768px) {
-      // todo. make this dynamic based on footer height
       margin-bottom: 75px;
 
       footer {
@@ -30,9 +28,11 @@ body {
   }
 
   &.sticky-powered-by {
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
 
     @media (min-width: 768px) {
+      margin-bottom: 30px;
+      
       #powered-by {
         position: fixed;
         width: 100%;
