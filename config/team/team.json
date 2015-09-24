@@ -1,0 +1,20 @@
+{
+  "name": "Team/About",
+  "fields": {
+    "description": {
+      "title": "Description",
+      "type":"section",
+      "items": {
+        "text":"wysiwyg"
+      }
+    }
+  },
+  "wireframe": [
+    "section-description"
+    {
+      "boxes-team": {
+        "width": "columns-4"
+      }
+    }
+  ]
+}

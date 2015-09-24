@@ -1,0 +1,52 @@
+.modal {
+  .modal-dialog {
+    width: 90%;
+    max-width: 800px;
+  }
+
+  // @media (min-width: 768px) {
+  //   .modal-dialog {
+  //     width: 800px;
+  //   }
+  // }
+
+  .modal-content {
+    position: relative;
+    height: 100%;
+    padding: 25px;
+    text-align: center;
+
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+  }
+
+  &.pdf {
+    iframe {
+      width: 100%;
+      height: 90%;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &.opentable {
+    .modal-dialog {
+      width: 800px;
+      height: 600px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    .close {
+      top: 5px;
+    }
+  }
+}

@@ -1,0 +1,199 @@
+body, .font-body {
+  {% if theme.options.typography.font_family %}
+    font-family: {{ theme.options.typography.font_family }};
+  {% endif %}
+  font-weight: {{  theme.options.typography.font_weight }};
+  {% if theme.options.typography.alignment %}
+    text-align: {{  theme.options.typography.alignment }};
+  {% endif %}
+  font-size: {{  theme.options.typography.font_size }};
+  color: {{  theme.options.typography.color }};
+}
+
+h1, .font-h1 {
+  {% if theme.options.typography.h1.font_family %}
+    font-family: {{ theme.options.typography.h1.font_family }};
+  {% endif %}
+  font-weight: {{  theme.options.typography.h1.font_weight }};
+  color: {{  theme.options.typography.h1.color }};
+  font-size: 4em;
+  margin: 0 0 20px;
+  {% if theme.options.typography.h1.uppercase %}
+    text-transform: uppercase;
+  {% endif %}
+  {% if theme.options.typography.h1.uppercase %}
+    text-transform: uppercase;
+  {% endif %}
+  text-align: center;
+  &.has-underline {
+    margin-bottom: 0px;
+  }
+}
+
+h2, .font-h2 {
+  {% if theme.options.typography.h2.font_family %}
+    font-family: {{ theme.options.typography.h2.font_family }};
+  {% endif %}
+  font-weight: {{  theme.options.typography.h2.font_weight }};
+  color: {{  theme.options.typography.h2.color }};
+  font-size: 1.5em;
+}
+
+a, .font-link {
+  color: {{  theme.options.typography.a.color }};
+  
+  {% if theme.options.typography.a.underline %}
+    text-decoration: underline;
+  {% endif %}
+  
+  cursor: pointer;
+  outline: none!important;
+
+  &:hover, &:focus, &:active {
+    color: {{  theme.options.typography.a.hover_color }};
+    
+    text-decoration: none;
+
+    {% if theme.options.typography.a.hover_underline %}
+      text-decoration: underline;
+    {% endif %}
+  }
+
+  &.print-link {
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 32px;
+    padding-left: 32px;
+    display: block;
+    margin: 3px 0;
+    display: block;
+    text-align: right;
+    text-decoration: none;
+
+    @media (max-width: 767px) {
+      text-align: center;
+      padding: 0;
+    }
+  }
+}
+
+p {
+  line-height: {{  theme.options.typography.p_line_height }};
+}
+
+// wysiwyg font fix
+.wysiwyg {
+  text-align: left;
+  
+  h1, h2, h3, h4, h5, h6 {
+    {% if theme.options.typography.h2.font_family %}
+      font-family: {{ theme.options.typography.h2.font_family }} !important;
+    {% endif %}
+    font-weight: {{  theme.options.typography.h2.font_weight }};
+    font-size: 1.5em !important;
+  }
+
+  // p {
+  //   font-family: $body-font !important;
+  //   font-size: $body-font-size !important;
+
+  //   span {
+  //     font-family: $body-font !important;
+  //     font-size: $body-font-size !important;
+  //   }
+  // }
+
+  table {
+    width: 100% !important;
+
+    td {
+      vertical-align: top;
+    }
+
+    @media (max-width: 767px) {
+      width: auto !important;
+      td {
+        width: 100%;
+        display: block;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Icomoon Custom Fonts */
+
+@font-face {
+  font-family: 'icomoon';
+  src:url('{{ static("/fonts/icomoon.eot?-v33995") }}');
+  src:url('{{ static("/fonts/icomoon.eot?#iefix-v33995") }}') format('embedded-opentype'),
+    url('{{ static("/fonts/icomoon.woff?-v33995") }}') format('woff'),
+    url('{{ static("/fonts/icomoon.ttf?-v33995") }}') format('truetype'),
+    url('{{ static("/fonts/icomoon.svg?-v33995#icomoon") }}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-clock:before {
+  content: "\f017";
+}
+.icon-calendar:before {
+  content: "\f073";
+}
+.icon-twitter:before {
+  content: "\f081";
+}
+.icon-facebook:before {
+  content: "\f082";
+}
+.icon-arrow-up:before {
+  content: "\f0aa";
+}
+.icon-arrow-down:before {
+  content: "\f0ab";
+}
+.icon-pinterest:before {
+  content: "\f0d3";
+}
+.icon-google-plus:before {
+  content: "\f0d4";
+}
+.icon-plus:before {
+  content: "\f0fe";
+}
+.icon-minus:before {
+  content: "\f146";
+}
+.icon-instagram:before {
+  content: "\f16d";
+}
+.icon-foursquare:before {
+  content: "\f180";
+}
+.icon-vine:before {
+  content: "\f1ca";
+}
+.icon-yelp:before {
+  content: "\e600";
+}
+
+

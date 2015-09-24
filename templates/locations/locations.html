@@ -1,0 +1,61 @@
+<section id="{{ section.slug }}" class="locations-section hidden-print">
+  <div class="container-fluid max-width">
+    {% if theme.options.locations.header %}
+      {% include "_section-header.html" %}
+    {% endif %}
+
+    {% if section.fields.description and section.fields.description.text %}
+      {% include "_section-description.html" %}
+    {% endif %}
+
+    {% if boxes.locations.all|length > 1 %}
+      <div class="multi-locations">
+        {% for group in boxes.locations.all|batch(theme.options.locations.columns) %}
+          <div class="row">
+            {% for location in group %}
+              <div class="col-md-{{12 // theme.options.locations.columns }}">
+                <h2>{{location.name}}</h2>
+                <p><a href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{ location.address }}</a></p>
+                <div class="wysiwyg">{{location.description|safe}}</div>
+                <div class="wysiwyg">{{location.hours|safe}}</div>
+                {% if theme.options.locations.map  %}
+                  {% include "_map.html" %}
+                {% endif %}
+              </div>
+            {% endfor%}
+          </div>
+        {% endfor %}
+      </div>
+    {% elif boxes.locations.all %}
+      {% set location = boxes.locations.all.0 %}
+      <div class="row">
+        <div class="{% if not theme.options.locations.map or theme.options.locations.map_full_width %}col-sm-12{% else %}col-sm-6{% endif %}">
+          <div class="wysiwyg limit-width">
+            {{location.hours|safe}}
+          </div>
+        </div>
+
+        {% if theme.options.locations.map and not theme.options.locations.map_full_width %}
+          <div class="col-sm-6">
+            {% include "_map.html" %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if theme.options.locations.map and theme.options.locations.map_full_width %}
+  {% with full_width="true" %}
+  {% include "_map.html"  %}
+  {% endwith %}
+{% endif %}
+
+<!-- Locations Carousel -->
+{% if theme.options.locations.gallery %}
+  <div id="locations-carousel" class="carousel-wrapper">
+    {% set gallery = theme.options.locations.gallery %}
+    {% include "_carousel.html" %}
+  </div>
+{% endif %}
+<!-- end Locations Carousel -->

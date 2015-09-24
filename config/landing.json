@@ -1,0 +1,16 @@
+{
+  "name": "Landing",
+  "fields": {
+  	"alert": {
+  	  "title": "Hero Alert",
+  	  "type":"section",
+  	  "items": {
+  	    "text":"wysiwyg"
+  	  }
+  	}
+  },
+  "wireframe": [
+  	"section-alert",
+    "boxes-header_gallery"
+  ]
+}

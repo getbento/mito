@@ -1,0 +1,17 @@
+<div class="col-md-{{ 12 // theme.options.news.columns }}">
+    <h3><a data-toggle="modal" data-target="#modal-news-{{item.slug}}">{{ item.title }}</a></h3>
+
+    {% if item.image %}
+      <div class="thumbnail" data-toggle="modal" data-target="#modal-news-{{item.slug}}">
+        <div class="newsthumb image-stroke" style="background-image: url('{{ item.image }}')"></div>
+      </div>
+    {% endif %}
+
+    <div class="caption">
+      {% if item.fields.caption %}
+        <p>{{ item.fields.caption|striptags }}</p>
+      {% elif item.content %}
+        <p>{{ item.content|striptags|truncate(200) }}</p>
+      {% endif %}
+    </div>
+</div>

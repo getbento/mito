@@ -1,0 +1,20 @@
+{
+  "name": "Locations",
+  "fields": {
+    "description": {
+      "title": "Description",
+      "type":"section",
+      "items": {
+        "text":"wysiwyg"
+      }
+    }
+  },
+  "wireframe": [
+    "section-description"
+    {
+      "boxes-locations": {
+        "width": "columns-4"
+      }
+    }
+  ]
+}

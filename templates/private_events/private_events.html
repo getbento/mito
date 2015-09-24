@@ -1,0 +1,120 @@
+<section id="{{ section.slug }}" class="private-events-section hidden-print">
+  <div class="container-fluid max-width">
+    {% if theme.options.private_events.header %}
+      {% include "_section-header.html" %}
+    {% endif %}
+    
+    {% set description = section.fields.description and section.fields.description.text %}
+    {% if boxes.venues.all|length == 1 %}
+      {% for venue in boxes.venues.all %}
+        {% if description %}
+          <div class="row sub-header">
+            <div class="{% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button %}col-sm-7{% else %}col-sm-12{% endif %}">
+              <div class="wysiwyg">
+                {{ section.fields.description.text|safe }}
+              </div>
+            </div>
+            {% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button %}
+              <div class="col-sm-5 text-right">
+                {% if theme.options.private_events.form.inquiry_button %}
+                  <a href="#event_inquiry" class="btn">Inquiry Form</a>
+                {% endif %}
+
+                {% if theme.options.private_events.pdf_button %}
+                  <button class="btn">Download PDF</button>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% set noRightColumn = theme.options.private_events.form.no_form and (description or (not theme.options.private_events.pdf_button and not theme.options.private_events.form.inquiry_button)) %}
+        <div class="row">
+          <div class="{% if noRightColumn %}col-sm-12{% else %}col-sm-6{% endif %} wysiwyg">
+            <p>{{venue.description|safe}}</p>
+          </div>
+
+          {% if not noRightColumn %}
+            <div class="col-sm-6 text-right">
+              {% if theme.options.private_events.form.inquiry_button and not description %}
+                <a href="#event_inquiry" class="btn">Inquiry Form</a>
+              {% endif %}
+
+              {% if theme.options.private_events.pdf_button and not description %}
+                <button class="btn">Download PDF</button>
+              {% endif %}
+
+              <div id="event_inquiry" {% if theme.options.private_events.form.hide %}class="collapse"{% endif %}>
+                {% if theme.options.private_events.form.header %}
+                  <h2>{{ theme.options.private_events.form.header }}</h2>
+                {% endif %}
+                {% set recipient=theme.options.private_events.form.contact_email %}
+                {% include "private_events/_form.html" %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      {% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button or (section.fields.description and section.fields.description.text) %}
+        <div class="row sub-header">
+          <div class="{% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button %}col-sm-7{% else %}col-sm-12{% endif %}">
+            {% if section.fields.description and section.fields.description.text %}
+              <div class="wysiwyg">
+                {{ section.fields.description.text|safe }}
+              </div>
+            {% endif %}
+          </div>
+          {% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button %}
+            <div class="col-sm-5 text-right">
+              {% if theme.options.private_events.pdf_button %}
+                <button class="btn">Download PDF</button>
+              {% endif %}
+              
+              {% if theme.options.private_events.form.inquiry_button %}
+                <a href="#event_inquiry" class="btn">Inquiry Form</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% for venue in boxes.venues.all %}
+        <div class="row venue">
+          <div class="{% if venue.images|length > 0 %}col-sm-4{% else %}col-sm-12{% endif %}">
+            <h2>{{venue.name}}</h2>
+            <div class="wysiwyg">{{venue.description|safe}}</div>
+          </div>
+          {% if venue.images|length > 0 %}
+            <div class="col-sm-8">
+              {% include "private_events/_carousel.html" %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      {% if not theme.options.private_events.form.no_form %}
+        <div class="row">
+          <div class="col-sm-12">
+            <div id="event_inquiry" {% if theme.options.private_events.form.hide %}class="collapse"{% endif %}>
+              {% if theme.options.private_events.form.header %}
+                <h2>{{ theme.options.private_events.form.header }}</h2>
+              {% endif %}
+              {% set recipient=theme.options.private_events.form.contact_email %}
+              {% include "private_events/_form.html" %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+<!-- Private Events Carousel -->
+{% if theme.options.private_events.gallery %}
+  <div id="private-events-carousel" class="carousel-wrapper">
+    {% set gallery = theme.options.private_events.gallery %}
+    {% include "_carousel.html" %}
+  </div>
+{% endif %}
+<!-- end Private Events Carousel -->

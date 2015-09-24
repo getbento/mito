@@ -1,0 +1,8 @@
+{
+  "engine": "blog",
+  "has_categories":true,
+  "has_featured":true,
+  "fields": { 
+  	"caption": "text" 
+  }
+}

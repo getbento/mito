@@ -1,0 +1,174 @@
+// google map
+.google-map {
+  opacity: 1;
+  @include transition(opacity .5s);
+  margin-top: 1em;
+
+  &.transparent {
+    opacity: 0;
+
+    .map-canvas {
+      max-height: 470px;
+    }
+
+    &.map-full-width {
+      .map-canvas {
+        max-height: 600px;
+      }
+    }
+  }
+
+  .custom-map {
+    background-size: cover;
+    background-position: center;
+    @include transition(opacity .3s);
+    height: 300px;
+
+    @media (min-width: 768px) {
+      height: 470px;
+    }
+  }
+
+  &.map-full-width {
+    .custom-map {
+      height: 600px;
+    }
+  }
+
+  // img {
+  //   width: 100%;
+  //   height: auto;
+  //   max-height: 300px;
+
+  //   @media (min-width: 768px) {
+  //     max-height: 400px;
+  //   }
+  // }
+
+  button, a.btn {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .map-canvas {
+    height: 400px;
+  }
+
+  &.map-full-width {
+    position: relative;
+    margin-top: 0;
+
+    .btn {
+      position: absolute;
+      bottom: 50px;
+      width: 300px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      
+      @media (min-width: 768px) {
+        {% if theme.options.locations.full_map_btn_color %}
+          color: {{ theme.options.locations.full_map_btn_color }};
+        {% endif %}
+        
+        {% if theme.options.locations.full_map_btn_bg_color %}
+          background-color: {{ theme.options.locations.full_map_btn_bg_color }};
+        {% endif %}
+
+        &:hover, &:focus, &:active {
+          {% if theme.options.locations.full_map_btn_bg_color %}
+            background-color: darken({{ theme.options.locations.full_map_btn_bg_color }}, 10%) !important;
+          {% endif %}
+        }
+      }
+    }
+
+    // img.custom-map {
+    //   max-width: 100%;
+    //   max-height: none;
+    //   height: auto;
+    //   min-height: 160px;
+
+    //   @media (max-width: 767px) {
+    //     max-width: 200%;
+    //     width: 200%;
+    //     margin-left: -50%;
+    //   }
+    // }
+
+    @media (max-width: 767px) {
+      margin-bottom: 0px;
+
+      .btn {
+        bottom: -50px;
+        width: 100%;
+        border-radius: 0px;
+        position: static;
+      }
+    }
+  }
+}
+
+.multi-locations {
+  .google-map {
+    .map-canvas, .custom-map {
+      margin-top: 25px;
+      height: 300px;
+    } 
+
+    &.transparent {
+      .map-canvas {
+        height: 370px;
+      }
+    }   
+  }
+}
+
+// Custom Map Zoom Arrows
+#cd-zoom-in, #cd-zoom-out {
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  margin-left: 10px;
+  background-repeat: no-repeat;
+  background-size: 32px 64px;
+  background-image: url('{{ static("/images/cd-icon-controller.svg") }}');
+  {% if theme.options.buttons.bg_color %}
+    background-color: rgba({{ theme.options.buttons.bg_color }}, .85);
+  {% endif %}
+}
+.no-touch #cd-zoom-in:hover, .no-touch #cd-zoom-out:hover {
+  {% if theme.options.buttons.bg_color %}
+    background-color: rgba({{ theme.options.buttons.bg_color }}, .95);
+  {% endif %}
+}
+@media only screen and (min-width: 992px) {
+  #cd-zoom-in, #cd-zoom-out {
+    margin-left: 30px;
+  }
+}
+
+#cd-zoom-in {
+  background-position: 50% 0;
+  margin-top: 10px;
+  margin-bottom: 1px;
+}
+@media only screen and (min-width: 992px) {
+  #cd-zoom-in {
+    margin-top: 30px;
+  }
+}
+
+#cd-zoom-out {
+  background-position: 50% -32px;
+}
+
+@media only screen and (max-width: 991px) {
+  .map-canvas {
+    pointer-events: none;
+  }
+
+  #cd-zoom-in, #cd-zoom-out {
+    display: none;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Press",
+  "fields": {
+    "description": {
+      "title": "Description",
+      "type":"section",
+      "items": {
+        "text":"wysiwyg"
+      }
+    }
+  },
+  "wireframe": [
+    "section-description"
+    {
+      "boxes-press": {
+        "width": "columns-4"
+      }
+    }
+  ]
+}

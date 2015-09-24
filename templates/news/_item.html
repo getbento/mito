@@ -1,0 +1,14 @@
+<div class="news-item col-md-{{ 12 // theme.options.news.columns }}">
+  <div class="caption">
+    {% if news.file %}
+      <h3><a class="lightbox" href="{{item.file}}" data-slug="{{ item.slug }}" data-section="{{ section.slug }}" data-lightbox-type="iframe">{{ item.title }}</a></h3>
+    {% elif item.url %}
+      <h3><a href="{{ item.url }}" target="_blank">{{ item.title }}</a></h3>
+    {% else %}
+      <h3>{{ item.title }}</h3>
+    {% endif %}
+    <p>
+      {% if item.source %}<span class="source"><a href="{{ item.url }}" target="_blank">{{ item.source }}</a></span>{% endif %}{% if item.source and item.date %} | {% endif %}{% if item.date %}<span class="date">{{ item.date }}</span>{% endif %}
+    <p>
+  </div>
+</div>

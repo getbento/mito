@@ -1,0 +1,65 @@
+.locations-section {
+  @media (max-width: 767px) {
+    overflow-x: hidden;
+  }
+
+  {% if theme.options.locations.custom_styles and theme.options.locations.bg_color %}
+    background-color: {{ theme.options.locations.bg_color }} !important;
+  {% endif %}
+
+  {% if theme.options.locations.custom_styles and theme.options.locations.bg_image %}
+    background-image: url('{{ theme.options.locations.bg_image }}');
+  {% endif %}
+
+  {% if theme.options.locations.custom_styles and theme.options.locations.color %}
+    color: {{ theme.options.locations.color }};
+  {% endif %}
+
+  .multi-locations {
+    .row {
+      border-bottom: dotted 1px transparent;
+
+      @media (min-width: 992px) {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+
+        {% if theme.options.locations.dividers %}
+          border-bottom-color: {{ theme.options.buttons.bg_color }};
+        {% endif %}
+      }
+
+      &:last-child {
+        border-bottom-color: transparent !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+
+        & > div:last-child {
+          border-bottom-color: transparent !important;
+        }
+      }
+
+      & > div {
+        border-right: dotted 1px transparent;
+        border-bottom: dotted 1px transparent;
+
+        {% if theme.options.locations.dividers %}
+          border-right-color: {{ theme.options.buttons.bg_color }};
+        {% endif %}
+
+        &:last-child {
+          border-right: none;
+        }
+
+        @media (max-width: 991px) {
+          border-right: none;
+          margin-bottom: 30px;
+          padding-bottom: 30px;
+
+          {% if theme.options.locations.dividers %}
+            border-bottom-color: {{ theme.options.buttons.bg_color }};
+          {% endif %}
+        }
+      }
+    }
+  }
+}

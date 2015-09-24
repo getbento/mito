@@ -1,0 +1,22 @@
+{
+  "fields": {
+    "header": {
+      "title": "Header",
+      "type":"section",
+      "items": {
+        "show":"boolean"
+      }
+    },
+    "description": {
+      "title": "Description",
+      "type":"section",
+      "items": {
+        "text":"wysiwyg"
+      }
+    }   
+  },
+  "wireframe": [
+    "section-header",
+    "section-description"
+  ]
+}

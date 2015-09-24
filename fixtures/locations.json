@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Chez Bento",
+        "short_name": "Bento",
+        "address": "1407 Broadway, New York, NY 10018",
+        "phone_number": "212-555-5555",
+        "map_image": "accounts/625bc6d02c88547eaf5bfe5e446298c3/mediausers/images/KxxWjm5gStu0thBWCR83_map.jpg",
+        "custom_map_image": true,
+        "display_hours": "<table align=\"center\" width=\"1070\" id=\"table1656\">\n<tbody color=\"\">\n<tr>\n\t<td style=\"text-align: center;\">\n\t\t<h2 style=\"text-align: center;\">HOURS</h2>\n\t\t<p style=\"text-align:center;\">\n\t\t\t<b>Monday\u2014Thursday<br>\n\t\t\t</b>11 AM\u201410 PM\n\t\t</p>\n\t\t<p style=\"text-align:center;\">\n\t\t\t<b>Friday<br>\n\t\t\t</b>11 AM\u201410 PM\n\t\t</p>\n\t\t<p style=\"text-align:center;\">\n\t\t\t<b>Saturday<br>\n\t\t\t</b>11 AM\u201410:30 PM\n\t\t</p>\n\t\t<p>\n\t\t\t<span style=\"font-size: 1em; background-color: initial;\" rel=\"font-size: 1em; background-color: initial;\"><b>Sunday </b><br>\n\t\t\t</span><span style=\"font-size: 1em; background-color: initial;\" rel=\"font-size: 1em; background-color: initial;\">11 AM\u20149 PM<br>\n\t\t\t<br>\n\t\t\t</span>\n\t\t</p>\n\t</td>\n\t<td>\n\t\t<h2 style=\"text-align: center;\">LOCATION</h2>\n\t\t<p style=\"text-align: center;\">\n\t\t\t1234 Broadway,<br>\n\t\t\t<span style=\"font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif; line-height: 1.45em; background-color: initial;\" rel=\"font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif; line-height: 1.45em; background-color: initial;\">between 30th and 31st.</span>\n\t\t</p>\n\t\t<p style=\"text-align: center;\">\n\t\t\tTel: 212 748 9156\n\t\t</p>\n\t\t<p style=\"text-align: center;\">\n\t\t\thello@getbento.com\n\t\t</p>\n\t\t<p style=\"text-align: center;\">\n\t\t\t<br>\n\t\t</p>\n\t\t<h2 style=\"text-align: center;\"><br>\n\t\t</h2>\n\t</td>\n</tr>\n</tbody>\n</table><p>\n\t<br>\n\t<br>\n</p>"
+    }
+]

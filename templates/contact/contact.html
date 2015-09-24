@@ -1,0 +1,111 @@
+<section id="{{ section.slug }}" class="contact-section hidden-print">
+  <div class="container-fluid max-width">
+    {% if theme.options.contact.header %}
+      {% include "_section-header.html" %}
+    {% endif %}
+
+    {% if section.fields.description and section.fields.description.text %}
+      {% include "_section-description.html" %}
+    {% endif %}
+
+    <div class="row">
+      <div class="{% if theme.options.contact.one_column %}col-sm-12{% else %}col-sm-6{% endif %}">
+        {% import 'forms.html' as forms with context %}
+        {% call forms.email_form(theme.options.contact.email) %}
+          <div id="form_error" style="display:none;">Please correct the errors below:<br><br></div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label for="name" class="sr-only">Name</label>
+              <input type="name" class="form-control" id="name" name="name" placeholder="Name*">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label for="contact-email" class="sr-only">Email</label>
+              <input type="email" class="form-control" id="contact-email" name="email" placeholder="Email*">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <div class="input-icon-wrapper">
+                <b class="caret"></b>
+                <select class="form-control" name="reason">
+                  <option selected="selected" disabled>What are you getting in touch about?</b></option>
+                  <option value="general">General</option>
+                  {% if theme.options.contact.contact_reasons %}
+                    {% for reason in theme.options.contact.contact_reasons %}
+                      <option value="{{reason.option}}">{{reason.option}}</option>
+                    {% endfor %}
+                  {% endif %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label for="contact-message" class="sr-only">Message</label>
+              <textarea id="contact-message" name="message" class="form-control" placeholder="Message"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row checkbox">
+            <div class="col-sm-12">
+              <input type="checkbox" value="Yes" id="get_newsletter" name="get_newsletter" name="check" />
+              <label for="get_newsletter"><span class="box"></span><span class="label-text">Sign up to get the latest updates</span></label>
+            </div>
+          </div>
+          <div class="form-group row submit-group">
+            <div class="col-sm-12">
+              <p class="error-msg">An error occurred.</p>
+              <p class="success-msg">Success! Thank you for your message. Someone will be in touch with you shortly.</p>
+              <button type="button" class="btn btn-default submit">Send <b class="caret-right"></b></button>
+            </div>
+          </div>
+        {% endcall %}
+      </div>
+
+      {% if theme.options.contact.show_locations %}
+        {% if theme.options.contact.one_column %}
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+        {% else %}
+          <div class="col-sm-6">
+        {% endif %}
+          {% for location in boxes.locations.all %}
+            {% if boxes.locations.all|length > 1 %}
+              <h2>{{location.name}}</h2>
+            {% elif boxes.locations.all %}
+              <h2>Location</h2>
+            {% endif %}
+            <p>
+              <a href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{location.address}}</a>
+            </p>
+            {% if location.phone_number %}
+              <p>{{location.phone_number}}</p>
+            {% endif %}
+            {% if theme.options.contact.email %}
+              <p>{{ theme.options.contact.email }}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Contact Carousel -->
+{% if theme.options.team.gallery %}
+  <div id="contact-carousel" class="carousel-wrapper">
+    {% for gallery in boxes.galleries.all %}
+      {% if gallery.name|lower == theme.options.contact.gallery_name %}
+        {% include "_carousel.html" %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<!-- end Contact Carousel -->
