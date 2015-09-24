@@ -1,5 +1,4 @@
 node_modules
 sftpCache.json
 *.scssc
-.ftppass
-preview_key
+.DS_Store
