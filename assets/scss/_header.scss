@@ -25,6 +25,8 @@ header {
     {% endif %}
 
     nav {
+      max-width: 99%;
+
       .logo {
         width: {{ theme.options.header.nav.logo_width }};
         margin-bottom: 20px;
@@ -115,7 +117,7 @@ header {
   }
 
   #header-alert-wrapper {
-    z-index: 30;
+    z-index: 210;
     position: absolute;
     top: 0;
     left: 0;
@@ -137,6 +139,16 @@ header {
       padding: 40px;
       width: 500px;
       margin: 100px auto 0;
+      position: relative;
+
+      .close {
+        position: absolute;
+        font-size: 34px;
+        position: absolute;
+        top: 5px;
+        right: 15px;
+        color: {{ theme.options.header.alert.link_color }}; 
+      }
 
       .wysiwyg {
         color: {{ theme.options.header.alert.body_color }};
@@ -174,6 +186,16 @@ header {
       @media (max-width: 767px) {
         height: 300px;
         top: 0 !important;
+      }
+
+      &.bottom-align {
+        @media (min-width: 768px) {
+          .carousel-caption {
+            position: absolute;
+            left: 50%;
+            margin-left: -32.5%;
+          }
+        }
       }
     }
 
@@ -268,6 +290,10 @@ header {
         margin-right: -0.25em; /* Adjusts for spacing */
       }
 
+      nav {
+        max-width: 99%;
+      }
+      
       nav, nav a {
         display: inline-block;
         vertical-align: middle;

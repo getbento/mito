@@ -82,6 +82,7 @@
   .btn {
     margin-top: 6px;
     margin-bottom: 6px;
+    background-color: darken({{ theme.options.address_bar.bg_color }}, 10%) !important;
   }
 }
 

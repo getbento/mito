@@ -385,6 +385,50 @@
                             }
                         }
                     }, 
+                    "sticky": {
+                        "title": "Sticky",
+                        "type": "section",
+                        "items": {
+                            "show": {
+                                "title": "Show",
+                                "type": "boolean",
+                                "default": true
+                            }, 
+                            "bg_color": {
+                                "title": "Background Color",
+                                "type": "color",
+                                "default": "#FFFFFF"
+                            }, 
+                            "bg_image": {
+                                "title": "Background Image",
+                                "type": "image"
+                            }, 
+                            "font_size": {
+                                "title": "Font Size",
+                                "type": "text",
+                                "default": "13px"
+                            }, 
+                            "color": {
+                                "title": "Font Color",
+                                "type": "color",
+                                "default": "#222222"
+                            }, 
+                            "hover_color": {
+                                "title": "Hover Color",
+                                "type": "color",
+                                "default": "#222222"
+                            },
+                            "hover_underline": {
+                                "title": "Hover Underline",
+                                "type": "boolean",
+                                "default": false
+                            }, 
+                            "logo": {
+                                "title": "Logo",
+                                "type": "image"
+                            }
+                        }
+                    },
                     "carousel": {
                         "title": "Carousel",
                         "type": "section",
@@ -430,10 +474,6 @@
                         "title": "Alert",
                         "type": "section",
                         "items": {
-                            "text": {
-                                "title": "Text",
-                                "type": "wysiwyg"
-                            },
                             "bg_color": {
                                 "title": "Background Color",
                                 "type": "color",
@@ -453,50 +493,6 @@
                                 "title": "Link Color",
                                 "type": "color",
                                 "default": "blue"
-                            }
-                        }
-                    },
-                    "sticky": {
-                        "title": "Sticky",
-                        "type": "section",
-                        "items": {
-                            "show": {
-                                "title": "Show",
-                                "type": "boolean",
-                                "default": true
-                            }, 
-                            "bg_color": {
-                                "title": "Background Color",
-                                "type": "color",
-                                "default": "#FFFFFF"
-                            }, 
-                            "bg_image": {
-                                "title": "Background Image",
-                                "type": "image"
-                            }, 
-                            "font_size": {
-                                "title": "Font Size",
-                                "type": "text",
-                                "default": "13px"
-                            }, 
-                            "color": {
-                                "title": "Font Color",
-                                "type": "color",
-                                "default": "#222222"
-                            }, 
-                            "hover_color": {
-                                "title": "Hover Color",
-                                "type": "color",
-                                "default": "#222222"
-                            },
-                            "hover_underline": {
-                                "title": "Hover Underline",
-                                "type": "boolean",
-                                "default": false
-                            }, 
-                            "logo": {
-                                "title": "Logo",
-                                "type": "image"
                             }
                         }
                     }
