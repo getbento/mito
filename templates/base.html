@@ -54,6 +54,7 @@
   </head>
 
   <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile">
+  
     {% if theme.options.address_bar.show %}
       {% include 'address_bar/_address_bar.html' %}
     {% endif %}

@@ -7,7 +7,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img src="{{ account.logo }}" alt="{{ account.site.title }}"></a>
+      <a class="navbar-brand" href="#">
+        {% if theme.options.header.sticky.logo %}
+          <img src="{{ theme.options.header.sticky.logo }}" alt="{{ account.site.title }}">
+        {% else %}
+          <img src="{{ account.logo }}" alt="{{ account.site.title }}">
+        {% endif %}
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
