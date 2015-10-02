@@ -25,7 +25,7 @@
           <div class="OTButton">
             <script type="text/javascript" src="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism"></script>
           </div>
-          
+
           <!-- Desktop -->
           <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable">Make a Reservation</button>
 
@@ -69,9 +69,7 @@
       </div>
 
       {% import 'forms.html' as forms with context %}
-      {% call forms.email_form('info') %}
-        {% csrf_token %}
-        <input type="hidden" name="group_id" value="67476"/>
+      {% call forms.newsletter_form() %}
         <div class="row">
           <div class="form-group">
             <div class="col-sm-4">
