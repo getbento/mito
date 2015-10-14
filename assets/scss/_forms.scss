@@ -268,8 +268,10 @@ form {
   color: {{ theme.options.buttons.color }};
 }
 
-.address-bar-sticky {
-  .bootstrap-datetimepicker-widget, .select2-dropdown {
-    margin-top: -42px;
+@media (min-width: 768px) {
+  .address-bar-sticky {
+    .bootstrap-datetimepicker-widget, .select2-dropdown {
+      margin-top: -42px;
+    }
   }
 }

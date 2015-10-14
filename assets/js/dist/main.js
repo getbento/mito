@@ -20914,12 +20914,12 @@ $(document).ready(function () {
   $tab_select.on('change', function () {
     var $this = $(this);
     var file = $this.find(':selected').attr('file');
-    
+
     if (file) {
       window.open(file);
       return true;
     }
-    
+
     $this.parents('section').find('.nav a[href=#'+$this.val().replace(/ /g,'')+']').tab('show');
   });
 
