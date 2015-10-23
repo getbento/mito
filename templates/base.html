@@ -53,15 +53,21 @@
     {% endif %}
   </head>
 
-  <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile">
+  <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile {% block containerClass %}{% endblock %}">
 
-    {% include 'address_bar/_address_bar.html' %}
-    
-    {% include 'header/_header.html' %}
+    {% block addressBar %}    
+      {% include 'address_bar/_address_bar.html' %}
+    {% endblock %}
 
-    {% for section in navs.main|rejectattr("homepage")|selectattr("template") %}
-      {% include section.template with context %}
-    {% endfor %}
+    {% block header %}
+      {% include 'header/_header.html' %}
+    {% endblock %}
+
+    {% block content %}
+      {% for section in navs.main|rejectattr("homepage")|selectattr("template") %}
+        {% include section.template with context %}
+      {% endfor %}
+    {% endblock %}
 
     {% include 'footer/_footer.html' %}
 

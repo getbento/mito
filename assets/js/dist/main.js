@@ -20978,6 +20978,18 @@ $(document).ready(function () {
   });
 });
 $(document).ready(function () {
+
+  $('.show-giftcard-form').on('click', function(event) {
+    event.preventDefault();
+    
+    $('.formContainer').hide();
+
+    var formSelector = '#' + $(this).data('target');
+    $(formSelector).fadeIn();
+  });
+
+});
+$(document).ready(function () {
   var $window = $(window);
   var $document = $(document);
   var $body = $('body');

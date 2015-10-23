@@ -60,33 +60,6 @@ module.exports = function (grunt) {
             options: {
                 compass: true
             }
-        },
-        "sftp-deploy": {
-              build: {
-                auth: {
-                  host: '104.236.34.179',
-                  port: 22,
-                  authKey: 'bento-preview'
-                },
-                cache: 'sftpCache.json',
-                src: '<%= currentPath %>',
-                dest: '/sites/<%= siteName %>',
-                exclusions: [
-                    '.git',
-                    '*.scss',
-                    'scss',
-                    'js/src',
-                    '.sass-cache',
-                    'config',
-                    'assets/files',
-                    'assets/*.map',
-                    'assets/js/src',
-                    'node_modules'
-                ],
-                serverSep: '/',
-                concurrency: 4,
-                progress: true
-              }
         }
 
     });
@@ -97,7 +70,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-sftp-deploy');
 
     // register at least this one task
     grunt.registerTask('default', [

@@ -333,6 +333,10 @@ header {
     }
   }
 
+  &.always-show-sticky #sticky-header {
+    top: 0px;
+  }
+
   #mobile-header {
     margin-bottom: 0;
     background-color: {{ theme.options.header.sticky.bg_color }};

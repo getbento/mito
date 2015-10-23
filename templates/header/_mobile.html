@@ -23,7 +23,7 @@
           <li><a href="#{{ item.slug }}" data-toggle="collapse" data-target="#mobile-nav-dropdown">{{item.name}}</a></li>
         {% endfor %}
         {% if theme.options.header.nav.reservations_link and not theme.options.address_bar.mobile_reservation_btn%}
-          <li><a href="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown">Reservations</a></li>
+          <li><a href="{{ account.reservations.url }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown">Reservations</a></li>
         {% endif %}
         {% if theme.options.address_bar.social_icons or theme.options.footer.social_links %}
           <div class="social-links text-center">

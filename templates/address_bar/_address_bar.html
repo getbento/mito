@@ -39,7 +39,7 @@
 
       {% if theme.options.address_bar.mobile_reservation_btn %}
         <div class="col-xs-12 visible-xs">
-          <a href="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism" target="_blank" class="btn visible-xs">Make a Reservation</a>          
+          <a href="{{ account.reservations.url }}" target="_blank" class="btn visible-xs">Make a Reservation</a>          
         </div>
       {% endif %}
     </div>
