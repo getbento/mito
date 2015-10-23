@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block addressBar %}{% endblock %}
+
+{% block header %}
+  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+    {% include 'header/_sticky.html' %}
+    {% include 'header/_mobile.html' %}
+  </header>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
