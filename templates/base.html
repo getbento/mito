@@ -14,11 +14,11 @@
       WebFont.load({
         google: {
           families: [
-            {% if theme.options.typography.font_family %}'{{ theme.options.typography.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.typography.h1.font_family %}'{{ theme.options.typography.h1.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.typography.h2.font_family %}'{{ theme.options.typography.h2.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.buttons.font_family %}'{{ theme.options.buttons.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.header.nav.font_family %}'{{ theme.options.header.nav.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.typography.font_family %}'{{ theme.options.typography.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.typography.h1.font_family %}'{{ theme.options.typography.h1.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.typography.h2.font_family %}'{{ theme.options.typography.h2.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.buttons.font_family %}'{{ theme.options.buttons.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.header.nav.font_family %}'{{ theme.options.header.nav.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
             ]
         }
       });
@@ -53,7 +53,7 @@
     {% endif %}
   </head>
 
-  <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile {% block containerClass %}{% endblock %}">
+  <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% block bodyClass %}{% endblock %} {% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile {% block containerClass %}{% endblock %}">
 
     {% block addressBar %}    
       {% include 'address_bar/_address_bar.html' %}
