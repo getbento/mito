@@ -59,5 +59,11 @@
 	.cart-details.checkout {
 		margin-top: 20px;
 	}
+	.cart-icon a svg {
+		margin: 0 10px -6px;
+		height: 23px;
+	}
+	.cart-icon a svg path {
+		fill: {{ theme.options.buttons.color }};
+	}
 }
-
