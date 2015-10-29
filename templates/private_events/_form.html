@@ -1,8 +1,8 @@
 {% import 'forms.html' as forms with context %}
 {% call forms.email_form('info') %}
 
-  {% if theme.options.private_events.contact_email %}
-    <input id="recipient" type="hidden" name="recipient" value="{{ theme.options.private_events.contact_email }}">
+  {% if theme.options.private_events.form.contact_email %}
+    <input id="recipient" type="hidden" name="recipient" value="{{ theme.options.private_events.form.contact_email }}">
   {% endif %}
 
   <div class="form-group row">
