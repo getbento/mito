@@ -26,9 +26,10 @@
             <a class="col-sm-5 btn show-giftcard-form" data-target="electronic-form">Electronic/Email Gift Card</a> {% endif %} {% if store.gift_card_settings.physical_available %}
             <a class="col-sm-5 col-sm-offset-2 btn show-giftcard-form" data-target="physical-form">Physical/Plastic Gift Card</a> {% endif %}
         </div>
+        {{ form.errors }}
     </div>
     <div class="row">
-        <div id="physical-form" class="formContainer col-lg-6" style="display:none;">
+        <div id="physical-form" class="formContainer col-lg-6 col-lg-offset-3" style="display:none;">
             <form method="post" action="" class="custom">
                 {% csrf_token %}
                 <div class="form-group">
@@ -123,7 +124,7 @@
         </div>
     </div>
     <div class="row">
-        <div id="electronic-form" class="formContainer col-lg-6" style="display:none;">
+        <div id="electronic-form" class="formContainer col-lg-6 col-lg-offset-3" style="display:none;">
             <form method="post" action="" class="custom">
                 {% csrf_token %}
                 <div class="form-group">
@@ -140,7 +141,7 @@
                 </div>
                 <div class="form-group row checkbox">
                     <div class="col-sm-12">
-                        <input type="checkbox" id="email_gifter" name="email_gifter">
+                        <input type="checkbox" id="email_gifter" name="email_gifter" value="true">
                         <label for="email_gifter"><span class="box"></span><span class="label-text">Email me a printable gift card</span></label>
                     </div>
                 </div>
@@ -164,4 +165,12 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block initScripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+    Bento.GiftCards.initialize();
+});
+</script>
 {% endblock %}

@@ -20977,18 +20977,18 @@ $(document).ready(function () {
     }
   });
 });
-$(document).ready(function () {
+// $(document).ready(function () {
 
-  $('.show-giftcard-form').on('click', function(event) {
-    event.preventDefault();
+//   $('.show-giftcard-form').on('click', function(event) {
+//     event.preventDefault();
     
-    $('.formContainer').hide();
+//     $('.formContainer').hide();
 
-    var formSelector = '#' + $(this).data('target');
-    $(formSelector).fadeIn();
-  });
+//     var formSelector = '#' + $(this).data('target');
+//     $(formSelector).fadeIn();
+//   });
 
-});
+// });
 $(document).ready(function () {
   var $window = $(window);
   var $document = $(document);

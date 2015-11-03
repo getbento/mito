@@ -72,5 +72,9 @@
     {% include 'footer/_footer.html' %}
 
     <script src="{{ static('js/dist/main.min.js') }}"></script>
+    <script src="{{ static('js/dist/bentobox.dist.js') }}"></script>
+
+    {% block initScripts %}
+    {% endblock %}
   </body>
 </html>
