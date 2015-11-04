@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{% if absolute_nav %}{{ account.site.url }}{% else %}#{% endif %}">
         {% if theme.options.header.sticky.logo %}
           <img src="{{ theme.options.header.sticky.logo }}" alt="{{ account.site.title }}">
         {% else %}
@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="mobile-nav-dropdown">
       <ul class="nav navbar-nav">
         {% for item in navs.main|rejectattr("homepage") %}
-          <li><a href="#{{ item.slug }}" data-toggle="collapse" data-target="#mobile-nav-dropdown">{{item.name}}</a></li>
+          <li><a href="{% if absolute_nav %}{{ account.site.url }}{% endif %}#{{ item.slug }}" data-toggle="collapse" data-target="#mobile-nav-dropdown">{{item.name}}</a></li>
         {% endfor %}
         {% if theme.options.header.nav.reservations_link and not theme.options.address_bar.mobile_reservation_btn%}
           <li><a href="{{ account.reservations.url }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown">Reservations</a></li>

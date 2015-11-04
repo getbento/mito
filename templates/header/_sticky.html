@@ -1,7 +1,7 @@
 <div id="sticky-header" class="hidden-print hidden-xs{% if not theme.options.header.sticky.show %} hidden{% endif %}">
   <div class="content-wrapper max-width">
     <div id="sticky-logo-wrapper">
-      <a href="#">
+      <a href="{% if absolute_nav %}{{ account.site.url }}{% else %}#{% endif %}">
         {% if theme.options.header.sticky.logo %}
           <img src="{{ theme.options.header.sticky.logo }}" alt="{{ account.site.title }}">
         {% else %}
@@ -14,7 +14,7 @@
       <nav class="nav text-right">
         <ul class="list-inline">
           {% for item in navs.main|rejectattr("homepage") %}
-            <li><a href="#{{ item.slug }}">{{ item.name }}</a></li>
+            <li><a href="{% if absolute_nav %}{{ account.site.url }}{% endif %}#{{ item.slug }}">{{ item.name }}</a></li>
           {% endfor %}
           {% if theme.options.header.nav.reservations_link %}
             <li><a data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>

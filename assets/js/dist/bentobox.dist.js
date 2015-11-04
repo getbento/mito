@@ -56,7 +56,7 @@
 	Bento.Newsletter = Newsletter;
 	Bento.Reservations = Reservations;
 	Bento.Forms = Forms;
-	Bento.GiftCards = GiftCards
+	Bento.GiftCards = GiftCards;
 
 	window.Bento = Bento;
 
@@ -289,13 +289,17 @@
 
 	    gc.showHideRecipientFields = function(event) {
 	    	var form = $(this).parents('form');
+	        
+	        var email_field = form.find('input[name="recipient_email"]');
+	        var send_after = form.find('input[name="send_after"]');
 
 	    	if (event.target.checked) {
-	    		form.find('input[name="recipient_email"]').hide();
-	    		form.find('input[name="send_after"]').hide();
+	            email_field.removeAttr('required');
+	    		email_field.parents('.form-group').hide();
+	    		send_after.parents('.form-group').hide();
 	    	} else {
-	    		form.find('input[name="recipient_email"]').show();
-	    		form.find('input[name="send_after"]').show();
+	    		email_field.parents('.form-group').show();
+	    		send_after.parents('.form-group').show();
 	    	}
 	    };
 

@@ -4,8 +4,10 @@
 
 {% block header %}
   <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+  {% with absolute_nav = True %}
     {% include 'header/_sticky.html' %}
     {% include 'header/_mobile.html' %}
+  {% endwith %}
   </header>
 {% endblock %}
 
