@@ -102,7 +102,7 @@
                     "color": {
                         "title": "Font Color",
                         "type": "color",
-                        "default": "#FFFFFF"
+                        "default": "#000000"
                     },
                     "p_line_height": {
                         "title": "Paragraph Line Height",
