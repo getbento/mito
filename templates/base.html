@@ -73,7 +73,14 @@
 
     <script src="{{ static('js/dist/main.min.js') }}"></script>
     <script src="{{ static('js/dist/bentobox.dist.js') }}"></script>
-
+    {% if account.services.resy.api_key %}
+      <script type="text/javascript">
+        $('.reservations-link').on('click', function(event) {
+          event.preventDefault();
+          resyWidget.openModal({'venueId': {{ account.services.resy.venue_id }}})
+        });
+      </script>
+    {% endif %}
     {% block initScripts %}
     {% endblock %}
   </body>
