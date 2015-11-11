@@ -16,7 +16,6 @@ header {
 
     width: 100%;
     height: {{ theme.options.header.nav.height }};
-    z-index: 100;
     text-align: center;
     padding-top: 70px;
 
@@ -26,6 +25,8 @@ header {
 
     nav {
       max-width: 99%;
+      z-index: 1000;
+      position: relative;
 
       .logo {
         width: {{ theme.options.header.nav.logo_width }};
