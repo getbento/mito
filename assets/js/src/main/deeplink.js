@@ -40,7 +40,7 @@ $(document).ready(function () {
             return;
           }
 
-          var $modalLink = $section.find('.thumbnail[data-target="#modal-'+ $section.attr('id') +'-'+hashArray[1]+'"]');
+          var $modalLink = $section.find('.thumbnail[data-target="#modal-'+ $section.attr('id').toLowerCase() +'-'+hashArray[1]+'"]');
           if ($modalLink.length > 0) {
             $modalLink.click();
             return;
