@@ -25,8 +25,11 @@ header {
 
     nav {
       max-width: 99%;
-      z-index: 1000;
-      position: relative;
+
+      * {
+        position: relative;
+        z-index: 100;
+      }
 
       .logo {
         width: {{ theme.options.header.nav.logo_width }};
