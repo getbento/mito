@@ -40,6 +40,12 @@ $(document).ready(function () {
             return;
           }
 
+          var $modalLink = $section.find('.thumbnail[data-target="#modal-'+ $section.attr('id').toLowerCase() +'-'+hashArray[1]+'"]');
+          if ($modalLink.length > 0) {
+            $modalLink.click();
+            return;
+          }
+
           var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
           
           if ($tabLink.length > 0) {

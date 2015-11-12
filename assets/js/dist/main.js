@@ -20829,6 +20829,12 @@ $(document).ready(function () {
             return;
           }
 
+          var $modalLink = $section.find('.thumbnail[data-target="#modal-'+ $section.attr('id') +'-'+hashArray[1]+'"]');
+          if ($modalLink.length > 0) {
+            $modalLink.click();
+            return;
+          }
+
           var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
           
           if ($tabLink.length > 0) {
@@ -21461,6 +21467,15 @@ $(document).ready(function () {
   }
 
   $unfeatured.on('shown.bs.collapse', $.debounce(100, scrollTo));
+
+  $('.modal.news').on('show.bs.modal', function (e) {
+    var $el = $(this);
+    window.location.hash = $el.data('section') + '/' + $el.data('slug');
+  });
+  $('.modal.news').on('hide.bs.modal', function (e) {
+     window.location.hash = window.location.hash.split('/')[0].slice(1);
+  });
+
 });
 $(document).ready(function () {
   var $html = $('html, body');

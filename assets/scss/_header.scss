@@ -16,7 +16,6 @@ header {
 
     width: 100%;
     height: {{ theme.options.header.nav.height }};
-    z-index: 100;
     text-align: center;
     padding-top: 70px;
 
@@ -26,6 +25,11 @@ header {
 
     nav {
       max-width: 99%;
+
+      * {
+        position: relative;
+        z-index: 1000;
+      }
 
       .logo {
         width: {{ theme.options.header.nav.logo_width }};
@@ -117,7 +121,7 @@ header {
   }
 
   #header-alert-wrapper {
-    z-index: 210;
+    z-index: 1020;
     position: absolute;
     top: 0;
     left: 0;
