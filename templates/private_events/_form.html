@@ -1,5 +1,6 @@
 {% import 'forms.html' as forms with context %}
 {% call forms.email_form('info') %}
+
   <input id="recipient" type="hidden" name="recipient" value="{{ theme.options.private_events.contact_email }}">
 
   <div class="form-group row">
@@ -27,7 +28,21 @@
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-sm-12">
+    {% if boxes.venues.all|length > 1 %}
+      <div class="col-sm-6">
+        <label for="which-space" class="sr-only">Which space are you interested in?</label>
+        <div class="input-icon-wrapper">
+          <b class="caret"></b>
+          <select id="which-space" name="which-space" class="form-control">
+            <option selected="selected" disabled>Which space are you interested in?</option>
+            {% for venue in boxes.venues.all %}
+              <option value="{{venue.slug}}">{{venue.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    {% endif %}
+    <div class="{% if boxes.venues.all|length > 1 %}col-sm-6{% else %}col-sm-12{% endif %}">
       <label for="number-people" class="sr-only">Number of People</label>
       <input type="text" class="form-control" id="number-people" placeholder="Number of people">
     </div>
@@ -51,7 +66,7 @@
       <div class="input-icon-wrapper">
         <b class="caret"></b>
         <select name="event-type" class="form-control">
-          <option selected="selected" disabled>Type of event</b></option>
+          <option selected="selected" disabled>Type of event</option>
           {% if theme.options.private_events.form.event_types %}
             {% for option in theme.options.private_events.form.event_types.split(',') %}
               <option value="{{option}}">{{option}}</option>

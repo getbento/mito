@@ -21,7 +21,7 @@
                 {% endif %}
 
                 {% if theme.options.private_events.pdf_button %}
-                  <button class="btn">Download PDF</button>
+                  <a href="{{ section.fields.pdf.file }}" target="_blank" class="btn">Download PDF</a>
                 {% endif %}
               </div>
             {% endif %}
@@ -41,7 +41,7 @@
               {% endif %}
 
               {% if theme.options.private_events.pdf_button and not description %}
-                <button class="btn">Download PDF</button>
+                <a href="{{ section.fields.pdf.file }}" target="_blank" class="btn">Download PDF</a>
               {% endif %}
 
               <div id="event_inquiry" {% if theme.options.private_events.form.hide %}class="collapse"{% endif %}>
@@ -49,29 +49,29 @@
                   <h2>{{ theme.options.private_events.form.header }}</h2>
                 {% endif %}
                 {% set recipient=theme.options.private_events.form.contact_email %}
-                {% include "private_events/_form.html" %}
+                {% include "private_events/_form.html" with context %}
               </div>
             </div>
           {% endif %}
         </div>
       {% endfor %}
     {% else %}
-      {% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button or (section.fields.description and section.fields.description.text) %}
+      {% if theme.options.private_events.pdf_button or (theme.options.private_events.form.inquiry_button and not theme.options.private_events.form.inquiry_button_per_venue) or (section.fields.description and section.fields.description.text) %}
         <div class="row sub-header">
-          <div class="{% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button %}col-sm-7{% else %}col-sm-12{% endif %}">
+          <div class="{% if theme.options.private_events.pdf_button or (theme.options.private_events.form.inquiry_button and not theme.options.private_events.form.inquiry_button_per_venue) %}col-sm-7{% else %}col-sm-12{% endif %}">
             {% if section.fields.description and section.fields.description.text %}
               <div class="wysiwyg">
                 {{ section.fields.description.text|safe }}
               </div>
             {% endif %}
           </div>
-          {% if theme.options.private_events.pdf_button or theme.options.private_events.form.inquiry_button %}
+          {% if theme.options.private_events.pdf_button or (theme.options.private_events.form.inquiry_button and not theme.options.private_events.form.inquiry_button_per_venue) %}
             <div class="col-sm-5 text-right">
               {% if theme.options.private_events.pdf_button %}
-                <button class="btn">Download PDF</button>
+                <a href="{{ section.fields.pdf.file }}" target="_blank" class="btn">Download PDF</a>
               {% endif %}
               
-              {% if theme.options.private_events.form.inquiry_button %}
+              {% if theme.options.private_events.form.inquiry_button and not theme.options.private_events.form.inquiry_button_per_venue %}
                 <a href="#event_inquiry" class="btn">Inquiry Form</a>
               {% endif %}
             </div>
@@ -84,6 +84,9 @@
           <div class="{% if venue.images|length > 0 %}col-sm-4{% else %}col-sm-12{% endif %}">
             <h2>{{venue.name}}</h2>
             <div class="wysiwyg">{{venue.description|safe}}</div>
+            {% if theme.options.private_events.form.inquiry_button_per_venue %}
+                <a href="#event_inquiry" class="btn">Inquiry Form</a>
+              {% endif %}
           </div>
           {% if venue.images|length > 0 %}
             <div class="col-sm-8">
@@ -101,7 +104,7 @@
                 <h2>{{ theme.options.private_events.form.header }}</h2>
               {% endif %}
               {% set recipient=theme.options.private_events.form.contact_email %}
-              {% include "private_events/_form.html" %}
+              {% include "private_events/_form.html" with context %}
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
-<div class="google-map{% if not location.image %} transparent{% endif %}{% if full_width == 'true' %} map-full-width{% endif %}">
-  {% if location.image %}
+<div class="google-map{% if not (location.fields.custom_map or location.image) %} transparent{% endif %}{% if full_width == 'true' %} map-full-width{% endif %}">
+  {% if location.fields.custom_map or location.image %}
     <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=15" target="_blank">
-      <div class="custom-map" style="background-image: url('{{ location.image }}')"></div>
+      <div class="custom-map" style="background-image: url('{{ location.fields.custom_map or location.image }}')"></div>
       <!-- <img class="custom-map" src="{{ location.image }}" alt="{{location.name}} Map" /> -->
     </a>
   {% else %}

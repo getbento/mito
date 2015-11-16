@@ -3,6 +3,9 @@
   background-color: {{ theme.options.buttons.bg_color }};
   height: 50px;
   line-height: 50px;
+  {% if theme.options.buttons.border_width %}
+    line-height: {{ theme.options.buttons.border_width|replace("px", "")|int * -2 + 50 }}px ;
+  {% endif %}
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 20px;
@@ -38,8 +41,12 @@
   &:hover, &:focus, &:active {
     color: {{ theme.options.buttons.color }} !important;
     
-    {% if theme.options.buttons.bg_color %}
+    {% if theme.options.buttons.bg_color %}      
       background-color: darken({{ theme.options.buttons.bg_color }}, 10%) !important;
+    {% endif %}
+
+    {% if theme.options.buttons.border_color %}
+      border-color: darken({{ theme.options.buttons.border_color }}, 10%) !important;
     {% endif %}
   }
 }

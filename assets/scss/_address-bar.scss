@@ -28,6 +28,10 @@
     {% endif %}
   }
 
+  a, a:hover, a:focus {
+    text-decoration: none !important;
+  }
+
   a:not(.btn) {
     {% if theme.options.typography.font_family %}
       font-family: {{ theme.options.typography.font_family }};

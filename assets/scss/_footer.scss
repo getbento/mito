@@ -46,6 +46,7 @@ footer {
     margin: 0 15px;
 
     &:hover, &:focus {
+      color: {{ theme.options.footer.btn_color }} !important;
       {% if theme.options.footer.btn_bg %}
         background: darken({{ theme.options.footer.btn_bg }}, 10%) !important;
       {% endif %}
