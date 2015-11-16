@@ -14,11 +14,11 @@
       WebFont.load({
         google: {
           families: [
-            {% if theme.options.typography.font_family %}'{{ theme.options.typography.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.typography.h1.font_family %}'{{ theme.options.typography.h1.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.typography.h2.font_family %}'{{ theme.options.typography.h2.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.buttons.font_family %}'{{ theme.options.buttons.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
-            {% if theme.options.header.nav.font_family %}'{{ theme.options.header.nav.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.typography.font_family %}'{{ theme.options.typography.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.typography.h1.font_family %}'{{ theme.options.typography.h1.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.typography.h2.font_family %}'{{ theme.options.typography.h2.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.buttons.font_family %}'{{ theme.options.buttons.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
+              {% if theme.options.header.nav.font_family %}'{{ theme.options.header.nav.font_family }}:100,200,300,400,500,600,700,latin',{% endif %}
             ]
         }
       });
@@ -53,18 +53,35 @@
     {% endif %}
   </head>
 
-  <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile">
+  <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% block bodyClass %}{% endblock %} {% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile {% block containerClass %}{% endblock %}">
 
-    {% include 'address_bar/_address_bar.html' %}
-    
-    {% include 'header/_header.html' %}
+    {% block addressBar %}    
+      {% include 'address_bar/_address_bar.html' %}
+    {% endblock %}
 
-    {% for section in navs.main|rejectattr("homepage")|selectattr("template") %}
-      {% include section.template with context %}
-    {% endfor %}
+    {% block header %}
+      {% include 'header/_header.html' %}
+    {% endblock %}
+
+    {% block content %}
+      {% for section in navs.main|rejectattr("homepage")|selectattr("template") %}
+        {% include section.template with context %}
+      {% endfor %}
+    {% endblock %}
 
     {% include 'footer/_footer.html' %}
 
     <script src="{{ static('js/dist/main.min.js') }}"></script>
+    <script src="{{ static('js/dist/bentobox.dist.js') }}"></script>
+    {% if account.services.resy.api_key %}
+      <script type="text/javascript">
+        $('.reservations-link').on('click', function(event) {
+          event.preventDefault();
+          resyWidget.openModal({'venueId': {{ account.services.resy.venue_id }}})
+        });
+      </script>
+    {% endif %}
+    {% block initScripts %}
+    {% endblock %}
   </body>
 </html>

@@ -1,0 +1,84 @@
+.gift-cards {
+	padding-top: 100px;
+	.btn {
+		margin-bottom: 30px;
+	}
+	.formContainer {
+		margin-top: 20px;
+		margin-bottom: 30px;
+	}
+
+	div.errorMessage {
+		text-align: left;
+		color: red;
+	}
+
+	#calendar-icon {
+		position: absolute;
+		top: 20px;
+		right: 30px;
+		color: #555;
+	}
+}
+
+
+.cart {
+	text-align: left;
+	margin-top: 100px;
+
+	.cart-titles {
+		padding-top: 36px;
+		margin-bottom: -12px;
+
+		+ .row hr {
+			margin-top: 8px;
+		}
+	}
+
+	.row.item {
+		padding: 15px 0;
+	}
+}
+
+.cart-icon {
+	margin-right: 15px;
+	a {
+	    border: none;
+	    color: {{ theme.options.buttons.color }};
+	    background: {{ theme.options.buttons.bg_color }};
+	    border-radius: 3px;
+	    display: block;
+	    line-height: 2.25em;
+	    img {
+	    	height: 18px;
+	    	margin: -9px 10px 0 10px;
+	    }
+
+	    span {
+	    	display: inline-block;
+	    	text-decoration: none;
+	    	padding: 0 10px;
+	    	border-left: solid 1px #ffffff;
+	    	font-weight: bold;
+	    }
+	}
+}
+
+.store {
+	h1 {
+		margin-top: 24px;
+		margin-bottom: 36px;
+	}
+	min-height: 1200px;
+
+	.cart-details.checkout {
+		margin-top: 20px;
+	}
+	.cart-icon a svg {
+		margin: 0 10px -6px;
+		height: 23px;
+	}
+	.cart-icon a svg path {
+		fill: {{ theme.options.buttons.color }};
+	}
+}

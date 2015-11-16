@@ -4,7 +4,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <iframe src="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism" width="auto" height="auto" frameBorder="0"></iframe>
+        <iframe src="{{ account.reservations.url }}" width="auto" height="auto" frameBorder="0"></iframe>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
         <!-- Opentable -->
         {% if account.services.opentable.id %}
           <div class="OTButton">
-            <script type="text/javascript" src="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism"></script>
+            <script type="text/javascript" src="{{ account.reservations.url }}"></script>
           </div>
 
           <!-- Desktop -->
@@ -31,7 +31,7 @@
 
           <!-- Mobile -->
           <div class="btn-wrapper visible-xs">
-            <a href="http://www.opentable.com/single.aspx?rid={{account.services.opentable.id}}&restref={{account.services.opentable.id}}&rtype=ism" target="_blank" class="btn">Make a Reservation</a>
+            <a href="{{ account.reservations.url }}" target="_blank" class="btn">Make a Reservation</a>
           </div>
         {% endif %}
         <!-- end Opentable -->
@@ -44,6 +44,17 @@
             </script>
         {% endif %}
         <!-- end Resy -->
+
+        {% if account.services.seatme %}
+                  <!-- Desktop -->
+          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable">Make a Reservation</button>
+
+          <!-- Mobile -->
+          <div class="btn-wrapper visible-xs">
+            <a href="{{ account.reservations.url }}" target="_blank" class="btn">Make a Reservation</a>
+          </div>
+        {% endif %}
+
       {% endif %}
 
       <div class="left-content">

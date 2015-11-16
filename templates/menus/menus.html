@@ -130,7 +130,23 @@
 
               <div class="info-wrapper">
                 <div class="col-sm-12 wysiwyg">
-                  {{menu.description|safe}}
+                  {{ menu.description|safe }}
+                  {% if menu.sections|length > 0 %}
+                    {% for section in menu.sections %}
+                    <div class="col-sm-6">
+                      <h3>{{ section.name }}</h3>
+                        {% for item in section.menu_items %}
+                          <p>
+                            <strong>{{ item.name }}</strong><br>
+                            {% if item.description %}
+                              <em>{{ item.description }}</em> <br>
+                            {% endif %}
+                            <strong>${{ item.prices[0].price }}</strong>
+                          </p>
+                        {% endfor %}
+                    </div>
+                      {% endfor %}
+                  {% endif %}
                 </div>
               </div>
             </div>
