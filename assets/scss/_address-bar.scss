@@ -86,7 +86,12 @@
   .btn {
     margin-top: 6px;
     margin-bottom: 6px;
+    color: {{ theme.options.address_bar.color }} !important;
     background-color: darken({{ theme.options.address_bar.bg_color }}, 10%) !important;
+    width: 90%;
+    @media (min-width: 768px) {
+      width: auto;
+    }
   }
 }
 

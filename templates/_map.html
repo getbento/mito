@@ -1,4 +1,4 @@
-<div class="google-map{% if not (location.fields.custom_map or location.image) %} transparent{% endif %}{% if full_width == 'true' %} map-full-width{% endif %}">
+<div class="google-map hidden-print{% if not (location.fields.custom_map or location.image) %} transparent{% endif %}{% if full_width == 'true' %} map-full-width{% endif %}">
   {% if location.fields.custom_map or location.image %}
     <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=15" target="_blank">
       <div class="custom-map" style="background-image: url('{{ location.fields.custom_map or location.image }}')"></div>
@@ -31,7 +31,7 @@
               saturation_value: -20,
               brightness_value: 5,
               onLoad: onLoad
-              {% if TEMPLATE_OPTIONS.locations.map_icon %}
+              {% if theme.options.locations.map_icon %}
                 , marker_url: "{{ theme.options.locations.map_icon }}"
               {% endif %},
             });

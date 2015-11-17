@@ -46,6 +46,15 @@ $(document).ready(function () {
             return;
           }
 
+          if ( $section.attr('id').toLowerCase() === 'news' ) {
+            var $modalLink = $('[data-target="#modal-news-'+hashArray[1]+'"]');
+            
+            if ($modalLink.length > 0) {
+              $modalLink[0].click();
+              return;
+            }
+          }
+
           var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
           
           if ($tabLink.length > 0) {
@@ -64,7 +73,7 @@ $(document).ready(function () {
   $anchorLinks.on('click', function (e) {
     var href = $(this).attr('href');
     // if link to an anchor tag, intercept and parse for deeplink
-    if (href && href.slice(0,1) === '#') {
+    if (href && href.slice(0,1) === '#' && href.length > 1) {
       e.preventDefault();
       newHash(href);
       setTimeout(function () {

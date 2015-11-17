@@ -570,8 +570,7 @@
                     },
                     "map_icon": {
                         "title": "Map Icon",
-                        "type": "boolean",
-                        "default": false,
+                        "type": "image",
                         "display_logic": "locations.map"
                     },
                     "columns": {

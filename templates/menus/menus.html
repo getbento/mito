@@ -38,62 +38,64 @@
       <!-- end Thumbnails -->
     {% endif %}
 
-    {% if not theme.options.menus.thumbnails and boxes.menus.all|length > 1 %}
-      <!-- Tabs -->
-      <div class="row hidden-xs">
-        <div class="col-xs-12">
-          <ul class="nav nav-pills nav-justified" role="tablist">
-            {% for menu in boxes.menus.all %}
-              {% if loop.index0 < theme.options.menus.columns %}
-                {% if menu.file %}
-                  <li><a target="_blank" href="{{ menu.file }}">{{menu.name}}</a></li>
-                {% else %}
-                  <li {% if loop.first %}class="active"{% endif %}><a href="#{{menu.slug}}" role="tab" data-toggle="tab">{{menu.name}}</a></li>
-                {% endif %}
-              {% else %}
-                <li class="visible-xs"><a href="#{{menu.slug}}" role="tab" data-toggle="tab">{{menu.name}}</a></li>
-              {% endif %}
-            {% endfor %}
-
-
-            {% if boxes.menus.all|length > theme.options.menus.columns %}
-              <li class="dropdown hidden-xs">
-                <a class="dropdown-toggle" data-toggle="dropdown">{{theme.options.menus.tabs.dropdown_text}} <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                  {% for menu in boxes.menus.all %}
-                    {% if loop.index > theme.options.menus.columns %}
-                      <li><a href="#{{menu.slug}}" tabindex="-1" role="tab" data-toggle="tab">{{menu.name}}</a></li>
-                      {% endif %}
-                  {% endfor %}
-                </ul>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-      <!-- end Tabs -->
-
-      <!-- Select Menu for Mobile Devices -->
-      <div class="row visible-xs hidden-print">
-        <div class="col-xs-12">
-          {% if boxes.menus.all|rejectattr('file')|list|length > 0 %}
-            <select class="form-control tab-select">
+    {% if not theme.options.menus.thumbnails %}
+      {% if boxes.menus.all|length > 1 %}
+        <!-- Tabs -->
+        <div class="row hidden-xs">
+          <div class="col-xs-12">
+            <ul class="nav nav-pills nav-justified" role="tablist">
               {% for menu in boxes.menus.all %}
-                <option value="{{menu.slug}}" {% if menu.file %}file="{{ menu.file }}"{% endif %}>{{menu.name}}</option>
+                {% if loop.index0 < theme.options.menus.columns %}
+                  {% if menu.file %}
+                    <li><a target="_blank" href="{{ menu.file }}">{{menu.name}}</a></li>
+                  {% else %}
+                    <li {% if loop.first %}class="active"{% endif %}><a href="#{{menu.slug}}" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+                  {% endif %}
+                {% else %}
+                  <li class="visible-xs"><a href="#{{menu.slug}}" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+                {% endif %}
               {% endfor %}
-            </select>
-          {% else %}
-            {% for menu in boxes.menus.all %}
-              <p>
-                <a href="{{ menu.file }}" target="_blank">
-                  {{menu.name}}
-                </a>
-              </p>
-            {% endfor %}
-          {% endif %}
+
+
+              {% if boxes.menus.all|length > theme.options.menus.columns %}
+                <li class="dropdown hidden-xs">
+                  <a class="dropdown-toggle" data-toggle="dropdown">{{theme.options.menus.tabs.dropdown_text}} <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                    {% for menu in boxes.menus.all %}
+                      {% if loop.index > theme.options.menus.columns %}
+                        <li><a href="#{{menu.slug}}" tabindex="-1" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
-      </div>
-      <!-- end Select Menu -->
+        <!-- end Tabs -->
+
+        <!-- Select Menu for Mobile Devices -->
+        <div class="row visible-xs hidden-print">
+          <div class="col-xs-12">
+            {% if boxes.menus.all|rejectattr('file')|list|length > 0 %}
+              <select class="form-control tab-select">
+                {% for menu in boxes.menus.all %}
+                  <option value="{{menu.slug}}" {% if menu.file %}file="{{ menu.file }}"{% endif %}>{{menu.name}}</option>
+                {% endfor %}
+              </select>
+            {% else %}
+              {% for menu in boxes.menus.all %}
+                <p>
+                  <a href="{{ menu.file }}" target="_blank">
+                    {{menu.name}}
+                  </a>
+                </p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <!-- end Select Menu -->
+      {% endif %}
 
       <!-- Print Header -->
       <div class="visible-print-block text-center">
