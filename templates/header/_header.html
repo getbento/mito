@@ -44,7 +44,7 @@
 
   {% for item in navs.main|selectattr("homepage") %}
     {% if item.fields.alert and item.fields.alert.text %}
-      <div id="header-alert-wrapper" onclick="$('#header-alert-wrapper').hide();">
+      <div id="header-alert-wrapper" onclick="$('#header-alert-wrapper').hide();" {% if theme.options.header.nav.overlay %}class="with-overlay"{% endif %}>
         <div id="header-alert">
             <a class="close" onclick="$('#header-alert-wrapper').hide();">&times;</a>
             <div class="wysiwyg">{{ item.fields.alert.text|safe }}</div>

@@ -1,5 +1,5 @@
 {
-  "name": "Private Events",
+  "name": "News",
   "fields": {
     "description": {
       "title": "Description",
@@ -7,17 +7,14 @@
       "items": {
         "text":"wysiwyg"
       }
-    },
-    "pdf": {
-      "title": "Download PDF",
-      "type":"section",
-      "items": {
-        "file":"file"
-      }
-    }    
+    }
   },
   "wireframe": [
     "section-description",
-    "section-pdf"
+    {
+      "boxes-news": {
+        "width": "columns-4"
+      }
+    }
   ]
 }

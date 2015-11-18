@@ -305,7 +305,13 @@
                                 "title": "Overlay Gallery",
                                 "type": "boolean",
                                 "default": false
-                            }, 
+                            },
+                            "use_custom_overlay_height": {
+                                "title": "Use Custom Height for Overlay",
+                                "type": "boolean",
+                                "default": false,
+                                "display_logic": "header.nav.overlay"
+                            },
                             "height": {
                                 "title": "Height",
                                 "type": "text",
@@ -564,8 +570,7 @@
                     },
                     "map_icon": {
                         "title": "Map Icon",
-                        "type": "boolean",
-                        "default": false,
+                        "type": "image",
                         "display_logic": "locations.map"
                     },
                     "columns": {
