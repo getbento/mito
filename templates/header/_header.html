@@ -12,7 +12,14 @@
 
         <ul class="list-inline">
           {% for item in navs.main|rejectattr("homepage") %}
-            <li><a href="#{{ item.slug }}">{{ item.name }}</a></li>
+            <li>
+              {% if item.type == 'page' %}
+                <a href="#{{ item.slug }}">{{ item.name }}</a>
+              {% endif %}
+              {% if item.type == 'link' %}
+                <a {% if not internal %}target="_blank"{% endif %} href="{{ item.url }}">{{ item.name }}</a>
+              {% endif %}
+            </li>
           {% endfor %}
           {% if theme.options.header.nav.reservations_link %}
             <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
@@ -52,14 +59,14 @@
       </div>
     {% endif %}
   {% endfor %}
-  
+
   {% if boxes.header_gallery and theme.options.header.carousel.show %}
   <div id="header-carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="false">
     <!-- Wrapper for slides -->
-    <div 
-      class="carousel-inner transparent" 
+    <div
+      class="carousel-inner transparent"
       {% if theme.options.layout.parallax %}
-      data-top-bottom="transform:translate3d(0px, 250px, 0px);" 
+      data-top-bottom="transform:translate3d(0px, 250px, 0px);"
       data-bottom-top="transform:translate3d(0px, -250px, 0px)"
       {% endif %}
       >

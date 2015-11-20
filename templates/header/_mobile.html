@@ -20,7 +20,14 @@
     <div class="collapse navbar-collapse" id="mobile-nav-dropdown">
       <ul class="nav navbar-nav">
         {% for item in navs.main|rejectattr("homepage") %}
-          <li><a href="{% if absolute_nav %}{{ account.site.url }}{% endif %}#{{ item.slug }}" data-toggle="collapse" data-target="#mobile-nav-dropdown">{{item.name}}</a></li>
+        <li>
+          {% if item.type == 'page' %}
+            <a href="{% if absolute_nav %}{{ account.site.url }}{% endif %}#{{ item.slug }}" data-toggle="collapse" data-target="#mobile-nav-dropdown">{{item.name}}</a>
+          {% endif %}
+          {% if item.type == 'link' %}
+              <a {% if not internal %}target="_blank"{% endif %} href="{{ item.url }}">{{ item.name }}</a>
+            {% endif %}
+        </li>
         {% endfor %}
         {% if theme.options.header.nav.reservations_link and not theme.options.address_bar.mobile_reservation_btn%}
           <li><a href="{{ account.reservations.url }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown">Reservations</a></li>
