@@ -112,7 +112,7 @@
 			}
 		};
 
-		return newsletter;	
+		return newsletter;
 	}());
 
 	module.exports = Newsletter;
@@ -125,7 +125,7 @@
 
 	var Reservations = (function() {
 		var reservations = {};
-		
+
 		options = {
 			selector: "a.reserve",
 		};
@@ -155,7 +155,7 @@
 			switch(options.provider) {
 				case 'opentable':
 					reservations.handleOpentable();
-				default: 
+				default:
 					return;
 			}
 		};
@@ -167,7 +167,7 @@
 			$(options.selector).on('click', reservations.handleReservation);
 		};
 
-		return reservations;	
+		return reservations;
 	}());
 
 	module.exports = Reservations;
@@ -178,7 +178,7 @@
 
 	var Utils = (function() {
 		var utils = {};
-		
+
 		utils.isMobile = function() {
 			return (window.matchMedia("(max-width: 800px)").matches);
 		}
@@ -196,7 +196,7 @@
 
 	var Forms = (function() {
 		var forms = {};
-		
+
 		options = {
 			formSelector: "form",
 			success: "div.success",
@@ -260,7 +260,7 @@
 			$(options.formSelector).on('submit', forms.handleSubmit);
 		};
 
-		return forms;	
+		return forms;
 	}());
 
 	module.exports = Forms;
@@ -291,7 +291,7 @@
 
 	    gc.showHideRecipientFields = function(event) {
 	    	var form = $(this).parents('form');
-	        
+
 	        var email_field = form.find('input[name="recipient_email"]');
 	        var send_after = form.find('input[name="send_after"]');
 
@@ -312,6 +312,7 @@
 	        var button = $(this);
 	        var form = button.closest('form');
 	        var dataString = form.serialize();
+	        var successCallback = options.successCallback || gc.formSubmitSuccess;
 
 	        gc.clearErrors(form);
 
@@ -319,11 +320,13 @@
 	            return false;
 	        }
 
+	        console.log(options.successCallback);
+
 	        $.ajax({
 	            type: "POST",
 	            url: form.attr('action'),
 	            data: dataString,
-	            success: gc.formSubmitSuccess,
+	            success: successCallback,
 	            error: gc.formSubmitError
 	        });
 
@@ -338,11 +341,11 @@
 	            if (!input.checkValidity()) {
 	                $(input).addClass('error');
 	                hasErrors = true;
-	            };
+	            }
 	        }, this);
 
 	        return !hasErrors;
-	    },
+	    };
 
 	    gc.clearErrors = function(form) {
 	        form.find('div.errorMessage').fadeOut();
@@ -374,12 +377,16 @@
 	        gc.currentForm.find('div.errorMessage').fadeIn();
 	    };
 
-	    gc.initialize = function() {
+	    gc.initialize = function(userOptions) {
+	        for (var attributeName in userOptions) {
+	            options[attributeName] = userOptions[attributeName];
+	        }
+
 	    	$(options.buttonsSelector).on('click', gc.showForm);
 	    	$(options.formContainerSelector).on('change', 'input[name="email_gifter"]', gc.showHideRecipientFields);
-	        
+
 	        if (options.handleFormSubmit) {
-	            $(options.formContainerSelector).on("click", "button", gc.handleFormSubmit)    
+	            $(options.formContainerSelector).on("click", "button", gc.handleFormSubmit);
 	        }
 	    };
 
