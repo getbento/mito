@@ -143,7 +143,7 @@
                             {% if item.description %}
                               <em>{{ item.description }}</em> <br>
                             {% endif %}
-                            <strong>${{ item.prices[0].price }}</strong>
+                            {% if item.prices[0].price %}<strong>${{ item.prices[0].price }}</strong>{% endif %}
                           </p>
                         {% endfor %}
                       {{ section.description }}
