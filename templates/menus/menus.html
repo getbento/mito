@@ -25,7 +25,7 @@
             <!-- desktop -->
             <div class="hidden-xs">
               <h2><a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">{{ menu.name }}</a></h2>
-              
+
               {% if menu.image %}
                 <a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">
                   <img src="{{ menu.image }}" alt="{{ menu.name }}">
@@ -143,9 +143,10 @@
                             {% if item.description %}
                               <em>{{ item.description }}</em> <br>
                             {% endif %}
-                            <strong>${{ item.prices[0].price }}</strong>
+                            {% if item.prices[0].price %}<strong>${{ item.prices[0].price }}</strong>{% endif %}
                           </p>
                         {% endfor %}
+                      {{ section.description }}
                     </div>
                       {% endfor %}
                   {% endif %}
