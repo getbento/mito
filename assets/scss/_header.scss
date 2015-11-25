@@ -9,6 +9,7 @@ header {
   #nav-wrapper {
     background-color: {{ theme.options.header.nav.bg_color }};
     position: relative;
+    z-index: 200;
     
     {% if theme.options.header.nav.bg_image %}
       background-image: url('{{ theme.options.header.nav.bg_image }}');
@@ -28,7 +29,7 @@ header {
 
       * {
         position: relative;
-        z-index: 1000;
+        // z-index: 1000;
       }
 
       .logo {
@@ -56,10 +57,16 @@ header {
     &.overlay {
       {% if not theme.options.header.nav.use_custom_overlay_height %}
         height: 100%;
+      {% else %}
+        &.vertically-center {
+          top: 50%;
+          margin-top: {{ theme.options.header.nav.height }} * -0.5;
+        }
       {% endif %}
       position: absolute;
       top: 0;
       left: 0;
+      margin-top: 0;      
     }
 
     &.vertically-center {
@@ -104,6 +111,16 @@ header {
             text-align: left;
             padding-right: 0;
             padding-left: {{ theme.options.header.nav.logo_width|replace("px", "")|int / 2 + 35 }}px;
+          }
+
+          @media (max-width: 1200px) {
+            padding-top: 0 !important;
+
+            & > li {
+              display: block;
+              padding: 0;
+              margin: 4px 0;
+            }
           }
         }
       }

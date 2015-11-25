@@ -34,6 +34,11 @@ $(document).ready(function () {
     $this.parents('section').find('.nav a[href=#'+$this.val().replace(/ /g,'')+']').tab('show');
   });
 
+  function validateEmail (email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+  }
+
   // submit form
   $submit_btn.click(function (e) {
     e.preventDefault();
@@ -64,6 +69,11 @@ $(document).ready(function () {
         error = 'Please complete all required fields';
       }
     });
+
+    if ( !validateEmail($form.find('#contact-email').val()) ) {
+      $form.find('#contact-email').parent().addClass('error');
+      error = 'Please enter a valid email';
+    }
 
     if (error) {
       $error_msg.html(error).show();

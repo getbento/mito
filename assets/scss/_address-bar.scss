@@ -84,8 +84,7 @@
   }
 
   .btn {
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin: 6px auto;
     color: {{ theme.options.address_bar.color }} !important;
     background-color: darken({{ theme.options.address_bar.bg_color }}, 10%) !important;
     width: 90%;

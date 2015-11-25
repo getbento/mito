@@ -23,7 +23,7 @@
         {% set location=boxes.locations.all.0 %}
         {% if location.address %}
           <div class="col-xs-12 visible-xs">
-            <a class="address btn" href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{ location.address }}</a>
+            <a class="address" href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{ location.address }}</a>
           </div>
         {% endif %}
       {% endif %}

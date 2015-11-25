@@ -10,6 +10,8 @@ $(document).ready(function () {
   var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)')
   var $mobile_nav_dropdown = $('#mobile-nav-dropdown')
   var $hamburger = $('button.navbar-toggle');
+  var $header_alert_wrapper = $('#header-alert-wrapper');
+  var $header_alert_close = $('#header-alert-wrapper .close');
 
   function showHamburger () {
     $hamburger.addClass('collapsed');
@@ -67,6 +69,13 @@ $(document).ready(function () {
 
     $oneLineTopNav.children('ul').css('padding-top', offset);
   }
+
+  function hideHeaderAlert () {
+    $header_alert_wrapper.hide();
+  }
+
+  $header_alert_wrapper.on('click', hideHeaderAlert);
+  $header_alert_close.on('click', hideHeaderAlert);
 
   $window.load(toggleStickyHeader);
 

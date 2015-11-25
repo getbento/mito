@@ -20938,6 +20938,11 @@ $(document).ready(function () {
     $this.parents('section').find('.nav a[href=#'+$this.val().replace(/ /g,'')+']').tab('show');
   });
 
+  function validateEmail (email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+  }
+
   // submit form
   $submit_btn.click(function (e) {
     e.preventDefault();
@@ -20968,6 +20973,11 @@ $(document).ready(function () {
         error = 'Please complete all required fields';
       }
     });
+
+    if ( !validateEmail($form.find('#contact-email').val()) ) {
+      $form.find('#contact-email').parent().addClass('error');
+      error = 'Please enter a valid email';
+    }
 
     if (error) {
       $error_msg.html(error).show();
@@ -21016,6 +21026,8 @@ $(document).ready(function () {
   var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)')
   var $mobile_nav_dropdown = $('#mobile-nav-dropdown')
   var $hamburger = $('button.navbar-toggle');
+  var $header_alert_wrapper = $('#header-alert-wrapper');
+  var $header_alert_close = $('#header-alert-wrapper .close');
 
   function showHamburger () {
     $hamburger.addClass('collapsed');
@@ -21073,6 +21085,13 @@ $(document).ready(function () {
 
     $oneLineTopNav.children('ul').css('padding-top', offset);
   }
+
+  function hideHeaderAlert () {
+    $header_alert_wrapper.hide();
+  }
+
+  $header_alert_wrapper.on('click', hideHeaderAlert);
+  $header_alert_close.on('click', hideHeaderAlert);
 
   $window.load(toggleStickyHeader);
 
