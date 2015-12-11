@@ -70,8 +70,10 @@ $(document).ready(function () {
       }
     });
 
-    if ( !validateEmail($form.find('#contact-email').val()) ) {
-      $form.find('#contact-email').parent().addClass('error');
+    var $emailInput = $form.find('#contact-email').length ? $form.find('#contact-email') : $form.find('#email').length ? $form.find('#email') : null;
+
+    if ( $emailInput && $emailInput.val() && !validateEmail($emailInput.val()) ) {
+      $emailInput.parent().addClass('error');
       error = 'Please enter a valid email';
     }
 
