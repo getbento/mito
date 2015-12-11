@@ -112,7 +112,7 @@
 			}
 		};
 
-		return newsletter;
+		return newsletter;	
 	}());
 
 	module.exports = Newsletter;
@@ -125,7 +125,7 @@
 
 	var Reservations = (function() {
 		var reservations = {};
-
+		
 		options = {
 			selector: "a.reserve",
 		};
@@ -155,7 +155,7 @@
 			switch(options.provider) {
 				case 'opentable':
 					reservations.handleOpentable();
-				default:
+				default: 
 					return;
 			}
 		};
@@ -167,7 +167,7 @@
 			$(options.selector).on('click', reservations.handleReservation);
 		};
 
-		return reservations;
+		return reservations;	
 	}());
 
 	module.exports = Reservations;
@@ -178,7 +178,7 @@
 
 	var Utils = (function() {
 		var utils = {};
-
+		
 		utils.isMobile = function() {
 			return (window.matchMedia("(max-width: 800px)").matches);
 		}
@@ -196,7 +196,7 @@
 
 	var Forms = (function() {
 		var forms = {};
-
+		
 		options = {
 			formSelector: "form",
 			success: "div.success",
@@ -260,7 +260,7 @@
 			$(options.formSelector).on('submit', forms.handleSubmit);
 		};
 
-		return forms;
+		return forms;	
 	}());
 
 	module.exports = Forms;
@@ -283,10 +283,12 @@
 	    gc.showForm = function(event) {
 	        event.preventDefault();
 
+	        $(options.buttonsSelector).removeClass('selected');
 	        $(options.formContainerSelector).hide();
 
 	        var formSelector = '#' + $(this).data('target');
 	        $(formSelector).fadeIn();
+	        $(this).addClass('selected');
 	    };
 
 	    gc.showHideRecipientFields = function(event) {

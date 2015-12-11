@@ -21,11 +21,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="pick-card-type col-sm-8 col-sm-offset-2">
-        {% if store.gift_card_settings.electronic_available and store.gift_card_settings.physical_available %}
-            <a class="col-sm-5 btn show-giftcard-form" data-target="electronic-form">Electronic/Email Gift Card</a>
-            <a class="col-sm-5 col-sm-offset-2 btn show-giftcard-form" data-target="physical-form">Physical/Plastic Gift Card</a>
-        {% endif %}
+        <div class="pick-card-type col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+            {% if store.gift_card_settings.electronic_available and store.gift_card_settings.physical_available %}
+                <a class="col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-0 btn show-giftcard-form" data-target="electronic-form">Electronic/Email Gift Card</a>
+                <a class="col-xs-8 col-xs-offset-2 col-sm-5 col-sm-offset-2 btn show-giftcard-form" data-target="physical-form">Physical/Plastic Gift Card</a>
+            {% endif %}
         </div>
         {{ form.errors }}
     </div>
@@ -34,6 +34,7 @@
     <div class="row">
         <div id="physical-form" class="formContainer col-lg-6 col-lg-offset-3" {% if store.gift_card_settings.electronic_available and store.gift_card_settings.physical_available %}style="display:none;"{% endif %}>
             <form method="post" action="" class="custom">
+            <h2>Physical/Plastic Gift Cards</h2>
                 {% csrf_token %}
                 <div class="form-group">
                     <select name="amount">
@@ -134,6 +135,7 @@
     <div class="row">
         <div id="electronic-form" class="formContainer col-lg-6 col-lg-offset-3" {% if store.gift_card_settings.electronic_available and store.gift_card_settings.physical_available %}style="display:none;"{% endif %}>
             <form method="post" action="" class="custom">
+            <h2>Electronic/Email Gift Card</h2>
                 {% csrf_token %}
                 <div class="form-group">
                     <select name="amount">

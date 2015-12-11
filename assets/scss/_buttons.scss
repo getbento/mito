@@ -38,10 +38,10 @@
     text-transform: uppercase;
   {% endif %}
 
-  &:hover, &:focus, &:active {
+  &:hover, &:focus, &:active, &.selected {
     color: {{ theme.options.buttons.color }} !important;
-    
-    {% if theme.options.buttons.bg_color %}      
+
+    {% if theme.options.buttons.bg_color %}
       background-color: darken({{ theme.options.buttons.bg_color }}, 10%) !important;
     {% endif %}
 
