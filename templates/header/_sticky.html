@@ -19,7 +19,7 @@
               <a href="{% if absolute_nav %}{{ account.site.url }}{% endif %}#{{ item.slug }}">{{ item.name }}</a>
             {% endif %}
             {% if item.type == 'link' %}
-              <a {% if not internal %}target="_blank"{% endif %} href="{{ item.url }}">{{ item.name }}</a>
+              <a {% if not internal %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
             {% endif %}
             </li>
           {% endfor %}
