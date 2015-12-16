@@ -21,12 +21,11 @@
       <ul class="nav navbar-nav">
         {% for item in navs.main|rejectattr("homepage") %}
         <li>
-          {% if item.type == 'page' %}
+          {% if item.type == 'link' or item.template == 'store/index.html' %}
+              <a {% if not item.internal and not item.template == 'store/index.html' %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
+          {% elif item.type == 'page' %}
             <a href="{% if absolute_nav %}{{ account.site.url }}{% endif %}#{{ item.slug }}" data-toggle="collapse" data-target="#mobile-nav-dropdown">{{item.name}}</a>
           {% endif %}
-          {% if item.type == 'link' %}
-              <a {% if not internal %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
-            {% endif %}
         </li>
         {% endfor %}
         {% if theme.options.header.nav.reservations_link and not theme.options.address_bar.mobile_reservation_btn%}

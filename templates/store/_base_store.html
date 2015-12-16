@@ -3,12 +3,64 @@
 {% block addressBar %}{% endblock %}
 
 {% block header %}
-  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
-  {% with absolute_nav = True %}
-    {% include 'header/_sticky.html' %}
-    {% include 'header/_mobile.html' %}
-  {% endwith %}
-  </header>
+<header id="home" class="hidden-print {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+  {% include 'header/_mobile.html' %}
+
+  <div id="nav-wrapper" class="hidden-xs{% if theme.options.header.nav.overlay %} overlay{% endif %}{% if theme.options.header.nav.vertically_center %} vertically-center{% endif %}{% if not theme.options.header.nav.below_logo %} single-line{% endif %}">
+    <nav>
+      {% if theme.options.header.nav.below_logo %}
+        {% if account.logo %}
+          <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
+        {% else %}
+          <h1 class="logo-font">{{ account.site.title }}</h1>
+        {% endif %}
+
+        <ul class="list-inline">
+          {% for item in navs.main|rejectattr("homepage") %}
+            <li>
+              {% if item.type == 'link' or item.template == 'store/index.html' %}
+                <a {% if not item.internal and not item.template == 'store/index.html' %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
+              {% elif item.type == 'page' %}
+                <a href="#{{ item.slug }}">{{ item.name }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+          {% if theme.options.header.nav.reservations_link %}
+            <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+          {% endif %}
+        </ul>
+      {% else %}
+        {% if not theme.options.header.nav.vertically_center %}
+          <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
+        {% endif %}
+
+        {% for group in navs.main|rejectattr("homepage")|slice(2) %}
+          {% set outer_group = loop %}
+          <ul class="list-inline">
+            {% for item in group %}
+              <li>
+                {% if item.type == 'link' or item.template == 'store/index.html' %}
+                  <a {% if not item.internal and not item.template == 'store/index.html' %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
+                {% elif item.type == 'page' %}
+                  <a href="#{{ item.slug }}">{{ item.name }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+            {% if outer_group.last and theme.options.header.nav.reservations_link%}
+              <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+            {% endif %}
+          </ul>
+        {% endfor %}
+      {% endif %}
+    </nav>
+
+    {% if not theme.options.header.nav.below_logo and theme.options.header.nav.vertically_center %}
+      <img class="logo" src="{{ account.logo }}" alt="{{ account.site.title }}">
+    {% endif %}
+  </div>
+
+  {% include 'header/_sticky.html' %}
+</header>
 {% endblock %}
 
 {% block content %}
