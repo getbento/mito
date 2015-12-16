@@ -6,7 +6,10 @@
   <div class="container-fluid max-width">
     <div class="row">
         <div class="col-md-6">
-            <a href="">Back to shop</a>
+            {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
+            {% if shop_landing %}
+            <a href="{{ shop_landing.url }}">Back to shop</a>
+            {% endif %}
         </div>
         <div class="col-md-6">
             <div class="cart-icon pull-right">
@@ -38,6 +41,9 @@
         </div>
         <div class="col-md-4">
             <h2>{{ current.name }}</h2>
+            {{ current.description }}
+
+            <a href="" class="btn">Add To Cart</a>
         </div>
     </div>
   </div>
@@ -49,7 +55,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $(".feature-image-wrap .image-option").hover(function(){
-        $(".feature-image-wrap .feature-image").css( $(this).css('background-image') );
+        $(".feature-image-wrap .feature-image").css('background-image', $(this).css('background-image') );
     });
 });
 </script>

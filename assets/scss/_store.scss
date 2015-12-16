@@ -135,12 +135,13 @@
 }
 
 .store.product {
-
+	text-align:left;
 	.feature-image-wrap {
 		.feature-image {
 			height:470px;
 			background-position: center center;
 			background-size:cover;
+			margin-bottom:30px;
 		}
 		.image-option {
 			height:145px;

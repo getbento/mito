@@ -1030,6 +1030,7 @@
                         "type": "number",
                         "default": 3
                     }
+                }
             },
             "footer": {
                 "title":"Footer",
