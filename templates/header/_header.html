@@ -13,10 +13,11 @@
         <ul class="list-inline">
           {% for item in navs.main|rejectattr("homepage") %}
             <li>
-              {% if item.type == 'link' or item.template == 'store/index.html' %}
-                <a {% if not item.internal and not item.template == 'store/index.html' %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
-              {% elif item.type == 'page' %}
+              {% if item.type == 'page' %}
                 <a href="#{{ item.slug }}">{{ item.name }}</a>
+              {% endif %}
+              {% if item.type == 'link' %}
+                <a {% if not item.internal %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
               {% endif %}
             </li>
           {% endfor %}
@@ -34,10 +35,11 @@
           <ul class="list-inline">
             {% for item in group %}
               <li>
-                {% if item.type == 'link' or item.template == 'store/index.html' %}
-                  <a {% if not item.internal and not item.template == 'store/index.html' %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
-                {% elif item.type == 'page' %}
+                {% if item.type == 'page' %}
                   <a href="#{{ item.slug }}">{{ item.name }}</a>
+                {% endif %}
+                {% if item.type == 'link' %}
+                  <a {% if not item.internal %}target="_blank"{% endif %} class="{{ item.classes }}" href="{{ item.url }}">{{ item.name }}</a>
                 {% endif %}
               </li>
             {% endfor %}
