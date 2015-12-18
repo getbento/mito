@@ -19,7 +19,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="mobile-nav-dropdown">
       <ul class="nav navbar-nav">
-        {% for item in navs.main|rejectattr("homepage") %}
+        {% for item in navs.main|rejectattr("homepage") if item.template != 'instagram/instagram.html' %}
         <li>
           {% if item.type == 'page' %}
             <a href="{% if absolute_nav %}{{ account.site.url }}{% endif %}#{{ item.slug }}" data-toggle="collapse" data-target="#mobile-nav-dropdown">{{item.name}}</a>
