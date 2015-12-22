@@ -6,9 +6,18 @@ $(document).ready(function () {
   var $anchorLinks = $('#address-bar a, .carousel-caption a, nav a, a.anchor');
   // Javascript to enable link to tab
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   function newHash (hash) {
     // remove hash if undefined
     hash = hash || window.location.pathname;
+
+    // Register 'fake' page view for Google Analytics dashboard
+    var page_name = capitalizeFirstLetter(hash.substr(1).replace(/-/g, " "));
+    _gaq.push(["_set", "title", page_name]);
+    _gaq.push(['_trackPageview', page_name]);
 
     // use pushstate to prevent jumping on hash change
     if (history.pushState) {
