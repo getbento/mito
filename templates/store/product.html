@@ -42,8 +42,14 @@
         <div class="col-md-4">
             <h2>{{ current.name }}</h2>
             {{ current.description }}
-
-            <a href="" class="btn">Add To Cart</a>
+            {% for option in current.options %}
+            <select id="{{ option.slug }}">
+                {% for value in option.values %}
+                    <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            {% endfor %}
+            <a href="{{ current.add_to_cart_url }}" class="btn">Add To Cart</a>
         </div>
     </div>
   </div>
