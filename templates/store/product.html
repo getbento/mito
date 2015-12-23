@@ -42,14 +42,21 @@
         <div class="col-md-4">
             <h2>{{ current.name }}</h2>
             {{ current.description }}
+            <form method="POST" action="{{ current.add_to_cart_url }}">
             {% for option in current.options %}
-            <select id="{{ option.slug }}">
-                {% for value in option.values %}
-                    <option value="{{ value }}">{{ value }}</option>
+            <select class="options-dropdown">
+                {% for value in option.choices %}
+                    <option data-slug="{{ option.slug }}" value="{{ value }}">{{ value }}</option>
                 {% endfor %}
             </select>
             {% endfor %}
-            <a href="{{ current.add_to_cart_url }}" class="btn">Add To Cart</a>
+            <select name="variant" id="variant" name="variant">
+                {% for variant in current.variants %}
+                <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.value }}"{% endfor %}>{{ variant.id }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn">Add To Cart</button>
+            </form>
         </div>
     </div>
   </div>
@@ -63,6 +70,19 @@ $(document).ready(function() {
     $(".feature-image-wrap .image-option").hover(function(){
         $(".feature-image-wrap .feature-image").css('background-image', $(this).css('background-image') );
     });
+
+    $(".options-dropdown").change(function(){
+        var $dropdown = $(this);
+        $('select.options-dropdown option:selected').each(function(){
+            var possible_variant = $('select#variant option[data-option-'+$dropdown.attr('data-slug')+'='+$dropdown.val()+']').val()
+            console.log(possible_variant);
+            //which ever possible_variant is a hit every time is the correct one and should be selected.
+            //it's possible that a variant won't be possible and then it should say
+            //need to switch up the displayed price/weight and handle inventory/in-stock issue
+        });
+    });
+
+    $(this).parents('form').find('select#variant').val();
 });
 </script>
 {% endblock %}
