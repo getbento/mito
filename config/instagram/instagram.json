@@ -1,0 +1,24 @@
+{
+  "fields": {
+    "photos": {
+      "type":"section",
+      "items": {
+        "user_ids": {
+            "type":"repeater",
+            "items": {
+              "user_id":"string"
+            }
+        },
+        "hashtags": {
+            "type":"repeater",
+            "items": {
+              "hashtag":"string"
+            }
+        }
+      }
+    }  
+  },
+  "wireframe": [
+    "section-photos"
+  ]
+}

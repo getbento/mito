@@ -11,7 +11,7 @@
         {% endif %}
 
         <ul class="list-inline">
-          {% for item in navs.main|rejectattr("homepage") %}
+          {% for item in navs.main|rejectattr("homepage") if item.template != 'instagram/instagram.html' %}
             <li>
               {% if item.type == 'page' %}
                 <a href="#{{ item.slug }}">{{ item.name }}</a>
@@ -33,7 +33,7 @@
         {% for group in navs.main|rejectattr("homepage")|slice(2) %}
           {% set outer_group = loop %}
           <ul class="list-inline">
-            {% for item in group %}
+            {% for item in group if item.template != 'instagram/instagram.html' %}
               <li>
                 {% if item.type == 'page' %}
                   <a href="#{{ item.slug }}">{{ item.name }}</a>
