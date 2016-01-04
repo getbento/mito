@@ -52,7 +52,7 @@
             {% endfor %}
             <select name="variant" id="variant" name="variant">
                 {% for variant in current.variants %}
-                <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.value }}"{% endfor %}>{{ variant.id }}</option>
+                <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-available="{% if variant.inventory > 0 %}true{% else %}false{% endif %}">{{ variant.id }}</option>
                 {% endfor %}
             </select>
             <button type="submit" class="btn">Add To Cart</button>
@@ -73,12 +73,26 @@ $(document).ready(function() {
 
     $(".options-dropdown").change(function(){
         var $dropdown = $(this);
+        var possible_variants = $('select#variant option');
+
+        // .attr('disabled',true);
+        // $("select").select2(
+
         $('select.options-dropdown option:selected').each(function(){
-            var possible_variant = $('select#variant option[data-option-'+$dropdown.attr('data-slug')+'='+$dropdown.val()+']').val()
-            console.log(possible_variant);
-            //which ever possible_variant is a hit every time is the correct one and should be selected.
-            //it's possible that a variant won't be possible and then it should say
-            //need to switch up the displayed price/weight and handle inventory/in-stock issue
+            possible_variants = possible_variants.filter('[data-option-'+$(this).attr('data-slug')+'='+$(this).val()+']');
+            if(possible_variants.length == 1) {
+                if(possible_variants.attr("available") == "false") {
+                    alert('not available');
+                }else{
+                    possible_variants.attr("selected",true);
+                }
+                
+            }else{
+                //variant doesnt exist, but this shouldn't possible with the changing around options on top
+            }
+
+            // 'Currently unavaiable' if out of stock
+            // Adjusting top dropdown changes the lower items, so all options will always be visible with top item.
         });
     });
 
