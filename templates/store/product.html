@@ -50,11 +50,13 @@
                 {% endfor %}
             </select>
             {% endfor %}
-            <select name="variant" id="variant" name="variant">
-                {% for variant in current.variants %}
-                <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-available="{% if variant.inventory > 0 %}true{% else %}false{% endif %}">{{ variant.id }}</option>
-                {% endfor %}
-            </select>
+            <div class="hidden">
+                <select name="variant" id="variant" name="variant">
+                    {% for variant in current.variants %}
+                        <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-available="{% if variant.inventory > 0 %}true{% else %}false{% endif %}">{{ variant.id }}</option>
+                    {% endfor %}
+                </select>
+            </div>
             <button type="submit" class="btn">Add To Cart</button>
             </form>
         </div>
@@ -79,21 +81,21 @@ $(document).ready(function() {
         // $("select").select2(
 
         $('select.options-dropdown option:selected').each(function(){
-            possible_variants = possible_variants.filter('[data-option-'+$(this).attr('data-slug')+'='+$(this).val()+']');
-            if(possible_variants.length == 1) {
-                if(possible_variants.attr("available") == "false") {
-                    alert('not available');
-                }else{
-                    possible_variants.attr("selected",true);
-                }
-                
+            possible_variants = possible_variants.filter('[data-option-'+$(this).attr('data-slug')+'="'+$(this).val()+'"]');
+        });
+
+        if(possible_variants.length == 1) {
+            if(possible_variants.attr("available") == "false") {
+                alert('not available');
             }else{
-                //variant doesnt exist, but this shouldn't possible with the changing around options on top
+                possible_variants.first().attr("selected",true);
             }
+        }else{
+            //variant doesnt exist, but this shouldn't possible with the changing around options on top
+        }
 
             // 'Currently unavaiable' if out of stock
             // Adjusting top dropdown changes the lower items, so all options will always be visible with top item.
-        });
     });
 
     $(this).parents('form').find('select#variant').val();
