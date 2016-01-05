@@ -38,6 +38,12 @@
                 {% if item.recipient_name %}
                   <br>{{ item.recipient_name }}
                 {% endif %}
+                {% if item.variant %}
+                <br>
+                    {% for option in item.variant.options %}
+                        {{ option.name }} - {{ option.choice }}<br>
+                    {% endfor %}
+                {% endif %}
             </div>
             <div class="col-lg-2">
                 ${{ item.unit_price }}
