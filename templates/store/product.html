@@ -1,4 +1,13 @@
-{% extends 'store/_base_store.html' %}
+{% extends 'base.html' %}
+
+{% block header %}
+  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+  {% with absolute_nav = True %}
+    {% include 'header/_mobile.html' %}
+    {% include 'header/_nav.html' %}
+  {% endwith %}
+  </header>
+{% endblock %}
 
 {% block content %}
 {% set current = store.products.all|first %}
@@ -47,6 +56,8 @@
             {{ current.description }}
             <br>
             <form method="POST" action="{{ current.add_to_cart_url }}">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ current.id }}">
             {% for option in current.options %}
             <select class="options-dropdown">
                 {% for value in option.choices %}

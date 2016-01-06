@@ -1,6 +1,15 @@
-{% extends 'store/_base_store.html' %}
+{% extends 'base.html' %}
 
 {% block bodyClass %}store-landing-body{% endblock %}
+
+{% block header %}
+  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+  {% with absolute_nav = True %}
+    {% include 'header/_mobile.html' %}
+    {% include 'header/_nav.html' %}
+  {% endwith %}
+  </header>
+{% endblock %}
 
 {% macro render_product(product) -%}
 <div class="col-md-{{12 // theme.options.store.columns }}">
