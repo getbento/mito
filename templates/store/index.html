@@ -28,6 +28,7 @@
 
 {% block content %}
 <div class="store products">
+{% if current.fields.header.title or current.fields.header.images or current.fields.header.text or current.fields.header.show_button %}
 <div id="intro" {% if current.fields.header.images %}class="has-images"{% endif %}>
     <div class="vertical-center splash">
         <div class="container">
@@ -63,6 +64,7 @@
 
     <a class="anchor" name="more"></a>
 </div>
+{% endif %}
 
 <div class="container-fluid max-width">
     <div class="row">
