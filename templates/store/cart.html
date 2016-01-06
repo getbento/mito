@@ -80,3 +80,16 @@
     </div>
 </div>
 {% endblock %}
+
+{% block initScripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(window).resize(function(){
+        $(".store.cart").css('min-height', $(window).outerHeight() - $("footer").outerHeight() - $("#powered-by").outerHeight() - 100 );
+    });
+    $(window).resize();
+
+});
+</script>
+{% endblock %}
