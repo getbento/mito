@@ -5,7 +5,7 @@
 <div class="row">
     <div class="cart-icon pull-right">
       <a href="{{ store.cart.url }}">
-        <img src="{{ static('images/cart_icon.png') }}" alt="cart"><span>{{ store.cart['items']|length }}</span>
+        <img src="{{ static('images/cart_icon.png') }}" alt="cart"><span>{{ store.cart.quantity }}</span>
       </a>
     </div>
   </div>
