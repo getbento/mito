@@ -20,6 +20,7 @@
         </div>
     </div>
     <div class="row">
+        {% if current.images|length > 0 %}
         <div class="col-md-8">
             <div class="feature-image-wrap">
             <div class="feature-image" style="background-image:url('{{ current.image }}')"></div>
@@ -39,9 +40,12 @@
             </div>
 
         </div>
-        <div class="col-md-4">
+        {% endif %}
+
+        <div class="col-md-4{% if current.images|length == 0 %} col-md-push-4 text-center{% endif %}">
             <h2>{{ current.name }}</h2>
             {{ current.description }}
+            <br>
             <form method="POST" action="{{ current.add_to_cart_url }}">
             {% for option in current.options %}
             <select class="options-dropdown">
@@ -49,6 +53,7 @@
                     <option data-slug="{{ option.slug }}" value="{{ value }}">{{ value }}</option>
                 {% endfor %}
             </select>
+            <br><br>
             {% endfor %}
             <div class="hidden">
                 <select name="variant" id="variant" name="variant">
@@ -77,25 +82,21 @@ $(document).ready(function() {
         var $dropdown = $(this);
         var possible_variants = $('select#variant option');
 
-        // .attr('disabled',true);
-        // $("select").select2(
-
         $('select.options-dropdown option:selected').each(function(){
             possible_variants = possible_variants.filter('[data-option-'+$(this).attr('data-slug')+'="'+$(this).val()+'"]');
         });
 
         if(possible_variants.length == 1) {
-            if(possible_variants.attr("available") == "false") {
-                alert('not available');
+            if(possible_variants.attr("data-available") == "false") {
+                $(this).parents('form').find('button').text('Out of Stock').attr('disabled','');
             }else{
                 possible_variants.first().attr("selected",true);
+                $(this).parents('form').find('button').text('Add To Cart').removeAttr('disabled');
             }
         }else{
-            //variant doesnt exist, but this shouldn't possible with the changing around options on top
+            $(this).parents('form').find('button').text('Currently Unavailable').attr('disabled','');
         }
 
-            // 'Currently unavaiable' if out of stock
-            // Adjusting top dropdown changes the lower items, so all options will always be visible with top item.
     });
 
     $(this).parents('form').find('select#variant').val();

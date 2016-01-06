@@ -70,13 +70,14 @@
 	    }
 	}
 }
-
+body { 
+	overflow-x:hidden;
+}
 .store {
 	h1 {
 		margin-top: 24px;
 		margin-bottom: 36px;
 	}
-	min-height: 1200px;
 
 	.cart-details.checkout {
 		margin-top: 20px;
