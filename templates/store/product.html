@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+  {% with absolute_nav = True %}
+    {% include 'header/_mobile.html' %}
+    {% include 'header/_nav.html' %}
+  {% endwith %}
+  </header>
+{% endblock %}
+
+{% block content %}
+{% set current = store.products.all|first %}
+<div class="store product">
+  <div class="container-fluid max-width">
+    <div class="row">
+        <div class="col-md-6">
+            {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
+            {% if shop_landing %}
+            <a href="{{ shop_landing.url }}">Back to shop</a>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <div class="cart-icon pull-right">
+                <a href="{{ store.cart.url }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 77 124.84375" enable-background="new 0 0 77 99.875" xml:space="preserve"><path d="M64.427,25.875c0-14-11.628-25.972-25.973-25.972c-14.342,0-25.97,11.972-25.97,25.972H0v74h77v-74H64.427z M17.887,25.875  c0-12,9.333-20.833,20.834-20.833c11.508,0,20.834,8.833,20.834,20.833H17.887z"/></svg><span>{{ store.cart['items']|length }}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% if current.images|length > 0 %}
+        <div class="col-md-8">
+            <div class="feature-image-wrap">
+            <div class="feature-image" style="background-image:url('{{ current.image }}')"></div>
+            
+            {% if current.images|length > 1 %}
+                {% for group in current.images|batch(3) %}
+                  <div class="row">
+                    {% for image in group %}
+                      <div class="col-md-4">
+                        <div class="image-option" style="background-image:url('{{ image }}')"></div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+            {% endif %}
+
+            </div>
+
+        </div>
+        {% endif %}
+
+        <div class="col-md-4{% if current.images|length == 0 %} col-md-push-4 text-center{% endif %}">
+            <h2>{{ current.name }}</h2>
+            {{ current.description }}
+            <br>
+            <form method="POST" action="{{ current.add_to_cart_url }}">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ current.id }}">
+            {% for option in current.options %}
+            <select class="options-dropdown">
+                {% for value in option.choices %}
+                    <option data-slug="{{ option.slug }}" value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            {% endfor %}
+            <div class="hidden">
+                <select name="variant" id="variant" name="variant">
+                    {% for variant in current.variants %}
+                        <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-available="{% if variant.inventory > 0 %}true{% else %}false{% endif %}">{{ variant.id }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn">Add To Cart</button>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block initScripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".feature-image-wrap .image-option").hover(function(){
+        $(".feature-image-wrap .feature-image").css('background-image', $(this).css('background-image') );
+    });
+
+    $(".options-dropdown").change(function(){
+        var $dropdown = $(this);
+        var possible_variants = $('select#variant option');
+
+        $('select.options-dropdown option:selected').each(function(){
+            possible_variants = possible_variants.filter('[data-option-'+$(this).attr('data-slug')+'="'+$(this).val()+'"]');
+        });
+
+        if(possible_variants.length == 1) {
+            if(possible_variants.attr("data-available") == "false") {
+                $(this).parents('form').find('button').text('Out of Stock').attr('disabled','');
+            }else{
+                possible_variants.first().attr("selected",true);
+                $(this).parents('form').find('button').text('Add To Cart').removeAttr('disabled');
+            }
+        }else{
+            $(this).parents('form').find('button').text('Currently Unavailable').attr('disabled','');
+        }
+
+    });
+
+    $(this).parents('form').find('select#variant').val();
+});
+</script>
+{% endblock %}

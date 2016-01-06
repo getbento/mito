@@ -1021,6 +1021,17 @@
                     }
                 }
             },
+            "store": {
+                "title": "Store",
+                "type": "section",
+                "items": {
+                    "columns": {
+                        "title": "Columns",
+                        "type": "number",
+                        "default": 3
+                    }
+                }
+            },
             "footer": {
                 "title":"Footer",
                 "type":"section",

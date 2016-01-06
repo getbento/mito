@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block bodyClass %}store-landing-body{% endblock %}
+
+{% block header %}
+  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+  {% with absolute_nav = True %}
+    {% include 'header/_mobile.html' %}
+    {% include 'header/_nav.html' %}
+  {% endwith %}
+  </header>
+{% endblock %}
+
+{% macro render_product(product) -%}
+<div class="col-md-{{12 // theme.options.store.columns }}">
+    <a class="product" href="{{ product.url }}">
+        {% if product.image %}
+          <div class="product-image image-stroke" style="background-image: url('{{product.image}}')">
+          </div>
+        {% endif %}
+        <div class="name">{{ product.name }}</div>
+        {% if product.price %}
+            <div class="price">{{ product.price }}</div>
+        {% endif %}
+    </a>
+</div>
+{%- endmacro %}
+
+{% block content %}
+<div class="store products">
+<div id="intro" {% if current.fields.header.images %}class="has-images"{% endif %}>
+    <div class="vertical-center splash">
+        <div class="container">
+            {% if current.fields.header.title %}<h2>{{ current.fields.header.title }}</h2>{% endif %}
+            {{ current.fields.header.text }}
+            {% if current.fields.header.show_button %}
+                <a href="#more" class="btn scroll-to">Learn More</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% if current.fields.header.images %}
+<div id="" class="carousel slide hidden-print no-parallax" data-ride="carousel" data-interval="4000" data-pause="false">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    {% for image in current.fields.header.images.images %}
+      <div class="item {% if loop.index0 == 0 %}active{% endif %}" style="background-image: url('{{ image }}')">
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if current.fields.header.images.images > 1 %}
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="prev">
+      <span></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="next">
+      <span></span>
+    </a>
+  {% endif %}
+</div>
+{% endif %}
+
+    <a class="anchor" name="more"></a>
+</div>
+
+<div class="container-fluid max-width">
+    <div class="row">
+        <div class="cart-icon pull-right">
+            <a href="{{ store.cart.url }}">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 77 124.84375" enable-background="new 0 0 77 99.875" xml:space="preserve"><path d="M64.427,25.875c0-14-11.628-25.972-25.973-25.972c-14.342,0-25.97,11.972-25.97,25.972H0v74h77v-74H64.427z M17.887,25.875  c0-12,9.333-20.833,20.834-20.833c11.508,0,20.834,8.833,20.834,20.833H17.887z"/></svg><span>{{ store.cart['items']|length }}</span>
+            </a>
+        </div>
+    </div>
+  <div class="container-fluid max-width">
+
+
+    <!-- Produts -->
+    {% if store.products.categories|length > 0 %}
+    {% with categories = store.products.by_category_slug %}
+        {% for category in categories %}
+          {% if categories[category].all|list|length > 0 %}
+            {% if categories[category].slug != 'uncategorized' %}
+            <div class="row">
+              <h2 class="col-sm-12">{{categories[category].name}}</h2>
+            </div>
+            {% endif %}
+            {% for group in categories[category].all|batch(theme.options.store.columns) %}
+              <div class="row">
+                {% for product in group %}
+                  {{ render_product(product) }}
+                {% endfor %}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+    {% endwith %}
+    {% else %}
+      {% for group in store.products.all|batch(theme.options.store.columns) %}
+        <div class="row">
+          {% for product in group %}
+            {{ render_product(product) }}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+    <!-- End Products -->
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block initScripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+    //Bento.GiftCards.initialize();
+});
+</script>
+{% endblock %}
