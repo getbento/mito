@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block bodyClass %}store-product-body{% endblock %}
+
 {% block header %}
   <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
   {% with absolute_nav = True %}
@@ -10,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-{% set current = store.products.all|first %}
+{% set current = store.products.all|last %}
 <div class="store product">
   <div class="container-fluid max-width">
     <div class="row">
@@ -53,31 +55,68 @@
 
         <div class="col-md-4{% if current.images|length == 0 %} col-md-push-4 text-center{% endif %}">
             <h2>{{ current.name }}</h2>
+            <span class="price">${{ current.price }}</span>
             {{ current.description }}
-            <br>
-            <form method="POST" action="{{ current.add_to_cart_url }}">
-            {% csrf_token %}
-            <input type="hidden" name="product_id" value="{{ current.id }}">
-            {% for option in current.options %}
-            <select class="options-dropdown">
-                {% for value in option.choices %}
-                    <option data-slug="{{ option.slug }}" value="{{ value }}">{{ value }}</option>
+            <form method="POST" action="{{ current.add_to_cart_url }}" id="product-form">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ current.id }}">
+                {% if current.options|length > 0 %}
+                <hr>
+                {% endif %}
+                {% for option in current.options %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>{{ option.name }}</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="options-dropdown">
+                            {% for value in option.choices %}
+                                <option data-name="{{ option.name }}" data-slug="{{ option.slug }}" value="{{ value }}">{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                        <br><br>
+                    </div>
+                </div>
                 {% endfor %}
-            </select>
-            <br><br>
-            {% endfor %}
-            <div class="hidden">
-                <select name="variant" id="variant" name="variant">
-                    {% for variant in current.variants %}
-                        <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-available="{% if variant.inventory > 0 %}true{% else %}false{% endif %}">{{ variant.id }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit" class="btn">Add To Cart</button>
+                <div class="hidden">
+                    <select name="variant" id="variant" name="variant">
+                        {% for variant in current.variants %}
+                            <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-available="{% if variant.inventory > 0 %}true{% else %}false{% endif %}" data-price="{{ variant.price }}">{{ variant.id }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn">Add To Cart</button>
             </form>
         </div>
     </div>
   </div>
+</div>
+
+<div id="added-to-cart">
+    <div class="modal">
+        <div class="row">
+            <a class="x remove">&times;</a>
+            <div class="col-md-6">
+                <img src="{{ current.image }}">
+            </div>
+            <div class="col-md-6 text-left">
+                <h2>{{ current.name }}</h2>
+                <div class="options">
+
+                </div>
+                <br>
+                <span class="price">${{ current.price }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a class="btn remove">Continue Shopping</a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn" href="{{ store.cart.url }}">Checkout</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
@@ -93,8 +132,10 @@ $(document).ready(function() {
         var $dropdown = $(this);
         var possible_variants = $('select#variant option');
 
+        $("#added-to-cart .options").html("");
         $('select.options-dropdown option:selected').each(function(){
             possible_variants = possible_variants.filter('[data-option-'+$(this).attr('data-slug')+'="'+$(this).val()+'"]');
+            $("#added-to-cart .options").html($("#added-to-cart .options").html() + $(this).attr('data-name') + ": " + $(this).val() + "<br>");
         });
 
         if(possible_variants.length == 1) {
@@ -104,13 +145,37 @@ $(document).ready(function() {
                 possible_variants.first().attr("selected",true);
                 $(this).parents('form').find('button').text('Add To Cart').removeAttr('disabled');
             }
+            $(".price").text("$" + possible_variants.attr("data-price"));
         }else{
             $(this).parents('form').find('button').text('Currently Unavailable').attr('disabled','');
         }
 
     });
+    $(".options-dropdown").change();
 
-    $(this).parents('form').find('select#variant').val();
+    $("form#product-form").submit(function(e){
+        e.preventDefault();
+        $(this).parents('form').find('button').text('Adding...').attr('disabled','');
+        var frm = $(this);
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                $(".cart-icon span").text(parseInt($(".cart-icon span").text()) + 1);
+                $(this).parents('form').find('button').text('Add To Cart').removeAttr('disabled');
+
+                $("#added-to-cart").fadeIn();
+            }
+        });
+    });
+
+    $("#added-to-cart .remove").click(function(e){
+        e.preventDefault();
+        $("#added-to-cart").fadeOut();
+    });
+
+
 });
 </script>
 {% endblock %}
