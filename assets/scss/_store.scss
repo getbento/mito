@@ -63,10 +63,15 @@
 
 	    span {
 	    	display: inline-block;
+  			{% if theme.options.typography.font_family %}
+  			  font-family: {{ theme.options.typography.font_family }};
+  			{% endif %}
+  			{% if theme.options.typography.font_weight %}
+  				font-weight: {{  theme.options.typography.font_weight }};
+  			{% endif %}
 	    	text-decoration: none;
 	    	padding: 0 10px;
 	    	border-left: solid 1px #ffffff;
-	    	font-weight: bold;
 	    }
 	}
 }
@@ -125,11 +130,17 @@
     	text-decoration:none;
     	color:unset;
 
+    	&:hover .product-image {
+    		opacity:.8;
+    	}
+
 		.product-image {
 		  background-size: cover;
 		  background-position: center;
 		  height: 260px;
 		  margin-bottom:12px;
+    	  -webkit-transition: opacity .3s;
+    	  transition: opacity .3s;
 
 		  @media (max-width: 767px) {
 		    height: 400px;
