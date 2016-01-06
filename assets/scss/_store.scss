@@ -70,9 +70,7 @@
 	    }
 	}
 }
-body { 
-	overflow-x:hidden;
-}
+
 .store {
 	h1 {
 		margin-top: 24px;
@@ -151,4 +149,8 @@ body {
 		}
 	}
 
+}
+
+body.store-landing-body, body.store-product-body {
+	overflow-x:hidden;
 }
