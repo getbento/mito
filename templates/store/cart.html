@@ -1,6 +1,8 @@
 {% extends 'store/_base_store.html' %}
+{% block bodyClass %}store-cart-body{% endblock %}
 
 {% block content %}
+<div class="wrap">
 <div class="container-fluid max-width store cart">
 <div class="row">
     <div class="cart-icon pull-right">
@@ -79,17 +81,7 @@
       </div>
     </div>
 </div>
-{% endblock %}
 
-{% block initScripts %}
-<script type="text/javascript">
-$(document).ready(function() {
-
-    $(window).resize(function(){
-        $(".store.cart").css('min-height', $(window).outerHeight() - $("footer").outerHeight() - $("#powered-by").outerHeight() - 100 );
-    });
-    $(window).resize();
-
-});
-</script>
+<div class="push"></div>
+</div>
 {% endblock %}

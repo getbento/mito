@@ -237,3 +237,21 @@ body.store-landing-body, body.store-product-body {
 		}
 	}
 }
+
+html, body.store-cart-body:not(.sticky-powered-by) {
+	height: 100%;
+	margin-bottom:0 !important;
+	.wrap {
+		min-height: 100%;
+		margin:0 auto -105px;
+		.store.cart {
+			margin-top:0;
+			padding-top:100px;
+		}
+		.push {
+			height: 105px;
+		}
+	}
+	#powered-by {
+	}
+}
