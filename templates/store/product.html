@@ -15,13 +15,13 @@
 <div class="store product">
   <div class="container-fluid max-width">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-xs-6">
             {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
             {% if shop_landing %}
             <a href="{{ shop_landing.url }}">Back to shop</a>
             {% endif %}
         </div>
-        <div class="col-md-6">
+        <div class="col-xs-6">
             <div class="cart-icon pull-right">
                 <a href="{{ store.cart.url }}">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 77 124.84375" enable-background="new 0 0 77 99.875" xml:space="preserve"><path d="M64.427,25.875c0-14-11.628-25.972-25.973-25.972c-14.342,0-25.97,11.972-25.97,25.972H0v74h77v-74H64.427z M17.887,25.875  c0-12,9.333-20.833,20.834-20.833c11.508,0,20.834,8.833,20.834,20.833H17.887z"/></svg><span>{{ store.cart.quantity }}</span>
@@ -39,7 +39,7 @@
                 {% for group in current.images|batch(3) %}
                   <div class="row">
                     {% for image in group %}
-                      <div class="col-md-4">
+                      <div class="col-xs-4">
                         <div class="image-option" style="background-image:url('{{ image }}')"></div>
                       </div>
                     {% endfor %}
