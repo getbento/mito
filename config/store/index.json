@@ -1,21 +1,6 @@
 {
   "name": "Store Landing",
-  "fields": {
-    "header": {
-      "title": "Header Content",
-      "type": "section",
-      "items": {
-        "title": "text",
-        "text": "wysiwyg",
-        "images": {
-          "type":"relationship",
-          "box": "galleries"
-        },
-        "show_button":"boolean"
-      }
-    }
-  },
   "wireframe": [
-    "section-header"
+    "boxes-store_gallery"
   ]
 }

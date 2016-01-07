@@ -6,7 +6,9 @@
   <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
   {% with absolute_nav = True %}
     {% include 'header/_mobile.html' %}
-    {% include 'header/_nav.html' %}
+    {% if "/store" in current.url %}
+      {% include 'header/_sticky.html' %}
+    {% endif %}
   {% endwith %}
   </header>
 {% endblock %}
@@ -15,7 +17,9 @@
 <div class="col-md-{{12 // theme.options.store.columns }}">
     <a class="product" href="{{ product.url }}">
         {% if product.image %}
-          <div class="product-image image-stroke" style="background-image: url('{{product.image}}')">
+          <div class="product-image-wrap">
+            <div class="product-image image-stroke" style="background-image: url('{{product.image}}')">
+            </div>
           </div>
         {% endif %}
         <div class="name">{{ product.name }}</div>
@@ -27,55 +31,53 @@
 {%- endmacro %}
 
 {% block content %}
+<div class="wrap">
 <div class="store products">
-{% if current.fields.header.title or current.fields.header.images or current.fields.header.text or current.fields.header.show_button %}
-<div id="intro" {% if current.fields.header.images %}class="has-images"{% endif %}>
-    <div class="vertical-center splash">
-        <div class="container">
-            {% if current.fields.header.title %}<h2>{{ current.fields.header.title }}</h2>{% endif %}
-            {{ current.fields.header.text }}
-            {% if current.fields.header.show_button %}
-                <a href="#more" class="btn scroll-to">Learn More</a>
+
+  {% if boxes.store_gallery.all|length > 0 %}
+  <div id="header-carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="false">
+    <!-- Wrapper for slides -->
+    <div
+      class="carousel-inner transparent"
+      {% if theme.options.layout.parallax %}
+        data-top-bottom="transform:translate3d(0px, 230px, 0px);"
+        data-bottom-top="transform:translate3d(0px, -250px, 0px)"
+      {% endif %}
+      >
+      {% for slide in boxes.store_gallery.all %}
+        <div id="hero-slide-{{ loop.index0 }}" class="item {% if loop.first %}active{% endif %}" style="background-image: url('{{ slide.fields.image_url }}')">
+          <div class="carousel-caption-wrapper{% if theme.options.header.nav.overlay and theme.options.header.nav.vertically_center %} bottom-align{% endif %}">
+            {% if slide.fields.text or slide.fields.title %}
+            <div class="carousel-caption">
+              {% if slide.fields.title %}
+                <h1>{{ slide.fields.title }}</h1>
+              {% endif %}
+              {% if slide.fields.text %}
+                <div class="wysiwyg">{{ slide.fields.text|safe }}</div>
+              {% endif %}
+              {% if slide.fields.button_text %}
+                <a href="{{ slide.fields.button_target }}"><button class="btn">{{ slide.fields.button_text }}</button></a>
+              {% endif %}
+            </div>
             {% endif %}
+          </div>
         </div>
+      {% endfor %}
     </div>
 
-{% if current.fields.header.images %}
-<div id="" class="carousel slide hidden-print no-parallax" data-ride="carousel" data-interval="4000" data-pause="false">
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    {% for image in current.fields.header.images.images %}
-      <div class="item {% if loop.index0 == 0 %}active{% endif %}" style="background-image: url('{{ image }}')">
-      </div>
-    {% endfor %}
+    {% if boxes.store_gallery.all|length > 1 %}
+      <!-- Controls -->
+      <a class="left carousel-control" href="#header-carousel" data-slide="prev">
+        <span></span>
+      </a>
+      <a class="right carousel-control" href="#header-carousel" data-slide="next">
+        <span></span>
+      </a>
+    {% endif %}
   </div>
-
-  {% if current.fields.header.images.images > 1 %}
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="prev">
-      <span></span>
-    </a>
-    <a class="right carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="next">
-      <span></span>
-    </a>
-  {% endif %}
-</div>
 {% endif %}
 
-    <a class="anchor" name="more"></a>
-</div>
-{% endif %}
-
-<div class="container-fluid max-width">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="cart-icon pull-right">
-            <a href="{{ store.cart.url }}">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 77 124.84375" enable-background="new 0 0 77 99.875" xml:space="preserve"><path d="M64.427,25.875c0-14-11.628-25.972-25.973-25.972c-14.342,0-25.97,11.972-25.97,25.972H0v74h77v-74H64.427z M17.887,25.875  c0-12,9.333-20.833,20.834-20.833c11.508,0,20.834,8.833,20.834,20.833H17.887z"/></svg><span>{{ store.cart.quantity }}</span>
-            </a>
-        </div>
-      </div>
-    </div>
+<div class="container-fluid max-width" id="product-listing">
   <div class="container-fluid max-width">
 
 
@@ -111,6 +113,9 @@
     <!-- End Products -->
   </div>
 </div>
+</div>
+
+<div class="push"></div>
 </div>
 {% endblock %}
 

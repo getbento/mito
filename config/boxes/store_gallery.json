@@ -1,0 +1,25 @@
+{
+  "name": "Store Hero Gallery",
+  "fields": {
+    "image_url": {
+      "title": "Image",
+      "type": "image"
+    },
+    "title": {
+      "title": "Headline",
+      "type": "text"
+    },
+    "text": {
+      "title": "Caption",
+      "type": "wysiwyg"
+    },
+    "button_text": {
+      "title": "Button Text",
+      "type": "text"
+    },
+    "button_target": {
+      "title": "Button Target",
+      "type": "text"
+    }
+  }
+}
