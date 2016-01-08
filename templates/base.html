@@ -64,7 +64,7 @@
     {% endblock %}
 
     {% block content %}
-      {% for section in navs.main|rejectattr("homepage")|selectattr("template") %}
+      {% for section in navs.main|rejectattr("homepage")|selectattr("template") if "/store" not in section.url %}
         {% include section.template with context %}
       {% endfor %}
     {% endblock %}
