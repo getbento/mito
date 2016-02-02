@@ -1,6 +1,6 @@
 Env
 
-##Convert Turnkey Site to Turnkey 2
+##Convert Turnkey Site to Mito
 Go to /site_admin/accounts/account/ (filter by turnkey)
 Select the site
 Check new context
