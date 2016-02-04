@@ -35,7 +35,7 @@ $(document).ready(function () {
       if ($section.length > 0) {
         // scroll to section
         var offset = $section.offset().top;
-        $body.scrollTop(Math.round(offset - 102));
+        $body.scrollTop(Math.round(offset));
 
         // make nav item active
         $scrollspy.find('a[href="'+hashArray[0]+'"]').parent().addClass('active');

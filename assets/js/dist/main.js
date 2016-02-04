@@ -20824,7 +20824,7 @@ $(document).ready(function () {
       if ($section.length > 0) {
         // scroll to section
         var offset = $section.offset().top;
-        $body.scrollTop(Math.round(offset - 102));
+        $body.scrollTop(Math.round(offset));
 
         // make nav item active
         $scrollspy.find('a[href="'+hashArray[0]+'"]').parent().addClass('active');
@@ -20931,7 +20931,8 @@ $(document).ready(function () {
 
   // initialize select2.js dropdowns
   $select_menu.select2({
-    minimumResultsForSearch: Infinity
+    minimumResultsForSearch: Infinity,
+    dropdownAutoWidth: true
   });
 
   // on select dropdown change mobile, e.g. menus
