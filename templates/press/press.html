@@ -34,16 +34,16 @@
 
     <!-- Unfeatured Press -->
     <div class="unfeatured collapse {% if not theme.options.press.see_all %}in{% endif %}">
-      {% with categories = boxes.press.by_category_slug %}
+      {% with categories = boxes.press.categories %}
       {% for category in categories %}
-        {% if categories[category].all|rejectattr("featured")|list|length > 0 %}
-          {% if theme.options.press.categories and categories[category].slug != 'uncategorized' %}
+        {% if category.all|rejectattr("featured")|list|length > 0 %}
+          {% if theme.options.press.categories and category.slug != 'uncategorized' %}
           <div class="row">
-            <h2 class="col-sm-12">{{categories[category].name}}</h2>
+            <h2 class="col-sm-12">{{category.name}}</h2>
           </div>
           {% endif %}
           <div class="bucket-into-rows" data-columns="{{ theme.options.press.columns }}">
-            {% for article in categories[category].all|rejectattr("featured") %}
+            {% for article in category.all|rejectattr("featured") %}
               {% include "press/_article.html" with context %}
             {% endfor %}
           </div>
