@@ -70,7 +70,7 @@
 		var newsletter = {};
 
 		newsletter.options = {
-			formSelector: 'form#email_newsletter',
+			formSelector: 'form#newsletter',
 			successMessage: 'div#success',
 			errorMessage: 'div#error',
 		};
@@ -112,10 +112,11 @@
 			}
 		};
 
-		return newsletter;	
+		return newsletter;
 	}());
 
 	module.exports = Newsletter;
+
 
 /***/ },
 /* 2 */
@@ -125,8 +126,8 @@
 
 	var Reservations = (function() {
 		var reservations = {};
-		
-		options = {
+
+		var options = {
 			selector: "a.reserve",
 		};
 
@@ -155,7 +156,7 @@
 			switch(options.provider) {
 				case 'opentable':
 					reservations.handleOpentable();
-				default: 
+				default:
 					return;
 			}
 		};
@@ -167,10 +168,11 @@
 			$(options.selector).on('click', reservations.handleReservation);
 		};
 
-		return reservations;	
+		return reservations;
 	}());
 
 	module.exports = Reservations;
+
 
 /***/ },
 /* 3 */
@@ -196,17 +198,11 @@
 
 	var Forms = (function() {
 		var forms = {};
-		
-		options = {
-			formSelector: "form",
-			success: "div.success",
-			error: "div.error",
-			successCallback: forms.successCallback,
-			errorCallback: forms.errorCallback,
-		};
 
 		forms.handleSubmit = function(event) {
 			event.preventDefault();
+
+			options.preSubmit();
 
 			var targetForm = $(this);
 
@@ -214,6 +210,10 @@
 
 			forms.currentForm = targetForm;
 			forms.hideMessages();
+
+			if (!forms.validateForm(targetForm)) {
+	            return false;
+	        }
 
 			$.ajax({
 				type: "POST",
@@ -260,10 +260,38 @@
 			$(options.formSelector).on('submit', forms.handleSubmit);
 		};
 
-		return forms;	
+		forms.preSubmit = function() {
+			return;
+		};
+
+		forms.validateForm = function() {
+	        var hasErrors = false;
+	        var inputs = $(options.formSelector).find('input, select');
+
+	        _.each(inputs, function(input) {
+	            if (!input.checkValidity()) {
+	                $(input).addClass('error');
+	                hasErrors = true;
+	            }
+	        }, this);
+
+	        return !hasErrors;
+		};
+
+		var options = {
+			formSelector: "form",
+			success: "div.success",
+			error: "div.error",
+			successCallback: forms.successCallback,
+			errorCallback: forms.errorCallback,
+			preSubmit: forms.preSubmit,
+		};
+
+		return forms;
 	}());
 
 	module.exports = Forms;
+
 
 /***/ },
 /* 5 */
@@ -272,7 +300,7 @@
 	var GiftCards = (function() {
 	    var gc = {};
 
-	    options = {
+	    var options = {
 	        buttonsSelector: '.show-giftcard-form',
 	        showFormDataAttribute: 'target',
 	        formContainerSelector: '.formContainer',
@@ -283,12 +311,10 @@
 	    gc.showForm = function(event) {
 	        event.preventDefault();
 
-	        $(options.buttonsSelector).removeClass('selected');
 	        $(options.formContainerSelector).hide();
 
 	        var formSelector = '#' + $(this).data('target');
 	        $(formSelector).fadeIn();
-	        $(this).addClass('selected');
 	    };
 
 	    gc.showHideRecipientFields = function(event) {
@@ -302,7 +328,7 @@
 	    		email_field.parents('.form-group').hide();
 	    		send_after.parents('.form-group').hide();
 	    	} else {
-	            email_field.addAttr('required');
+	            email_field.attr('required');
 	    		email_field.parents('.form-group').show();
 	    		send_after.parents('.form-group').show();
 	    	}
@@ -321,8 +347,6 @@
 	        if (!gc.validateForm(form)) {
 	            return false;
 	        }
-
-	        console.log(options.successCallback);
 
 	        $.ajax({
 	            type: "POST",
