@@ -19,21 +19,21 @@
                         "title": "Background Color",
                         "type": "color",
                         "default": "#FFFFFF"
-                    }, 
+                    },
                     "bg_image": {
                         "title": "Background Image",
                         "type": "image"
-                    }, 
+                    },
                     "parallax": {
                         "title": "Parallax",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "section_underlines": {
                         "title": "Section Underlines",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "section_underlines_image": {
                         "title": "Section Underline Image",
                         "type": "image",
@@ -44,7 +44,7 @@
                         "type": "color",
                         "default": "#282828",
                         "display_logic":"layout.section_underlines"
-                    }, 
+                    },
                     "section_underline_stroke": {
                         "title": "Section Underline Stroke",
                         "type": "text",
@@ -65,7 +65,7 @@
                         "type": "color",
                         "default": "#282828",
                         "display_logic":"layout.image_stroke"
-                    }, 
+                    },
                     "image_stroke_weight": {
                         "title": "Image Stroke Weight",
                         "type": "text",
@@ -81,24 +81,24 @@
                     "font_family": {
                         "title": "Font Family",
                         "type": "text"
-                    }, 
+                    },
                     "font_weight": {
                         "title": "Font Weight",
                         "type": "number",
                         "default": 400
-                    }, 
+                    },
                     "alignment": {
                         "title": "Align",
                         "type": "dropdown",
                         "options": [
                             "left", "center", "right"
                         ]
-                    }, 
+                    },
                     "font_size": {
                         "title": "Font Size",
                         "type": "text",
                         "default": "14px"
-                    }, 
+                    },
                     "color": {
                         "title": "Font Color",
                         "type": "color",
@@ -108,7 +108,7 @@
                         "title": "Paragraph Line Height",
                         "type": "number",
                         "default": 1.2
-                    }, 
+                    },
                     "h1": {
                         "title": "Section Headings (h1)",
                         "type": "section",
@@ -121,7 +121,7 @@
                                 "title": "Font Weight",
                                 "type": "number",
                                 "default": 700
-                            }, 
+                            },
                             "color": {
                                 "title": "Font Color",
                                 "type": "color",
@@ -132,7 +132,7 @@
                                 "type": "boolean"
                             }
                         }
-                    }, 
+                    },
                     "h2": {
                         "title": "Subheadings (h2)",
                         "type": "section",
@@ -145,14 +145,14 @@
                                 "title": "Font Weight",
                                 "type": "number",
                                 "default": 700
-                            }, 
+                            },
                             "color": {
                                 "title": "Font Color",
                                 "type": "color",
                                 "default": "#333333"
                             }
                         }
-                    }, 
+                    },
                     "a": {
                         "title": "Links",
                         "type": "section",
@@ -166,12 +166,12 @@
                                 "title": "Hover Color",
                                 "type": "color",
                                 "default": "#000000"
-                            }, 
+                            },
                             "underline": {
                                 "title": "Underline",
                                 "type": "boolean",
                                 "default": true
-                            }, 
+                            },
                             "hover_underline": {
                                 "title": "Hover Underline",
                                 "type": "boolean",
@@ -189,7 +189,7 @@
                         "title": "Background Color",
                         "type": "color",
                         "default": "#000000"
-                    }, 
+                    },
                     "bg_image": {
                         "title": "Background Image",
                         "type": "image"
@@ -198,21 +198,21 @@
                         "title": "Font Color",
                         "type": "color",
                         "default": "#FFFFFF"
-                    }, 
+                    },
                     "font_family": {
                         "title": "Font Family",
                         "type": "text"
-                    }, 
+                    },
                     "font_size": {
                         "title": "Font Size",
                         "type": "text",
                         "default": "16px"
-                    }, 
+                    },
                     "border_color": {
                         "title": "Border Color",
                         "type": "color",
                         "default": "rgba(0,0,0,0)"
-                    }, 
+                    },
                     "border_width": {
                         "title": "Border Width",
                         "type": "text",
@@ -227,7 +227,7 @@
                         "type": "boolean"
                     }
                 }
-            }, 
+            },
             "address_bar": {
                 "title": "Address Bar",
                 "type": "section",
@@ -236,46 +236,46 @@
                         "title": "Show",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "sticky": {
                         "title": "Sticky",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "social_icons": {
                         "title": "Social Icons",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
                         "default": "#726659"
-                    }, 
+                    },
                     "bg_image": {
                         "title": "Background Image",
                         "type": "image"
-                    }, 
+                    },
                     "color": {
                         "title": "Font Color",
                         "type": "color",
                         "default": "#FFFFFF"
-                    }, 
+                    },
                     "hover_color": {
                         "title": "Hover Color",
                         "type": "color",
                         "default": "#FFFFFF"
-                    }, 
+                    },
                     "hover_underline": {
                         "title": "Hover Underline",
                         "type": "boolean",
                         "default": false
-                    }, 
+                    },
                     "shadow": {
                         "title": "Shadow",
                         "type": "boolean",
                         "default": false
-                    }, 
+                    },
                     "mobile_reservation_btn": {
                         "title": "Mobile Reservations Button",
                         "type": "boolean",
@@ -316,17 +316,17 @@
                                 "title": "Height",
                                 "type": "text",
                                 "default": "400px"
-                            }, 
+                            },
                             "logo_width": {
                                 "title": "Logo Width",
                                 "type": "text",
                                 "default": "322px"
-                            }, 
+                            },
                             "vertically_center": {
                                 "title": "Vertically Center",
                                 "type": "boolean",
                                 "default": true
-                            }, 
+                            },
                             "below_logo": {
                                 "title": "Below Logo",
                                 "type": "boolean",
@@ -336,26 +336,26 @@
                                 "title": "Reservations Link",
                                 "type": "boolean",
                                 "default": false
-                            }, 
+                            },
                             "bg_color": {
                                 "title": "Background Color",
                                 "type": "color",
                                 "default": "rgba(0,0,0,0)"
-                            }, 
+                            },
                             "bg_image": {
                                 "title": "Background Image",
                                 "type": "image"
-                            }, 
+                            },
                             "shadow": {
                                 "title": "Shadow",
                                 "type": "boolean",
                                 "default": false
-                            }, 
+                            },
                             "color": {
                                 "title": "Font Color",
                                 "type": "color",
                                 "default": "#726659"
-                            }, 
+                            },
                             "hover_color": {
                                 "title": "Hover Color",
                                 "type": "color",
@@ -365,21 +365,21 @@
                                 "title": "Hover Underline",
                                 "type": "boolean",
                                 "default": false
-                            }, 
+                            },
                             "font_family": {
                                 "title": "Font Family",
                                 "type": "text"
-                            }, 
+                            },
                             "font_weight": {
                                 "title": "Font Weight",
                                 "type": "number",
                                 "default": 400
-                            }, 
+                            },
                             "font_size": {
                                 "title": "Font Size",
                                 "type": "text",
                                 "default": "15px"
-                            }, 
+                            },
                             "letter_spacing": {
                                 "title": "Letter Spacing",
                                 "type": "text",
@@ -390,7 +390,7 @@
                                 "type": "boolean"
                             }
                         }
-                    }, 
+                    },
                     "sticky": {
                         "title": "Sticky",
                         "type": "section",
@@ -399,26 +399,26 @@
                                 "title": "Show",
                                 "type": "boolean",
                                 "default": true
-                            }, 
+                            },
                             "bg_color": {
                                 "title": "Background Color",
                                 "type": "color",
                                 "default": "#FFFFFF"
-                            }, 
+                            },
                             "bg_image": {
                                 "title": "Background Image",
                                 "type": "image"
-                            }, 
+                            },
                             "font_size": {
                                 "title": "Font Size",
                                 "type": "text",
                                 "default": "13px"
-                            }, 
+                            },
                             "color": {
                                 "title": "Font Color",
                                 "type": "color",
                                 "default": "#222222"
-                            }, 
+                            },
                             "hover_color": {
                                 "title": "Hover Color",
                                 "type": "color",
@@ -428,7 +428,7 @@
                                 "title": "Hover Underline",
                                 "type": "boolean",
                                 "default": false
-                            }, 
+                            },
                             "logo": {
                                 "title": "Logo",
                                 "type": "image"
@@ -443,12 +443,12 @@
                                 "title": "Show",
                                 "type": "boolean",
                                 "default": true
-                            }, 
+                            },
                             "height": {
                                 "title": "Height",
                                 "type": "text",
                                 "default": "500px"
-                            }, 
+                            },
                             "line_1_color": {
                                 "title": "Line 1 Color",
                                 "type": "color",
@@ -475,7 +475,7 @@
                                 "default": false
                             }
                         }
-                    }, 
+                    },
                     "alert": {
                         "title": "Alert",
                         "type": "section",
@@ -484,17 +484,17 @@
                                 "title": "Background Color",
                                 "type": "color",
                                 "default": "#FFFFFF"
-                            }, 
+                            },
                             "header_color": {
                                 "title": "Header Color",
                                 "type": "color",
                                 "default": "#000000"
-                            }, 
+                            },
                             "body_color": {
                                 "title": "Body Color",
                                 "type": "color",
                                 "default": "#333333"
-                            }, 
+                            },
                             "link_color": {
                                 "title": "Link Color",
                                 "type": "color",
@@ -512,7 +512,7 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "gallery": {
                         "title": "Gallery",
                         "type": "relationship",
@@ -549,19 +549,19 @@
                         "type": "boolean",
                         "default": false,
                         "display_logic": "locations.map"
-                    }, 
+                    },
                     "full_map_btn_bg_color": {
                         "title": "Button Background Color",
                         "type": "color",
                         "default": "#000000",
                         "display_logic": "locations.map_full_width"
-                    }, 
+                    },
                     "full_map_btn_color": {
                         "title": "Button Font Color",
                         "type": "color",
                         "default": "#FFFFFF",
                         "display_logic": "locations.map_full_width"
-                    }, 
+                    },
                     "map_color": {
                         "title": "Map Color",
                         "type": "color",
@@ -777,7 +777,7 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    },  
+                    },
                     "gallery": {
                         "title": "Gallery",
                         "type": "relationship",
@@ -829,7 +829,7 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    },  
+                    },
                     "gallery": {
                         "title": "Gallery",
                         "type": "relationship",
@@ -896,7 +896,7 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "gallery": {
                         "title": "Gallery",
                         "type": "relationship",
@@ -942,17 +942,17 @@
                         "title": "Lightbox Header Color",
                         "type": "color",
                         "default": "#222222"
-                    }, 
+                    },
                     "lightbox_text_color": {
                         "title": "Lightbox Text Color",
                         "type": "color",
                         "default": "#222222"
-                    }, 
+                    },
                     "lightbox_link_color": {
                         "title": "Lightbox Link Color",
                         "type": "color",
                         "default": "#222222"
-                    }, 
+                    },
                     "lightbox_bg_color": {
                         "title": "Lightbox Background Color",
                         "type": "color",
@@ -968,7 +968,7 @@
                         "title": "Header",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "gallery": {
                         "title": "Gallery",
                         "type": "relationship",
@@ -1044,57 +1044,57 @@
                         "title": "Email Signup",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "social_links": {
                         "title": "Social Links",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "sticky": {
                         "title": "Sticky",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "reservations_btn": {
                         "title": "Reservations Button",
                         "type": "boolean",
                         "default": true
-                    }, 
+                    },
                     "powered_by_bento": {
                         "title": "Powered by Bento",
                         "type": "boolean",
                         "default": false
-                    }, 
+                    },
                     "powered_by_bento_sticky": {
                         "title": "Sticky (powered by bento)",
                         "type": "boolean",
                         "default": true,
                         "display_logic":"footer.powered_by_bento"
-                    }, 
+                    },
                     "bg_color": {
                         "title": "Background Color",
                         "type": "color",
                         "default": "#444444"
-                    }, 
+                    },
                     "bg_image": {
                         "title": "Background Image",
                         "type": "image"
-                    }, 
+                    },
                     "color": {
                         "title": "Font Color",
                         "type": "color",
                         "default": "#FFFFFF"
-                    }, 
+                    },
                     "hover_color": {
                         "title": "Hover Color",
                         "type": "color",
                         "default": "#FFFFFF"
-                    }, 
+                    },
                     "btn_color": {
                         "title": "Button Color",
                         "type": "color",
                         "default": "#FFFFFF"
-                    }, 
+                    },
                     "btn_bg": {
                         "title": "Button Background Color",
                         "type": "color",
@@ -1104,7 +1104,7 @@
                         "title": "Border Color",
                         "type": "color",
                         "default": "rgba(0,0,0,0)"
-                    }, 
+                    },
                     "btn_border_width": {
                         "title": "Border Width",
                         "type": "text",
@@ -1130,5 +1130,30 @@
             "name": "Main Navigation",
             "slug": "main"
         }
-    ]
+    ],
+    "forms": [
+        {
+            "name": "Contact Form",
+            "slug": "contact"
+        },
+        {
+            "name": "Test Form",
+            "slug": "test_form"
+        }
+    ],
+    "customers": {
+      "fields": {
+        "addtional_data": {
+          "title": "Addtional Data",
+          "type": "section",
+          "items": {
+            "neighborhood": "text",
+            "empties_out": "text",
+            "licenses": "text",
+            "ein/resell": "text",
+          }
+        }
+      }
+    },
+
 }

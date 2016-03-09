@@ -133,6 +133,7 @@
               <div class="info-wrapper">
                 <div class="col-sm-12 wysiwyg">
                   {{ menu.description|safe }}
+
                   {% if menu.sections|length > 0 %}
                     {% for section in menu.sections %}
                     <div class="col-sm-6">
