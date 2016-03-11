@@ -3,10 +3,12 @@ section.instagram-section {
   padding:0;
   .photo {
     width:20%;
-    height:auto;
+    height:0;
+    padding-bottom:20%;
     display:inline-block;
     float:left;
-    img { width:100%; }
+    background-position:center center;
+    background-size:cover;
   } 
 
   &:before,
@@ -19,7 +21,7 @@ section.instagram-section {
       clear: both;
   } 
   @media (max-width: 767px) {
-    .photo { width:50%; }
+    .photo { width:50%; padding-bottom:50%; }
     .photo:nth-child(3), 
     .photo:nth-child(4), 
     .photo:nth-child(5), 

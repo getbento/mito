@@ -66,7 +66,8 @@ $(document).ready(function () {
         $section.html('');
         $.each(result, function(i, photo) {
             if(!photo.caption) { photo.caption = {text: ""}; }
-            $section.append("<div class='photo'><img src='"+photo.images.standard_resolution.url+"'></div>");
+            var style = "background-image:url('" + photo.images.standard_resolution.url +"')";
+            $section.append('<div class="photo" style="'+style+'"></div>');
         });
   
     });
