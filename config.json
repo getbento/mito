@@ -1136,24 +1136,5 @@
             "name": "Contact Form",
             "slug": "contact"
         },
-        {
-            "name": "Test Form",
-            "slug": "test_form"
-        }
     ],
-    "customers": {
-      "fields": {
-        "addtional_data": {
-          "title": "Addtional Data",
-          "type": "section",
-          "items": {
-            "neighborhood": "text",
-            "empties_out": "text",
-            "licenses": "text",
-            "ein/resell": "text",
-          }
-        }
-      }
-    },
-
 }
