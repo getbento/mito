@@ -86,6 +86,7 @@
 		svg {
 			margin: 0 10px -9px;
 			height: 23px;
+	        width:14px;
 			path {
   				{% if theme.options.buttons.color %}
 					fill: {{ theme.options.buttons.color }};
@@ -252,7 +253,9 @@ body.store-landing-body, body.store-product-body {
 		top:50%;
 		left:50%;
 		-webkit-transform:translate(-50%,-50%);
-		transform:translateY(-50%,-50%);
+		-moz-transform:translate(-50%,-50%);
+   		 -ms-transform:translate(-50%,-50%);
+		transform:translate(-50%,-50%);
 		img {
 			max-width:100%;
 			margin-bottom: 20px;
