@@ -122,57 +122,5 @@ $(document).ready(function() {
     $(".feature-image-wrap .image-option").hover(function(){
         $(".feature-image-wrap .feature-image").css('background-image', $(this).css('background-image') );
     });
-
-    $(".options-dropdown").change(function(){
-        var $dropdown = $(this);
-        var possible_variants = $('select#variant option');
-        possible_variants.removeAttr("selected");
-
-        $("#added-to-cart .options").html("");
-        $('select.options-dropdown option:selected').each(function(){
-            possible_variants = possible_variants.filter('[data-option-'+$(this).attr('data-slug')+'="'+$(this).val()+'"]');
-            $("#added-to-cart .options").html($("#added-to-cart .options").html() + $(this).attr('data-name') + ": " + $(this).val() + "<br>");
-        });
-
-        if(possible_variants.length == 1) {
-            if(possible_variants.attr("data-inventory") == "0") {
-                $(this).parents('form').find('button').text('Out of Stock').attr('disabled','');
-            }else{
-                possible_variants.first().attr("selected",true);
-                $(this).parents('form').find('button').text('Add To Cart').removeAttr('disabled');
-            }
-            $(".price").text("$" + possible_variants.attr("data-price"));
-        }else{
-            $(this).parents('form').find('button').text('Currently Unavailable').attr('disabled','');
-        }
-
-    });
-    $(".options-dropdown").change();
-
-    $("form#product-form").submit(function(e){
-        e.preventDefault();
-        $(this).parents('form').find('button').text('Adding...').attr('disabled','');
-        var frm = $(this);
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-                $(".cart-icon span").text(parseInt($(".cart-icon span").first().text()) + 1);
-                $(this).parents('form').find('button').text('Add To Cart').removeAttr('disabled');
-                $("form#product-form #variant option:selected").attr('data-inventory', parseInt($("form#product-form #variant option:selected").attr('data-inventory')) - 1);
-                $(".options-dropdown").change();
-                $("#added-to-cart").fadeIn();
-            }
-        });
-    });
-
-    $("#added-to-cart .remove").click(function(e){
-        e.preventDefault();
-        $("#added-to-cart").fadeOut();
-    });
-
-
-});
 </script>
 {% endblock %}
