@@ -119,8 +119,10 @@
 {% block initScripts %}
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".feature-image-wrap .image-option").hover(function(){
-        $(".feature-image-wrap .feature-image").css('background-image', $(this).css('background-image') );
+    $('.feature-image-wrap .image-option').hover(function(){
+      $('.feature-image-wrap .feature-image').css('background-image', $(this).css('background-image') );
     });
+      STORE.initialize();
+});
 </script>
 {% endblock %}

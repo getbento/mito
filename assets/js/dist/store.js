@@ -80,19 +80,16 @@ STORE = {
     var frm = $button.parent();
 
     STORE.disableButton($button);
-    // debugger;
+
     $.ajax({
       type: frm.attr('method'),
       url: frm.attr('action'),
       data: frm.serialize(),
       success: function(data) {
-        // debugger;
         if (data.success === true) {
           var item = data.item;
           var cart = data.cart;
           var quantityAdded = data.quantity_added;
-
-          // $('form#product-form')[0].reset();
 
           STORE.updateCartCount(cart);
           STORE.activateButton($button);
@@ -111,7 +108,6 @@ STORE = {
     STORE.resetModalText();
 
     var name = item.name;
-    var price = item.variant.price;
     var options = item.variant.options;
     var $contentDiv = $('#added-to-cart .options');
 
