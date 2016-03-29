@@ -28,7 +28,7 @@
         <div class="col-md-8">
             <div class="feature-image-wrap">
             <div class="feature-image" style="background-image:url('{{ current.image }}')"></div>
-            
+
             {% if current.images|length > 1 %}
                 {% for group in current.images|batch(3) %}
                   <div class="row">
@@ -126,6 +126,7 @@ $(document).ready(function() {
     $(".options-dropdown").change(function(){
         var $dropdown = $(this);
         var possible_variants = $('select#variant option');
+        possible_variants.removeAttr("selected");
 
         $("#added-to-cart .options").html("");
         $('select.options-dropdown option:selected').each(function(){
