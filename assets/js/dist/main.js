@@ -21180,10 +21180,8 @@ $(document).ready(function () {
         $section.html('');
         $.each(result, function(i, photo) {
             if(!photo.caption) { photo.caption = {text: ""}; }
-            //debugger;
             var style = "background-image:url('" + photo.images.standard_resolution.url +"')";
-            console.log(style);
-            $section.append('<div class="photo" style="'+style+'"></div>');
+            $section.append('<a target="_blank" href="'+photo.link+'" class="photo" style="'+style+'"></a>');
         });
   
     });
