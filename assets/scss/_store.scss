@@ -256,8 +256,10 @@ body.store-landing-body, body.store-product-body {
 		-moz-transform:translate(-50%,-50%);
    		 -ms-transform:translate(-50%,-50%);
 		transform:translate(-50%,-50%);
-		img {
-			max-width:100%;
+		div.img {
+			background-size:cover;
+			background-position: center center;
+			height: 240px;
 			margin-bottom: 20px;
 		}
 		h2 {
@@ -267,6 +269,9 @@ body.store-landing-body, body.store-product-body {
 		}
 		.btn {
 			width:100%;
+			@media (max-width: 767px) {
+				margin-top: 20px
+			}
 		}
 		.x.remove {
 			position:absolute;
