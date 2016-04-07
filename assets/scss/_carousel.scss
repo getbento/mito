@@ -22,12 +22,16 @@
     height: 100%;
     background-size: cover;
     background-position: center top;
-    @include transition(left .7s ease-in-out);
+    -moz-transition: left .7s ease-in-out;
+    -webkit-transition: left .7s ease-in-out;
+    transition: left .7s ease-in-out;
   }
 
   .carousel-inner {
     height: 600px;
-    @include transition(height .5s, opacity 1s);
+    -moz-transition: height .5s, opacity 1s;
+    -webkit-transition: height .5s, opacity 1s;
+    transition: height .5s, opacity 1s;
     position: relative;
 
     &.transparent {
@@ -104,7 +108,9 @@
   {% if theme.options.layout.fade_carousel %}
     &:not(#carousel-news) {
       .item {
-        @include transition(opacity 1.5s);
+        -moz-transition: opacity 1.5s;
+        -webkit-transition: opacity 1.5s;
+        transition: opacity 1.5s;
       }
       .active.left { left:0; opacity:0; z-index:2; }
       .active.right { left:0; opacity:0; z-index:2; }
