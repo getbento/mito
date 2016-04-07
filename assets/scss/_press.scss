@@ -75,8 +75,12 @@
 
     p {
       line-height: 1.2;
-      margin: 0;
     }
+
+    @media (min-width: 992px) {
+      margin-bottom: 20px;
+    }
+
   }
 
   .press-group {
