@@ -1,7 +1,7 @@
 $(document).ready(function () {
   var $body = $('html, body');
   var $scrollspy = $('#sticky-nav-wrapper');
-  var $menus = $('#menus a[data-toggle="tab"]');
+  var $menus = $('#menus a[data-toggle="tab"], #menu a[data-toggle="tab"]');
   var $sticky_header = $('#sticky-header');
   var $anchorLinks = $('#address-bar a, .carousel-caption a, nav a, a.anchor');
   // Javascript to enable link to tab
@@ -43,7 +43,7 @@ $(document).ready(function () {
         // if modal or tab link, open
         if (hashArray[1]) {
           var $modalLink = $section.find('.lightbox[data-slug="'+hashArray[1]+'"]');
-          
+
           if ($modalLink.length > 0) {
             $modalLink.click();
             return;
@@ -57,7 +57,7 @@ $(document).ready(function () {
 
           if ( $section.attr('id').toLowerCase() === 'news' ) {
             var $modalLink = $('[data-target="#modal-news-'+hashArray[1]+'"]');
-            
+
             if ($modalLink.length > 0) {
               $modalLink[0].click();
               return;
@@ -65,7 +65,7 @@ $(document).ready(function () {
           }
 
           var $tabLink = $section.find('.nav-pills a[href="#'+hashArray[1]+'"]');
-          
+
           if ($tabLink.length > 0) {
             $tabLink.click();
             return;
