@@ -102,6 +102,10 @@ $(document).ready(function () {
 
   // menus tab show
   $menus.on('shown.bs.tab', function (e) {
-    window.location.hash = 'menus/'+$(e.target).attr('href').slice(1);
+    var target = $(e.target);
+    var menuIdentifier = target.parents('section').attr('id');
+    var currentMenu = target.attr('href').slice(1);
+
+    window.location.hash = menuIdentifier + '/' + currentMenu;
   });
 });
