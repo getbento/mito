@@ -24,20 +24,20 @@
     {% if theme.options.team.icons %}
       <div class="social-links">
         <ul class="list-inline">
-          {% if person.facebook_link %}
-            <li><a class="ss-facebook ss-icon ss-social-circle" target="_blank" href="{{ person.facebook_link }}"></a></li>
+          {% if person.social.facebook %}
+            <li><a class="ss-facebook ss-icon ss-social-circle" target="_blank" href="{{ person.social.facebook }}"></a></li>
           {% endif %}
 
-          {% if person.twitter_link %}
-            <li><a class="ss-twitter ss-icon ss-social-circle" target="_blank" href="{{ person.twitter_link }}"></a></li>
+          {% if person.social.twitter %}
+            <li><a class="ss-twitter ss-icon ss-social-circle" target="_blank" href="{{ person.social.twitter }}"></a></li>
           {% endif %}
 
-          {% if person.instagram_link %}
-            <li><a class="ss-instagram ss-icon ss-social-circle" target="_blank" href="{{ person.instagram_link }}"></a></li>
+          {% if person.social.instagram %}
+            <li><a class="ss-instagram ss-icon ss-social-circle" target="_blank" href="{{ person.social.instagram }}"></a></li>
           {% endif %}
 
-          {% if person.vine_link %}
-            <li><a class="ss-vine ss-icon ss-social-circle" target="_blank" href="{{ person.vine_link }}"></a></li>
+          {% if person.social.vine %}
+            <li><a class="ss-vine ss-icon ss-social-circle" target="_blank" href="{{ person.social.vine }}"></a></li>
           {% endif %}
         </ul>
       </div>
