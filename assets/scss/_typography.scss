@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Beton-Lig';
+    src: url('{{ static('fonts/beton-lig/30C552_0_0.eot') }}');
+    src: url('{{ static('fonts/beton-lig/30C552_0_0.eot?#iefix') }}') format('embedded-opentype'), url('{{ static('fonts/beton-lig/30C552_0_0.woff2') }}') format('woff2'), url('{{ static('fonts/beton-lig/30C552_0_0.woff') }}') format('woff'), url('{{ static('fonts/beton-lig/30C552_0_0.ttf') }}') format('truetype');
+}
+
 body, .font-body {
   {% if theme.options.typography.font_family %}
     font-family: {{ theme.options.typography.font_family }};
@@ -41,17 +47,17 @@ h2, .font-h2 {
 
 a, .font-link {
   color: {{  theme.options.typography.a.color }};
-  
+
   {% if theme.options.typography.a.underline %}
     text-decoration: underline;
   {% endif %}
-  
+
   cursor: pointer;
   outline: none!important;
 
   &:hover, &:focus, &:active {
     color: {{  theme.options.typography.a.hover_color }};
-    
+
     text-decoration: none;
 
     {% if theme.options.typography.a.hover_underline %}
@@ -84,7 +90,7 @@ p {
 // wysiwyg font fix
 .wysiwyg {
   text-align: left;
-  
+
   h1, h2, h3, h4, h5, h6 {
     {% if theme.options.typography.h2.font_family %}
       font-family: {{ theme.options.typography.h2.font_family }} !important;
