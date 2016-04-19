@@ -39,6 +39,14 @@
           {% if person.social.vine %}
             <li><a class="ss-vine ss-icon ss-social-circle" target="_blank" href="{{ person.social.vine }}"></a></li>
           {% endif %}
+
+          {% if person.social.linkedin %}
+            <li><a class="ss-linkedin ss-icon ss-social-circle" target="_blank" href="{{ person.social.linkedin }}"></a></li>
+          {% endif %}
+
+          {% if person.social.pinterest %}
+            <li><a class="ss-pinterest ss-icon ss-social-circle" target="_blank" href="{{ person.social.pinterest }}"></a></li>
+          {% endif %}
         </ul>
       </div>
     {% endif %}
