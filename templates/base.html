@@ -51,6 +51,8 @@
     {% if theme.options.other.head_code %}
         {{ theme.options.other.head_code|safe }}
     {% endif %}
+
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7521052/7931552/css/fonts.css" />
   </head>
 
   <body data-spy="scroll" data-offset="200" data-target="#sticky-nav-wrapper" class="{% block bodyClass %}{% endblock %} {% if theme.options.footer.sticky %}sticky-footer{% endif %}{% if theme.options.footer.powered_by_bento and theme.options.footer.powered_by_bento_sticky %} sticky-powered-by{% endif %}{% if theme.options.address_bar.sticky %} address-bar-sticky{% endif %}{% if theme.options.layout.parallax %} parallax{% endif %} scroll-away-mobile {% block containerClass %}{% endblock %}">
