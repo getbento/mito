@@ -37,7 +37,8 @@
 
   &.opentable {
     .modal-dialog {
-      width: 880px;
+      width: 840px;
+      max-width: none;
       height: 600px;
     }
 
