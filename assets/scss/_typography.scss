@@ -1,4 +1,22 @@
 @font-face {
+    font-family: "Boylar";
+    src:url("{{ static('fonts/boylar/302A33_1_0.eot') }}");
+    src:url("{{ static('fonts/boylar/302A33_1_0.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/boylar/302A33_1_0.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Clarke";
+    src:url("{{ static('fonts/clarke/clarke_medium_v6.3-webfont.eot') }}");
+    src:url("{{ static('fonts/clarke/clarke_medium_v6.3-webfont.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/clarke/clarke_medium_v6.3-webfont.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Beton-Lig';
     src: url('{{ static('fonts/beton-lig/30C552_0_0.eot') }}');
     src: url('{{ static('fonts/beton-lig/30C552_0_0.eot?#iefix') }}') format('embedded-opentype'), url('{{ static('fonts/beton-lig/30C552_0_0.woff2') }}') format('woff2'), url('{{ static('fonts/beton-lig/30C552_0_0.woff') }}') format('woff'), url('{{ static('fonts/beton-lig/30C552_0_0.ttf') }}') format('truetype');
