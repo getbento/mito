@@ -3,7 +3,7 @@
 {% block bodyClass %}store-product-body{% endblock %}
 
 {% block header %}
-  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{%endif %}">
+  <header id="home" class="hidden-print always-show-sticky {% if not theme.options.address_bar.show %}no-address-bar{% else %}has-address-bar{%endif %}">
   {% with absolute_nav = True %}
     {% include 'header/_mobile.html' %}
     {% include 'header/_sticky.html' %}

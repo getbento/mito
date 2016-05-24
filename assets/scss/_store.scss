@@ -307,3 +307,16 @@ html, body.store-cart-body:not(.sticky-powered-by), body.gift-cards-body:not(.st
 	#powered-by {
 	}
 }
+
+@media (min-width: 767px){
+body.store-cart-body, body.gift-cards-body, body.store-landing-body, body.store-product-body {
+	#address-bar  { position:fixed; width:100%; top:0; }
+	header.always-show-sticky.has-address-bar {
+		margin-bottom:42px;
+		#sticky-header {
+			top:42px;
+		}
+	}
+}
+}
+

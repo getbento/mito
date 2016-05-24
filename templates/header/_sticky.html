@@ -1,5 +1,7 @@
 <div id="sticky-header" class="hidden-print hidden-xs{% if not theme.options.header.sticky.show %} hidden{% endif %}">
+
   <div class="content-wrapper max-width">
+
     <div id="sticky-logo-wrapper">
       <a href="{% if absolute_nav %}{{ account.site.url }}{% else %}#{% endif %}">
         {% if theme.options.header.sticky.logo %}
