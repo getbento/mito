@@ -210,4 +210,35 @@
     border-width: 2px !important;
     border-color: {{ theme.options.menus.tabs.color }} !important;
   }
+
+
+  .menu-section {
+    padding-bottom:20px;
+    .row { margin: 0 -5px; }
+    .column, .columns {
+      padding:0 5px;
+    }
+    .menu-section-description {
+      margin:-12px 0 12px;
+    }
+  }
+  .section-description { padding-bottom: 20px; }
+  .menu-item {
+    padding-bottom:15px;
+    strong {
+      font-size:16px;
+    }
+    p {
+      font-size:16px;
+    }
+  }
+  .addon {
+    font-weight:bold;
+    color:#a3c579;
+  }
+
+  @media (max-width: 767px) {
+    .text-right { text-align:left; }
+  }
+
 }

@@ -1,3 +1,76 @@
+{% macro render_column_section(section) -%}
+<div class="menu-section">
+{% if section.name %}
+    <h4>{{ section.name }}</h4>
+{% endif %}
+{% if section.description %}
+  <div class="menu-section-description">{{ section.description }}</div>
+{% endif %}
+{% for item in section.menu_items %}
+    <div class="menu-item">
+              <div class="row">
+                <div class="col-sm-6 columns">
+                  {% if item.image %}
+                    <span class="th" style="float:left;max-width:90px;margin:0 10px 10px 0;">
+                      <img src="{{ item.image }}" alt="{{ item.name }}">
+                    </span>
+                  {% endif %}
+
+                  {% if item.name %}
+                    <strong>{{ item.name }}</strong>
+                  {% elif item.description %}
+                    {{ item.description|linebreaksbr }}
+                  {% endif %}
+                </div>
+                <div class="col-sm-6 columns text-right">
+                  {% for price in item.prices %}
+                    {{ price.label }}
+                    {% if price.price %}<strong>{{ price.price }}</strong>{% endif %}{% if price.price_max %} - {{ price.price_max }}{% endif %}
+                    {% if price.unit %}
+                      per {{ price.unit }}
+                    {% endif %}
+                    {% if price.calories %}
+                      ({{ price.calories }}{% if price.calories_max %} - {{ price.calories_max }}{% endif %} cal.)
+                    {% endif %}
+                    <br>
+                  {% endfor %}
+                </div>
+              </div>
+              {% if item.spicy_rating %}
+                {% set item_details = [item.spicy_rating] + item.allergens + item.dietary_types %}
+              {% else %}
+                {% set item_details = item.allergens + item.dietary_types %}
+              {% endif %}
+              {% if (item.name and item.description) or item_details %}
+                <div class="row">
+                  <div class="col-md-12 columns">
+                    {% if item.name and item.description %}
+                      {{ item.description|linebreaksbr }}
+                    {% endif %}
+                    {% if item_details %}
+                      <br>
+                      <small>{{ item_details|join(", ") }}</small>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if item.addons %}
+                {% for addon in item.addons %}
+                  <div class="row addon">
+                    <div class="col-sm-6 columns">
+                      Add {{ addon.name }}
+                    </div>
+                    <div class="col-sm-6 columns text-right">
+                      {% if addon.price %}{{ addon.price }}{% endif %}{% if addon.price_max %} - {{ addon.price_max }}{% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+    </div>
+            {% endfor %}
+</div>
+{%- endmacro %}
+
 <!-- Menus -->
 <section id="{{ section.slug }}" class="menus-section">
   <div class="container-fluid max-width">
@@ -137,6 +210,9 @@
                   {% if menu.sections|length > 0 %}
                     {% for section in menu.sections %}
                     <div class="col-sm-6">
+
+                      {{ render_column_section(section) }}
+<!--
                       <h3>{{ section.name }}</h3>
                         {% for item in section.menu_items %}
                           <p>
@@ -148,6 +224,7 @@
                           </p>
                         {% endfor %}
                       {{ section.description }}
+-->
                     </div>
                       {% endfor %}
                   {% endif %}
