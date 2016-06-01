@@ -215,7 +215,7 @@
 
                   {% set columns = 1 %}
                   {% set sections = menu.sections %}
-                  {% if menu.layout and menu.layout.slug %}
+                  {% if menu.layout.slug != "basic" %}
                     {% set sections = menu.layout.blocks.column_one.sections %}
                     {% if menu.layout.slug == "two_columns" %}
                       {% set columns = 2 %}
