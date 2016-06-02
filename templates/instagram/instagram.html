@@ -1,1 +1,7 @@
-<section id="{{ section.slug }}" class="generic-section hidden-print instagram-section" data-user-ids="{{ section.fields.photos.user_ids|map(attribute='user_id')|join(' ') }}" data-hashtags="{{ section.fields.photos.hashtags|map(attribute='hashtag')|join(' ') }}"></section>
+<section id="{{ section.slug }}" class="generic-section hidden-print instagram-section">
+  {% if account.services.instagram.media and account.services.instagram.media|length > 0 %}
+    {% for media in account.services.instagram.media %}
+      <a target="_blank" href="{{ media.link }}" class="photo" style="background-image:url('{{ media.images.standard_resolution.url }}')"></a>
+    {% endfor %}
+  {% endif %}
+</section>
