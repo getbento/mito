@@ -1,3 +1,4 @@
+/*
 $(document).ready(function () {
 
   var clientId = "6433a7290419437ea0da55357c4561b6";
@@ -75,5 +76,5 @@ $(document).ready(function () {
   });
 
 });
-
+*/
 
