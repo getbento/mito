@@ -1,11 +1,15 @@
 {% macro render_column_section(section, columns) -%}
 <div class="menu-section">
+<div class="row">
+<div class="col-md-12">
 {% if section.name %}
     <h4>{{ section.name }}</h4>
 {% endif %}
 {% if section.description %}
   <div class="menu-section-description">{{ section.description }}</div>
 {% endif %}
+</div>
+</div>
 {% for row in section.menu_items|batch(columns) %}
   <div class="row">
     {% for item in row %}
@@ -28,7 +32,7 @@
                 <div class="col-sm-6 columns text-right">
                   {% for price in item.prices %}
                     {{ price.label }}
-                    {% if price.price %}<strong>{{ price.price }}</strong>{% endif %}{% if price.price_max %} - {{ price.price_max }}{% endif %}
+                    {% if price.price %}<strong>${{ price.price }}</strong>{% endif %}{% if price.price_max %} - ${{ price.price_max }}{% endif %}
                     {% if price.unit %}
                       per {{ price.unit }}
                     {% endif %}
@@ -64,7 +68,7 @@
                       Add {{ addon.name }}
                     </div>
                     <div class="col-sm-6 columns text-right">
-                      {% if addon.price %}{{ addon.price }}{% endif %}{% if addon.price_max %} - {{ addon.price_max }}{% endif %}
+                      {% if addon.price %}${{ addon.price }}{% endif %}{% if addon.price_max %} - ${{ addon.price_max }}{% endif %}
                     </div>
                   </div>
                 {% endfor %}
@@ -213,36 +217,45 @@
                 <div class="col-sm-12 wysiwyg">
                   {{ menu.description|safe }}
 
-                  {% set columns = 1 %}
-                  {% set sections = menu.sections %}
-                  {% if menu.layout.slug != "basic" %}
+                  {% if not menu.layout.slug or menu.layout.slug == "basic" %}
+
+                    {% if menu.sections|length > 0 %}
+                      {% for section in menu.sections %}
+                      <div class="col-sm-6">
+                        <h3>{{ section.name }}</h3>
+                          {% for item in section.menu_items %}
+                            <p>
+                              <strong>{{ item.name }}</strong><br>
+                              {% if item.description %}
+                                <em>{{ item.description }}</em> <br>
+                              {% endif %}
+                              {% if item.prices[0].price %}<strong>${{ item.prices[0].price }}</strong>{% endif %}
+                            </p>
+                          {% endfor %}
+                        {{ section.description }}
+                      </div>
+                        {% endfor %}
+                    {% endif %}
+
+                  {% else %}
+
+                    {% set columns = 1 %}
                     {% set sections = menu.layout.blocks.column_one.sections %}
                     {% if menu.layout.slug == "two_columns" %}
                       {% set columns = 2 %}
                     {% elif menu.layout.slug == "three_columns" %}
                       {% set columns = 3 %}
                     {% endif %}
-                  {% endif %}
-                  {% if menu.sections|length > 0 %}
-                    {% for section in sections %}
-                    <div class="{% if menu.layout and menu.layout.slug %}col-sm-12{% else %}col-sm-6{% endif %}">
-
-                      {{ render_column_section(section, columns) }}
-<!--
-                      <h3>{{ section.name }}</h3>
-                        {% for item in section.menu_items %}
-                          <p>
-                            <strong>{{ item.name }}</strong><br>
-                            {% if item.description %}
-                              <em>{{ item.description }}</em> <br>
-                            {% endif %}
-                            {% if item.prices[0].price %}<strong>${{ item.prices[0].price }}</strong>{% endif %}
-                          </p>
+  
+                    {% if menu.sections|length > 0 %}
+                      {% for section in sections %}
+                      <div class="{% if menu.layout and menu.layout.slug %}col-sm-12{% else %}col-sm-6{% endif %}">
+  
+                        {{ render_column_section(section, columns) }}
+                      </div>
                         {% endfor %}
-                      {{ section.description }}
--->
-                    </div>
-                      {% endfor %}
+                    {% endif %}
+
                   {% endif %}
                 </div>
               </div>
