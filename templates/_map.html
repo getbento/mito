@@ -13,12 +13,12 @@
     <script type="text/javascript">
       function initialize () {
         geocoder = new google.maps.Geocoder();
-        var address = "{{ location.name }}" + " " + "{{ location.address }}";
+        var address = "{{ location.address }}";
 
         geocoder.geocode( {'address': address}, function (results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             var map_location = results[0].geometry.location;
-            
+
             function onLoad () {
               $('#map-canvas-{{ location.slug }}').parents('.google-map').removeClass('transparent');
             }
