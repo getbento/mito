@@ -17,6 +17,27 @@
 }
 
 @font-face {
+  font-family: HelveticaLlama;
+  src: url("{{ static('fonts/helvetica-llama/HelveticaLlama-Regular.otf') }}") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: HelveticaLlama;
+  src: url("{{ static('fonts/helvetica-llama/HelveticaLlama-Bold.otf') }}") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: HelveticaLlama;
+  src: url("{{ static('fonts/helvetica-llama/HelveticaLlama-Light.otf') }}") format("opentype");
+  font-weight: light;
+  font-style: normal;
+}
+
+@font-face {
     font-family: 'Beton-Lig';
     src: url('{{ static('fonts/beton-lig/30C552_0_0.eot') }}');
     src: url('{{ static('fonts/beton-lig/30C552_0_0.eot?#iefix') }}') format('embedded-opentype'), url('{{ static('fonts/beton-lig/30C552_0_0.woff2') }}') format('woff2'), url('{{ static('fonts/beton-lig/30C552_0_0.woff') }}') format('woff'), url('{{ static('fonts/beton-lig/30C552_0_0.ttf') }}') format('truetype');
