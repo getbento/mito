@@ -1120,7 +1120,8 @@
               "title": "Other Settings",
               "type": "section",
               "items": {
-                "head_code": "code"
+                "head_code": "code",
+                "footer_code": "code"
               }
             }
         }

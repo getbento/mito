@@ -49,7 +49,7 @@
     </script>
 
     {% if theme.options.other.head_code %}
-        {{ theme.options.other.head_code|safe }}
+        {{ theme.options.other.head_code }}
     {% endif %}
 
     <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7521052/7931552/css/fonts.css" />
@@ -87,5 +87,10 @@
     {% endif %}
     {% block initScripts %}
     {% endblock %}
+
+    {% if theme.options.other.footer_code %}
+        {{ theme.options.other.footer_code }}
+    {% endif %}
+
   </body>
 </html>
