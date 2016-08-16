@@ -1,5 +1,5 @@
 footer {
-  z-index: 200;
+  z-index: 1020; // increased from 200 to address hero overlay issue. Refer: https://app.asana.com/0/164883087213679/164671092599685
   background-color: {{ theme.options.footer.bg_color }};
 
   {% if theme.options.footer.bg_image %}
