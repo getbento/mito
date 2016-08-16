@@ -38,6 +38,19 @@
 }
 
 @font-face {
+  font-family: "Thunderhouse";
+  src: url("{{ static('fonts/thunderhouse.eot' }}");
+  src: url("{{ static('thunderhouse.eot?#iefix'}}") format('embedded-opentype'),
+             url("{{ static('thunderhouse.woff2' }}") format('woff2'),
+       url("{{ static(thunderhouse.woff') }}") format('woff'),
+       url("{{ static('thunderhouse.ttf') }}") format('truetype'),
+       url("{{ static('thunderhouse.svg#youworkforthem') }}") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
     font-family: 'Beton-Lig';
     src: url('{{ static('fonts/beton-lig/30C552_0_0.eot') }}');
     src: url('{{ static('fonts/beton-lig/30C552_0_0.eot?#iefix') }}') format('embedded-opentype'), url('{{ static('fonts/beton-lig/30C552_0_0.woff2') }}') format('woff2'), url('{{ static('fonts/beton-lig/30C552_0_0.woff') }}') format('woff'), url('{{ static('fonts/beton-lig/30C552_0_0.ttf') }}') format('truetype');
