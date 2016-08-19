@@ -25,10 +25,10 @@ footer {
   }
 
   label, a, .social-links {
-    color: {{ theme.options.footer.color }};
+    color: {{ theme.options.footer.color }} !important;
 
     &:hover, &:focus {
-      color: {{ theme.options.footer.hover_color }};
+      color: {{ theme.options.footer.hover_color }} !important;
     }
   }
 
@@ -39,16 +39,16 @@ footer {
     padding-left: 20px;
     padding-right: 20px;
     white-space: normal;
-    background: {{ theme.options.footer.btn_bg }};
-    color: {{ theme.options.footer.btn_color }} ;
-    border-color: {{ theme.options.footer.btn_border_color }};
-    border-width: {{ theme.options.footer.btn_border_width }};
+    background: {{ theme.options.footer.btn_bg }} !important;
+    color: {{ theme.options.footer.btn_color }} !important;
+    border-color: {{ theme.options.footer.btn_border_color }} !important;
+    border-width: {{ theme.options.footer.btn_border_width }} !important;
     margin: 0 15px;
 
     &:hover, &:focus {
-      color: {{ theme.options.footer.btn_color }};
+      color: {{ theme.options.footer.btn_color }} !important;
       {% if theme.options.footer.btn_bg %}
-        background: darken({{ theme.options.footer.btn_bg }}, 10%);
+        background: darken({{ theme.options.footer.btn_bg }}, 10%) !important;
       {% endif %}
     }
   }
@@ -58,29 +58,21 @@ footer {
     margin-left: 0;
   }
 
-  // These are styled to look/behave like footer buttons
   .social-links {
     width: auto;
     text-align: left;
+    font-size: 28px;
     margin: 0 15px;
     position: relative;
+    top: 10px;
     display: inline-block;
 
     a {
-      @include transition(all .4s);
-      text-decoration: none;
-      color: {{ theme.options.footer.btn_bg }};
-      &:hover, &:focus {
-        color: {{ theme.options.footer.btn_color }};
-        {% if theme.options.footer.btn_bg %}
-          color: darken({{ theme.options.footer.btn_bg }}, 10%);
-        {% endif %}
-      }
-    }
+      margin-right: 7px;
 
-    // Two icons are stacked. The first child is the bg, the second is the actual icon
-    i:last-child {
-      color: {{ theme.options.footer.btn_color }}; 
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
