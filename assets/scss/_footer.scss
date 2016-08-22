@@ -25,10 +25,10 @@ footer {
   }
 
   label, a, .social-links {
-    color: {{ theme.options.footer.color }} !important;
+    color: {{ theme.options.footer.color }};
 
     &:hover, &:focus {
-      color: {{ theme.options.footer.hover_color }} !important;
+      color: {{ theme.options.footer.hover_color }};
     }
   }
 
@@ -39,10 +39,10 @@ footer {
     padding-left: 20px;
     padding-right: 20px;
     white-space: normal;
-    background: {{ theme.options.footer.btn_bg }} !important;
-    color: {{ theme.options.footer.btn_color }} !important;
-    border-color: {{ theme.options.footer.btn_border_color }} !important;
-    border-width: {{ theme.options.footer.btn_border_width }} !important;
+    background: {{ theme.options.footer.btn_bg }};
+    color: {{ theme.options.footer.btn_color }} ;
+    border-color: {{ theme.options.footer.btn_border_color }};
+    border-width: {{ theme.options.footer.btn_border_width }};
     margin: 0 15px;
 
     &:hover, &:focus {
@@ -60,13 +60,12 @@ footer {
     margin-left: 0;
   }
 
+  // These are styled to look/behave like footer buttons
   .social-links {
     width: auto;
     text-align: left;
-    font-size: 28px;
     margin: 0 15px;
     position: relative;
-    top: 10px;
     display: inline-block;
 
     a {

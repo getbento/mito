@@ -1,9 +1,11 @@
+{% from '_social-icons.html' import social_icons %}
+
 <section id="address-bar" class="hidden-print {% if not theme.options.address_bar.mobile_address and not theme.options.address_bar.mobile_phone_number and not theme.options.address_bar.mobile_reservation_btn %}hidden-xs{% endif %} {% if not theme.options.address_bar.show %}hidden-sm hidden-md hidden-lg{% endif %}">
   <div class="container-fluid max-width">
     <div class="row">
       {% if theme.options.address_bar.social_icons %}
         <div class="social-links hidden-xs">
-          {% include "_social-icons.html" %}
+          {{ social_icons(account) }}
         </div>
       {% endif %}
       {% if boxes.locations.all|length == 1 %}

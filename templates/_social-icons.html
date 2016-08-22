@@ -1,18 +1,53 @@
+{# Size should take the form of font-awesome's sizing suffix. E.g. "-lg", "-2x", etc. #}
+{% macro social_icons(account, size) -%}
+
 {% if account.services.facebook.url %}
-  <a target="_blank" href="{{ account.services.facebook.url }}" class="ss-icon ss-social-circle ss-facebook"></a>
+  <a target="_blank" href="{{ account.services.facebook.url }}">
+    <span class="fa-stack fa{{ size }}">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-facebook fa-stack-1x"></i>
+    </span>
+  </a>
 {% endif %}
 {% if account.services.twitter.url %}
-  <a target="_blank" href="{{ account.services.twitter.url }}" class="ss-icon ss-social-circle ss-twitter"></a>
+  <a target="_blank" href="{{ account.services.twitter.url }}">
+    <span class="fa-stack fa{{ size }}">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-twitter fa-stack-1x"></i>
+    </span>
+  </a>
 {% endif %}
 {% if account.services.instagram.url %}
-  <a target="_blank" href="{{ account.services.instagram.url }}" class="ss-icon ss-social-circle ss-instagram"></a>
+  <a target="_blank" href="{{ account.services.instagram.url }}">
+    <span class="fa-stack fa{{ size }}">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-instagram fa-stack-1x"></i>
+    </span>
+  </a>
 {% endif %}
 {% if account.services.yelp.url %}
-  <a target="_blank" href="{{ account.services.yelp.url }}" class="ss-icon ss-social-circle ss-yelp"></a>
+  <a target="_blank" href="{{ account.services.yelp.url }}">
+    <span class="fa-stack fa{{ size }}">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-yelp fa-stack-1x"></i>
+    </span>
+  </a>
 {% endif %}
 {% if account.services.foursquare.url %}
-  <a target="_blank" href="{{ account.services.foursquare.url }}" class="ss-icon ss-social-circle ss-foursquare"></a>
+  <a target="_blank" href="{{ account.services.foursquare.url }}">
+    <span class="fa-stack fa{{ size }}">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-foursquare fa-stack-1x"></i>
+    </span>
+  </a>
 {% endif %}
 {% if account.services.google_plus.url %}
-  <a target="_blank" href="{{ account.services.google_plus.url }}" class="ss-icon ss-social-circle ss-googleplus"></a>
+  <a target="_blank" href="{{ account.services.google_plus.url }}">
+    <span class="fa-stack fa{{ size }}">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-google-plus fa-stack-1x"></i>
+    </span>
+  </a>
 {% endif %}
+
+{%- endmacro %}
