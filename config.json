@@ -1100,6 +1100,10 @@
                         "type": "color",
                         "default": "#282828"
                     },
+                    "btn_bg_hover": {
+                        "title": "Button Background Hover Color",
+                        "type": "color"
+                    },
                     "btn_border_color": {
                         "title": "Border Color",
                         "type": "color",

@@ -75,10 +75,26 @@
       font-size: 24px;
       text-decoration: none !important;
       @include transition(all .4s);
-      color: {{ theme.options.address_bar.color }};
+      
+      /* 
+      The goal here is to make the switch to font-awesome as 
+      backwards compatible as possible with existing Mito sites. 
+      The footer's background color must be defined, even when 
+      the background is image-based.
+      */
 
-      &:hover, &:focus, &:active {
+      // icon background
+      color: {{ theme.options.address_bar.color }};
+      &:hover, &:focus {
         color: {{ theme.options.address_bar.hover_color }};
+      }
+    }
+
+    // icon foreground
+    i:last-child {
+        color: {{ theme.options.address_bar.bg_color }};
+      &:hover, &:focus {
+        color: {{ theme.options.address_bar.bg_color }};
       }
     }
   }

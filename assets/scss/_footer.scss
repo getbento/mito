@@ -46,9 +46,11 @@ footer {
     margin: 0 15px;
 
     &:hover, &:focus {
-      color: {{ theme.options.footer.btn_color }} !important;
-      {% if theme.options.footer.btn_bg %}
-        background: darken({{ theme.options.footer.btn_bg }}, 10%) !important;
+      color: {{ theme.options.footer.btn_color }};
+      {% if theme.options.footer.btn_bg_hover %}
+        background: {{ theme.options.footer.btn_bg_hover }};
+      {% elif theme.options.footer.btn_bg %}
+        background: darken({{ theme.options.footer.btn_bg }}, 10%);
       {% endif %}
     }
   }
@@ -68,10 +70,33 @@ footer {
     display: inline-block;
 
     a {
-      margin-right: 7px;
+      @include transition(all .4s);
+      text-decoration: none;
+      margin-right: 5px;
 
       &:last-child {
         margin-right: 0;
+      }
+      
+      /* 
+      The goal here is to make the switch to font-awesome as 
+      backwards compatible as possible with existing Mito sites. 
+      The footer's background color must be defined, even when 
+      the background is image-based.
+      */
+
+      // icon background
+      color: {{ theme.options.footer.color }};
+      &:hover, &:focus {
+        color: {{ theme.options.footer.hover_color }};
+      }
+    }
+
+    // icon foreground
+    i:last-child {
+        color: {{ theme.options.footer.bg_color }};
+      &:hover, &:focus {
+        color: {{ theme.options.footer.bg_color }};
       }
     }
   }
