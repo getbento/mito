@@ -39,12 +39,12 @@
 
 @font-face {
   font-family: "Thunderhouse";
-  src: url("{{ static('fonts/thunderhouse.eot') }}");
-  src: url("{{ static('fonts/thunderhouse.eot?#iefix') }}") format('embedded-opentype'),
-       url("{{ static('fonts/thunderhouse.woff2') }}") format('woff2'),
-       url("{{ static('fonts/thunderhouse.woff') }}") format('woff'),
-       url("{{ static('fonts/thunderhouse.ttf') }}") format('truetype'),
-       url("{{ static('fonts/thunderhouse.svg#youworkforthem') }}") format('svg');
+  src: url("{{ static('fonts/thunderhouse/thunderhouse.eot') }}");
+  src: url("{{ static('fonts/thunderhouse/thunderhouse.eot?#iefix') }}") format('embedded-opentype'),
+       url("{{ static('fonts/thunderhouse/thunderhouse.woff2') }}") format('woff2'),
+       url("{{ static('fonts/thunderhouse/thunderhouse.woff') }}") format('woff'),
+       url("{{ static('fonts/thunderhouse/thunderhouse.ttf') }}") format('truetype'),
+       url("{{ static('fonts/thunderhouse/thunderhouse.svg#youworkforthem') }}") format('svg');
   font-weight: normal;
   font-style: normal;
 }
