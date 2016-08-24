@@ -8,12 +8,14 @@ $(document).ready(function () {
   // initialize bootstrap timepicker
   $timepicker.datetimepicker({
       pickDate: false,
-      minuteStepping: 30
+      minuteStepping: 30,
+      debug: true
   });
 
   // initialize bootstrap datepicker
   $datepicker.datetimepicker({
-      pickTime: false
+      pickTime: false,
+      debug: true
   });
 
   // initialize select2.js dropdowns

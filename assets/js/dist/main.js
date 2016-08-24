@@ -19358,7 +19358,7 @@ S2.define('jquery.mousewheel',[
 (function(b,c){var $=b.jQuery||b.Cowboy||(b.Cowboy={}),a;$.throttle=a=function(e,f,j,i){var h,d=0;if(typeof f!=="boolean"){i=j;j=f;f=c}function g(){var o=this,m=+new Date()-d,n=arguments;function l(){d=+new Date();j.apply(o,n)}function k(){h=c}if(i&&!h){l()}h&&clearTimeout(h);if(i===c&&m>e){l()}else{if(f!==true){h=setTimeout(i?k:l,i===c?e-m:e)}}}if($.guid){g.guid=j.guid=j.guid||$.guid++}return g};$.debounce=function(d,e,f){return f===c?a(d,e,false):a(d,f,e!==false)}})(this);
 
 /*
-//! version : 3.0.3
+//! version : 3.1.3
 =========================================================
 bootstrap-datetimepicker.js
 https://github.com/Eonasdan/bootstrap-datetimepicker
@@ -19390,8 +19390,11 @@ THE SOFTWARE.
     if (typeof define === 'function' && define.amd) {
         // AMD is used - Register as an anonymous module.
         define(['jquery', 'moment'], factory);
-    } else {
-        // AMD is not used - Attempt to fetch dependencies from scope.
+    } else if (typeof exports === 'object') {
+        factory(require('jquery'), require('moment'));
+    }
+    else {
+        // Neither AMD or CommonJS used. Use global variables.
         if (!jQuery) {
             throw new Error('bootstrap-datetimepicker requires jQuery to be loaded first');
         }
@@ -19419,7 +19422,7 @@ THE SOFTWARE.
             },
 
             picker = this,
-
+            errored = false,
             dDate,
 
         init = function () {
@@ -19469,7 +19472,7 @@ THE SOFTWARE.
                     }
                 }
             }
-            picker.use24hours = picker.format.toLowerCase().indexOf('a') < 1;
+            picker.use24hours = (picker.format.toLowerCase().indexOf('a') < 0 && picker.format.indexOf('h') < 0);
 
             if (picker.component) {
                 icon = picker.component.find('span');
@@ -19540,7 +19543,9 @@ THE SOFTWARE.
             fillSeconds();
             update();
             showMode();
-            attachDatePickerEvents();
+            if (!getPickerInput().prop('disabled')) {
+                attachDatePickerEvents();
+            }
             if (picker.options.defaultDate !== '' && getPickerInput().val() === '') {
                 picker.setValue(picker.options.defaultDate);
             }
@@ -19592,6 +19597,9 @@ THE SOFTWARE.
             if (eData.dateUsecurrent !== undefined) {
                 picker.options.useCurrent = eData.dateUsecurrent;
             }
+            if (eData.calendarWeeks !== undefined) {
+                picker.options.calendarWeeks = eData.calendarWeeks;
+            }
             if (eData.dateMinutestepping !== undefined) {
                 picker.options.minuteStepping = eData.dateMinutestepping;
             }
@@ -19634,12 +19642,6 @@ THE SOFTWARE.
             if (eData.dateDaysofweekdisabled !== undefined) {
                 picker.options.daysOfWeekDisabled = eData.dateDaysofweekdisabled;
             }
-//            $.each(defaults, function (key) {
-//                var attributeName = 'date' + key.charAt(0).toUpperCase() + key.slice(1);
-//                if (eData[attributeName] !== undefined) {
-//                    picker.options[key] = eData[attributeName];
-//                }
-//            });
         },
 
         place = function () {
@@ -19663,7 +19665,7 @@ THE SOFTWARE.
                 }
             }
             if (placePosition === 'top') {
-                offset.top -= picker.widget.height() + picker.element.outerHeight() + 15;
+                offset.bottom = $window.height() - offset.top + picker.element.outerHeight() + 3;
                 picker.widget.addClass('top').removeClass('bottom');
             } else {
                 offset.top += 1;
@@ -19694,18 +19696,30 @@ THE SOFTWARE.
                 picker.widget.removeClass('pull-right');
             }
 
-            picker.widget.css({
-                position: position,
-                top: offset.top,
-                left: offset.left,
-                right: offset.right
-            });
+            if (placePosition === 'top') {
+                picker.widget.css({
+                    position: position,
+                    bottom: offset.bottom,
+                    top: 'auto',
+                    left: offset.left,
+                    right: offset.right
+                });
+            } else {
+                picker.widget.css({
+                    position: position,
+                    top: offset.top,
+                    bottom: 'auto',
+                    left: offset.left,
+                    right: offset.right
+                });
+            }
         },
 
         notifyChange = function (oldDate, eventType) {
-            if (moment(picker.date).isSame(moment(oldDate))) {
+            if (moment(picker.date).isSame(moment(oldDate)) && !errored) {
                 return;
             }
+            errored = false;
             picker.element.trigger({
                 type: 'dp.change',
                 date: moment(picker.date),
@@ -19718,6 +19732,7 @@ THE SOFTWARE.
         },
 
         notifyError = function (date) {
+            errored = true;
             picker.element.trigger({
                 type: 'dp.error',
                 date: moment(date, picker.format, picker.options.useStrict)
@@ -19744,6 +19759,9 @@ THE SOFTWARE.
         fillDow = function () {
             moment.locale(picker.options.language);
             var html = $('<tr>'), weekdaysMin = moment.weekdaysMin(), i;
+            if (picker.options.calendarWeeks === true) {
+                html.append('<th class="cw">#</th>');
+            }
             if (moment().localeData()._week.dow === 0) { // starts on Sunday
                 for (i = 0; i < 7; i++) {
                     html.append('<th class="dow">' + weekdaysMin[i] + '</th>');
@@ -19805,6 +19823,9 @@ THE SOFTWARE.
                 if (prevMonth.weekday() === moment().startOf('week').weekday()) {
                     row = $('<tr>');
                     html.push(row);
+                    if (picker.options.calendarWeeks === true) {
+                        row.append('<td class="cw">' + prevMonth.week() + '</td>');
+                    }
                 }
                 clsName = '';
                 if (prevMonth.year() < year || (prevMonth.year() === year && prevMonth.month() < month)) {
@@ -20251,13 +20272,13 @@ THE SOFTWARE.
             if (picker.isInput) {
                 picker.element.off({
                     'focus': picker.show,
-                    'change': picker.change,
+                    'change': change,
                     'click': picker.show,
                     'blur' : picker.hide
                 });
             } else {
                 picker.element.off({
-                    'change': picker.change
+                    'change': change
                 }, 'input');
                 if (picker.component) {
                     picker.component.off('click', picker.show);
@@ -20387,18 +20408,36 @@ THE SOFTWARE.
         },
 
         getTemplate = function () {
+            var
+                headTemplate =
+                        '<thead>' +
+                            '<tr>' +
+                                '<th class="prev">&lsaquo;</th><th colspan="' + (picker.options.calendarWeeks ? '6' : '5') + '" class="picker-switch"></th><th class="next">&rsaquo;</th>' +
+                            '</tr>' +
+                        '</thead>',
+                contTemplate =
+                        '<tbody><tr><td colspan="' + (picker.options.calendarWeeks ? '8' : '7') + '"></td></tr></tbody>',
+                template = '<div class="datepicker-days">' +
+                    '<table class="table-condensed">' + headTemplate + '<tbody></tbody></table>' +
+                '</div>' +
+                '<div class="datepicker-months">' +
+                    '<table class="table-condensed">' + headTemplate + contTemplate + '</table>' +
+                '</div>' +
+                '<div class="datepicker-years">' +
+                    '<table class="table-condensed">' + headTemplate + contTemplate + '</table>' +
+                '</div>',
+                ret = '';
             if (picker.options.pickDate && picker.options.pickTime) {
-                var ret = '';
                 ret = '<div class="bootstrap-datetimepicker-widget' + (picker.options.sideBySide ? ' timepicker-sbs' : '') + (picker.use24hours ? ' usetwentyfour' : '') + ' dropdown-menu" style="z-index:9999 !important;">';
                 if (picker.options.sideBySide) {
                     ret += '<div class="row">' +
-                       '<div class="col-sm-6 datepicker">' + dpGlobal.template + '</div>' +
+                       '<div class="col-sm-6 datepicker">' + template + '</div>' +
                        '<div class="col-sm-6 timepicker">' + tpGlobal.getTemplate() + '</div>' +
                      '</div>';
                 } else {
                     ret += '<ul class="list-unstyled">' +
                         '<li' + (picker.options.collapse ? ' class="collapse in"' : '') + '>' +
-                            '<div class="datepicker">' + dpGlobal.template + '</div>' +
+                            '<div class="datepicker">' + template + '</div>' +
                         '</li>' +
                         '<li class="picker-switch accordion-toggle"><a class="btn" style="width:100%"><span class="' + picker.options.icons.time + '"></span></a></li>' +
                         '<li' + (picker.options.collapse ? ' class="collapse"' : '') + '>' +
@@ -20418,7 +20457,7 @@ THE SOFTWARE.
             }
             return (
                 '<div class="bootstrap-datetimepicker-widget dropdown-menu">' +
-                    '<div class="datepicker">' + dpGlobal.template + '</div>' +
+                    '<div class="datepicker">' + template + '</div>' +
                 '</div>'
             );
         },
@@ -20440,15 +20479,7 @@ THE SOFTWARE.
                     navFnc: 'year',
                     navStep: 10
                 }
-            ],
-            headTemplate:
-                    '<thead>' +
-                        '<tr>' +
-                            '<th class="prev">&lsaquo;</th><th colspan="5" class="picker-switch"></th><th class="next">&rsaquo;</th>' +
-                        '</tr>' +
-                    '</thead>',
-            contTemplate:
-                    '<tbody><tr><td colspan="7"></td></tr></tbody>'
+            ]
         },
 
         tpGlobal = {
@@ -20456,17 +20487,6 @@ THE SOFTWARE.
             minuteTemplate: '<span data-action="showMinutes" data-time-component="minutes" class="timepicker-minute"></span>',
             secondTemplate: '<span data-action="showSeconds"  data-time-component="seconds" class="timepicker-second"></span>'
         };
-
-        dpGlobal.template =
-            '<div class="datepicker-days">' +
-                '<table class="table-condensed">' + dpGlobal.headTemplate + '<tbody></tbody></table>' +
-            '</div>' +
-            '<div class="datepicker-months">' +
-                '<table class="table-condensed">' + dpGlobal.headTemplate + dpGlobal.contTemplate + '</table>' +
-            '</div>' +
-            '<div class="datepicker-years">' +
-                '<table class="table-condensed">' + dpGlobal.headTemplate + dpGlobal.contTemplate + '</table>' +
-            '</div>';
 
         tpGlobal.getTemplate = function () {
             return (
@@ -20521,6 +20541,9 @@ THE SOFTWARE.
         };
 
         picker.show = function (e) {
+            if (getPickerInput().prop('disabled')) {
+                return;
+            }
             if (picker.options.useCurrent) {
                 if (getPickerInput().val() === '') {
                     if (picker.options.minuteStepping !== 1) {
@@ -20559,7 +20582,7 @@ THE SOFTWARE.
         };
 
         picker.disable = function () {
-            var input = picker.element.find('input');
+            var input = getPickerInput();
             if (input.prop('disabled')) {
                 return;
             }
@@ -20568,7 +20591,7 @@ THE SOFTWARE.
         };
 
         picker.enable = function () {
-            var input = picker.element.find('input');
+            var input = getPickerInput();
             if (!input.prop('disabled')) {
                 return;
             }
@@ -20700,6 +20723,7 @@ THE SOFTWARE.
         useMinutes: true,
         useSeconds: false,
         useCurrent: true,
+        calendarWeeks: false,
         minuteStepping: 1,
         minDate: moment({y: 1900}),
         maxDate: moment().add(100, 'y'),
@@ -20930,12 +20954,14 @@ $(document).ready(function () {
   // initialize bootstrap timepicker
   $timepicker.datetimepicker({
       pickDate: false,
-      minuteStepping: 30
+      minuteStepping: 30,
+      debug: true
   });
 
   // initialize bootstrap datepicker
   $datepicker.datetimepicker({
-      pickTime: false
+      pickTime: false,
+      debug: true
   });
 
   // initialize select2.js dropdowns
