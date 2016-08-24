@@ -36,6 +36,11 @@ $(document).ready(function () {
       var s = skrollr.init({
         forceHeight: false
       });
+
+      // Refreshes the menu elements after tab change so Skrollr knows the correct offset
+      $('#Menu a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        skrollr.get().refresh($('#Menu'));
+      });
   }
 
   $hidden_carousels.removeClass('transparent');

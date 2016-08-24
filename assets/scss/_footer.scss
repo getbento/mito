@@ -1,5 +1,5 @@
 footer {
-  z-index: 200;
+  z-index: 1020; // increased from 200 to address hero overlay issue. Refer: https://app.asana.com/0/164883087213679/164671092599685
   background-color: {{ theme.options.footer.bg_color }};
 
   {% if theme.options.footer.bg_image %}
@@ -25,10 +25,10 @@ footer {
   }
 
   label, a, .social-links {
-    color: {{ theme.options.footer.color }} !important;
+    color: {{ theme.options.footer.color }};
 
     &:hover, &:focus {
-      color: {{ theme.options.footer.hover_color }} !important;
+      color: {{ theme.options.footer.hover_color }};
     }
   }
 
@@ -39,16 +39,18 @@ footer {
     padding-left: 20px;
     padding-right: 20px;
     white-space: normal;
-    background: {{ theme.options.footer.btn_bg }} !important;
-    color: {{ theme.options.footer.btn_color }} !important;
-    border-color: {{ theme.options.footer.btn_border_color }} !important;
-    border-width: {{ theme.options.footer.btn_border_width }} !important;
+    background: {{ theme.options.footer.btn_bg }};
+    color: {{ theme.options.footer.btn_color }} ;
+    border-color: {{ theme.options.footer.btn_border_color }};
+    border-width: {{ theme.options.footer.btn_border_width }};
     margin: 0 15px;
 
     &:hover, &:focus {
-      color: {{ theme.options.footer.btn_color }} !important;
-      {% if theme.options.footer.btn_bg %}
-        background: darken({{ theme.options.footer.btn_bg }}, 10%) !important;
+      color: {{ theme.options.footer.btn_color }};
+      {% if theme.options.footer.btn_bg_hover %}
+        background: {{ theme.options.footer.btn_bg_hover }};
+      {% elif theme.options.footer.btn_bg %}
+        background: darken({{ theme.options.footer.btn_bg }}, 10%);
       {% endif %}
     }
   }
@@ -58,20 +60,42 @@ footer {
     margin-left: 0;
   }
 
+  // These are styled to look/behave like footer buttons
   .social-links {
     width: auto;
     text-align: left;
-    font-size: 28px;
     margin: 0 15px;
     position: relative;
-    top: 10px;
     display: inline-block;
 
     a {
-      margin-right: 7px;
+      @include transition(all .4s);
+      text-decoration: none;
+      margin-right: 5px;
 
       &:last-child {
         margin-right: 0;
+      }
+      
+      /* 
+      The goal here is to make the switch to font-awesome as 
+      backwards compatible as possible with existing Mito sites. 
+      The footer's background color must be defined, even when 
+      the background is image-based.
+      */
+
+      // icon background
+      color: {{ theme.options.footer.color }};
+      &:hover, &:focus {
+        color: {{ theme.options.footer.hover_color }};
+      }
+    }
+
+    // icon foreground
+    i:last-child {
+        color: {{ theme.options.footer.bg_color }};
+      &:hover, &:focus {
+        color: {{ theme.options.footer.bg_color }};
       }
     }
   }

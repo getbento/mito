@@ -22,12 +22,12 @@
   color: {{ theme.options.buttons.color }};
   border-style: solid;
   border-color: {{ theme.options.buttons.border_color }};
-  border-width: {{ theme.options.buttons.border_width }} !important;
+  border-width: {{ theme.options.buttons.border_width }};
   text-decoration: none;
   outline: none!important;
 
   {% if theme.options.buttons.bg_image %}
-    background-image: url('{{ theme.options.buttons.bg_image }}') !important;
+    background-image: url('{{ theme.options.buttons.bg_image }}');
   {% endif %}
 
   {% if theme.options.buttons.rounded %}
@@ -39,14 +39,14 @@
   {% endif %}
 
   &:hover, &:focus, &:active, &.selected {
-    color: {{ theme.options.buttons.color }} !important;
+    color: {{ theme.options.buttons.color }};
 
     {% if theme.options.buttons.bg_color %}
-      background-color: darken({{ theme.options.buttons.bg_color }}, 10%) !important;
+      background-color: darken({{ theme.options.buttons.bg_color }}, 10%);
     {% endif %}
 
     {% if theme.options.buttons.border_color %}
-      border-color: darken({{ theme.options.buttons.border_color }}, 10%) !important;
+      border-color: darken({{ theme.options.buttons.border_color }}, 10%);
     {% endif %}
   }
 }

@@ -153,29 +153,31 @@ header {
     bottom: 0;
     text-align: center;
     background-color: rgba(0,0,0,.6);
+    height: 100%;
 
     @media (min-width: 768px) {
       &.with-overlay {
         bottom: initial;
-
-        #header-alert {
-          margin-bottom: 100px;
-        }
       }
     }
 
+    @media (max-width: 1200px) {
+      position: fixed;
+      height: 100%;
+    }
+
     #header-alert {
-      max-width: 95%;
+      max-width: 90%;
+      max-height: 90%;
       background: {{ theme.options.header.alert.bg_color }};
       padding: 40px;
       width: 500px;
-      margin: 100px auto 0;
-      position: relative;
-      
-
-      @media (min-width: 768px) {
-        margin-top: {{ theme.options.header.nav.height }} - 20;
-      }
+      position: absolute;
+      margin: 0 auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      overflow-y: auto;
 
       .close {
         position: absolute;

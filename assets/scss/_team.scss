@@ -52,11 +52,29 @@
   }
 
   .social-links {
+    // margin: 1em 0;
     a {
+      text-decoration: none;
       color: {{ theme.options.team.icon_color }};
+      margin-right: 1em;
+      &:last-child {
+        margin-right: 0;
+      }
 
       &:hover, &:focus, &:active {
-        color: {{ theme.options.team.icon_hover_color }};
+        color: contrast-color(
+            {{ theme.options.team.icon_color }}, 
+            darken({{ theme.options.team.icon_color }}, 10%),
+            lighten({{ theme.options.team.icon_color }}, 10%)
+          );
+      }
+
+      i:last-child {
+        color: contrast-color(
+            {{ theme.options.team.icon_color }}, 
+            darken({{ theme.options.team.icon_color }}, 50%),
+            lighten({{ theme.options.team.icon_color }}, 50%)
+          );
       }
     }
   }
