@@ -64,6 +64,11 @@
          url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.ttf') }}") format('truetype');
 }
 
+@font-face {
+    font-family: 'Champion-HTF-Heavyweight';
+    src: url("{{ static('fonts/champion-htf/Champion-HTF-Heavyweight.otf') }}");
+}
+
 body, .font-body {
   {% if theme.options.typography.font_family %}
     font-family: {{ theme.options.typography.font_family }};
