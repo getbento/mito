@@ -13,10 +13,18 @@
       "items": {
         "text":"wysiwyg"
       }
-    }   
+    },
+    "code": {
+      "title": "Code",
+      "type":"section",
+      "items": {
+        "code":"code"
+      }
+    }
   },
   "wireframe": [
     "section-header",
-    "section-description"
+    "section-description",
+    "section-code"
   ]
 }

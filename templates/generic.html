@@ -7,5 +7,9 @@
     {% if section.fields.description and section.fields.description.text %}
       {% include "_section-description.html" %}
     {% endif %}
+
+    {% if section.fields.code and section.fields.code.code %}
+      {{ section.fields.code.code }}
+    {% endif %}
   </div>
 </section>
