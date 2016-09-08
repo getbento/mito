@@ -3,8 +3,8 @@
     background-color: {{ theme.options.news.bg_color }} !important;
   {% endif %}
 
-  {% if theme.options.news.custom_styles and theme.options.news.bg_image %}
-    background-image: url('{{ theme.options.news.bg_image }}');
+  {% if theme.options.news.custom_styles and theme.options.news.bg_image|raw_image %}
+    background-image: url('{{ theme.options.news.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.news.custom_styles and theme.options.news.color %}
