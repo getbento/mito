@@ -26,8 +26,8 @@
   text-decoration: none;
   outline: none!important;
 
-  {% if theme.options.buttons.bg_image %}
-    background-image: url('{{ theme.options.buttons.bg_image }}');
+  {% if theme.options.buttons.bg_image|raw_image %}
+    background-image: url('{{ theme.options.buttons.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.buttons.rounded %}

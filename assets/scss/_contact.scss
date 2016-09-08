@@ -3,8 +3,8 @@
     background-color: {{ theme.options.contact.bg_color }} !important;
   {% endif %}
 
-  {% if theme.options.contact.custom_styles and theme.options.contact.bg_image %}
-    background-image: url('{{ theme.options.contact.bg_image }}');
+  {% if theme.options.contact.custom_styles and theme.options.contact.bg_image|raw_image %}
+    background-image: url('{{ theme.options.contact.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.contact.custom_styles and theme.options.contact.color %}
