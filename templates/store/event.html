@@ -1,0 +1,120 @@
+{% extends 'store/_base_store.html' %}
+
+{% block bodyClass %}store-event{% endblock %}
+
+{% block content %}
+<div class="wrap">
+<div class="store product">
+  <div class="container-fluid max-width">
+    <div class="row">
+        <div class="col-xs-6">
+            {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
+            {% if shop_landing %}
+            <a class="back" href="{{ shop_landing.url }}">Back to shop</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="feature-image-wrap">
+                        <div class="feature-image" style="background-image:url('')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="event-header">{{ current.name }}</h1>
+                    <h3 class="event-date-time">{{ current.date|date('%B %-d %Y') }} | {{ current.start_time|date('%-I:%M %p') }} {% if current.end_time %}- {{ current.end_time|date('%-I:%M %p') }}{% endif %}</h3>
+                    {{ current.description }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <h2 class="form-header">Purchase Tickets</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST" action="" id="event-form">
+                        {% csrf_token %}
+                        <input type="hidden" id="ticketed_event_id" name="ticketed_event_id" value="{{ current.id }}">
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <select id="variant_id" name="variant_id" class="variants-dropdown">
+                                    {% for variant in current.variants %}
+                                        <option value="{{ variant.id }}" data-remaining="{{ variant.remaining }}">{{ variant.name }} - ${{ variant.price }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        {% for row in current.required_information|batch(2) %}
+                            <div class="form-group row">
+                                {% for field in row %}
+                                    <div class="{% if row|length ==1 %}col-md-12{% else %}col-md-6{% endif %}">
+                                        <input class="required-fields" name="{{ field.slug }}" placeholder="{{ field.name }}"></input>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn">Add Ticket To Cart</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="added-to-cart">
+    <div class="modal">
+        <div class="row">
+            <a class="x remove">&times;</a>
+            <div class="col-md-6">
+                <div class="img" style="background-image: url('{{ current.image }}');"></div>
+            </div>
+            <div class="col-md-6 text-left">
+                <h2>{{ current.name }}</h2>
+                <span id="variant-details"></span>
+                <br>
+                <span id="item-price"></span>
+                <br>
+                <span id="item-quantity"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a class="btn remove">Continue Shopping</a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn" href="{{ store.cart.url }}">Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="push"></div>
+</div>
+{% endblock %}
+
+{% block initScripts %}
+<script type="text/javascript">
+$(document).ready(function () {
+  TICKETED_EVENTS.initialize();
+});
+
+</script>
+{% endblock %}
