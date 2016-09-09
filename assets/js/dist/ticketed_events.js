@@ -1,8 +1,7 @@
 TICKETED_EVENTS = {
   initialize: function () {
-    this.closeModalListener();
-
     var $eventForm = $('#event-form');
+    this.closeModalListener();
     this.onSubmit = this.onSubmit.bind(this);
     this.buildTicketData = this.buildTicketData.bind(this);
 
@@ -14,8 +13,6 @@ TICKETED_EVENTS = {
 
   onSubmit: function () {
     var $eventForm = $('#event-form');
-
-
     var csrftoken = $eventForm.find($('input[name="csrfmiddlewaretoken"]')).val();
 
     $.ajaxSetup({
@@ -66,8 +63,8 @@ TICKETED_EVENTS = {
     $('#added-to-cart .variant-details').html('');
   },
 
-  closeModalListener: function() {
-    $('#added-to-cart .remove').click(function(e) {
+  closeModalListener: function () {
+    $('#added-to-cart .remove').click(function (e) {
       e.preventDefault();
       $('#added-to-cart').fadeOut();
     });
