@@ -17,14 +17,15 @@
 
     <div class="row">
         <div class="col-md-6">
-
+            {% if current.images %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="feature-image-wrap">
-                        <div class="feature-image" style="background-image:url('')"></div>
+                        <div class="feature-image" style="background-image:url('{{ current.images[0] }}')"></div>
                     </div>
                 </div>
             </div>
+            {% endif %}
 
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -34,13 +35,23 @@
                 </div>
             </div>
         </div>
+            {% if current.total_remaining <= 0 %}
+                {% set sold_out = True %}
+            {% else %}
+                {% set sold_out = False %}
+            {% endif %}
 
         <div class="col-md-6">
             <div class="row form-group">
                 <div class="col-md-12">
-                    <h2 class="form-header">Purchase Tickets</h2>
+                {% if sold_out%}
+                    <h2 class="form-header">Sold Out!</h2>
+                {% else %}
+                  <h2 class="form-header">Purchase Tickets</h2>
+                {% endif %}
                 </div>
             </div>
+            {% if not sold_out %}
             <div class="row">
                 <div class="col-md-12">
                     <form method="POST" action="" id="event-form">
@@ -60,15 +71,20 @@
                         {% for row in current.required_information|batch(2) %}
                             <div class="form-group row">
                                 {% for field in row %}
+                                    {% if field.slug == 'email' %}
+                                        {% set input_type = 'email' %}
+                                    {% else %}
+                                        {% set input_type = 'text' %}
+                                    {% endif %}
                                     <div class="{% if row|length ==1 %}col-md-12{% else %}col-md-6{% endif %}">
-                                        <input class="required-fields" name="{{ field.slug }}" placeholder="{{ field.name }}"></input>
+                                        <input class="required-fields" name="{{ field.slug }}" placeholder="{{ field.name }}" type="{{ input_type }}"></input>
                                     </div>
                                 {% endfor %}
                             </div>
                         {% endfor %}
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="btn">Add Ticket To Cart</button>
+                                <button id="add-to-cart-button" type="submit" class="btn">Add Ticket To Cart</button>
                             </div>
                         </div>
                         <div class="ticket-error">
@@ -78,9 +94,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="server-error-message" class="error-message text-center"></div>
+                        <div id="field-error-message" class="error-message text-center">Please complete all required fields.</div>
                     </form>
                 </div>
             </div>
+            {% endif %}
+
         </div>
     </div>
   </div>
