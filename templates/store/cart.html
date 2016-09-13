@@ -59,10 +59,9 @@
         <div class="row cart-details">
             <div class="col-sm-6">
 
-            {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
-            {% if shop_landing %}
-                <a id="go-back" class="back">Go Back</a>
-            {% endif %}
+
+            <a id="go-back" class="back">Go Back</a>
+
             </div>
             <div class="col-sm-6 text-right">
                 <span>Subtotal: ${{ store.cart.subtotal }}</span>
