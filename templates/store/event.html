@@ -40,7 +40,7 @@
         <div class="col-md-6">
             <div class="row form-group">
                 <div class="col-md-12">
-                {% if sold_out%}
+                {% if sold_out %}
                     <h2 class="form-header">Sold Out!</h2>
                 {% else %}
                   <h2 class="form-header">Purchase Tickets</h2>
@@ -104,11 +104,13 @@
 
 <div id="added-to-cart">
     <div class="modal">
-        <div class="row">
+        <div class="row modal-top-row">
             <a class="x remove">&times;</a>
+            {% if current.images %}
             <div class="col-md-6">
-                <div class="img" style="background-image: url('{{ current.image }}');"></div>
+                <div class="img" style="background-image: url('{{ current.images[0] }}');"></div>
             </div>
+            {% endif %}
             <div class="col-md-6 text-left">
                 <h2>{{ current.name }}</h2>
                 <span id="variant-details"></span>

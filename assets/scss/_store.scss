@@ -269,6 +269,14 @@ body.store-event{
 	.back-link-placeholder{
 		height:70px;
 	}
+	#added-to-cart{
+		.modal-top-row{
+			margin-bottom:20px;
+		}
+		div.img {
+			margin-bottom: 0;
+		}
+	}
 	@media (max-width: 991px){
 		.form-group{
 			margin-bottom:0;
