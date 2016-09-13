@@ -61,7 +61,7 @@
 
             {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
             {% if shop_landing %}
-                <a class="back" href="{{ shop_landing.url }}">Go Back</a>
+                <a id="go-back" class="back">Go Back</a>
             {% endif %}
             </div>
             <div class="col-sm-6 text-right">
@@ -82,3 +82,14 @@
 <div class="push"></div>
 </div>
 {% endblock %}
+
+{% block initScripts %}
+<script>
+
+$('#go-back').on('click', function () {
+  console.log('going back');
+  window.history.back();
+});
+</script>
+{% endblock %}
+
