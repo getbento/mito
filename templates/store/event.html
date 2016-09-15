@@ -13,6 +13,12 @@
 
     <div class="row">
         <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="event-header">{{ current.name }}</h1>
+                </div>
+            </div>
+
             {% if current.images %}
             <div class="row">
                 <div class="col-md-12">
@@ -25,18 +31,17 @@
 
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h1 class="event-header">{{ current.name }}</h1>
                     <h3 class="event-date-time">{{ current.date|date('%B %-d %Y') }} | {{ current.start_time|date('%-I:%M %p') }} {% if current.end_time %}- {{ current.end_time|date('%-I:%M %p') }}{% endif %}</h3>
                     {{ current.description }}
                 </div>
             </div>
         </div>
-            {% if current.total_remaining <= 0 %}
-                {% set sold_out = True %}
-            {% else %}
-                {% set sold_out = False %}
-            {% endif %}
 
+        {% if current.total_remaining <= 0 %}
+            {% set sold_out = True %}
+        {% else %}
+            {% set sold_out = False %}
+        {% endif %}
         <div class="col-md-6">
             <div class="row form-group">
                 <div class="col-md-12">
