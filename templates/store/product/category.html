@@ -68,8 +68,23 @@
 
 <div class="container-fluid max-width" id="product-listing">
   <div class="container-fluid max-width">
+
+    <!-- Tabs -->
+    <div class="row hidden-xs">
+      <div class="col-xs-12">
+        <ul class="nav nav-pills nav-justified" role="tablist">
+
+          {% for category in store.products.categories %}
+             <li><a class="hidden-xs-down {% if current.slug == category.slug %}active{% endif %}" href="{{ category.url }}">{{ category.name }}</a></li>
+          {% endfor %}
+
+        </ul>
+      </div>
+    </div>
+    <!-- end Tabs -->
+
     <!-- Produts -->
-      {% for group in store.products.all|batch(theme.options.store.columns) %}
+      {% for group in current.all|batch(theme.options.store.columns) %}
         <div class="row">
           {% for product in group %}
             {{ render_product(product) }}
