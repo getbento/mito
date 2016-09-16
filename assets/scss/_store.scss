@@ -365,25 +365,21 @@ html, body.store-event:not(.sticky-powered-by), body.store-cart-body:not(.sticky
 }
 
 @media (min-width: 767px){
-body.store-cart-body, body.gift-cards-body, body.store-landing-body, body.store-product-body {
-	#address-bar  { position:fixed; width:100%; top:0; }
-	header.always-show-sticky.has-address-bar {
-		margin-bottom:42px;
-		#sticky-header {
-			top:42px;
-		}
-	}
-}
+    body.store-cart-body, body.gift-cards-body, body.store-landing-body, body.store-product-body {
+    	#address-bar  { position:fixed; width:100%; top:0; }
+    	header.always-show-sticky.has-address-bar {
+    		margin-bottom:42px;
+    		#sticky-header {
+    			top:42px;
+    		}
+    	}
+    }
 }
 
-  .nav-pills {
+.nav-pills.store-nav {
     li {
       position: relative;
       text-align: center;
-
-      // &:first-child a {
-      //   border-left: 0px;
-      // }
 
       a {
         {% if theme.options.header.nav.font_family %}
@@ -409,6 +405,9 @@ body.store-cart-body, body.gift-cards-body, body.store-landing-body, body.store-
           border-color: {{ theme.options.menus.tabs.hover_border_color }};
           text-decoration: none;
         }
+          &.active {
+              color: {{ theme.options.menus.tabs.hover_color }};
+          }
       }
 
       &:last-child a {
@@ -453,15 +452,6 @@ body.store-cart-body, body.gift-cards-body, body.store-landing-body, body.store-
           }
         }
       }
-
-      &.active {
-        a, a:focus, a:hover {
-          background-color: {{ theme.options.menus.tabs.hover_bg_color }};
-          color: {{ theme.options.menus.tabs.hover_color }};
-          border-color: {{ theme.options.menus.tabs.hover_border_color }};
-          text-decoration: none;
-        }
-      }
     }
 
     &.nav-left, &.nav-right {
@@ -476,5 +466,5 @@ body.store-cart-body, body.gift-cards-body, body.store-landing-body, body.store-
     &.nav-right {
       float: right;
     }
-  }
+}
 
