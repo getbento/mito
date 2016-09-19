@@ -89,14 +89,14 @@
     <!-- Select Menu for Mobile Devices -->
     <div class="row visible-xs hidden-print">
       <div class="col-xs-12">
-
+        <div class="store-category-select-holder">
           <select class="form-control store-category-select">
               <option value="/store">All</option>
             {% for category in store.products.categories %}
               <option value="{{ category.url }}" data-category-slug="{{ category.slug }}">{{ category.name }}</option>
             {% endfor %}
           </select>
-
+        </div>
       </div>
     </div>
     <!-- End Select Menu -->

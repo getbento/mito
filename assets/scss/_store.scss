@@ -146,9 +146,16 @@ nav#mobile-header .cart-icon {
 		* { color:#ffffff; }
 	}
 
-	.cart-icon { margin-bottom:25px; }
+	.cart-icon {
+        margin-bottom:25px;
+    }
 
-	#product-listing { padding-top:40px; }
+	#product-listing {
+        padding-top:40px;
+    }
+    .store-category-select-holder{
+        padding-top:40px;
+    }
 	.product {
 		display:block;
 		text-align:left;
@@ -226,8 +233,6 @@ nav#mobile-header .cart-icon {
 		display:block;
 		margin:25px 0;
 	}
-
-
 }
 
 body.store-landing-body, body.store-product-body, body.store-event {
