@@ -21729,7 +21729,6 @@ $(document).ready(function () {
       $categorySelect.val(matchedNavItem.val());
       // $categorySelect.selectpicker('refresh');
       $categorySelect.select2('val', matchedNavItem.val());
-      console.log(matchedNavItem.val());
     }
 
     // Navigate to category page on select change.

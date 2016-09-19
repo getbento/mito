@@ -76,7 +76,7 @@
         <ul class="nav nav-pills nav-justified store-nav" role="tablist">
 
              <li><a class="hidden-xs-down" href="/store">All</a></li>
-          {% for category in store.products.categories %}
+          {% for category in store.products.categories if category.all %}
              <li><a class="hidden-xs-down {% if current.slug == category.slug %}active{% endif %}" href="{{ category.url }}">{{ category.name }}</a></li>
           {% endfor %}
 
@@ -91,7 +91,7 @@
           <div class="store-category-select-holder">
             <select class="form-control store-category-select">
                 <option value="/store">All</option>
-              {% for category in store.products.categories %}
+              {% for category in store.products.categories if category.all %}
                 <option value="{{ category.url }}" data-category-slug="{{ category.slug }}">{{ category.name }}</option>
               {% endfor %}
             </select>
