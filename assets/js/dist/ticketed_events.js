@@ -1,4 +1,4 @@
-TICKETED_EVENTS = {
+var TICKETED_EVENTS = {
   initialize: function () {
     var $eventForm = $('#event-form');
     this.closeModalListener();
