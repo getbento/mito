@@ -489,12 +489,16 @@ header {
         margin-top: 15px;
         
         a {
-          font-size: 26px;
+          font-size: 20px;
           margin-right: 10px;
 
           &:last-child {
             margin-right: 0;
           }
+        }
+        // icon foreground
+        i:last-child {
+            color: {{ theme.options.header.sticky.bg_color }};
         }
       }
     }
