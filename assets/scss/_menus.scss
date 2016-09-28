@@ -3,8 +3,8 @@
     background-color: {{ theme.options.menus.bg_color }} !important;
   {% endif %}
 
-  {% if theme.options.menus.custom_styles and theme.options.menus.bg_image %}
-    background-image: url('{{ theme.options.menus.bg_image }}');
+  {% if theme.options.menus.custom_styles and theme.options.menus.bg_image|raw_image %}
+    background-image: url('{{ theme.options.menus.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.menus.custom_styles and theme.options.menus.color %}
@@ -64,7 +64,7 @@
   table {
     margin: 0 auto;
   }
-  
+
   .print-link {
     &:before {
       display: inline-block;
@@ -102,7 +102,7 @@
       //   border-left: 0px;
       // }
 
-      a {        
+      a {
         {% if theme.options.header.nav.font_family %}
           font-family: {{ theme.options.header.nav.font_family }};
         {% endif %}
@@ -144,8 +144,8 @@
           {% if theme.options.menus.tabs.bg_color == 'rgba(0,0,0,0)' %}
             background-color: {{ theme.options.menus.bg_color }};
 
-            {% if theme.options.menus.bg_image %}
-              background-image: url('{{ theme.options.menus.bg_image }}');
+            {% if theme.options.menus.bg_image|raw_image %}
+              background-image: url('{{ theme.options.menus.bg_image|raw_image }}');
             {% endif %}
           {% else %}
             background: {{ theme.options.menus.tabs.bg_color }};

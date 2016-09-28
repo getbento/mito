@@ -2174,7 +2174,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
     slice = classes.slice,
 
-    featureName, 
+    featureName,
 
 
     injectElementWithStyles = function( rule, callback, nodes, testnames ) {
@@ -2263,7 +2263,7 @@ window.Modernizr = (function( window, document, undefined ) {
       };
     }
     else {
-      hasOwnProp = function (object, property) { 
+      hasOwnProp = function (object, property) {
         return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
       };
     }
@@ -2731,7 +2731,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
        }
 
-       return Modernizr; 
+       return Modernizr;
      };
 
 
@@ -17375,7 +17375,7 @@ S2.define('select2/core',[
     // Hide the original select
     $element.addClass('select2-hidden-accessible');
   $element.attr('aria-hidden', 'true');
-  
+
     // Synchronize any monitored attributes
     this._syncAttributes();
 
@@ -20760,7 +20760,7 @@ $(document).ready(function () {
       }
     });
   }
-  
+
   $buckets.each(function (i, el) {
     var $this = $(this);
     var divs = $this.children('div');
@@ -20776,7 +20776,7 @@ $(document).ready(function () {
   var $parallax_carousels = $('.parallax .carousel:not(.no-parallax)');
   var $headerSlidesText = $('.carousel-caption-wrapper');
   var $hidden_carousels = $('.carousel-inner.transparent');
-  
+
   // Hammer Gestures
   var hammer = {};
 
@@ -20801,7 +20801,7 @@ $(document).ready(function () {
 
   $carousels.each(initHammerGesture);
 
-  // Parallax  
+  // Parallax
   if(!(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i).test(navigator.userAgent || navigator.vendor || window.opera)){
       var s = skrollr.init({
         forceHeight: false
@@ -21053,7 +21053,7 @@ $(document).ready(function () {
 
 //   $('.show-giftcard-form').on('click', function(event) {
 //     event.preventDefault();
-    
+
 //     $('.formContainer').hide();
 
 //     var formSelector = '#' + $(this).data('target');
@@ -21103,7 +21103,7 @@ $(document).ready(function () {
         // set active nav link on appear
         var $firstNavItem = $sticky_header.find('ul > li:first-child');
         $firstNavItem.addClass('active');
-        newHash($firstNavItem.find('a').attr('href'));  
+        newHash($firstNavItem.find('a').attr('href'));
       }
     } else if (!belowNav && $sticky_header.hasClass('show')) {
       $sticky_header.removeClass('show');
@@ -21122,7 +21122,7 @@ $(document).ready(function () {
   }
 
   // if nav on one line and not verticall centered,
-  // push down half image height since img is position absolute 
+  // push down half image height since img is position absolute
   // and doesn't effect parent height
   if ($oneLineTop.length > 0) {
     var $oneLineTopNav = $oneLineTop.find('nav');
@@ -21151,7 +21151,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 
   var clientId = "6433a7290419437ea0da55357c4561b6";
-  
+
   $(".instagram-section").each(function(){
     var $section = $(this);
 
@@ -21193,11 +21193,11 @@ $(document).ready(function () {
       );
     });
 
-  
+
     $.when.apply($, promises).done(function ( v1, v2 ) {
-  
+
         photos = photos.sort(function(a,b){ return b.created_time - a.created_time; });
-  
+
         var result = [];
         $.each(photos, function(index, item) {
             var flag = false;
@@ -21210,18 +21210,18 @@ $(document).ready(function () {
                 result.push(item);
             }
         });
-  
+
         result = result.slice(0,10);
-  
+
         $section.html('');
         $.each(result, function(i, photo) {
             if(!photo.caption) { photo.caption = {text: ""}; }
             var style = "background-image:url('" + photo.images.standard_resolution.url +"')";
             $section.append('<a target="_blank" href="'+photo.link+'" class="photo" style="'+style+'"></a>');
         });
-  
+
     });
-  
+
   });
 
 });
@@ -21240,7 +21240,7 @@ $(document).ready(function () {
 
     for (var i=0; i < childrenCount - 1; i++) {
       var $children = $columns.children(':nth-child(' + (i + 1) +')');
-      
+
       var hgt = Math.max.apply(null, $children.map(function () {
         return $(this).height();
       }).get());;
@@ -21605,7 +21605,7 @@ $(document).ready(function($){
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
     }
 });
-$(document).ready(function () {  
+$(document).ready(function () {
   $('a.lightbox').nivoLightbox({
     beforeShowLightbox: function (e) {
       var $el = $(this)[0].$el;
@@ -21674,7 +21674,7 @@ $(document).ready(function () {
   // scroll to inquiry form
   function scrollTo (delay) {
     var offset = $inquiry_form.offset().top - 120;
-    
+
     setTimeout(function () {
       $html.animate({scrollTop: offset }, '400');
     }, delay);
@@ -21705,4 +21705,36 @@ $(document).ready(function () {
 
   $inquiry_btn.click(onClick);
   $inquiry_close.click(slideUp);
+});
+
+
+//Store category navigation
+$(document).ready(function () {
+
+    var pathname;
+    var categoryPosition;
+    var categorySlug;
+    var matchedNavItem;
+    var $categorySelectOptions;
+    var $categorySelect = $('.store-category-select');
+
+    // Update selected option based on category slug in the URL.
+    if (location.pathname.indexOf('category') > -1) {
+      pathname = location.pathname;
+      categoryPosition = pathname.indexOf('category');
+      categorySlug = pathname.slice((categoryPosition + 'category'.length + 1), -1);
+      $categorySelectOptions = $categorySelect.find('option');
+      matchedNavItem = $categorySelectOptions.filter('[data-category-slug="' + categorySlug + '"]');
+
+      $categorySelect.val(matchedNavItem.val());
+      // $categorySelect.selectpicker('refresh');
+      $categorySelect.select2('val', matchedNavItem.val());
+    }
+
+    // Navigate to category page on select change.
+    $categorySelect.on('change', function () {
+      var url = $(this).val();
+      location.href = url;
+    });
+
 });

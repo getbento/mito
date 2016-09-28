@@ -58,11 +58,74 @@
 @font-face {
     font-family: 'FilmotypeLaSalle';
     src: url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.eot') }}");
-    src: url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.eot?#iefix') }}") format('embedded-opentype'), 
-         url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.woff2') }}") format('woff2'), 
-         url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.woff') }}") format('woff'), 
+    src: url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.eot?#iefix') }}") format('embedded-opentype'),
+         url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.woff2') }}") format('woff2'),
+         url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.woff') }}") format('woff'),
          url("{{ static('fonts/filmotype-lasalle/31F1C3_0_0.ttf') }}") format('truetype');
 }
+
+@font-face {
+    font-family: "Brown-Light";
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-light.eot') }}");
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-light.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-light.woff2') }}") format("woff2"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-light.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Brown-Reclinlight";
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-reclinlight.eot') }}");
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-reclinlight.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-reclinlight.woff2') }}") format("woff2"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-reclinlight.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: "Brown-Regular";
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-regular.eot') }}");
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-regular.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-regular.woff2') }}") format("woff2"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-regular.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Brown-Reclinregular";
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-reclinregular.eot') }}");
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-reclinregular.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-reclinregular.woff2') }}") format("woff2"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-reclinregular.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Brown-Reclinregularalt";
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-reclinregularalt.eot') }}");
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-reclinregularalt.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-reclinregularalt.woff2') }}") format("woff2"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-reclinregularalt.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Brown-Regularalt";
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-regularalt.eot') }}");
+    src:url("{{ static('fonts/lineto-brown/lineto-brown-regularalt.eot') }}?#iefix") format("embedded-opentype"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-regularalt.woff2') }}") format("woff2"),
+        url("{{ static('fonts/lineto-brown/lineto-brown-regularalt.woff') }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 
 @font-face {
     font-family: 'Champion-HTF-Heavyweight';

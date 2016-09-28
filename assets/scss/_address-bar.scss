@@ -11,8 +11,8 @@
   position: relative;
   z-index: 1200;
 
-  {% if theme.options.address_bar.bg_image %}
-    background-image: url('{{ theme.options.address_bar.bg_image }}');
+  {% if theme.options.address_bar.bg_image|raw_image %}
+    background-image: url('{{ theme.options.address_bar.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.address_bar.shadow %}
@@ -70,11 +70,11 @@
 
     a {
       @include transition(all .4s);
-      
-      /* 
-      The goal here is to make the switch to font-awesome as 
-      backwards compatible as possible with existing Mito sites. 
-      The footer's background color must be defined, even when 
+
+      /*
+      The goal here is to make the switch to font-awesome as
+      backwards compatible as possible with existing Mito sites.
+      The footer's background color must be defined, even when
       the background is image-based.
       */
 

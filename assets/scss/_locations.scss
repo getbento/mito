@@ -7,8 +7,8 @@
     background-color: {{ theme.options.locations.bg_color }} !important;
   {% endif %}
 
-  {% if theme.options.locations.custom_styles and theme.options.locations.bg_image %}
-    background-image: url('{{ theme.options.locations.bg_image }}');
+  {% if theme.options.locations.custom_styles and theme.options.locations.bg_image|raw_image %}
+    background-image: url('{{ theme.options.locations.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.locations.custom_styles and theme.options.locations.color %}

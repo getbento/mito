@@ -2,8 +2,8 @@ footer {
   z-index: 1020; // increased from 200 to address hero overlay issue. Refer: https://app.asana.com/0/164883087213679/164671092599685
   background-color: {{ theme.options.footer.bg_color }};
 
-  {% if theme.options.footer.bg_image %}
-    background-image: url('{{ theme.options.footer.bg_image }}');
+  {% if theme.options.footer.bg_image|raw_image %}
+    background-image: url('{{ theme.options.footer.bg_image|raw_image }}');
   {% endif %}
 
   @media (min-width: 768px) {
@@ -76,11 +76,11 @@ footer {
       &:last-child {
         margin-right: 0;
       }
-      
-      /* 
-      The goal here is to make the switch to font-awesome as 
-      backwards compatible as possible with existing Mito sites. 
-      The footer's background color must be defined, even when 
+
+      /*
+      The goal here is to make the switch to font-awesome as
+      backwards compatible as possible with existing Mito sites.
+      The footer's background color must be defined, even when
       the background is image-based.
       */
 
@@ -122,7 +122,7 @@ footer {
     .close {
       margin: 15px 0;
     }
-    
+
     input {
       margin-bottom: 10px;
     }
@@ -170,7 +170,7 @@ footer {
   line-height: 30px;
   color: {{ theme.options.footer.color }} !important;
   text-align: center;
-  
+
   {% if theme.options.footer.bg_color %}
     background-color: darken({{ theme.options.footer.bg_color }}, 15%);
   {% endif %}

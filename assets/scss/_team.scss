@@ -3,8 +3,8 @@
     background-color: {{ theme.options.team.bg_color }} !important;
   {% endif %}
 
-  {% if theme.options.team.custom_styles and theme.options.team.bg_image %}
-    background-image: url('{{ theme.options.team.bg_image }}');
+  {% if theme.options.team.custom_styles and theme.options.team.bg_image|raw_image %}
+    background-image: url('{{ theme.options.team.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.team.custom_styles and theme.options.team.color %}
@@ -63,7 +63,7 @@
 
       &:hover, &:focus, &:active {
         color: contrast-color(
-            {{ theme.options.team.icon_color }}, 
+            {{ theme.options.team.icon_color }},
             darken({{ theme.options.team.icon_color }}, 10%),
             lighten({{ theme.options.team.icon_color }}, 10%)
           );
@@ -71,7 +71,7 @@
 
       i:last-child {
         color: contrast-color(
-            {{ theme.options.team.icon_color }}, 
+            {{ theme.options.team.icon_color }},
             darken({{ theme.options.team.icon_color }}, 50%),
             lighten({{ theme.options.team.icon_color }}, 50%)
           );

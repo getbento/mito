@@ -3,8 +3,8 @@ body {
   position: relative;
   background-color: {{ theme.options.layout.bg_color }};
 
-  {% if theme.options.layout.bg_image %}
-    background-image: url('{{ theme.options.layout.bg_image }}');
+  {% if theme.options.layout.bg_image|raw_image %}
+    background-image: url('{{ theme.options.layout.bg_image|raw_image }}');
   {% endif %}
 
   &.sticky-footer {
@@ -32,7 +32,7 @@ body {
 
     @media (min-width: 768px) {
       margin-bottom: 30px;
-      
+
       #powered-by {
         position: fixed;
         width: 100%;

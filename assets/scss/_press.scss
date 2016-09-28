@@ -3,8 +3,8 @@
     background-color: {{ theme.options.press.bg_color }} !important;
   {% endif %}
 
-  {% if theme.options.press.custom_styles and theme.options.press.bg_image %}
-    background-image: url('{{ theme.options.press.bg_image }}');
+  {% if theme.options.press.custom_styles and theme.options.press.bg_image|raw_image %}
+    background-image: url('{{ theme.options.press.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.press.custom_styles and theme.options.press.color %}

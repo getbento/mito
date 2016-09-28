@@ -3,8 +3,8 @@
     background-color: {{ theme.options.private_events.bg_color }} !important;
   {% endif %}
 
-  {% if theme.options.private_events.custom_styles and theme.options.private_events.bg_image %}
-    background-image: url('{{ theme.options.private_events.bg_image }}');
+  {% if theme.options.private_events.custom_styles and theme.options.private_events.bg_image|raw_image %}
+    background-image: url('{{ theme.options.private_events.bg_image|raw_image }}');
   {% endif %}
 
   {% if theme.options.private_events.custom_styles and theme.options.private_events.color %}
@@ -36,7 +36,7 @@
     a.btn {
       float: left;
     }
-    
+
     .carousel {
       top: 20px;
       height: 500px;

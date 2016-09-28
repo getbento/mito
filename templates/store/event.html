@@ -1,0 +1,145 @@
+{% extends 'store/_base_store.html' %}
+
+{% block bodyClass %}store-event{% endblock %}
+
+{% block content %}
+<div class="wrap">
+<div class="store product">
+  <div class="container-fluid max-width">
+    <div class="row">
+        <div class="back-link-placeholder">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {% if current.images %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="feature-image-wrap">
+                        <div class="feature-image" style="background-image:url('{{ current.images[0] }}')"></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="event-header">{{ current.name }}</h1>
+                    <h3 class="event-date-time">{{ current.date|date('%B %-d %Y') }} | {{ current.start_time|date('%-I:%M %p') }} {% if current.end_time %}- {{ current.end_time|date('%-I:%M %p') }}{% endif %}</h3>
+                    {{ current.description }}
+                </div>
+            </div>
+        </div>
+            {% if current.total_remaining <= 0 %}
+                {% set sold_out = True %}
+            {% else %}
+                {% set sold_out = False %}
+            {% endif %}
+
+        <div class="col-md-6">
+            <div class="row form-group">
+                <div class="col-md-12">
+                {% if sold_out %}
+                    <h2 class="form-header">Sold Out!</h2>
+                {% else %}
+                  <h2 class="form-header">Purchase Tickets</h2>
+                {% endif %}
+                </div>
+            </div>
+            {% if not sold_out %}
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST" action="" id="event-form">
+                        {% csrf_token %}
+                        <input type="hidden" id="ticketed_event_id" name="ticketed_event_id" value="{{ current.id }}">
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <select id="variant_id" name="variant_id" class="variants-dropdown">
+                                    {% for variant in current.variants %}
+                                        <option value="{{ variant.id }}" data-remaining="{{ variant.remaining }}">{{ variant.name }} - ${{ variant.price }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        {% for row in current.required_information|batch(2) %}
+                            <div class="form-group row">
+                                {% for field in row %}
+                                    {% if field.slug == 'email' %}
+                                        {% set input_type = 'email' %}
+                                    {% else %}
+                                        {% set input_type = 'text' %}
+                                    {% endif %}
+                                    <div class="{% if row|length ==1 %}col-md-12{% else %}col-md-6{% endif %}">
+                                        <input class="required-fields" name="{{ field.slug }}" placeholder="{{ field.name }}" type="{{ input_type }}"></input>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button id="add-to-cart-button" type="submit" class="btn">Add Ticket To Cart</button>
+                            </div>
+                        </div>
+                        <div class="ticket-error">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <div id="ticket-error-message"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="server-error-message" class="error-message text-center"></div>
+                        <div id="field-error-message" class="error-message text-center">Please complete all required fields.</div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="added-to-cart">
+    <div class="modal">
+        <div class="row modal-top-row">
+            <a class="x remove">&times;</a>
+            {% if current.images %}
+            <div class="col-md-6">
+                <div class="img" style="background-image: url('{{ current.images[0] }}');"></div>
+            </div>
+            {% endif %}
+            <div class="col-md-6 text-left">
+                <h2>{{ current.name }}</h2>
+                <span id="variant-details"></span>
+                <br>
+                <span id="item-price"></span>
+                <br>
+                <span id="item-quantity"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a class="btn remove">Continue Shopping</a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn" href="{{ store.cart.url }}">Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="push"></div>
+</div>
+{% endblock %}
+
+{% block initScripts %}
+<script type="text/javascript">
+$(document).ready(function () {
+  TICKETED_EVENTS.initialize();
+});
+
+</script>
+{% endblock %}
