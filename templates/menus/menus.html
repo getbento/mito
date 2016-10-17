@@ -146,7 +146,11 @@
                   <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
                     {% for menu in boxes.menus.all %}
                       {% if loop.index > theme.options.menus.columns %}
-                        <li><a href="#{{menu.slug}}" tabindex="-1" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+                        {% if menu.file %}
+                          <li><a target="_blank" href="{{ menu.file }}">{{menu.name}}</a></li>
+                        {% else %}
+                          <li><a href="#{{menu.slug}}" tabindex="-1" role="tab" data-toggle="tab">{{menu.name}}</a></li>
+                        {% endif %}
                         {% endif %}
                     {% endfor %}
                   </ul>
@@ -246,11 +250,11 @@
                     {% elif menu.layout.slug == "three_columns" %}
                       {% set columns = 3 %}
                     {% endif %}
-  
+
                     {% if menu.sections|length > 0 %}
                       {% for section in sections %}
                       <div class="{% if menu.layout and menu.layout.slug %}col-sm-12{% else %}col-sm-6{% endif %}">
-  
+
                         {{ render_column_section(section, columns) }}
                       </div>
                         {% endfor %}
