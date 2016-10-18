@@ -138,7 +138,7 @@
                 <div class="form-group">
                     <select name="amount">
                         <option SELECTED DISABLED>Select Amount*</option>
-                        {% for amount in store.gift_card_settings.physical_amounts %}
+                        {% for amount in store.gift_card_settings.electronic_amounts %}
                         <option value="{{ amount }}">${{ amount }}</option>
                         {% endfor %}
                     </select>
