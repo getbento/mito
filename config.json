@@ -1143,7 +1143,8 @@
         },
         {
             "name": "Private Events",
-            "slug": "private-events"
+            "slug": "private-events",
+            "engine": "private_events"
         },
     ],
 }
