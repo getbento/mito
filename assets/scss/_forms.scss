@@ -232,6 +232,13 @@ form {
   text-align: left;
   @include border-radius(0!important);
   @include box-shadow(none);
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+  display: table;
+  table-layout: fixed;
 
   &:focus {
     outline: none;

@@ -20,8 +20,7 @@ $(document).ready(function () {
 
   // initialize select2.js dropdowns
   $select_menu.select2({
-    minimumResultsForSearch: Infinity,
-    dropdownAutoWidth: true
+    minimumResultsForSearch: Infinity
   });
 
   // on select dropdown change mobile, e.g. menus
