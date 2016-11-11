@@ -39,7 +39,7 @@
           <select id="which-space" name="which-space" class="form-control">
             <option selected="selected" disabled>Which space are you interested in?</option>
             {% for venue in boxes.venues.all %}
-              <option value="{{venue.slug}}">{{venue.name}}</option>
+              <option value="{{venue.name}}">{{venue.name}}</option>
             {% endfor %}
           </select>
         </div>
