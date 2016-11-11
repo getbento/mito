@@ -61,7 +61,7 @@ $(document).ready(function () {
     //Validations
     resetErrors();
 
-    var required = ['email', 'firstName', 'lastName', 'contact-email', 'name'];
+    var required = ['email', 'firstName', 'lastName', 'contact-email', 'name', 'datepicker'];
 
     _.each(required, function (requiredId) {
       var $input = $form.find('#'+requiredId);
