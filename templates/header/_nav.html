@@ -18,7 +18,7 @@
             </li>
           {% endfor %}
           {% if theme.options.header.nav.reservations_link %}
-            {% if account.reservations.service == "reserve" and account.reservations.id %}
+            {% if account.reservations.provider == "reserve" and account.reservations.id %}
               <li><a href="#" class="rsrv-link">Reservations</a></li>
             {% endif %}
             {% if account.services.opentable.id %}
@@ -44,7 +44,7 @@
               </li>
             {% endfor %}
             {% if outer_group.last and theme.options.header.nav.reservations_link%}
-              {% if account.reservations.service == "reserve" and account.reservations.id %}
+              {% if account.reservations.provider == "reserve" and account.reservations.id %}
                 <li><a href="#" class="rsrv-link">Reservations</a></li>
               {% endif %}
               {% if account.services.opentable.id %}
