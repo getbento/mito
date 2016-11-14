@@ -18,7 +18,12 @@
             </li>
           {% endfor %}
           {% if theme.options.header.nav.reservations_link %}
-            <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+            {% if account.reservations.service == "reserve" and account.reservations.id %}
+              <li><a href="#" class="rsrv-link">Reservations</a></li>
+            {% endif %}
+            {% if account.services.opentable.id %}
+              <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+            {% endif %}
           {% endif %}
         </ul>
       {% else %}
@@ -39,7 +44,12 @@
               </li>
             {% endfor %}
             {% if outer_group.last and theme.options.header.nav.reservations_link%}
-              <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+              {% if account.reservations.service == "reserve" and account.reservations.id %}
+                <li><a href="#" class="rsrv-link">Reservations</a></li>
+              {% endif %}
+              {% if account.services.opentable.id %}
+                <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+              {% endif %}
             {% endif %}
           </ul>
         {% endfor %}

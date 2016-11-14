@@ -49,7 +49,7 @@
         <!-- end Resy -->
 
         {% if account.services.seatme %}
-                  <!-- Desktop -->
+        <!-- Desktop -->
           <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable">Make a Reservation</button>
 
           <!-- Mobile -->
@@ -58,6 +58,16 @@
           </div>
         {% endif %}
 
+        {% if account.reservations.service == "reserve" and account.reservations.id %}
+
+          <script src="https://widgets.reserve.com/reserve­widget.js?restaurant_id={{ account.reservations.id }}" type="text/javascript"></script>
+
+          <button class="rsrv-link btn hidden-xs">Make a Reservation</button>
+          <!-- Mobile -->
+          <div class="rsrv-link btn-wrapper visible-xs">
+            <a href="{{ account.reservations.url }}" target="_blank" class="btn">Make a Reservation</a>
+          </div>
+        {% endif %}
       {% endif %}
 
       <div class="left-content">
