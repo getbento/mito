@@ -41,7 +41,11 @@
 
       {% if theme.options.address_bar.mobile_reservation_btn %}
         <div class="col-xs-12 visible-xs">
-          <a href="{{ account.reservations.url }}" target="_blank" class="btn visible-xs reservations-link">Make a Reservation</a>          
+        {% if account.reservations.provider == "reserve" and account.reservations.id %}
+          <a href="{{ account.reservations.url }}" class="rsrv-link" target="_blank" class="btn">Make a Reservation</a>
+        {% else %}
+          <a href="{{ account.reservations.url }}" target="_blank" class="btn visible-xs reservations-link">Make a Reservation</a>
+        {% endif %}
         </div>
       {% endif %}
     </div>
