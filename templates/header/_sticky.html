@@ -25,7 +25,12 @@
             </li>
           {% endfor %}
           {% if theme.options.header.nav.reservations_link %}
-            <li><a data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+            {% if account.reservations.provider == "reserve" and account.reservations.id %}
+                <li><a href="#" class="rsrv-link">Reservations</a></li>
+              {% endif %}
+              {% if account.services.opentable.id %}
+                <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+              {% endif %}
           {% endif %}
 
         {% if "/store" in current.url %}
