@@ -1,8 +1,10 @@
 {# Size should take the form of font-awesome's sizing suffix. E.g. "-lg", "-2x", etc. #}
-{% macro social_icons(account, size) -%}
+{% macro social_icons(account, size, track=true, track_placement="") -%}
+{%- import "_macros/_tracking.html" as bbTrack %}
+{% set track_placement = (", " ~ track_placement) if track_placement else "" %}
 
 {% if account.services.facebook.url %}
-  <a target="_blank" href="{{ account.services.facebook.url }}">
+  <a target="_blank" href="{{ account.services.facebook.url }}"{% if track %} {{ bbTrack.button(category="Social Icons", label=("Facebook" ~ track_placement))  }}{% endif %}>
     <span class="fa-stack fa{{ size }}">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-facebook fa-stack-1x"></i>
@@ -10,7 +12,7 @@
   </a>
 {% endif %}
 {% if account.services.twitter.url %}
-  <a target="_blank" href="{{ account.services.twitter.url }}">
+  <a target="_blank" href="{{ account.services.twitter.url }}"{% if track %} {{ bbTrack.button(category="Social Icons", label=("Twitter" ~ track_placement))  }}{% endif %}>
     <span class="fa-stack fa{{ size }}">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-twitter fa-stack-1x"></i>
@@ -18,7 +20,7 @@
   </a>
 {% endif %}
 {% if account.services.instagram.url %}
-  <a target="_blank" href="{{ account.services.instagram.url }}">
+  <a target="_blank" href="{{ account.services.instagram.url }}"{% if track %} {{ bbTrack.button(category="Social Icons", label=("Instagram" ~ track_placement))  }}{% endif %}>
     <span class="fa-stack fa{{ size }}">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-instagram fa-stack-1x"></i>
@@ -26,7 +28,7 @@
   </a>
 {% endif %}
 {% if account.services.yelp.url %}
-  <a target="_blank" href="{{ account.services.yelp.url }}">
+  <a target="_blank" href="{{ account.services.yelp.url }}"{% if track %} {{ bbTrack.button(category="Social Icons", label=("Yelp" ~ track_placement))  }}{% endif %}>
     <span class="fa-stack fa{{ size }}">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-yelp fa-stack-1x"></i>
@@ -34,7 +36,7 @@
   </a>
 {% endif %}
 {% if account.services.foursquare.url %}
-  <a target="_blank" href="{{ account.services.foursquare.url }}">
+  <a target="_blank" href="{{ account.services.foursquare.url }}"{% if track %} {{ bbTrack.button(category="Social Icons", label=("Foursquare" ~ track_placement))  }}{% endif %}>
     <span class="fa-stack fa{{ size }}">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-foursquare fa-stack-1x"></i>
@@ -42,7 +44,7 @@
   </a>
 {% endif %}
 {% if account.services.google_plus.url %}
-  <a target="_blank" href="{{ account.services.google_plus.url }}">
+  <a target="_blank" href="{{ account.services.google_plus.url }}"{% if track %} {{ bbTrack.button(category="Social Icons", label=("Google Plus" ~ track_placement))  }}{% endif %}>
     <span class="fa-stack fa{{ size }}">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-google-plus fa-stack-1x"></i>

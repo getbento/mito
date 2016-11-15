@@ -1,4 +1,5 @@
 {% from '_social-icons.html' import social_icons %}
+{% import "_macros/_tracking.html" as bbTrack %}
 
 <nav id="mobile-header" class="navbar navbar-default visible-xs hidden-print" role="navigation">
   <div class="container-fluid">
@@ -40,12 +41,12 @@
           {% endif %}
         </li>
         {% endfor %}
-        {% if theme.options.header.nav.reservations_link and not theme.options.address_bar.mobile_reservation_btn%}
-          <li><a href="{{ account.reservations.url }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown">Reservations</a></li>
+        {% if theme.options.header.nav.reservations_link and not theme.options.address_bar.mobile_reservation_btn %}
+          <li><a href="{{ account.reservations.url }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
         {% endif %}
         {% if theme.options.address_bar.social_icons or theme.options.footer.social_links %}
           <div class="social-links text-center">
-            {{ social_icons(account) }}
+            {{ social_icons(account, "", true, "Header") }}
           </div>
         {% endif %}
       </ul>

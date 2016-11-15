@@ -1,3 +1,5 @@
+{% import "_macros/_tracking.html" as bbTrack %}
+  
   <div id="nav-wrapper" class="hidden-xs{% if theme.options.header.nav.overlay %} overlay{% endif %}{% if theme.options.header.nav.vertically_center %} vertically-center{% endif %}{% if not theme.options.header.nav.below_logo %} single-line{% endif %}">
     <nav>
       {% if theme.options.header.nav.below_logo %}
@@ -19,10 +21,10 @@
           {% endfor %}
           {% if theme.options.header.nav.reservations_link %}
             {% if account.reservations.provider == "reserve" and account.reservations.id %}
-              <li><a href="#" class="rsrv-link">Reservations</a></li>
+              <li><a href="#" class="rsrv-link" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
             {% endif %}
             {% if account.services.opentable.id %}
-              <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#modal-opentable" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
             {% endif %}
           {% endif %}
         </ul>
@@ -45,10 +47,10 @@
             {% endfor %}
             {% if outer_group.last and theme.options.header.nav.reservations_link%}
               {% if account.reservations.provider == "reserve" and account.reservations.id %}
-                <li><a href="#" class="rsrv-link">Reservations</a></li>
+                <li><a href="#" class="rsrv-link" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
               {% endif %}
               {% if account.services.opentable.id %}
-                <li><a href="#" data-toggle="modal" data-target="#modal-opentable">Reservations</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#modal-opentable" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
               {% endif %}
             {% endif %}
           </ul>

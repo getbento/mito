@@ -1,5 +1,6 @@
 {% import 'forms.html' as forms with context %}
 {% from '_social-icons.html' import social_icons %}
+{% import "_macros/_tracking.html" as bbTrack %}
 
 <!-- Opentable Modal -->
 <div id="footer-modals">
@@ -23,6 +24,7 @@
       {% endif %}
 
       {% if theme.options.footer.reservations_btn %}
+        {%- set footer_reservations_tracking = bbTrack.button(category="Reservations Trigger Button", label="Button, Footer") %}
         <!-- Opentable -->
         {% if account.services.opentable.id %}
           <div class="OTButton">
@@ -30,11 +32,11 @@
           </div>
 
           <!-- Desktop -->
-          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable">Make a Reservation</button>
+          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable" {{ footer_reservations_tracking }}>Make a Reservation</button>
 
           <!-- Mobile -->
           <div class="btn-wrapper visible-xs">
-            <a href="{{ account.reservations.url }}" target="_blank" class="btn">Make a Reservation</a>
+            <a href="{{ account.reservations.url }}" target="_blank" class="btn" {{ footer_reservations_tracking }}>Make a Reservation</a>
           </div>
         {% endif %}
         <!-- end Opentable -->
@@ -50,33 +52,33 @@
 
         {% if account.services.seatme %}
         <!-- Desktop -->
-          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable">Make a Reservation</button>
+          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable" {{ footer_reservations_tracking }}>Make a Reservation</button>
 
           <!-- Mobile -->
           <div class="btn-wrapper visible-xs">
-            <a href="{{ account.reservations.url }}" target="_blank" class="btn">Make a Reservation</a>
+            <a href="{{ account.reservations.url }}" target="_blank" class="btn" {{ footer_reservations_tracking }}>Make a Reservation</a>
           </div>
         {% endif %}
 
         {% if account.reservations.provider == "reserve" and account.reservations.id %}
-          <button class="rsrv-link btn hidden-xs">Make a Reservation</button>
+          <button class="rsrv-link btn hidden-xs" {{ footer_reservations_tracking }}>Make a Reservation</button>
           <!-- Mobile -->
           <div class="rsrv-link btn-wrapper visible-xs">
-            <a href="{{ account.reservations.url }}" target="_blank" class="btn">Make a Reservation</a>
+            <a href="{{ account.reservations.url }}" target="_blank" class="btn" {{ footer_reservations_tracking }}>Make a Reservation</a>
           </div>
         {% endif %}
       {% endif %}
 
       <div class="left-content">
         {% if theme.options.footer.email_signup %}
-          <button id="signup-btn" class="btn" data-toggle="collapse" data-target="#footerform">
+          <button id="signup-btn" class="btn" data-toggle="collapse" data-target="#footerform" {{ bbTrack.button(category="Email Sign Up Trigger Button", label="Button, Footer") }}>
             Sign up for the latest updates
           </button>
         {% endif %}
 
         {% if theme.options.footer.social_links %}
           <div class="social-links hidden-xs">
-            {{ social_icons(account) }}
+            {{ social_icons(account, "", true, "Footer") }}
           </div>
         {% endif %}
       </div>

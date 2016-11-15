@@ -21071,6 +21071,223 @@ THE SOFTWARE.
  *
  **/
 (function(a){(jQuery.browser=jQuery.browser||{}).mobile=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))})(navigator.userAgent||navigator.vendor||window.opera);
+// ============================================================================================================
+// =============== BENTOBOX TRACKING ==========================================================================
+// ============================================================================================================
+/**
+ * This object provides shortcuts and validation for sending Google Analytics tracking events. It also provides 
+ * the ability to automatically send button clicks and form submissions on elements that have the proper 
+ * data-attributes on them (listed below).
+ *
+ * IMPORTANT: Most forms are tracked via the API and called from other files (main.js and ticketing.js). You 
+ * should only apply the form data-attributes (via macro) to elements that do not use any JavaScript/Ajax, and 
+ * therefore do not provide any callbacks that can be directly hooked into.
+ * 
+ * Buttons
+ *
+ * Ex:
+ * 
+ * <a data-bb-track="button"				- Identifies the button as trackable.
+ * 	  data-bb-track-on="click"				- Specifies we want to track the "click" action.
+ * 	  data-bb-track-category=""				- Required. No defaults, and Tracker will not submit if empty.
+ * 	  data-bb-track-action="Click"			- Optional. If not included, it defaults to "Click".
+ * 	  data-bb-track-label=""				- Required. No defaults, and Tracker will not submit if empty.
+ * 	  data-bb-track-value=""				- Optional. Most times, you won't use this and should exclude it.
+ * 	</a>
+ *
+ * 
+ * Forms Ex:
+ * 
+ * <div data-bb-track="form"					- Identifies the form as trackable.
+ * 		data-bb-track-on="submit"				- Specifies we want to track the "form submit" action.
+ * 		data-bb-track-category="Forms"			- Optional. If not included, it defaults to "Forms".
+ * 		data-bb-track-action="Submit"			- Optional. If not included, it defaults to "Submit".
+ * 		data-bb-track-label="Email Sign Up"		- Required. Tracker will not submit without a label
+ * 		data-bb-track-value="2"					- Optional. Most times, you won't use this and should exclude it.
+ * 		aria-hidden="true">						- Required. There's no reason to show this node to screen readers.
+ * 	</div>
+ */
+
+var TRACKING = {
+
+	/**
+     * Instance pseudo constants that can be referenced via object notation. This is intended to be used instead of passing 
+     * strings around as values/labels. The benefit of this is that (1) it doesn't really matter what the actual string 
+     * value is, and (2) we get more meaningful errors in the console. For example spelling "clik" wrong in a single place 
+     * won't give us anything really useful. However, spelling `this.contant.aktions.clik` will throw an undefined error...
+     * which is a lot easier to track down.
+     * 
+     * property
+     * @access public
+     */
+	constants: {
+		actions: {
+			click: "click",
+			submit: "submit"
+		}
+	},
+
+	/**
+     * Startup and initialize. Finds all of the button and form instances that should be tracked – only if Google Analytics 
+     * is defined. By using the $context parameter, we can attempt to initialize only the elements found within that context, 
+     * and not every button/form on the page again. 
+     * @access public
+     * @param {jQuery|Optional} $context - A jQuery object that is the equivalent of $($context).find()
+     */
+	initialize: function($context) {
+		if (window.ga !== undefined) {
+			this._initButtons($context);
+			this._initForms($context);
+		} else {
+			// console.warn('Analytics is not enabled');
+		}
+	},
+
+	/**
+     * Finds all of the [data-bb-track='form'] instances within the optional $context. If we haven't already bound are 
+     * tracking methods to the element, we mark it as bound/active (bb-tracking), and attempt to figure out which event you 
+     * are attempting to track. Currently, only "submit" is supported. 
+     * @access private
+     * @param {jQuery|Optional} $context - A jQuery object that is the equivalent of $($context).find()
+     */
+	_initForms: function($context){
+		var self = this;
+
+		var $els = (typeof $context !== "undefined") ? $context.find("[data-bb-track='form']") : $("[data-bb-track='form']");
+		$els.each(function(index){
+			var $el = $(this);
+			// If we have already/previously bound tracking to this element, we don't want to do it again.
+			if ($el.data("bb-tracking")) return;
+			// Now, its ok to make this as bound/active so we don't duplicate it later.
+			$el.data("bb-tracking", true);
+			// Which event should we be configuring? Note: Currently, only the "submit" event is supported.
+			switch ($el.attr("data-bb-track-on")) {
+				case self.constants.actions.submit:
+					self._configureFormSubmitEvent($el);
+					break;
+			}
+		});
+	},
+
+	/**
+     * Binds the click event to the [data-bb-track='form'] instance. On submit, we retrieve all the values we need to 
+     * configure a Google Analytics Event (category, action, label, and (optionally) value) – and then pass the parameters to 
+     * our sendEvent() proxy. Please note, if the form submission does not open in a new window, it is possible that the 
+     * tracking tag doesn't have enough time to be sent...and no tracking will be logged.
+     * @access private
+     * @param {jQuery} $el - A jQuery object representing our [data-bb-track='form'] instance.
+     */
+	_configureFormSubmitEvent: function($el){
+		var self = this;
+		var $form = $el.closest("form").first();
+		
+		if ($form.length > 0){
+			$form.submit(function(e){
+				var $el = $(this);
+				var $tracker = $el.find("[data-bb-track='form'][data-bb-track-on='submit']").first();
+				if ($tracker.length > 0){
+					var category = $tracker.attr("data-bb-track-category") || "Forms";
+					var action = $tracker.attr("data-bb-track-action") || "Submit";
+					var label = $tracker.attr("data-bb-track-label") || null;
+					var value = $tracker.attr("data-bb-track-value") || null;
+					self.sendEvent(category, action, label, value);
+				}
+			});
+		}
+	},
+
+	/**
+     * Finds all of the [data-bb-track='button'] instances within the optional $context. If we haven't already bound are 
+     * tracking methods to the element, we mark it as bound/active (bb-tracking), and attempt to figure out which event you 
+     * are attempting to track. Currently, only "click" is supported. 
+     * @access private
+     * @param {jQuery|Optional} $context - A jQuery object that is the equivalent of $($context).find()
+     */
+	_initButtons: function($context){
+		var self = this;
+		// find all the $els within the optional $context.
+		var $els = (typeof $context !== "undefined") ? $context.find("[data-bb-track='button']") : $("[data-bb-track='button']");
+		$els.each(function(index){
+			var $el = $(this);
+			// If we have already/previously bound tracking to this element, we don't want to do it again.
+			if ($el.data("bb-tracking")) return;
+			// Now, its ok to make this as bound/active so we don't duplicate it later.
+			$el.data("bb-tracking", true);
+
+			// Which event should we be configuring? Note: Currently, only the "click" event is supported.
+			switch ($el.attr("data-bb-track-on")) {
+				case self.constants.actions.click:
+					self._configureButtonsClickEvent($el);
+					break;
+			}
+		});
+	},
+
+	/**
+     * Binds the click event to the [data-bb-track='button'] instance. On click, we retrieve all the values we need to 
+     * configure a Google Analytics Event (category, action, label, and (optionally) value) – and then pass the parameters to 
+     * our sendEvent() proxy.
+     * @access private
+     * @param {jQuery} $el - A jQuery object representing our [data-bb-track='button'] instance.
+     */
+	_configureButtonsClickEvent: function($el){
+		var self = this;
+		$el.click(function(e){
+			var $btn = $(this);
+			var category = $btn.attr("data-bb-track-category") || null;
+			var action = $btn.attr("data-bb-track-action") || "Click";
+			var label = $btn.attr("data-bb-track-label") || null;
+			var value = $btn.attr("data-bb-track-value") || null;
+			self.sendEvent(category, action, label, value);
+		});
+	},
+
+	/**
+     * Before we attempt to send an event, we need to validate it to ensure all the required data is populated...otherwise, we 
+     * would probably get a Google Analytics error. In most scenarios, the category, action and label have to be populated. Only 
+     * the value is optional – and only used in very specific use cases.
+     * @access private
+     * @param {String} category - Required. Google Analytics Event Category.
+     * @param {String} action - Required. Google Analytics Event Action.
+     * @param {String} action - Required. Google Analytics Event Label.
+     * @param {Int} value - Optional. Google Analytics Event Value.
+     * @returns {Boolean} true if all the required data is popuplated, false if not.
+     */
+	_validateEvent: function(category, action, label, value){
+		return (window.ga && category && action && label) ? true : false;
+	},
+
+	/**
+     * Validates that the required event parameters are populated, creates the object formatting that Google Analytics expects,
+     * and finally sends the event via Google Analytics API.
+     * @access public
+     * @param {String} category - Required. Google Analytics Event Category.
+     * @param {String} action - Required. Google Analytics Event Action.
+     * @param {String} action - Required. Google Analytics Event Label.
+     * @param {Int} value - Optional. Google Analytics Event Value.
+     */
+	sendEvent: function(category, action, label, value){
+		if (this._validateEvent(category, action, label, value)){
+			// copy our properties to the Google Analytics format
+			var params = {
+				eventCategory: category,
+				eventAction: action,
+				eventLabel: label
+			};
+			// "value" is optional, so we check for this separately so it doesn't get included as eventValue:undefined
+			if (value && (typeof value === "number")) params.eventValue = value;
+			// if (beacon === true) params.transport = "beacon";
+			// finally, send it!
+			window.ga("send", "event", params);
+		}
+	}
+};
+
+// self initializing!
+$(document).ready(function(){
+	TRACKING.initialize();
+});
+
 $(document).ready(function () {
   var $buckets = $('.bucket-into-rows');
 
@@ -21156,8 +21373,13 @@ $(document).ready(function () {
 
     // Register 'fake' page view for Google Analytics dashboard
     var page_name = capitalizeFirstLetter(hash.substr(1).replace(/-/g, " "));
-    _gaq.push(["_set", "title", page_name]);
-    _gaq.push(['_trackPageview', page_name]);
+    if (window.ga){
+      window.ga("set", "title", page_name);
+      window.ga("send", "pageview");
+      // legacy ga
+      // _gaq.push(["_set", "title", page_name]);
+      // _gaq.push(['_trackPageview', page_name]);
+    }
 
     // use pushstate to prevent jumping on hash change
     if (history.pushState) {

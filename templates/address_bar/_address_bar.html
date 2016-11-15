@@ -1,22 +1,23 @@
 {% from '_social-icons.html' import social_icons %}
+{% import "_macros/_tracking.html" as bbTrack %}
 
 <section id="address-bar" class="hidden-print {% if not theme.options.address_bar.mobile_address and not theme.options.address_bar.mobile_phone_number and not theme.options.address_bar.mobile_reservation_btn %}hidden-xs{% endif %} {% if not theme.options.address_bar.show %}hidden-sm hidden-md hidden-lg{% endif %}">
   <div class="container-fluid max-width">
     <div class="row">
       {% if theme.options.address_bar.social_icons %}
         <div class="social-links hidden-xs">
-          {{ social_icons(account) }}
+          {{ social_icons(account, "", true, "Header") }}
         </div>
       {% endif %}
       {% if boxes.locations.all|length == 1 %}
         {% set location=boxes.locations.all.0 %}
         <div class="col-sm-12{% if not theme.options.address_bar.social_icons %} text-center{% endif %}">
           {% if location.address %}
-            <a class="address hidden-xs" href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{ location.address }}</a>
+            <a class="address hidden-xs" href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank" {{ bbTrack.button_address(placement="Header") }}>{{ location.address }}</a>
           {% endif %}
 
           {% if location.phone_number %}
-            <a class="phone-number hidden-xs" href="tel:{{ location.phone_number }}" target="_blank">{{ location.phone_number }}</a>
+            <a class="phone-number hidden-xs" href="tel:{{ location.phone_number }}" target="_blank" {{ bbTrack.button_phone(placement="Header") }}>{{ location.phone_number }}</a>
           {% endif %}
         </div>
       {% endif %}
@@ -25,7 +26,7 @@
         {% set location=boxes.locations.all.0 %}
         {% if location.address %}
           <div class="col-xs-12 visible-xs">
-            <a class="address" href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{ location.address }}</a>
+            <a class="address" href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank" {{ bbTrack.button_address(placement="Header") }}>{{ location.address }}</a>
           </div>
         {% endif %}
       {% endif %}
@@ -34,7 +35,7 @@
         {% set location=boxes.locations.all.0 %}
         {% if location.phone_number %}
           <div class="col-xs-12 visible-xs">
-            <a class="phone-number btn" href="tel:{{ location.phone_number }}" target="_blank">{{ location.phone_number }}</a>
+            <a class="phone-number btn" href="tel:{{ location.phone_number }}" target="_blank" {{ bbTrack.button_phone(placement="Header") }}>{{ location.phone_number }}</a>
           </div>
         {% endif %}
       {% endif %}
@@ -42,9 +43,9 @@
       {% if theme.options.address_bar.mobile_reservation_btn %}
         <div class="col-xs-12 visible-xs">
         {% if account.reservations.provider == "reserve" and account.reservations.id %}
-          <a href="{{ account.reservations.url }}" class="rsrv-link btn visible-xs reservations-link" target="_blank" class="btn">Make a Reservation</a>
+          <a href="{{ account.reservations.url }}" class="rsrv-link btn visible-xs reservations-link" target="_blank" class="btn" {{ bbTrack.button(category="Reservations Trigger Button", label="Mobile Address Bar") }}>Make a Reservation</a>
         {% else %}
-          <a href="{{ account.reservations.url }}" target="_blank" class="btn visible-xs reservations-link">Make a Reservation</a>
+          <a href="{{ account.reservations.url }}" target="_blank" class="btn visible-xs reservations-link" {{ bbTrack.button(category="Reservations Trigger Button", label="Mobile Address Bar") }}>Make a Reservation</a>
         {% endif %}
         </div>
       {% endif %}

@@ -45,7 +45,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    '<%= dest %>/js/dist/main.js': ['<%= dest %>/js/src/vendor/jquery-1.11.1.min.js', '<%= dest %>/js/src/vendor/*.js', '<%= dest %>/js/src/plugins.js', '<%= dest %>/js/src/main.js', '<%= dest %>/js/src/main/*.js',  '!<%= dest %>/js/src/vendor/modernizr-2.6.2.min.js'],
+                    '<%= dest %>/js/dist/main.js': ['<%= dest %>/js/src/vendor/jquery-1.11.1.min.js', '<%= dest %>/js/src/vendor/*.js', '<%= dest %>/js/src/plugins.js', '<%= dest %>/js/src/tracking.js', '<%= dest %>/js/src/main.js', '<%= dest %>/js/src/main/*.js',  '!<%= dest %>/js/src/vendor/modernizr-2.6.2.min.js'],
                     '<%= dest %>/js/dist/modernizr.min.js': ['<%= dest %>/js/src/vendor/modernizr-2.6.2.min.js']                
                 }
             }

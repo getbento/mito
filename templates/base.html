@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    {#- globally import tracking #}
+    {%- import "_macros/_tracking.html" as bbTrack %}
+
     <!-- POWERED BY BENTOBOX | http://getbento.com -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,17 +36,14 @@
     <![endif]-->
     <script src="{{ static('js/dist/modernizr.min.js') }}"></script>
     <link rel="icon" href="{{ account.site.favicon }}" />
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '{{ account.services.google_analytics.tracking_code }}']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+    {% if account.services.google_analytics %}
+        <script>
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('create', '{{ account.services.google_analytics.tracking_code }}', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <script async src='https://www.google-analytics.com/analytics{% if current.request.is_preview or current.request.is_development %}_debug{% endif %}.js'></script>
+    {% endif %}
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}">
     </script>
@@ -72,7 +72,7 @@
     {% endblock %}
 
     {% include 'footer/_footer.html' %}
-
+    
     <script src="{{ static('js/dist/main.min.js') }}"></script>
     <script src="{{ static('js/dist/bentobox.dist.js') }}"></script>
     <script src="{{ static('js/dist/store.js') }}"></script>

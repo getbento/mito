@@ -1,3 +1,5 @@
+{% import "_macros/_tracking.html" as bbTrack %}
+
 <section id="{{ section.slug }}" class="contact-section hidden-print">
   <div class="container-fluid max-width">
     {% if theme.options.contact.header %}
@@ -85,7 +87,7 @@
               <h2>Location</h2>
             {% endif %}
             <p>
-              <a href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank">{{location.address}}</a>
+              <a href="http://google.com/maps?q={{location.name}}+{{location.address}}" target="_blank" {{ bbTrack.button_address(placement="Contact") }}>{{location.address}}</a>
             </p>
             {% if location.phone_number %}
               <p>{{location.phone_number}}</p>
