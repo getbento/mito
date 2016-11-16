@@ -99,6 +99,8 @@ STORE = {
 
           STORE.updateModal(item, quantityAdded);
           STORE.displayModal();
+          // track it!
+          window.TRACKING.sendEvent("Add To Cart", "Click", "eCom", parseInt(quantityAdded));
         }
       },
     });

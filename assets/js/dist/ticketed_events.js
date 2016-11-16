@@ -53,6 +53,8 @@ var TICKETED_EVENTS = {
         TICKETED_EVENTS.updateModal(item, quantityAdded);
         TICKETED_EVENTS.displayModal();
         TICKETED_EVENTS.resetForm();
+        // track it!
+        window.TRACKING.sendEvent("Add To Cart", "Click", "Ticketed Event", quantityAdded);
       },
     });
   },
