@@ -125,6 +125,11 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Abys-Regular";
+    src:url("{{ static('fonts/abys/abys-regular.otf') }}");
+}
+
 
 
 @font-face {
