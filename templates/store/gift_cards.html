@@ -192,7 +192,18 @@
 {% block initScripts %}
 <script type="text/javascript">
 $(document).ready(function() {
-    Bento.GiftCards.initialize();
+    Bento.GiftCards.initialize({
+        successCallback: function(data){
+            // required to property "capture" for use in setTimeout()
+            var data = data; 
+            // track it!
+            window.TRACKING.sendEvent("Add To Cart", "Click", "Gift Cards");
+            // wait 300ms before redirecting so we give GA the best change to complete its request.
+            setTimeout(function(){
+                Bento.GiftCards.formSubmitSuccess(data);
+            }, 300);
+        }
+    });
 });
 </script>
 {% endblock %}

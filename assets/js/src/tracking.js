@@ -213,4 +213,9 @@ var TRACKING = {
 // self initializing!
 $(document).ready(function(){
 	TRACKING.initialize();
+
+	// Special case: Resy creates its own button and is only used in the footer.
+	$("#BookWithResy").click(function(e){
+		window.TRACKING.sendEvent("Reservations Trigger Button", "Click", "Button, Footer");
+	});
 });
