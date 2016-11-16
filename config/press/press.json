@@ -10,7 +10,7 @@
     }
   },
   "wireframe": [
-    "section-description"
+    "section-description",
     {
       "boxes-press": {
         "width": "columns-4"
