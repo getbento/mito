@@ -12,7 +12,8 @@
       "title": "Download PDF",
       "type":"section",
       "items": {
-        "file":"file"
+        "file":"file",
+        "button_text": "text"
       }
     }    
   },
