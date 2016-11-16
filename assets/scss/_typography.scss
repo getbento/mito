@@ -130,11 +130,24 @@
     src:url("{{ static('fonts/abys/abys-regular.otf') }}");
 }
 
-
-
 @font-face {
     font-family: 'Champion-HTF-Heavyweight';
     src: url("{{ static('fonts/champion-htf/Champion-HTF-Heavyweight.otf') }}");
+}
+
+@font-face {
+    font-family: 'GothamRoundBold';
+    src:url("{{ static('fonts/gotham/gothamrnd-bold.otf') }}");
+}
+
+@font-face {
+    font-family: 'GothamRoundItalic';
+    src:url("{{ static('fonts/gotham/gothamrnd-bookital.otf') }}");
+}
+
+@font-face {
+    font-family: 'GothamRoundBook';
+    src:url("{{ static('fonts/gotham/gothamrounded-book.otf') }}");
 }
 
 body, .font-body {
