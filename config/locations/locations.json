@@ -10,7 +10,7 @@
     }
   },
   "wireframe": [
-    "section-description"
+    "section-description",
     {
       "boxes-locations": {
         "width": "columns-4"

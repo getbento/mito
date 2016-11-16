@@ -6,7 +6,8 @@
         "one_column": [{"column_one":"Menu"}],
         "two_columns": [{"column_one":"Menu"}],
         "three_columns": [{"column_one":"Menu"}]
+      }
     }
   },
-  "has_categories":true
+  "has_categories": true
 }
