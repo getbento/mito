@@ -1136,7 +1136,7 @@
                                 "options": [
                                     {"selfhosted": "Self Hosted"}
                                 ],
-                                "default": "google"
+                                "default": "selfhosted"
                             },
                             "selfhosted_name": {
                                 "title": "Font Family",
