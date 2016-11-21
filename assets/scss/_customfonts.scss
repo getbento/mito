@@ -1,0 +1,31 @@
+// jinja shortcuts
+{% set custom_fonts = theme.options.other.customfonts %}
+
+// special case: ustom self-hosted fonts...
+{% if custom_fonts and custom_fonts|length > 0 %}
+  {% with selfhosted = custom_fonts|selectattr("fonttype", "equalto", "selfhosted")|list %}
+    // at a minimum the font-family has to exist to proceed...
+    {% for item in selfhosted if item.selfhosted_name %}
+      {% set src1 = [] %}
+      {% set src2 = [] %}
+      {% if item.selfhosted_eot %}
+        {% do src1.append("url(\"" ~ item.selfhosted_eot ~ "\")") %}
+        {% do src2.append("url(\"" ~ item.selfhosted_eot ~ "?#iefix\") format(\"embedded-opentype\")") %}
+      {% endif %}
+      {% if item.selfhosted_woff2 %}{% do src2.append("url(\"" ~ item.selfhosted_woff2 ~ "\") format(\"woff2\")") %}{% endif %}
+      {% if item.selfhosted_woff %}{% do src2.append("url(\"" ~ item.selfhosted_woff ~ "\") format(\"woff\")") %}{% endif %}
+      {% if item.selfhosted_ttf %}{% do src2.append("url(\"" ~ item.selfhosted_ttf ~ "\") format(\"truetype\")") %}{% endif %}
+      {% if item.selfhosted_otf %}{% do src2.append("url(\"" ~ item.selfhosted_otf ~ "\") format(\"opentype\")") %}{% endif %}
+      // at least one font file slot has to be populated to output anything...
+      {% if src1|length > 0 or src2|length > 0 %}
+        @font-face {
+          font-family: "{{ item.selfhosted_name }}";
+          {%- if src1|length > 0 %}src: {{ src1|join(", ") }};{% endif %}
+          {%- if src2|length > 0 %}src: {{ src2|join(", ") }};{% endif %} 
+          {%- if item.selfhosted_style %}font-style: {{ item.selfhosted_style }};{% endif %}
+          {%- if item.selfhosted_weight %}font-weight: {{ item.selfhosted_weight }};{% endif %}
+        }
+      {% endif %}
+    {% endfor %}
+  {% endwith %}
+{% endif %}

@@ -1121,12 +1121,73 @@
                 }
             },
             "other": {
-              "title": "Other Settings",
-              "type": "section",
-              "items": {
-                "head_code": "code",
-                "footer_code": "code"
-              }
+                "title": "Other Settings",
+                "type": "section",
+                "items": {
+                    "head_code": "code",
+                    "footer_code": "code",
+                    "customfonts": {
+                        "title": "Custom Fonts",
+                        "type": "repeater",
+                        "items": {
+                            "fonttype": {
+                                "title": "Type",
+                                "type": "dropdown",
+                                "options": [
+                                    {"selfhosted": "Self Hosted"}
+                                ],
+                                "default": "google"
+                            },
+                            "selfhosted_name": {
+                                "title": "Font Family",
+                                "type": "text",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            },
+                            "selfhosted_eot": {
+                                "title": "EOT",
+                                "type": "file",
+                                "helper": "Optional. Browser Support: IE6-9",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            },
+                            "selfhosted_woff2": {
+                                "title": "WOFF2",
+                                "type": "file",
+                                "helper": "Optional. Browser Support: Chrome 36.0+, Firefox 35.0+, Opera 26.0+",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            },
+                            "selfhosted_woff": {
+                                "title": "WOFF",
+                                "type": "file",
+                                "helper": "Recommended. Browser Support: Chrome 5.0+, IE9+, Firefox 3.6+, Safari 5.1+, Opera 11.1+",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            },
+                            "selfhosted_ttf": {
+                                "title": "TTF",
+                                "type": "file",
+                                "helper": "Recommended. Browser Support: Chrome 4.0+, IE9+, Firefox, 4.5+, Safari 3.1+, Opera 10.0+, iOS, Android",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            },
+                            "selfhosted_otf": {
+                                "title": "OTF",
+                                "type": "file",
+                                "helper": "Optional. Browser Support: Chrome 4.0+, IE9+, Firefox, 4.5+, Safari 3.1+, Opera 10.0+",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            },
+                            "selfhosted_style": {
+                                "title": "Font Style",
+                                "type": "text",
+                                "helper": "Optional. Inaccurate values may cause the font to fail to load. If you are unsure, leave this blank.",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            },
+                            "selfhosted_weight": {
+                                "title": "Font Weight",
+                                "type": "text",
+                                "helper": "Optional. Inaccurate values may cause the font to fail to load. If you are unsure, leave this blank.",
+                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
