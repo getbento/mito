@@ -206,7 +206,7 @@ form {
 .bootstrap-datetimepicker-widget {
   &.dropdown-menu, .picker-switch {
     text-align: center;
-  }  
+  }
 
   .day:hover, .active {
     background-color: {{ theme.options.buttons.bg_color }};
@@ -284,6 +284,11 @@ form {
   .address-bar-sticky {
     .bootstrap-datetimepicker-widget, .select2-dropdown {
       margin-top: -42px;
+    }
+  }
+  .address-bar-sticky.store-product-body {
+    .bootstrap-datetimepicker-widget, .select2-dropdown {
+      margin-top: 0;
     }
   }
 }
