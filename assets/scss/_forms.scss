@@ -286,7 +286,8 @@ form {
       margin-top: -42px;
     }
   }
-  .address-bar-sticky.store-product-body {
+  .address-bar-sticky.store-product-body,
+  .address-bar-sticky.store-event {
     .bootstrap-datetimepicker-widget, .select2-dropdown {
       margin-top: 0;
     }
