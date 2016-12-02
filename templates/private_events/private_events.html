@@ -41,7 +41,7 @@
               {% endif %}
 
               {% if theme.options.private_events.pdf_button and not description %}
-                <a href="{{ section.fields.pdf.file }}" target="_blank" class="btn">Download PDF</a>
+                <a href="{{ section.fields.pdf.file }}" target="_blank" class="btn">{% if section.fields.pdf.button_text %}{{ section.fields.pdf.button_text }}{% else %}Download PDF{% endif %}</a>
               {% endif %}
 
               <div id="event_inquiry" {% if theme.options.private_events.form.hide %}class="collapse"{% endif %}>
@@ -68,7 +68,7 @@
           {% if theme.options.private_events.pdf_button or (theme.options.private_events.form.inquiry_button and not theme.options.private_events.form.inquiry_button_per_venue) %}
             <div class="col-sm-5 text-right">
               {% if theme.options.private_events.pdf_button %}
-                <a href="{{ section.fields.pdf.file }}" target="_blank" class="btn">Download PDF</a>
+                <a href="{{ section.fields.pdf.file }}" target="_blank" class="btn">{% if section.fields.pdf.button_text %}{{ section.fields.pdf.button_text }}{% else %}Download PDF{% endif %}</a>
               {% endif %}
               
               {% if theme.options.private_events.form.inquiry_button and not theme.options.private_events.form.inquiry_button_per_venue %}
