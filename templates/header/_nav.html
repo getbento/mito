@@ -1,5 +1,5 @@
 {% import "_macros/_tracking.html" as bbTrack %}
-  
+
   <div id="nav-wrapper" class="hidden-xs{% if theme.options.header.nav.overlay %} overlay{% endif %}{% if theme.options.header.nav.vertically_center %} vertically-center{% endif %}{% if not theme.options.header.nav.below_logo %} single-line{% endif %}">
     <nav>
       {% if theme.options.header.nav.below_logo %}
@@ -26,6 +26,9 @@
             {% if account.services.opentable.id %}
               <li><a href="#" data-toggle="modal" data-target="#modal-opentable" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
             {% endif %}
+            {% if account.services.seatme %}
+              <li><a href="#" data-toggle="modal" data-target="#modal-seatme" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
+            {% endif %}
           {% endif %}
         </ul>
       {% else %}
@@ -51,6 +54,9 @@
               {% endif %}
               {% if account.services.opentable.id %}
                 <li><a href="#" data-toggle="modal" data-target="#modal-opentable" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
+              {% endif %}
+              {% if account.services.seatme %}
+                <li><a href="#" data-toggle="modal" data-target="#modal-seatme" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
               {% endif %}
             {% endif %}
           </ul>

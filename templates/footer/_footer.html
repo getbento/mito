@@ -12,6 +12,14 @@
       </div>
     </div>
   </div>
+
+   <div class="modal fade seatme" id="modal-seatme" tabindex="-1" role="dialog" aria-labelledby="modal-seatme-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer id="footer" class="hidden-print">
@@ -52,7 +60,7 @@
 
         {% if account.services.seatme %}
         <!-- Desktop -->
-          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-opentable" {{ footer_reservations_tracking }}>Make a Reservation</button>
+          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-seatme" {{ footer_reservations_tracking }}>Make a Reservation</button>
 
           <!-- Mobile -->
           <div class="btn-wrapper visible-xs">

@@ -72,7 +72,7 @@
     {% endblock %}
 
     {% include 'footer/_footer.html' %}
-    
+
     <script src="{{ static('js/dist/main.min.js') }}"></script>
     <script src="{{ static('js/dist/bentobox.dist.js') }}"></script>
     <script src="{{ static('js/dist/store.js') }}"></script>
@@ -96,5 +96,14 @@
     {% if account.reservations.provider == "reserve" and account.reservations.id %}
       <script src="https://widgets.reserve.com/reserve-widget.js?restaurant_id={{ account.reservations.id }}" type="text/javascript"></script>
     {% endif %}
+
+    {% if account.reservations.provider == "seatme" and account.reservations.id %}
+      <script>
+      $(document).ready(function() {
+        Reservations.initializeSeatmeModal('{{ account.services.seatme.id }}')
+      });
+      </script>
+    {% endif %}
+
   </body>
 </html>
