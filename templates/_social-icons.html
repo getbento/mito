@@ -51,5 +51,12 @@
     </span>
   </a>
 {% endif %}
-
+{% if account.services.tripadvisor.url %}
+  <a target="_blank" href="{{ account.services.tripadvisor.url }}"{% if track %} {{ bbTrack.button(category="Social Icons", label=("TripAdvisor" ~ track_placement))  }}{% endif %}>
+    <span class="fa-stack fa{{ size }}">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-tripadvisor fa-stack-1x"></i>
+    </span>
+  </a>
+{% endif %}
 {%- endmacro %}
