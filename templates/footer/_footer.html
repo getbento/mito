@@ -78,7 +78,7 @@
       {% endif %}
 
       <div class="left-content">
-        {% if theme.options.footer.email_signup and account.services.newsletter|length > 0 %}
+        {% if theme.options.footer.email_signup and account.newsletter|length > 0 %}
           <button id="signup-btn" class="btn" data-toggle="collapse" data-target="#footerform" {{ bbTrack.button(category="Email Sign Up Trigger Button", label="Button, Footer") }}>
             Sign up for the latest updates
           </button>
