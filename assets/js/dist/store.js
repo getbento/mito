@@ -80,12 +80,14 @@ STORE = {
     var frm = $button.parent();
 
     STORE.disableButton($button);
+    STORE.clearError();
 
     $.ajax({
       type: frm.attr('method'),
       url: frm.attr('action'),
       data: frm.serialize(),
       success: function(data) {
+        STORE.activateButton($button);
         if (data.success === true) {
           var item = data.item;
           var cart = data.cart;
@@ -101,9 +103,23 @@ STORE = {
           STORE.displayModal();
           // track it!
           window.TRACKING.sendEvent("Add To Cart", "Click", "eCom", parseInt(quantityAdded));
+        } else if (data.success === false) {
+          STORE.displayError(data.message);
         }
       },
     });
+  },
+
+  displayError: function(errorMessage) {
+    var errorContainer = $('#errorContainer');
+    errorContainer.html(errorMessage);
+    errorContainer.fadeIn();
+  },
+
+  clearError: function() {
+    var errorContainer = $('#errorContainer');
+    errorContainer.html('');
+    errorContainer.hide();
   },
 
   updateModal: function(item, quantityAdded) {

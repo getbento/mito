@@ -473,3 +473,8 @@ html, body.store-event:not(.sticky-powered-by), body.store-cart-body:not(.sticky
     }
 }
 
+#errorContainer {
+  display: none;
+  color: red;
+  font-style: italic;
+}
