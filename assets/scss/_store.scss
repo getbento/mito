@@ -233,6 +233,10 @@ nav#mobile-header .cart-icon {
 		display:block;
 		margin:25px 0;
 	}
+
+	& form button[type="submit"]:disabled {
+		pointer-events: auto;
+	}
 }
 
 body.store-landing-body, body.store-product-body, body.store-event {
@@ -471,5 +475,85 @@ html, body.store-event:not(.sticky-powered-by), body.store-cart-body:not(.sticky
     &.nav-right {
       float: right;
     }
+}
+
+
+.product-quantity {
+	margin-top: 6px; // magic number!
+}
+
+// block
+.product-config {
+	$product-config-field-border: 1px solid #dbd8cf; // hard-coded in all form elements
+	$product-config-field-input-color: #2a2a2a; // hard-coded in .form
+	$product-config-field-error-color: #F00; // hard-coded in form elements.
+	$product-config-field-input-height: 56px; // hard-coded in all form elements.
+	$product-config-field-input-font-size: {{  theme.options.typography.font_size }};
+	$product-config-field-input-line-height: 1.42857143; // derived from Bootstrap.
+
+	// block element: .product-config-field
+	&-field {
+		border-top: $product-config-field-border;
+		padding: 1rem 0; // magic number!
+
+		// element: .product-config-field__message
+		&__message {
+			display: none;
+			margin-bottom: 1em; // matches <p>, derived from Normalize
+
+			// modifier: .product-config-field__message--show
+			&--show {
+				display: block;
+			}
+
+			// modifier: .product-config-field__message--error
+			&--error {
+				color: $product-config-field-error-color;
+			}
+		}
+
+		// child component: .product-config-field .checkbox
+		& .checkbox {
+
+			// child: .product-config-field .checkbox label
+			& label {
+				margin-top: 0;
+
+				// child: .product-config-field .checkbox label .label-text
+				& .label-text {
+					color: $product-config-field-input-color !important; // matches form color and overrides other !important
+				}
+			}
+		}
+
+		// child component: .product-config-field [data-incrementer]
+		& [data-incrementer] {
+			float: left;
+
+			// next sibling: product-config-field [data-incrementer] + label
+			& + label {
+				display: block;
+				height: $product-config-field-input-height;
+        font-size: $product-config-field-input-font-size;
+				line-height: $product-config-field-input-line-height;
+        padding: 1rem 0 0 1.3rem; // magic number!
+        border: 1px solid transparent;
+				margin-top: 0;
+        margin-bottom: 0;
+				overflow: hidden; // enables the "fill remaining space" float hack!
+			}
+		}
+	}
+
+	// element: .product-config__message
+	&__message {
+		display: none;
+		color: $product-config-field-error-color;
+
+		// modifier: .product-config__message--show
+		&--show {
+			display: block;
+		}
+	}
 }
 

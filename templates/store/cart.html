@@ -28,17 +28,51 @@
         {% for item in store.cart['items'] %}
         <div class="row item">
             <div class="col-lg-6">
+                {#- item information: generic  #}
                 {{ item.name }}
                 {% if item.giftcard_type %}({{ item.giftcard_type }}){% endif %}
                 {% if item.recipient_name %}
                   <br>{{ item.recipient_name }}
                 {% endif %}
-                {% if item.variant %}
+
+                {#- item variants  #}
+                {% if item.variant and item.variant.options and item.variant.options|length %}
                 <br>
                     {% for option in item.variant.options %}
                         {{ option.name }} - {{ option.choice }}<br>
                     {% endfor %}
                 {% endif %}
+
+                {#- item required fields: configurable product #}
+                {%- if item.required_fields and item.required_fields|length %}
+                    {%- set br = joiner("<br>") %}
+                    <br>
+                    <span>
+                        {%- for field in item.required_fields if field.selected|length %}
+                            {%- set renderable_count = [] %}
+                            {%- set comma = joiner(", ") %}
+                            {{ br() }}
+                            {{ field.name }}: 
+                            {%- for option in field.selected %}
+                                {%- set renderable = true if ((not option.quantity is defined) or (option.quantity != 0)) else false %}
+                                {%- set renderable = renderable if (option.option_name or option.option_text) else false %}
+                                {%- if renderable %}
+                                    {%- do renderable_count.append(1) %}
+                                    {%- set props = {
+                                            "name": option.option_name if (option.option_name) else "",
+                                            "text": option.option_text if (option.option_text) else "",
+                                            "price": option.price_variance|money if (option.price_variance and (option.price_variance != "0.00")) else "",
+                                            "quantity": ("(" ~ option.quantity ~ ")") if (option.quantity is defined) else ""
+                                        }
+                                    -%}
+                                    {{ comma() }} {{ props.quantity }} {{ props.name }} {{ props.text }} {{ props.price }}
+                                {%- endif %}    
+                            {%- endfor %}
+                            {%- if renderable_count|length == 0 %} n/a{% endif %}
+                        {%- endfor %}
+                    </span>
+                {%- endif %}
+
             </div>
             <div class="col-lg-2">
                 ${{ item.unit_price }}

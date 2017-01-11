@@ -1,7 +1,30 @@
 {% extends 'store/_base_store.html' %}
 
+{# ============================================================================
+================== MACROS : PRIVATE ===========================================
+============================================================================= #}
+{# 
+    Formats a context price (+1.00, -2.00, etc) so it can be displayed inline 
+    with the corresponding option label (Vanilla +$1.00)
+#}
+{% macro _format_price_variance(value, add_leading_space=true) -%}
+    {%- if value and (value != "0.00") -%}
+        {%- set prefix = " " if (add_leading_space) else "" -%}
+        {%- set is_negative = true if (value.0 == "-") else false -%}
+        {%- set sign = "-" if (is_negative) else "+" -%}
+        {%- set price = "$" ~ value|replace("-", "") -%}
+        {{- prefix ~ sign ~ price -}}
+    {%- endif -%}
+{%- endmacro %}
+
+{# ============================================================================
+================== BLOCK : BODY CLASSES =======================================
+============================================================================= #}
 {% block bodyClass %}store-product-body{% endblock %}
 
+{# ============================================================================
+================== BLOCK : CONTENT ============================================
+============================================================================= #}
 {% block content %}
 <div class="wrap">
 <div class="store product">
@@ -39,38 +62,153 @@
 
         <div class="col-md-4{% if current.images|length == 0 %} col-md-push-4 text-center{% endif %}">
             <h2>{{ current.name }}</h2>
-            <span class="price">${{ current.price }}</span>
+            <span class="price price--single">${{ current.price }}</span>
             {{ current.description }}
-            <form method="POST" action="{{ current.add_to_cart_url }}" id="product-form">
-                {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ current.id }}">
-                {% if current.options|length > 0 %}
-                <hr>
-                {% endif %}
-                {% for option in current.options %}
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>{{ option.name }}</label>
+
+            {% if current.product_type == "basic" %}
+                <form method="POST" action="{{ current.add_to_cart_url }}" id="product-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ current.id }}">
+                    {% if current.options|length > 0 %}
+                    <hr>
+                    {% endif %}
+                    {% for option in current.options %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>{{ option.name }}</label>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="options-dropdown">
+                                {% for value in option.choices %}
+                                    <option data-name="{{ option.name }}" data-slug="{{ option.slug }}" value="{{ value }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                            <br><br>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <select class="options-dropdown">
-                            {% for value in option.choices %}
-                                <option data-name="{{ option.name }}" data-slug="{{ option.slug }}" value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                    <div class="hidden">
+                        <select id="variant" name="variant_id">
+                            {% for variant in current.variants %}
+                                <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-inventory="{{ variant.inventory }}" data-price="{{ variant.price }}">{{ variant.id }}</option>
                             {% endfor %}
                         </select>
-                        <br><br>
                     </div>
-                </div>
-                {% endfor %}
-                <div class="hidden">
-                    <select id="variant" name="variant_id">
-                        {% for variant in current.variants %}
-                            <option value="{{ variant.id }}"{% for option in variant.options %} data-option-{{option.slug}}="{{ option.choice }}"{% endfor %} data-inventory="{{ variant.inventory }}" data-price="{{ variant.price }}">{{ variant.id }}</option>
+                    <button type="submit" class="btn">Add To Cart</button>
+                </form>
+
+            {% elif current.product_type == "configurable" %}
+                {# 
+                    Note: configurable products don't currently have variants, but our data is in the current.variant.0 slot. So, 
+                    its ok to assume its populated.
+                #}
+                {% set variant = current.variants.0 %}
+                {% set variant_has_inventory = true if (variant.inventory and (variant.inventory > 0)) else false %}
+
+                <form method="POST" action="{{ current.add_to_cart_url }}" data-product-config-preview-action="{{ current.price_preview_url }}" data-product-config="{{ current.id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ current.id }}">
+                    <input type="hidden" name="variant_id" value="{{ variant.id }}">
+                    <input type="hidden" name="variant_base_price" value="{{ variant.price }}">
+
+                    {# Only show the form if there is available inventory #}
+                    {% if variant_has_inventory %}
+                        {# primary product quantity field #}
+                        <div class="form-group{% if not current.show_quantity_field %} hidden{% endif %}">
+                            <label>Quantity
+                                <div class="input-group product-quantity" data-incrementer>
+                                    <span class="input-group-btn form-control">
+                                        <button type="button" class="btn btn-number" disabled="disabled" data-type="minus" data-field="quantity">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                    <input type="number" name="quantity" min="1" max="{{ variant.inventory }}" class="form-control input-number" value="1">
+                                    <span class="input-group-btn form-control">
+                                        <button type="button" class="btn btn-number" data-type="plus" data-field="quantity">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </label>
+                        </div>
+
+                        {# Required fields #}
+                        {% for field in variant.required_fields %}
+                            {# Note: Dropdown, checkbox, and quantity all require at least one option for the input to be rendered. #}
+                            {% set is_multioption = true if (field.field_type in ["dropdown", "checkbox", "quantity"]) else false %}
+                            {% set is_renderable = true if (not is_multioption or (field.options|length > 0)) else false %}
+                            
+                            {% if is_renderable %}
+                                <div class="product-config-field{#  form-group #}" data-product-config-field="{{ field.field_type }}" {% if field.max_quantity %} data-product-config-field-max="{{ field.max_quantity }}"{% endif %}>
+                                    <h3 class="product-config-field__title">{{ field.name }}</h3>
+                                    {% if field.show_help_text %}<p class="product-config-field__helper">{{ field.help_text }}</p>{% endif %}
+
+                                    {# field type: freeform #}
+                                    {% if field.field_type == "free_form" %}
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <textarea class="form-control" name="required_fields[{{ field.slug }}]" placeholder="{{ option.name|upper }}" data-product-config-field-slug="{{ field.slug }}"></textarea>
+                                            </div>
+                                        </div>
+
+                                    {# field type: dropdown #}
+                                    {% elif field.field_type == "dropdown" %}
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <select name="required_fields[{{ field.slug }}]" title="{{ field.name|upper }}" data-product-config-field-slug="{{ field.slug }}">
+                                                    {% for option in field.options %}
+                                                        <option value="{{ option.slug }}"{% if loop.first %} selected{% endif %}{% if option.price_variance and (option.price_variance != "0.00") %} data-product-config-field-price-variant="{{ option.price_variance }}"{% endif %}>{{ option.name ~ _format_price_variance(option.price_variance) }}</option>
+                                                       
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    {# field type: checkbox #}
+                                    {% elif field.field_type == "checkbox" %}
+                                        {% for option in field.options %}
+                                            {% set checkbox_id = "checkbox-" ~ field.slug ~ "-" ~ option.slug %}
+                                            <div class="form-group row checkbox">
+                                                <div class="col-sm-12">
+                                                    <input id="{{ checkbox_id }}" name="required_fields[{{ field.slug }}][]" type="checkbox" value="{{ option.slug }}" data-product-config-field-slug="{{ field.slug }}"{% if option.price_variance and (option.price_variance != "0.00") %} data-product-config-field-price-variant="{{ option.price_variance }}"{% endif %}>
+                                                    <label for="{{ checkbox_id }}"><span class="box"></span><span class="label-text">{{ option.name ~ _format_price_variance(option.price_variance) }}</span></label>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    {# field type: quantity #}
+                                    {% elif field.field_type == "quantity" %}
+                                        {% for option in field.options %}
+                                            <div class="form-group clearfix">
+                                                <div class="input-group" data-incrementer data-product-config-field-slug="{{ field.slug }}"{% if option.price_variance and (option.price_variance != "0.00") %} data-product-config-field-price-variant="{{ option.price_variance }}"{% endif %}>
+                                                    <span class="input-group-btn form-control">
+                                                        <button type="button" class="btn btn-number" disabled data-type="minus" data-field="required_fields[{{ field.slug }}][{{ option.slug }}]">
+                                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                                        </button>
+                                                    </span>
+                                                    <input type="number" name="required_fields[{{ field.slug }}][{{ option.slug }}]" min="0" max="99999" class="form-control input-number" value="0" data-product-config-option-slug="{{ option.slug }}">
+                                                    <span class="input-group-btn form-control">
+                                                        <button type="button" class="btn btn-number" data-type="plus" data-field="required_fields[{{ field.slug }}][{{ option.slug }}]">
+                                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <label>{{ option.name ~ _format_price_variance(option.price_variance) }}</label>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <span class="product-config-field__message product-config-field__message--show product-config-field__message--error">A message.</span>
+                                </div>
+                            {% endif %}
                         {% endfor %}
-                    </select>
-                </div>
-                <button type="submit" class="btn">Add To Cart</button>
-            </form>
+                        {# form error message #}
+                        <p class="product-config__message"></p>
+                    {% endif %}
+
+                    {# submit button #}
+                    <button type="submit" class="btn"{% if not variant_has_inventory %} disabled{% endif %}>{{ "Add To Cart" if variant_has_inventory else "Currently Unavailable" }}</button>
+                </form>
+            {% endif %}
         </div>
     </div>
   </div>
@@ -106,7 +244,9 @@
 <div class="push"></div>
 </div>
 {% endblock %}
-
+{# ============================================================================
+================== BLOCK : INIT SCRIPTS =======================================
+============================================================================= #}
 {% block initScripts %}
 <script type="text/javascript">
 $(document).ready(function() {

@@ -184,12 +184,45 @@ form {
 
   input[type=checkbox] {
     visibility: hidden;
-  }
 
-  input[type=checkbox]:checked + label > .box:after {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1;
+    // when checked, add the full checkmark to the box
+    &:checked + label > .box:after {
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+      filter: alpha(opacity=100);
+      opacity: 1;
+    }
+
+    // when disabled...
+    &:disabled {
+
+      // dim everything and add the not-allowed cursor
+      & + label {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+
+        &,
+        & > .box {
+          cursor: not-allowed;
+        }
+      }
+
+      // when disabled and checked on hover – force the full checkmark to show instead 
+      // of the semi-dimmed version
+      &:checked + label > .box:hover:after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        filter: alpha(opacity=100);
+        opacity: 1;
+      }
+
+      // when disabled and not checked on hover – force the checkmark to invisible instead 
+      // of showing the semi-dimmed version (which we can't shut off)
+      &:not(:checked) + label > .box:hover:after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+        opacity: 0;
+      }
+    }
   }
 }
 
@@ -293,3 +326,73 @@ form {
     }
   }
 }
+
+
+[data-incrementer] {
+  $incrementer-form-color: #2a2a2a; // hard-coded in .form
+  $incrementer-input-width: 42px; // magic number!
+  $incrementer-input-height: 56px; // hard-coded in all form elements.
+  $incrementer-border-size: 1px; // hard-coded in all form elements.
+  $incrementer-input-font-size: 14px; // hard-coded in all form elements.
+  $incrementer-input-line-height: 1.42857143; // derived from Bootstrap.
+
+  // child: [data-incrementer] .input-group-btn
+  & .input-group-btn {
+    display:inline-block;
+    width: $incrementer-input-width;
+    height: auto;
+    padding: 0;
+    @include border-radius(0);
+
+    // child: [data-incrementer] .input-group-btn .btn-number
+    & .btn-number {
+      width:100%;
+      height: ($incrementer-input-height - ($incrementer-border-size * 2)); // match input height - minus border
+      font-size: $incrementer-input-font-size;
+      line-height: $incrementer-input-line-height;
+      color: $incrementer-form-color;
+      background: none;
+      padding: 6px 0; // derived from Bootstrap
+      border: 0;
+      margin: 0;
+
+      // modifier: [data-incrementer] .input-group-btn .btn-number:active
+      &:active {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+
+      // modifier: [data-incrementer] .input-group-btn .btn-number:disabled
+      &:disabled {
+        pointer-events: auto;
+      }
+    }
+  }
+
+  // child: [data-incrementer] .input-number
+  & .input-number {
+    display: inline-block;
+    width: $incrementer-input-width;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    border-left: none;
+    border-right: none;
+
+    // modifier: [data-incrementer] .input-number:focus
+    &:focus {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    // pseudo: remove appearance to native type="number" spinners
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+
+
