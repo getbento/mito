@@ -477,7 +477,6 @@ html, body.store-event:not(.sticky-powered-by), body.store-cart-body:not(.sticky
     }
 }
 
-
 .product-quantity {
 	margin-top: 6px; // magic number!
 }
@@ -555,5 +554,11 @@ html, body.store-event:not(.sticky-powered-by), body.store-cart-body:not(.sticky
 			display: block;
 		}
 	}
+}
+
+#errorContainer {
+  display: none;
+  color: red;
+  font-style: italic;
 }
 
