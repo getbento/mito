@@ -12,11 +12,17 @@ $(document).ready(function () {
       debug: true
   });
 
+
+  var dateOptions = {
+    pickTime: false,
+    debug: true,
+  };
+
+  if ($datepicker.data('min-date') === 'today') {
+    dateOptions.minDate = new Date();
+  }
   // initialize bootstrap datepicker
-  $datepicker.datetimepicker({
-      pickTime: false,
-      debug: true
-  });
+  $datepicker.datetimepicker(dateOptions);
 
   // initialize select2.js dropdowns
   $select_menu.select2({
@@ -95,7 +101,7 @@ $(document).ready(function () {
             $success_msg.show();
 
             // Bento Tracking
-            // Notes: 
+            // Notes:
               //  - Some forms return "true", and some return true, so we're checking for both before submitting a tracking request.
               //  - We have to identify which form has been submitted using the below if/else/switch, and attempt
               //    to return; as soon as we find it.
@@ -106,7 +112,7 @@ $(document).ready(function () {
               // If this is the newsletter form...
               if ($form.is("#newsletter")){
                 window.TRACKING.sendEvent("Forms", "Submit", "Email Sign Up");
-                return;  
+                return;
               }
               // Else, if it exists, we're going to look for the value of <input type="hidden" name="form" value="?">
               // to identify the form.

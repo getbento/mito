@@ -160,7 +160,7 @@
                     <div class="col-sm-12">
 
                         <label for="date" class="sr-only">Date</label>
-                        <input type="text" name="send_after" class="form-control date-picker" id="datepicker" placeholder="Send immediately"><span id="calendar-icon" class="ss-icon ss-standard ss-calendar"></span>
+                        <input type="text" name="send_after" class="form-control date-picker" data-min-date="today" id="datepicker" placeholder="Send immediately"><span id="calendar-icon" class="ss-icon ss-standard ss-calendar"></span>
                         <br><br>
                     </div>
                 </div>
@@ -195,7 +195,7 @@ $(document).ready(function() {
     Bento.GiftCards.initialize({
         successCallback: function(data){
             // required to property "capture" for use in setTimeout()
-            var data = data; 
+            var data = data;
             // track it!
             window.TRACKING.sendEvent("Add To Cart", "Click", "Gift Cards");
             // wait 300ms before redirecting so we give GA the best change to complete its request.
