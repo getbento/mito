@@ -1,0 +1,69 @@
+{% macro render_product(product) -%}
+<div class="col-md-{{12 // theme.options.store.columns }}">
+    <a class="product" href="{{ product.url }}">
+        {% if product.image %}
+          <div class="product-image-wrap">
+            <div class="product-image image-stroke" style="background-image: url('{{product.image}}')">
+            </div>
+          </div>
+        {% endif %}
+        <div class="name">{{ product.name }}</div>
+        {% if product.price %}
+            <div class="price">${{ product.price }}</div>
+        {% endif %}
+    </a>
+</div>
+{%- endmacro %}
+
+
+{% if products.categories %}
+<!-- Category Navigation -->
+  <div class="container-fluid max-width">
+
+    <!-- Tabs -->
+    <div class="row hidden-xs">
+      <div class="col-xs-12">
+        <ul class="nav nav-pills nav-justified store-nav" role="tablist">
+
+             <li><a class="hidden-xs-down active" href="/store">All</a></li>
+
+            {% for category in products.categories if category.all %}
+               <li><a class="hidden-xs-down" href="{{ category.url }}">{{ category.name }}</a></li>
+            {% endfor %}
+
+        </ul>
+      </div>
+    </div>
+    <!-- End Tabs -->
+
+    <!-- Select Menu for Mobile Devices -->
+    <div class="row visible-xs hidden-print">
+      <div class="col-xs-12">
+        <div class="store-category-select-holder">
+          <select class="form-control store-category-select">
+              <option value="/store">All</option>
+            {% for category in products.categories if category.all %}
+              <option value="{{ category.url }}" data-category-slug="{{ category.slug }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- End Select Menu -->
+  </div>
+<!-- End Category Navigation -->
+ {% endif %}
+
+  <!-- Produts -->
+  <div class="container-fluid max-width" id="product-listing">
+    <div class="container-fluid max-width">
+        {% for group in products.all|batch(theme.options.store.columns) %}
+          <div class="row">
+            {% for product in group %}
+              {{ render_product(product) }}
+            {% endfor %}
+          </div>
+        {% endfor %}
+    </div>
+  </div>
+  <!-- End Products -->
