@@ -31,6 +31,11 @@
             {% if store.gift_card_settings.physical_available and store.gift_card_settings.electronic_available %}
                 <h2>Physical/Plastic Gift Cards</h2>
             {% endif %}
+                {% if store.gift_card_settings.physical_description %}
+                    <div class="description">
+                        {{ store.gift_card_settings.physical_description }}
+                    </div>
+                {% endif %}
                 {% csrf_token %}
                 <div class="form-group">
                     <select name="amount">
@@ -135,6 +140,11 @@
                 <h2>Electronic/Email Gift Card</h2>
             {% endif %}
                 {% csrf_token %}
+                {% if store.gift_card_settings.electronic_description %}
+                    <div class="description">
+                        {{ store.gift_card_settings.electronic_description }}
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <select name="amount">
                         <option SELECTED DISABLED>Select Amount*</option>
