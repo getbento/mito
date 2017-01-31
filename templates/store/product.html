@@ -34,7 +34,7 @@
             {% if current.product_type == 'basic' %}
                 {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
             {% else %}
-                {% set shop_landing = pages.all|selectattr("template","equalto","store/index_custom.html")|list|first  %}
+                {% set shop_landing = 'store/custom/' %}
             {% endif %}
             {% if shop_landing %}
             <a class="back" href="{{ shop_landing.url }}">Back to shop</a>
