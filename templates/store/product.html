@@ -32,13 +32,14 @@
     <div class="row">
         <div class="col-xs-6">
             {% if current.product_type == 'basic' %}
-                {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
+                {% set shop_landing_url = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
+                {% if shop_landing %}
+                    <a class="back" href="{{ shop_landing_url }}">Back to shop</a>
+                {% endif %}
             {% else %}
-                {% set shop_landing = 'store/custom/' %}
+                <a class="back" href="/store/custom/">Back to shop</a>
             {% endif %}
-            {% if shop_landing %}
-            <a class="back" href="{{ shop_landing.url }}">Back to shop</a>
-            {% endif %}
+
         </div>
     </div>
     <div class="row">
