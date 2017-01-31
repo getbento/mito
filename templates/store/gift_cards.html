@@ -29,7 +29,12 @@
         <div id="physical-form" class="formContainer col-lg-6 col-lg-offset-3" {% if store.gift_card_settings.electronic_available and store.gift_card_settings.physical_available %}style="display:none;"{% endif %}>
             <form method="post" action="" class="custom">
             {% if store.gift_card_settings.physical_available and store.gift_card_settings.electronic_available %}
-                <h2>Physical/Plastic Gift Cards</h2>
+                <h2>
+                    {% if store.gift_card_settings.physical_label %}
+                        {{ store.gift_card_settings.physical_label }}
+                    {% else %}
+                        Physical/Plastic Gift Cards
+                    {% endif %}</h2>
             {% endif %}
                 {% if store.gift_card_settings.physical_description %}
                     <div class="description">
@@ -137,7 +142,12 @@
         <div id="electronic-form" class="formContainer col-lg-6 col-lg-offset-3" {% if store.gift_card_settings.electronic_available and store.gift_card_settings.physical_available %}style="display:none;"{% endif %}>
             <form method="post" action="" class="custom">
             {% if store.gift_card_settings.physical_available and store.gift_card_settings.electronic_available %}
-                <h2>Electronic/Email Gift Card</h2>
+                <h2>{% if store.gift_card_settings.electronic_label %}
+                        {{ store.gift_card_settings.electronic_label }}
+                    {% else %}
+                        Electronic/Email Gift Card
+                    {% endif %}
+                </h2>
             {% endif %}
                 {% csrf_token %}
                 {% if store.gift_card_settings.electronic_description %}
