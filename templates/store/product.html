@@ -3,8 +3,8 @@
 {# ============================================================================
 ================== MACROS : PRIVATE ===========================================
 ============================================================================= #}
-{# 
-    Formats a context price (+1.00, -2.00, etc) so it can be displayed inline 
+{#
+    Formats a context price (+1.00, -2.00, etc) so it can be displayed inline
     with the corresponding option label (Vanilla +$1.00)
 #}
 {% macro _format_price_variance(value, add_leading_space=true) -%}
@@ -31,7 +31,11 @@
   <div class="container-fluid max-width">
     <div class="row">
         <div class="col-xs-6">
-            {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
+            {% if current.product_type == 'basic' %}
+                {% set shop_landing = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
+            {% else %}
+                {% set shop_landing = pages.all|selectattr("template","equalto","store/index_custom.html")|list|first  %}
+            {% endif %}
             {% if shop_landing %}
             <a class="back" href="{{ shop_landing.url }}">Back to shop</a>
             {% endif %}
@@ -99,8 +103,8 @@
                 </form>
 
             {% elif current.product_type == "configurable" %}
-                {# 
-                    Note: configurable products don't currently have variants, but our data is in the current.variant.0 slot. So, 
+                {#
+                    Note: configurable products don't currently have variants, but our data is in the current.variant.0 slot. So,
                     its ok to assume its populated.
                 #}
                 {% set variant = current.variants.0 %}
@@ -138,7 +142,7 @@
                             {# Note: Dropdown, checkbox, and quantity all require at least one option for the input to be rendered. #}
                             {% set is_multioption = true if (field.field_type in ["dropdown", "checkbox", "quantity"]) else false %}
                             {% set is_renderable = true if (not is_multioption or (field.options|length > 0)) else false %}
-                            
+
                             {% if is_renderable %}
                                 <div class="product-config-field{#  form-group #}" data-product-config-field="{{ field.field_type }}" {% if field.max_quantity %} data-product-config-field-max="{{ field.max_quantity }}"{% endif %}>
                                     <h3 class="product-config-field__title">{{ field.name }}</h3>
@@ -159,7 +163,7 @@
                                                 <select name="required_fields[{{ field.slug }}]" title="{{ field.name|upper }}" data-product-config-field-slug="{{ field.slug }}">
                                                     {% for option in field.options %}
                                                         <option value="{{ option.slug }}"{% if loop.first %} selected{% endif %}{% if option.price_variance and (option.price_variance != "0.00") %} data-product-config-field-price-variant="{{ option.price_variance }}"{% endif %}>{{ option.name ~ _format_price_variance(option.price_variance) }}</option>
-                                                       
+
                                                     {% endfor %}
                                                 </select>
                                             </div>
