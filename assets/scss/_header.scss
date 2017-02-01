@@ -562,3 +562,26 @@ nav, .font-nav {
   }
 }
 {% endif %}
+
+/* 
+Fixes padding on section anchor targets when 
+both address bar and navigation are sticky.
+https://app.asana.com/0/164883087213679/178764233919323
+*/
+{% if theme.options.address_bar.show and
+      theme.options.address_bar.sticky and
+      theme.options.header.sticky.show %}
+  section:not(#address-bar) {
+    @media (min-width: 768px) {
+      /* 
+      Addresses 1px border issue in Chrome 56. 
+      This seems fixed in Chrome Canary 58
+      */
+      border-top: 59px solid transparent;
+      margin-top: -60px;
+      -webkit-background-clip: padding-box;
+      -moz-background-clip: padding;
+      background-clip: padding-box;
+    }
+  }
+{% endif %}
