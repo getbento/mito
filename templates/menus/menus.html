@@ -11,7 +11,7 @@
 </div>
 </div>
 {% for row in section.menu_items|batch(columns) %}
-  <div class="row">
+  <div class="row {% if columns == 2 %}gutter-60{% endif %}">
     {% for item in row %}
     <div class="{% if columns == 3 %}col-sm-4{% elif columns == 2 %}col-sm-6{% else %}col-md-6{% endif %}">
     <div class="menu-item">
