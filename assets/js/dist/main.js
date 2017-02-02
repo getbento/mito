@@ -22308,14 +22308,15 @@ $(document).ready(function () {
   var $html = $('html, body');
   var $window = $(window);
   var $featured = $('.featured-press');
-  var $unfeatured = $('.press-group .unfeatured');
+  var $unfeatured = $('.press-section .unfeatured');
 
-  function scrollTo () {
-    $html.animate({scrollTop: $window.scrollTop() + $featured.height() + 100 }, '400');
+  function scrollTo() {
+    $html.animate({ scrollTop: $window.scrollTop() + $featured.height() + 100, }, '400');
   }
 
   $unfeatured.on('shown.bs.collapse', $.debounce(100, scrollTo));
 });
+
 $(document).ready(function () {
   var $html = $('html, body');
   var $inquiry_btn = $('a[href="#event_inquiry"]');
