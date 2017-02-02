@@ -22306,15 +22306,19 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
   var $html = $('html, body');
-  var $window = $(window);
-  var $featured = $('.featured-press');
-  var $unfeatured = $('.press-section .unfeatured');
+  var $unfeatured = $('.press-section #press-unfeatured');
+  var $headerOffset = $('#sticky-header').height() + 15;
+  var $stickyOffset = $headerOffset;
 
   function scrollTo() {
-    $html.animate({ scrollTop: $window.scrollTop() + $featured.height() + 100, }, '400');
+    if ($html.hasClass('address-bar-sticky')) {
+      $stickyOffset = $('#address-bar').height() + $headerOffset;
+    }
+
+    $html.animate({ scrollTop: $unfeatured.offset().top - $stickyOffset, }, '250');
   }
 
-  $unfeatured.on('shown.bs.collapse', $.debounce(100, scrollTo));
+  $unfeatured.on('shown.bs.collapse', $.debounce($stickyOffset, scrollTo));
 });
 
 $(document).ready(function () {

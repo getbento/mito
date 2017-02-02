@@ -11,7 +11,7 @@
     {% if theme.options.press.see_all and boxes.press.all|length > boxes.press.featured|length %}
       <div class="row hidden-xs">
         <div class="col-sm-12">
-          <a data-toggle="collapse" data-target=".unfeatured" class="print-link collapsed"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>
+          <a data-toggle="collapse" data-target="#press-unfeatured" class="print-link collapsed"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>
         </div>
       </div>
     {% endif %}
@@ -27,13 +27,13 @@
     {% if theme.options.press.see_all and boxes.press.all|length > boxes.press.featured|length %}
       <div class="row visible-xs">
         <div class="col-sm-12">
-          <a data-toggle="collapse" data-target=".unfeatured" class="print-link collapsed {% if not theme.options.press.see_all %}in{% endif %}"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>
+          <a data-toggle="collapse" data-target="#press-unfeatured" class="print-link collapsed {% if not theme.options.press.see_all %}in{% endif %}"><span class="open">HIDE</span><span class="closed">SEE ALL</span></a>
         </div>
       </div>
     {% endif %}
 
     <!-- Unfeatured Press -->
-    <div class="unfeatured collapse {% if not theme.options.press.see_all %}in{% endif %}">
+    <div id="press-unfeatured" class="unfeatured collapse {% if not theme.options.press.see_all %}in{% endif %}">
       {% with categories = boxes.press.categories %}
       {% for category in categories %}
         {% if category.all|rejectattr("featured")|list|length > 0 %}
