@@ -6,12 +6,21 @@ $(document).ready(function () {
   var $address_bar = $('#address-bar');
   var $nav_wrapper = $('#nav-wrapper');
   var $sticky_header = $('#sticky-header');
+  var $sticky_logo_wrapper = $('#sticky-logo-wrapper');
+  var $sticky_nav = $('#sticky-header nav');
   var isSticky = $body.hasClass('address-bar-sticky');
-  var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)')
-  var $mobile_nav_dropdown = $('#mobile-nav-dropdown')
+  var $oneLineTop = $('#nav-wrapper.single-line:not(.vertically-center)');
+  var $mobile_nav_dropdown = $('#mobile-nav-dropdown');
   var $hamburger = $('button.navbar-toggle');
   var $header_alert_wrapper = $('#header-alert-wrapper');
   var $header_alert_close = $('#header-alert-wrapper .close');
+
+  function setNavWidth() {
+    var logo_percent_width = ($sticky_logo_wrapper.width() /
+      $sticky_logo_wrapper.parent().width()) * 100;
+
+    $sticky_nav.css({ 'max-width': (Math.floor(100 - logo_percent_width)) + '%', });
+  }
 
   function showHamburger () {
     $hamburger.addClass('collapsed');
@@ -59,7 +68,7 @@ $(document).ready(function () {
   }
 
   // if nav on one line and not verticall centered,
-  // push down half image height since img is position absolute 
+  // push down half image height since img is position absolute
   // and doesn't effect parent height
   if ($oneLineTop.length > 0) {
     var $oneLineTopNav = $oneLineTop.find('nav');
@@ -78,6 +87,8 @@ $(document).ready(function () {
   $header_alert_close.on('click', hideHeaderAlert);
 
   $window.load(toggleStickyHeader);
+  $window.load(setNavWidth);
+  window.addEventListener('resize', setNavWidth);
 
   $document.on('scroll', $.throttle(15, function () {
     toggleStickyHeader();
