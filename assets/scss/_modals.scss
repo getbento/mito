@@ -37,9 +37,11 @@
 
   &.opentable {
     .modal-dialog {
-      width: 840px;
-      max-width: none;
+      top: 50%;
+      transform: translateY(-50%);
       height: 600px;
+      width: 840px;
+      max-width: 90%;
     }
 
     iframe {
