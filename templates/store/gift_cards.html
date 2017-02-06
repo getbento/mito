@@ -17,8 +17,19 @@
     <div class="row">
         <div class="pick-card-type col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
             {% if store.gift_card_settings.electronic_available and store.gift_card_settings.physical_available %}
-                <a class="btn show-giftcard-form" data-target="electronic-form">Electronic/Email Gift Card</a>
-                <a class="btn show-giftcard-form" data-target="physical-form">Physical/Plastic Gift Card</a>
+                <a class="btn show-giftcard-form" data-target="electronic-form">
+                    {% if store.gift_card_settings.electronic_label %}
+                        {{ store.gift_card_settings.electronic_label }}
+                    {% else %}
+                        Electronic/Email Gift Card
+                    {% endif %}</a>
+                <a class="btn show-giftcard-form" data-target="physical-form">
+                    {% if store.gift_card_settings.physical_label %}
+                        {{ store.gift_card_settings.physical_label }}
+                    {% else %}
+                        Physical/Plastic Gift Cards
+                    {% endif %}
+                </a>
             {% endif %}
         </div>
         {{ form.errors }}
