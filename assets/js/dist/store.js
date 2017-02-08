@@ -1,7 +1,7 @@
-STORE = {
+var STORE = {
   options: {},
 
-  initialize: function(options) {
+  initialize: function (options) {
     STORE.setInitialOptions(options);
 
     STORE.closeModalListener();
@@ -20,44 +20,44 @@ STORE = {
     } else {
       var allVariants = $('.hidden option');
       var $currentForm = $(form);
-      allVariants.each(function() {
+      allVariants.each(function () {
         var variant = $(this);
         STORE.checkVariantAvailability(variant, 1, $currentForm);
       });
     }
   },
 
-  triggerOptionsChange: function() {
+  triggerOptionsChange: function () {
     $('select.options-dropdown').trigger('change');
   },
 
-  triggerQuantityChange: function() {
+  triggerQuantityChange: function () {
     $('.qty').trigger('change');
   },
 
-  hasOptionsDropdown: function(form) {
+  hasOptionsDropdown: function (form) {
     return !!($(form).find('select.options-dropdown').length);
   },
 
-  hasQuantities: function() {
+  hasQuantities: function () {
     return STORE.options.hasQuantities;
   },
 
-  setInitialOptions: function(options) {
-    Object.keys(options).forEach(function(key) {
+  setInitialOptions: function (options) {
+    Object.keys(options).forEach(function (key) {
       STORE.options[key] = options[key];
     });
   },
 
-  addQuantityListener: function(form) {
-    //Update Variants When the Quantity Changes
-    $(form).find('.qty').change(function() {
+  addQuantityListener: function (form) {
+    // Update Variants When the Quantity Changes
+    $(form).find('.qty').change(function () {
       var $dropDowns = $(this).closest('form').find('select.options-dropdown');
       var $form = $(form);
       if ($dropDowns.length) {
         STORE.filterVariants($form);
       } else {
-        //If no dropdown then there is only 1 variant and inventory can be checked immediately.
+        // If no dropdown then there is only 1 variant and inventory can be checked immediately.
         var quantitySelected = $(this).val() || 1;
         var selected_variant = $(this).parents('form').find('#variant option');
         STORE.checkVariantAvailability(selected_variant, quantitySelected, $form);
@@ -65,15 +65,15 @@ STORE = {
     });
   },
 
-  addOptionsDropdownListener: function(form) {
-    $(form).find('select.options-dropdown').change(function() {
+  addOptionsDropdownListener: function (form) {
+    $(form).find('select.options-dropdown').change(function () {
       var $form = $(form);
       STORE.filterVariants($form);
     });
   },
 
-  addToCartListener: function() {
-    $('#submit').click(function(e) {
+  addToCartListener: function () {
+    $('#submit').click(function (e) {
       var $form = $(e.currentTarget).parents('form');
       var quantitySelected = STORE.quantitySelected($form);
 
@@ -81,42 +81,43 @@ STORE = {
     });
   },
 
-  closeModalListener: function() {
-    $('#added-to-cart .remove').click(function(e) {
+  closeModalListener: function () {
+    $('#added-to-cart .remove').click(function (e) {
       e.preventDefault();
       $('#added-to-cart').fadeOut();
     });
   },
 
-  quantitySelected: function($form) {
+  quantitySelected: function ($form) {
     if (STORE.hasQuantities()) {
       return $form.siblings('.qty').val();
-    } else {
-      return 1;
     }
+
+    return 1;
   },
 
-  filterVariants: function($currentForm) {
+  filterVariants: function ($currentForm) {
     var possible_variants = $('select#variant option');
     var quantitySelected = STORE.quantitySelected($currentForm);
 
 
     var $selectedOptions = $currentForm.find('select.options-dropdown option:selected');
-    $selectedOptions.each(function() {
+    $selectedOptions.each(function () {
       var $selectedOption = $(this);
-      var selector = '[data-option-' + $selectedOption.attr('data-slug') + '="' + $selectedOption.val() + '"]';
+      var selector = '[data-option-' + $selectedOption.attr('data-slug')
+        + '="' + $selectedOption.val() + '"]';
       possible_variants = possible_variants.filter(selector);
     });
 
     STORE.checkVariantAvailability(possible_variants, quantitySelected, $currentForm);
   },
 
-  checkVariantAvailability: function(selected_variant, quantitySelected, $currentForm) {
+  checkVariantAvailability: function (selected_variant, quantitySelected, $currentForm) {
     var $cartButton;
     var $quantityInput = $currentForm.find('input[name="quantity"]');
 
     if (selected_variant.length === 1) {
-      var variantInventory = parseInt(selected_variant.attr('data-inventory'));
+      var variantInventory = parseInt(selected_variant.attr('data-inventory'), 10);
 
       if (variantInventory === 0 || variantInventory < quantitySelected) {
         $cartButton = $currentForm.find('#submit');
@@ -128,13 +129,13 @@ STORE = {
         var $hiddenVariantSelect = selected_variant.parents('select');
         $hiddenVariantSelect.val(variantValue);
 
-        //Required to Work with HTML5 data-incrementer inputs
+        // Required to Work with HTML5 data-incrementer inputs
         STORE.enableQuantityInput($quantityInput, variantInventory);
 
         $cartButton = $currentForm.find('#submit');
         STORE.activateButton($cartButton);
       }
-    $('.price').text('$' + selected_variant.attr('data-price'));
+      $('.price').text('$' + selected_variant.attr('data-price'));
     } else {
       $cartButton = $currentForm.find('#submit');
       $cartButton.text('Currently Unavailable');
@@ -143,24 +144,24 @@ STORE = {
     }
   },
 
-  disableQuantityInput: function($quantityInput){
-    $quantityInput.val(0).attr({'min': 0, 'max': 0});
+  disableQuantityInput: function ($quantityInput) {
+    $quantityInput.val(0).attr({ min: 0, max: 0, });
   },
 
-  enableQuantityInput: function($quantityInput, variantInventory){
+  enableQuantityInput: function ($quantityInput, variantInventory) {
     $('.btn-number').removeAttr('disabled');
 
-    if($quantityInput.val() == 0 || $quantityInput.val() == 1){
+    if ($quantityInput.val() == 0 || $quantityInput.val() == 1) {
       $quantityInput.val(1);
-      $('.btn-number[data-type="minus"]').attr('disabled', 'disabled')
-    }else if($quantityInput.val() > variantInventory){
+      $('.btn-number[data-type="minus"]').attr('disabled', 'disabled');
+    } else if ($quantityInput.val() > variantInventory) {
       $quantityInput.val(variantInventory);
-      $('.btn-number[data-type="plus"]').attr('disabled', 'disabled')
+      $('.btn-number[data-type="plus"]').attr('disabled', 'disabled');
     }
-    $quantityInput.attr({'min': 1, 'max': variantInventory});
+    $quantityInput.attr({ min: 1, max: variantInventory, });
   },
 
-  addToCart: function(e) {
+  addToCart: function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
@@ -175,7 +176,7 @@ STORE = {
       type: frm.attr('method'),
       url: frm.attr('action'),
       data: frm.serialize(),
-      success: function(data) {
+      success: function (data) {
         if (data.success === true) {
           var item = data.item;
           var cart = data.cart;
@@ -190,28 +191,28 @@ STORE = {
 
           STORE.updateModal(item, quantityAdded);
           STORE.displayModal();
-          // track it! 
-          window.TRACKING.sendEvent("Add To Cart", "Click", "eCom", parseInt(quantityAdded)); 
-        } else if (data.success === false) { 
-          STORE.displayError(data.message); 
-        } 
-      }, 
-    }); 
-  }, 
- 
-  displayError: function(errorMessage) { 
-    var errorContainer = $('#errorContainer'); 
-    errorContainer.html(errorMessage); 
-    errorContainer.fadeIn(); 
-  }, 
- 
-  clearError: function() { 
-    var errorContainer = $('#errorContainer'); 
-    errorContainer.html(''); 
+          // track it!
+          window.TRACKING.sendEvent('Add To Cart', 'Click', 'eCom', parseInt(quantityAdded, 10));
+        } else if (data.success === false) {
+          STORE.displayError(data.message);
+        }
+      },
+    });
+  },
+
+  displayError: function (errorMessage) {
+    var errorContainer = $('#errorContainer');
+    errorContainer.html(errorMessage);
+    errorContainer.fadeIn();
+  },
+
+  clearError: function () {
+    var errorContainer = $('#errorContainer');
+    errorContainer.html('');
     errorContainer.hide();
   },
 
-  updateModal: function(item, quantityAdded) {
+  updateModal: function (item, quantityAdded) {
     STORE.resetModalText();
 
     var name = item.name;
@@ -232,17 +233,18 @@ STORE = {
     STORE.setModalQuantityText($contentDiv, quantityAdded);
   },
 
-  setModalQuantityText: function($contentDiv, quantityAdded) {
+  setModalQuantityText: function ($contentDiv, quantityAdded) {
     $contentDiv.append('Qty: ' + quantityAdded);
   },
 
-  updateAvailableInventory: function(quantitySelected) {
-    var currentInventory = parseInt($('form#product-form #variant option:selected').attr('data-inventory'));
+  updateAvailableInventory: function (quantitySelected) {
+    var currentInventory = parseInt($('form#product-form #variant option:selected')
+      .attr('data-inventory'), 10);
     var newInventory = currentInventory - quantitySelected;
     $('form#product-form #variant option:selected').attr('data-inventory', newInventory);
   },
 
-  updateCartCount: function(cart) {
+  updateCartCount: function (cart) {
     var cartItems = cart.items;
     var cartCount = 0;
     for (var i = 0; i < cartItems.length; i++) {
@@ -254,19 +256,19 @@ STORE = {
     $('.cart-icon span').text(cartCount);
   },
 
-  activateButton: function($button) {
+  activateButton: function ($button) {
     $button.text('Add To Cart').removeAttr('disabled');
   },
 
-  disableButton: function($button) {
+  disableButton: function ($button) {
     $button.attr('disabled', '');
   },
 
-  displayModal: function() {
+  displayModal: function () {
     $('#added-to-cart').fadeIn();
   },
 
-  resetModalText: function() {
+  resetModalText: function () {
     $('#added-to-cart .options').html('');
   },
 };
