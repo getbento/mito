@@ -30,8 +30,12 @@ $(document).ready(function () {
     }
   }
 
-  function toggleStickyHeader () {
-    var belowNav = $window.scrollTop() > $nav_wrapper.height() + $nav_wrapper.offset().top - 60;
+  function toggleStickyHeader() {
+    var belowNav;
+
+    if ($nav_wrapper.height() !== null) {
+      belowNav = $window.scrollTop() > $nav_wrapper.height() + $nav_wrapper.offset().top - 60;
+    }
 
     if (belowNav && !$sticky_header.hasClass('show')) {
       $sticky_header.addClass('show');
