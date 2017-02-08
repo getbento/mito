@@ -99,7 +99,23 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <button type="submit" class="btn">Add To Cart</button>
+                    <div class="form-group{% if not current.show_quantity_field %} hidden{% endif %}">
+                        <label>Quantity</label>
+                        <div class="input-group" data-incrementer>
+                            <span class="input-group-btn form-control">
+                                <button type="button" class="btn btn-number" disabled="disabled" data-type="minus" data-field="quantity">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                            <input type="number" name="quantity" min="1" class="form-control input-number qty">
+                            <span class="input-group-btn form-control">
+                                <button type="button" class="btn btn-number" data-type="plus" data-field="quantity">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <button id="submit" type="submit" class="btn">Add To Cart</button>
                     <div id="errorContainer"></div>
                 </form>
 
@@ -259,7 +275,10 @@ $(document).ready(function() {
     $('.feature-image-wrap .image-option').hover(function(){
       $('.feature-image-wrap .feature-image').css('background-image', $(this).css('background-image') );
     });
-      STORE.initialize();
+
+    STORE.initialize({
+        hasQuantities: true,
+    });
 });
 </script>
 {% endblock %}

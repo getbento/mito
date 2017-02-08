@@ -1,21 +1,82 @@
 STORE = {
-  initialize: function() {
+  options: {},
+
+  initialize: function(options) {
+    STORE.setInitialOptions(options);
+
     STORE.closeModalListener();
-
-    //Update Variants When An Option is Changed
-    $('.options-dropdown').change(function() {
-      var $dropdown = $(this);
-      STORE.filterVariants($dropdown);
-    });
-
-    $('.options-dropdown').trigger('change');
-
     STORE.addToCartListener();
+
+    var form = document.getElementById('product-form');
+
+    if (STORE.hasOptionsDropdown(form)) {
+      STORE.addOptionsDropdownListener(form);
+      STORE.triggerOptionsChange();
+    }
+
+    if (STORE.hasQuantities()) {
+      STORE.addQuantityListener(form);
+      STORE.triggerQuantityChange();
+    } else {
+      var allVariants = $('.hidden option');
+      var $currentForm = $(form);
+      allVariants.each(function() {
+        var variant = $(this);
+        STORE.checkVariantAvailability(variant, 1, $currentForm);
+      });
+    }
+  },
+
+  triggerOptionsChange: function() {
+    $('select.options-dropdown').trigger('change');
+  },
+
+  triggerQuantityChange: function() {
+    $('.qty').trigger('change');
+  },
+
+  hasOptionsDropdown: function(form) {
+    return !!($(form).find('select.options-dropdown').length);
+  },
+
+  hasQuantities: function() {
+    return STORE.options.hasQuantities;
+  },
+
+  setInitialOptions: function(options) {
+    Object.keys(options).forEach(function(key) {
+      STORE.options[key] = options[key];
+    });
+  },
+
+  addQuantityListener: function(form) {
+    //Update Variants When the Quantity Changes
+    $(form).find('.qty').change(function() {
+      var $dropDowns = $(this).closest('form').find('select.options-dropdown');
+      var $form = $(form);
+      if ($dropDowns.length) {
+        STORE.filterVariants($form);
+      } else {
+        //If no dropdown then there is only 1 variant and inventory can be checked immediately.
+        var quantitySelected = $(this).val() || 1;
+        var selected_variant = $(this).parents('form').find('#variant option');
+        STORE.checkVariantAvailability(selected_variant, quantitySelected, $form);
+      }
+    });
+  },
+
+  addOptionsDropdownListener: function(form) {
+    $(form).find('select.options-dropdown').change(function() {
+      var $form = $(form);
+      STORE.filterVariants($form);
+    });
   },
 
   addToCartListener: function() {
-    $('form#product-form button').click(function(e) {
-      var quantitySelected = 1;
+    $('#submit').click(function(e) {
+      var $form = $(e.currentTarget).parents('form');
+      var quantitySelected = STORE.quantitySelected($form);
+
       STORE.addToCart(e, quantitySelected);
     });
   },
@@ -27,48 +88,76 @@ STORE = {
     });
   },
 
-  filterVariants: function($dropdown) {
-    var possible_variants = $('select#variant option');
-    // possible_variants.removeAttr('selected');
-    var quantitySelected = 1;
-
-    $('select.options-dropdown option:selected').each(function() {
-      var $selectedOption = $(this);
-      possible_variants = possible_variants.filter('[data-option-'+$selectedOption.attr('data-slug')+'="'+$selectedOption.val()+'"]');
-    });
-
-    STORE.checkVariantAvailability($dropdown, possible_variants, quantitySelected);
+  quantitySelected: function($form) {
+    if (STORE.hasQuantities()) {
+      return $form.siblings('.qty').val();
+    } else {
+      return 1;
+    }
   },
 
-  checkVariantAvailability: function($dropdown, possible_variants, quantitySelected) {
-    var $cartButton;
+  filterVariants: function($currentForm) {
+    var possible_variants = $('select#variant option');
+    var quantitySelected = STORE.quantitySelected($currentForm);
 
-    if (possible_variants.length == 1) {
-      var variantInventory = parseInt(possible_variants.attr('data-inventory'));
+
+    var $selectedOptions = $currentForm.find('select.options-dropdown option:selected');
+    $selectedOptions.each(function() {
+      var $selectedOption = $(this);
+      var selector = '[data-option-' + $selectedOption.attr('data-slug') + '="' + $selectedOption.val() + '"]';
+      possible_variants = possible_variants.filter(selector);
+    });
+
+    STORE.checkVariantAvailability(possible_variants, quantitySelected, $currentForm);
+  },
+
+  checkVariantAvailability: function(selected_variant, quantitySelected, $currentForm) {
+    var $cartButton;
+    var $quantityInput = $currentForm.find('input[name="quantity"]');
+
+    if (selected_variant.length === 1) {
+      var variantInventory = parseInt(selected_variant.attr('data-inventory'));
 
       if (variantInventory === 0 || variantInventory < quantitySelected) {
-        $cartButton = $dropdown.parents('form').find('button');
+        $cartButton = $currentForm.find('#submit');
         $cartButton.text('Out of Stock');
         STORE.disableButton($cartButton);
-      }else {
-        var variantValue = possible_variants.first().val();
-        // console.log('Variant:');
-        // console.log(variantValue);
+        STORE.disableQuantityInput($quantityInput);
+      } else {
+        var variantValue = selected_variant.first().val();
+        var $hiddenVariantSelect = selected_variant.parents('select');
+        $hiddenVariantSelect.val(variantValue);
 
-        $('select#variant').val(variantValue);
-        //  console.log('select#variant.val():');
-        // console.log($('select#variant').val());
+        //Required to Work with HTML5 data-incrementer inputs
+        STORE.enableQuantityInput($quantityInput, variantInventory);
 
-        $cartButton = $dropdown.parents('form').find('button');
+        $cartButton = $currentForm.find('#submit');
         STORE.activateButton($cartButton);
       }
-
-      $('.price').text("$" + possible_variants.attr('data-price'));
+    $('.price').text('$' + selected_variant.attr('data-price'));
     } else {
-      $cartButton = $dropdown.parents('form').find('button');
+      $cartButton = $currentForm.find('#submit');
       $cartButton.text('Currently Unavailable');
       STORE.disableButton($cartButton);
+      STORE.disableQuantityInput($quantityInput);
     }
+  },
+
+  disableQuantityInput: function($quantityInput){
+    $quantityInput.val(0).attr({'min': 0, 'max': 0});
+  },
+
+  enableQuantityInput: function($quantityInput, variantInventory){
+    $('.btn-number').removeAttr('disabled');
+
+    if($quantityInput.val() == 0 || $quantityInput.val() == 1){
+      $quantityInput.val(1);
+      $('.btn-number[data-type="minus"]').attr('disabled', 'disabled')
+    }else if($quantityInput.val() > variantInventory){
+      $quantityInput.val(variantInventory);
+      $('.btn-number[data-type="plus"]').attr('disabled', 'disabled')
+    }
+    $quantityInput.attr({'min': 1, 'max': variantInventory});
   },
 
   addToCart: function(e) {
@@ -87,7 +176,6 @@ STORE = {
       url: frm.attr('action'),
       data: frm.serialize(),
       success: function(data) {
-        STORE.activateButton($button);
         if (data.success === true) {
           var item = data.item;
           var cart = data.cart;
@@ -97,28 +185,29 @@ STORE = {
           STORE.activateButton($button);
           STORE.updateAvailableInventory(quantityAdded);
 
-          $('.options-dropdown').trigger('change');
+
+          $('select.options-dropdown').trigger('change');
 
           STORE.updateModal(item, quantityAdded);
           STORE.displayModal();
-          // track it!
-          window.TRACKING.sendEvent("Add To Cart", "Click", "eCom", parseInt(quantityAdded));
-        } else if (data.success === false) {
-          STORE.displayError(data.message);
-        }
-      },
-    });
-  },
-
-  displayError: function(errorMessage) {
-    var errorContainer = $('#errorContainer');
-    errorContainer.html(errorMessage);
-    errorContainer.fadeIn();
-  },
-
-  clearError: function() {
-    var errorContainer = $('#errorContainer');
-    errorContainer.html('');
+          // track it! 
+          window.TRACKING.sendEvent("Add To Cart", "Click", "eCom", parseInt(quantityAdded)); 
+        } else if (data.success === false) { 
+          STORE.displayError(data.message); 
+        } 
+      }, 
+    }); 
+  }, 
+ 
+  displayError: function(errorMessage) { 
+    var errorContainer = $('#errorContainer'); 
+    errorContainer.html(errorMessage); 
+    errorContainer.fadeIn(); 
+  }, 
+ 
+  clearError: function() { 
+    var errorContainer = $('#errorContainer'); 
+    errorContainer.html(''); 
     errorContainer.hide();
   },
 
@@ -126,10 +215,12 @@ STORE = {
     STORE.resetModalText();
 
     var name = item.name;
+    var totalAdded = '$' + (parseFloat(item.unit_price) * quantityAdded).toFixed(2);
     var options = item.variant.options;
     var $contentDiv = $('#added-to-cart .options');
 
     $('#item-name').html(name);
+    $('#added-to-cart .price').text(totalAdded);
 
     for (var i = 0; i < options.length; i++) {
       var optionName = options[i].name;
