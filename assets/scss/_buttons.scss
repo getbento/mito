@@ -51,6 +51,23 @@
   }
 }
 
+a.btn.disabled,
+a.btn[disabled] {
+  pointer-events: auto;
+
+  // note: make the disabled hover styles match the default styles so it looks like
+  // nothing changes on hover.
+  &:hover {
+    color: {{ theme.options.buttons.color }};
+    {% if theme.options.buttons.bg_color %}
+      background-color: {{ theme.options.buttons.bg_color }};
+    {% endif %}
+    {% if theme.options.buttons.border_color %}
+      border-color: {{ theme.options.buttons.border_color }};
+    {% endif %}
+  }
+}
+
 .btn-wrapper {
   text-align: center;
   a {

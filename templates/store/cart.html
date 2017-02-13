@@ -101,11 +101,18 @@
                 <span>Subtotal: ${{ store.cart.subtotal }}</span>
             </div>
         </div>
+        {%- if not store.cart.can_checkout %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="cart-msg"><strong>{{ store.cart.checkout_not_available_message }}</strong></p>
+                </div>
+            </div>
+        {%- endif %}
         <div class="row cart-details checkout">
             <div class="col-sm-3 pull-right text-right">
-                <a class="btn" href="{{ store.cart.checkout_url }}">
-              Checkout
-          </a>
+                <a class="btn{% if not store.cart.can_checkout %} disabled{% endif %}"{% if store.cart.can_checkout %} href="{{ store.cart.checkout_url }}"{% endif %}>
+                    Checkout
+                </a>
             </div>
         </div>
       </div>
