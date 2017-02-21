@@ -161,7 +161,7 @@
                             {% set is_renderable = true if (not is_multioption or (field.options|length > 0)) else false %}
 
                             {% if is_renderable %}
-                                <div class="product-config-field{#  form-group #}" data-product-config-field="{{ field.field_type }}" {% if field.max_quantity %} data-product-config-field-max="{{ field.max_quantity }}"{% endif %}>
+                                <div class="product-config-field{#  form-group #}" data-product-config-field="{{ field.field_type }}"{% if field.min_quantity %} data-product-config-field-min="{{ field.min_quantity }}"{% endif %}{% if field.max_quantity %} data-product-config-field-max="{{ field.max_quantity }}"{% endif %}>
                                     <h3 class="product-config-field__title">{{ field.name }}</h3>
                                     {% if field.show_help_text %}<p class="product-config-field__helper">{{ field.help_text }}</p>{% endif %}
 

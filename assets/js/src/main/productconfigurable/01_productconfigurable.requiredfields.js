@@ -27,6 +27,12 @@ function export_productconfig_fields(){
         this.model = model;
         this.type = this.$el.data("product-config-field") || null;
         this.$message = this.$el.find(".product-config-field__message").first();
+
+        // Normalize the min value to a valid integer...if possible
+        this.min = this.$el.data("product-config-field-min") || null;
+        this.min = (this.min && !isNaN(this.min)) ? parseInt(this.min) : null;
+        this.min = (this.min && (this.min < 0)) ? 0 : this.min; // make sure this can't be less than zero!
+
         // Normalize the max value to a valid integer...if possible
         this.max = this.$el.data("product-config-field-max") || null;
         this.max = (this.max && !isNaN(this.max)) ? parseInt(this.max) : null;
@@ -88,10 +94,11 @@ function export_productconfig_fields(){
             var errorModifier = "product-config-field__message--error";
 
             // If a message is available, show it. If the adapter is invalid, we'll also mark this as an 
-            // error message.
+            // error message. Please note, we are accessing the private `_valid` property so we don't run 
+            // the `adapter.updateAvailability()` again.
             if (this.adapter.message){
                 this.$message.text(this.adapter.message)
-                .addClass(showModifier).toggleClass(errorModifier, !this.adapter.valid);
+                .addClass(showModifier).toggleClass(errorModifier, !this.adapter._valid);
             }
             // If no message is provided, we'll reset/hide our message and error state.
             else {
@@ -105,7 +112,7 @@ function export_productconfig_fields(){
          * @returns {Boolean} - True if the adapter is valid, false if not.
          */
         getValid: function(){
-            return this.adapter.valid;
+            return this.adapter.getValid();
         },
 
         /**
@@ -170,12 +177,12 @@ function export_productconfig_fields(){
 
             case "checkbox":
                 $input = field.$el.find("input[type='checkbox']");
-                return ($input.length > 0) ? new ProductConfigFieldCheckboxAdapter($input, field.max) : null;
+                return ($input.length > 0) ? new ProductConfigFieldCheckboxAdapter($input, field.min, field.max) : null;
                 break;
 
             case "quantity":
                 $input = field.$el.find("[data-incrementer]");
-                return ($input.length > 0) ? new ProductConfigFieldQuantityAdapter($input, field.max) : null;
+                return ($input.length > 0) ? new ProductConfigFieldQuantityAdapter($input, field.min, field.max) : null;
                 break;
 
             default:
@@ -205,7 +212,6 @@ function export_productconfig_fields(){
      * - this.$dispatcher
      * - this.name
      * - this.will_change_price
-     * - this.valid
      * - this.message
      * - this.requires_immediate_preview
      *
@@ -214,6 +220,7 @@ function export_productconfig_fields(){
      * 
      * - setValue()     - currently never called from outside itself
      * - setMessage()   - currently never called from outside itself
+     * - getValid()
      * - getJSON() 
      * - getPrettyValue()     
      */
@@ -242,12 +249,12 @@ function export_productconfig_fields(){
         this.name = this.$el.data("product-config-field-slug");
         this.will_change_price = (this.$el.find("option[data-product-config-field-price-variant]").length > 0) ? true : false;
         this.requires_immediate_preview = this.will_change_price;
-        this.valid = true;
         this.message = null;
 
         // Adapter-specific properties: Not required to be implemented in all Adapters.
         this._json = {};
         this._json[this.name] = "";
+        this._valid = true;
 
         // start it up!
         this._init();
@@ -320,11 +327,22 @@ function export_productconfig_fields(){
          * @param {Boolean} valid - True if the message is a "direction". False if it is an error.
          */
         setMessage: function(msg, valid){
-            if ((this.message != msg) || (this.valid != valid)){
+            if ((this.message != msg) || (this._valid != valid)){
                 this.message = msg;
-                this.valid = valid;
+                this._valid = valid;
                 this.$dispatcher.trigger(_EVENTS.adapter.message_change);
             }
+        },
+
+        /**
+         * Returns the current valid state.
+         * Adapter API: This method is required in all Adapters.
+         * 
+         * @access public
+         * @returns {Boolean} - True if valid. False if not.
+         */
+        getValid: function(){
+            return this._valid;
         },
 
         /**
@@ -386,12 +404,12 @@ function export_productconfig_fields(){
         this.name = this.$el.data("product-config-field-slug"); 
         this.will_change_price = false;
         this.requires_immediate_preview = false;
-        this.valid = true;
         this.message = null;
 
         // Adapter-specific properties: Not required to be implemented in all Adapters.
         this._json = {};
         this._json[this.name] = "";
+        this._valid = true;
 
         // start it up!
         this._init();
@@ -447,11 +465,22 @@ function export_productconfig_fields(){
          * @param {Boolean} valid - True if the message is a "direction". False if it is an error.
          */
         setMessage: function(msg, valid){
-            if ((this.message != msg) || (this.valid != valid)){
+            if ((this.message != msg) || (this._valid != valid)){
                 this.message = msg;
-                this.valid = valid;
+                this._valid = valid;
                 this.$dispatcher.trigger(_EVENTS.adapter.message_change);
             }
+        },
+
+        /**
+         * Returns the current valid state.
+         * Adapter API: This method is required in all Adapters.
+         * 
+         * @access public
+         * @returns {Boolean} - True if valid. False if not.
+         */
+        getValid: function(){
+            return this._valid;
         },
 
         /**
@@ -499,22 +528,24 @@ function export_productconfig_fields(){
      * @constructor
      * @access public
      * @param {jQuery} $el - A jQuery object representing one or more `<input type="checkbox">` element(s).
+     * @param {Int} min - A minimum selection amount to impose on the sum of all checkboxes selected.
      * @param {Int} max - A maximum selection amount to impose on the sum of all checkboxes selected.
      */
-    ProductConfigFieldCheckboxAdapter = function($el, max){
+    ProductConfigFieldCheckboxAdapter = function($el, min, max){
         // Adapter API: These properities are required in all Adapters.
         this.$el = $el;
         this.$dispatcher = $("<div></div>");
         this.name = this.$el.first().data("product-config-field-slug");
         this.will_change_price = (this.$el.filter("[data-product-config-field-price-variant]").length > 0) ? true : false;;
         this.requires_immediate_preview = false;
-        this.valid = true;
         this.message = null;
 
         // Adapter-specific properties: Not required to be implemented in all Adapters.
         this._json = {};
         this._json[this.name] = [];
+        this._min = min;
         this._max = max;
+        this._valid = true;
         
         // start it up!
         this._init();
@@ -551,38 +582,63 @@ function export_productconfig_fields(){
 
         /**
          * Updates the enabled/disabled states of each checkbox and the corresponding message. Please note, this 
-         * method is only executed if a max quantity is imposed...if not, a user can check as many as they want. 
-         * Also, it should be impossible (via UI) to select MORE than the max allowed, but just in case, we are 
-         * going to address that possiblity as well.
+         * method is only executed if a min or max quantity is imposed...if not, a user can check as many as they 
+         * want. Also, it should be impossible (via UI) to select MORE than the max allowed, but just in case, we 
+         * are going to address that possiblity as well.
+         *
+         * IMPORTANT: Because two different types of errors/message can occur (min/max) at the same time and attempt 
+         * to use the same message DOM node, the minimum error will always take priority over the maximum messages. 
+         * If a user fixes the minimum requirement, they will then be shown the maximum messages if applicable.
+         * 
          * @access private
          */
         _updateAvailability: function(){
-            // If we need to impose a max quantity...
-            if (this._max){
+            // If we are enforcing either a minimum or maximum value...
+            if (this._min || this._max){
                 var count = this._json[this.name].length;
-                // If we are allowed to select more checkboxes: re-enable all disabled checkboxes and reset 
-                // the message.
-                if (count < this._max){
-                    this.$el.filter(":disabled").prop("disabled", false);
-                    this.setMessage(null, true);
-                    return;
+                var min_valid = true;
+                var max_valid = true;
+                var msg = null;
+
+                // If a minimum value is being enforced (which should always be the case because if its not set it 
+                // should be zero) and the current selection is less than our minimum – mark it as invalid and 
+                // set our message.
+                if (this._min && (count < this._min)){
+                    var min_pluralized = (this._min == 1) ? "item" : "items";
+                    msg = "Please select a minimum of " + this._min + " " + min_pluralized + " to continue.";
+                    min_valid = false;
                 }
-                // If we have reached our max: disable all unchecked checkboxes and update the directions message. 
-                else if (count == this._max){
-                    this.$el.not(":checked").prop("disabled", true);
-                    this.setMessage("All done. To make additional changes, please remove a selected item.", true);
-                    return;
+
+                // If a maximum value is being enforced...
+                if (this._max){
+                    // If we are allowed to select more checkboxes: re-enable all disabled checkboxes and leave the
+                    // valid and message states as-is.
+                    if (count < this._max){
+                        this.$el.filter(":disabled").prop("disabled", false);
+                    }
+                    // If we have reached our max: disable all unchecked checkboxes, keep valid state as-is, and 
+                    // update our message. If we have extra disabled checkboxes, we want to show the "To make additional 
+                    // changes..." message. Please note, if a message has already been set (via minimum), that message 
+                    // should take priority. 
+                    else if (count == this._max){
+                        this.$el.not(":checked").prop("disabled", true);
+                        msg = (msg) ? msg : "All done." + ((this.$el.length > this._max) ? " To make additional changes, please remove a selected item." : "");
+                    }
+                    // If we made it this far, it means something went wrong and there are more checkboxes selected 
+                    // than is allowed by the max...so, we have to disable all unchecked checkoxes and set an error 
+                    // message with directions on how to correct the issue. This should never happen, but we want to 
+                    // cover off on it anyways. Please note, if a message has already been set (via minimum), that 
+                    // message should take priority.
+                    else {
+                        var max_diff = count - this._max;
+                        var max_pluralized = (max_diff == 1) ? "item" : "items";
+                        this.$el.not(":checked").prop("disabled", true);
+                        msg = (msg) ? msg : "Oops. Please remove " + max_diff + " selected " + max_pluralized + ".";
+                        max_valid = false;
+                    }
                 }
-                // If we made it this far, it means something went wrong and there are more checkboxes selected 
-                // than is allowed by the max...so, we have to disable all unchecked checkoxes and show an error 
-                // message with directions on how to correct the issue. This should never happen, but we want to 
-                // cover off on it anyways.
-                else {
-                    var diff = count - this._max;
-                    var pluralized = (count == 1) ? "item" : "items";
-                    this.$el.not(":checked").prop("disabled", true);
-                    this.setMessage("Oops. Please remove " + diff + " selected " + pluralized + ".", false);
-                }
+                // Finally, we set our message and valid state.
+                this.setMessage(msg, (min_valid && max_valid));
             }
         },
 
@@ -615,11 +671,23 @@ function export_productconfig_fields(){
          * @param {Boolean} valid - True if the message is a "direction". False if it is an error.
          */
         setMessage: function(msg, valid){
-            if ((this.message != msg) || (this.valid != valid)){
+            if ((this.message != msg) || (this._valid != valid)){
                 this.message = msg;
-                this.valid = valid;
+                this._valid = valid;
                 this.$dispatcher.trigger(_EVENTS.adapter.message_change);
             }
+        },
+
+        /**
+         * Returns the current valid state after running `this._updateAvailability()`.
+         * Adapter API: This method is required in all Adapters.
+         * 
+         * @access public
+         * @returns {Boolean} - True if valid. False if not.
+         */
+        getValid: function(){
+            this._updateAvailability();
+            return this._valid;
         },
 
         /**
@@ -687,22 +755,25 @@ function export_productconfig_fields(){
      * @constructor
      * @access public
      * @param {jQuery} $el - A jQuery object representing one or more `[data-incrementer]` element(s).
+     * @param {Int} min - A minimum selection amount to impose on the sum of all quantity field values.
      * @param {Int} max - A maximum selection amount to impose on the sum of all quantity field values.
      */
-    ProductConfigFieldQuantityAdapter = function($el, max){
+    ProductConfigFieldQuantityAdapter = function($el, min, max){
         // Adapter API: These properities are required in all Adapters.
         this.$el = $el; // data-incrementers
         this.$dispatcher = $("<div></div>");
         this.name = this.$el.first().data("product-config-field-slug");
         this.will_change_price = (this.$el.filter("[data-product-config-field-price-variant]").length > 0) ? true : false;;
         this.requires_immediate_preview = false;
-        this.valid = true;
         this.message = null;
 
         // Adapter-specific properties: Not required to be implemented in all Adapters.
         this._json = {};
         this._json[this.name] = {};
+        this._min = min;
         this._max = max;
+        this._valid = true;
+
         this.$inputs = this.$el.find("input[type='number']");
         this.$plusBtns = this.$el.find(".btn-number[data-type='plus']");
         
@@ -784,55 +855,97 @@ function export_productconfig_fields(){
         },
 
         /**
+         * Gets the sum total based on the current selections and the max allowed. This method also can optionally 
+         * exclude a slug from the tally. This intention of the "exclude" feature is that it comes in handy to know 
+         * the maximum amount any one field can have before you commit to setting that field's value.
+         * @access private
+         * @param {String} exclude - The corresponding input's slug to exclude from the remaining tally.
+         * @returns {Int} The current amount remaining based on the max allowed.
+         */
+        _getTotal: function(exclude){
+            var total = 0;
+            for (var slug in this._json[this.name]){
+                if (slug != exclude) total += this._json[this.name][slug];
+            }
+            return total;
+        },
+
+        /**
          * Gets the amount remaining based on the current selections and the max allowed. This method also 
          * can optionally exclude a slug from the tally. This intention of the "exclude" feature is that 
          * it comes in handy to know the maximum amount any one field can have before you commit to setting that 
          * field's value. Please note, if the max is not being enforced, we are returning a pseudo-unlimited number.
          * @access private
-         * @param {String} - The corresponding input's slug to exclude from the remaining tally.
+         * @param {String} exclude - The corresponding input's slug to exclude from the remaining tally.
          * @returns {Int} The current amount remaining based on the max allowed.
          */
         _getRemaining: function(exclude){
-            if (this._max){
-                var total = 0;
-                for (var slug in this._json[this.name]){
-                    if (slug != exclude) total += this._json[this.name][slug];
-                }
-                return this._max - total;
-            }
-            return Number.MAX_VALUE;
+            return (this._max) 
+                ? (this._max - this._getTotal(exclude)) 
+                : Number.MAX_VALUE;
         },
 
         /**
          * Updates the enabled/disabled states of each plus button and sets the corresponding directions/error 
-         * message based if any more selections can be made. Please note, this method is only executed if a max 
-         * quantity is imposed...if not, a user can add as many as they want. Also, it should be impossible 
-         * (via UI) to select MORE than the max allowed, but just in case, we are going to address that 
-         * possiblity as well.
+         * message based if any more selections can be made. Please note, this method is only executed if a min or 
+         * max quantity is imposed...if not, a user can add as many as they want. Also, it should be impossible 
+         * (via UI) to select MORE than the max allowed, but just in case, we are going to address that possiblity 
+         * as well.
+         *
+         * IMPORTANT: We are not enabling/disabling minus buttons based on a minimum value because that would get 
+         * incredibly annoying to the user. Instead, the minimum value will only trigger an error message.
+         *
+         * IMPORTANT: Because two different types of errors/message can occur (min/max) at the same time and attempt 
+         * to use the same message DOM node, the minimum error will always take priority over the maximum messages. 
+         * If a user fixes the minimum requirement, they will then be shown the maximum messages if applicable.
+         * 
          * @access private
          */
         _updateAvailability: function(){
-            if (this._max){
+            // If we are enforcing either a minimum or maximum value...
+            if (this._min || this._max){
+                var total = this._getTotal();
                 var remaining = this._getRemaining();
-                // If there is still some available, turn on all plus buttons, and reset/hide the message.
-                if (remaining > 0){
-                    this._enablePlusBtns();
-                    this.setMessage(null, true);
+                var min_valid = true;
+                var max_valid = true;
+                var msg = null;
+
+                // If a minimum value is being enforced (which should always be the case because if its not set it 
+                // should be zero) and the current selection is less than our minimum – mark it as invalid and 
+                // set our message.
+                if (this._min && (total < this._min)){
+                    var min_pluralized = (this._min == 1) ? "item": "items";
+                    msg = "Please select a minimum of " + this._min + " " + min_pluralized + " to continue.";
+                    min_valid = false; 
                 }
-                // If we have hit our max, disable all the plus buttons, and show additional directions.
-                else if (remaining == 0){
-                    this.$plusBtns.prop("disabled", true);
-                    this.setMessage("All done. To make additional changes, please remove a selected item.", true);
+
+                // If a maximum value is being enforced...
+                if (this._max){
+                    // If there is still some available, turn on all plus buttons and leave the valid state and 
+                    // message as-is.
+                    if (remaining > 0){
+                        this._enablePlusBtns();
+                    }
+                    // If we have hit our max, disable all the plus buttons, and update the directions message. Please 
+                    // note, if a message has already been set (via minimum), that message should take priority. 
+                    else if (remaining == 0){
+                        this.$plusBtns.prop("disabled", true);
+                        msg = (msg) ? msg : "All done. To make additional changes, please remove a selected item.";
+                    }
+                    // If we made it this far, it means something went wrong and we are over the max allowed. Even 
+                    // though this shouldn't be possible, we are still going to set an error message to the user 
+                    // with directions on how to correct the problem. Please note, if a message has already been set 
+                    // (via minimum), than message should take priority.
+                    else {
+                        this.$plusBtns.prop("disabled", true);
+                        var max_diff = Math.abs(remaining);
+                        var max_pluralized = (max_diff == 1) ? "item" : "items";
+                        msg = (msg) ? msg : "Oops. Please remove " + max_diff + " selected " + max_pluralized + ".";
+                        max_valid = false;
+                    }
                 }
-                // If we made it this far, it means something went wrong and we are over the max allowed. Even 
-                // though this shouldn't be possible, we are still going to show an error message to the user 
-                // with directions on how to correct the problem.
-                else {
-                    var diff = Math.abs(remaining);
-                    var pluralized = (count == 1) ? "item" : "items";
-                    this.$plusBtns.prop("disabled", true);
-                    this.setMessage("Oops. Please remove " + diff + " selected " + plurizalize + ".", false);
-                }
+                // Finally, we set our message and valid state.
+                this.setMessage(msg, (min_valid && max_valid));
             }
         },
 
@@ -915,11 +1028,23 @@ function export_productconfig_fields(){
          * @param {Boolean} valid - True if the message is a "direction". False if it is an error.
          */
         setMessage: function(msg, valid){
-            if ((this.message != msg) || (this.valid != valid)){
+            if ((this.message != msg) || (this._valid != valid)){
                 this.message = msg;
-                this.valid = valid;
+                this._valid = valid;
                 this.$dispatcher.trigger(_EVENTS.adapter.message_change);
             }
+        },
+
+        /**
+         * Returns the current valid state after running `this._updateAvailability()`.
+         * Adapter API: This method is required in all Adapters.
+         * 
+         * @access public
+         * @returns {Boolean} - True if valid. False if not.
+         */
+        getValid: function(){
+            this._updateAvailability();
+            return this._valid;
         },
 
         /**

@@ -373,6 +373,10 @@ $(document).ready(function(){
                     }
                 });
             }
+            else {
+                this._errorMessage = "Please fix the invalid fields and try again.";
+                this.$dispatcher.trigger(_EVENTS.submit.error);
+            }
         },
 
         /**
@@ -491,10 +495,11 @@ $(document).ready(function(){
          * @returns {Boolean} true if all "required_fields" are valid. false if not.
          */
         _getIsValid: function(){
+            var valid = true;
             for (var i=0; i<this._config_fields.length; i++){
-                if (!this._config_fields[i].getValid()) return false;
+                if (!this._config_fields[i].getValid()) valid = false;
             }
-            return true;
+            return valid;
         },
 
         /**
