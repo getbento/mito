@@ -23587,22 +23587,22 @@ function export_productconfig_fields(){
 $(document).ready(function(){
     /**
      * IMPORTANT:
-     * File names in this bundle are intentionally named with leading number (ie...00_, 01_, 02_) so that when 
-     * Grunt concatentates them in the build process, they are compiled in order. This is very important because 
-     * we need to ensure that both our Events and ProductConfigField are defined and ready before configuring 
-     * our ProductConfig package – meaning, they are dependencies of this package. Please review the next few 
+     * File names in this bundle are intentionally named with leading number (ie...00_, 01_, 02_) so that when
+     * Grunt concatentates them in the build process, they are compiled in order. This is very important because
+     * we need to ensure that both our Events and ProductConfigField are defined and ready before configuring
+     * our ProductConfig package – meaning, they are dependencies of this package. Please review the next few
      * lines of code which are responsible for preparing our objects/dependencies.
      */
 
-    // call the functions that create and attach our objects/dependencies to the `window`. Its very important to 
-    // understand that by this point, the concatentation process has already run and included our files in the 
+    // call the functions that create and attach our objects/dependencies to the `window`. Its very important to
+    // understand that by this point, the concatentation process has already run and included our files in the
     // very specific order we need them in. (Events -> Fields -> Form)
     window.export_productconfig_events();
     window.export_productconfig_fields();
 
-    // Now that our objects are attached to the `window` object, we are creating local shortcuts. The reason for 
-    // this is to keep the implementation as familiar as possible across the different themes using this same 
-    // implementation – Juno, Osaka, Sensei, etc. Common names make it easier to track down functional issues 
+    // Now that our objects are attached to the `window` object, we are creating local shortcuts. The reason for
+    // this is to keep the implementation as familiar as possible across the different themes using this same
+    // implementation – Juno, Osaka, Sensei, etc. Common names make it easier to track down functional issues
     // across all themes.
     var _EVENTS = window.Bento.ConfigurableProduct.Events;
     var ProductConfigField = window.Bento.ConfigurableProduct.Field;
@@ -23611,15 +23611,15 @@ $(document).ready(function(){
     // =============== PRODUCT FORM ===============================================================================
     // ============================================================================================================
     /**
-     * The ProductConfigForm class is the main entry point to Configurable Products. This class is exposed as a 
-     * singleton (because there is only ever one of these available per page) and is responsible for creating all 
-     * the necessary components to make a Configurable Product form experience function properly. There are many 
-     * components that make up Configurable Products, most notably Config Field Adapters, so it is recommended to 
+     * The ProductConfigForm class is the main entry point to Configurable Products. This class is exposed as a
+     * singleton (because there is only ever one of these available per page) and is responsible for creating all
+     * the necessary components to make a Configurable Product form experience function properly. There are many
+     * components that make up Configurable Products, most notably Config Field Adapters, so it is recommended to
      * read all the package documentation thoroughly before attempting to make any changes.
      *
-     * Please note, because this class is exposed as a singleton, it is perfectly acceptable for it to find its 
+     * Please note, because this class is exposed as a singleton, it is perfectly acceptable for it to find its
      * own DOM node...because we're never creating more than one of either.
-     * 
+     *
      * @constructor
      * @access public
      * @param {jQuery} $form - jQuery object representing the single `[data-product-config]` instance.
@@ -23637,7 +23637,7 @@ $(document).ready(function(){
             message: null,
             submitbtn: null
         };
-        
+
         // If we have a form, create the model and start it up!
         if (this.$el.length > 0){
             this.model = new Model(this.$el);
@@ -23648,7 +23648,7 @@ $(document).ready(function(){
     ProductConfigForm.prototype = {
 
         /**
-         * Initialize and startup. Creates all the necessary components. Please note, we must call `_immediatePreview()` 
+         * Initialize and startup. Creates all the necessary components. Please note, we must call `_immediatePreview()`
          * last to guarentee all of our components are initialized and ready to handle dispatched events.
          * @access private
          */
@@ -23663,7 +23663,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Creates all of the `required_fields` that make up the Configurable Product experience. Please note, for a 
+         * Creates all of the `required_fields` that make up the Configurable Product experience. Please note, for a
          * `ProductConfigField` to be added to the overall system, it MUST have a valid adapter.
          * @access private
          * @see ./_productconfigurable.requiredfields.js for more information.
@@ -23681,9 +23681,9 @@ $(document).ready(function(){
         },
 
         /**
-         * After all the components have been created, we need to check to see if any of our adapters require an 
-         * immediate price preview request. The intention is – Dropdown Field Types use their first option as the default 
-         * value. Although that option/value may effect the price (+/-), it is not included in the base price...and, to 
+         * After all the components have been created, we need to check to see if any of our adapters require an
+         * immediate price preview request. The intention is – Dropdown Field Types use their first option as the default
+         * value. Although that option/value may effect the price (+/-), it is not included in the base price...and, to
          * accurately reflect the current selections, we may need to make an immediate request.
          * @access private
          */
@@ -23728,7 +23728,7 @@ $(document).ready(function(){
         _createMessage: function(){
             var $message = this.$el.find(".product-config__message").first();
             if ($message.length > 0) this.components.message = new Message($message, this.model);
-        },  
+        },
 
         /**
          * Creates the `SubmitButton` instance if applicable.
@@ -23744,14 +23744,14 @@ $(document).ready(function(){
     // =============== MODEL ======================================================================================
     // ============================================================================================================
     /**
-     * The Model class is responsible for keeping track of the state of various values, and when these values 
-     * change – dispatching the appropriate events to notify all subscribing views that they need to update 
-     * accordingly. This class is also responsible for making price preview requests and handling the actual form 
-     * submission. There's a lot going on in this class (and a lot may seem unrelated), so please read the 
-     * documentation of each method carefully before attempting to make changes. For an even better understanding, 
-     * it is recommended and will be very helpful to read through the documentation of all the other package 
+     * The Model class is responsible for keeping track of the state of various values, and when these values
+     * change – dispatching the appropriate events to notify all subscribing views that they need to update
+     * accordingly. This class is also responsible for making price preview requests and handling the actual form
+     * submission. There's a lot going on in this class (and a lot may seem unrelated), so please read the
+     * documentation of each method carefully before attempting to make changes. For an even better understanding,
+     * it is recommended and will be very helpful to read through the documentation of all the other package
      * components as well to see how they are interacting and communicating with the model.
-     * 
+     *
      * @constructor
      * @access internal
      * @param {jQuery} $form - jQuery object representing the single `form.product-config` instance.
@@ -23760,7 +23760,7 @@ $(document).ready(function(){
         this.$form = $form;
         this.$dispatcher = $("<div></div>");
         this._config_fields = [];
-        
+
         this._quantity = 1;
         this._inventory = Number.MAX_VALUE;
         this._pricePerUnit = parseFloat($form.find("input[name='variant_base_price']").first().val());
@@ -23768,7 +23768,7 @@ $(document).ready(function(){
         this._ajaxPrice = null;
         this._pricePreviewUrl = this.$form.data("product-config-preview-action");
         this._previewCount = 0;
-        
+
         this._receipt = null;
         this._errorMessage = null;
     };
@@ -23776,9 +23776,9 @@ $(document).ready(function(){
     Model.prototype = {
 
         /**
-         * Sets the initial quantity and inventory values – originating from the `Quantity` class. This allows us 
-         * to "prime" the model with real values instead of assuming `quantity=1` and having no value for inventory. 
-         * Please note, we do not need to dispatch an event here because the other components don't need to know yet, 
+         * Sets the initial quantity and inventory values – originating from the `Quantity` class. This allows us
+         * to "prime" the model with real values instead of assuming `quantity=1` and having no value for inventory.
+         * Please note, we do not need to dispatch an event here because the other components don't need to know yet,
          * and we can't yet be sure all components are ready to handle dispatched events.
          * @access public
          * @param {Int} quantity - The current quantity originating from the `Quantity` instance.
@@ -23790,7 +23790,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Adds a new `ProductConfigField` instance to our internal cache. This allows us to quickly and easily run 
+         * Adds a new `ProductConfigField` instance to our internal cache. This allows us to quickly and easily run
          * operations on all instances – compiling json, validation, etc.
          * @access public
          * @param {ProductConfigField} field - A `ProductConfigField` instance with valid adapter.
@@ -23800,16 +23800,16 @@ $(document).ready(function(){
         },
 
         /**
-         * Makes a price preview AJAX request that takes all of the current user's selections and calculates the current 
-         * price on-the-fly. Please note, the request endpoint is expecting data to be formatted as JSON – which is different 
-         * than many other BentoBox endpoints. We also don't need a csrftoken because we are not attempting to alter data – 
+         * Makes a price preview AJAX request that takes all of the current user's selections and calculates the current
+         * price on-the-fly. Please note, the request endpoint is expecting data to be formatted as JSON – which is different
+         * than many other BentoBox endpoints. We also don't need a csrftoken because we are not attempting to alter data –
          * instead, we are only trying to `GET` data.
          * @access public
          */
         preview: function(){
             var self = this;
-            // kill any in-progress price preview requests. This is important because we can't guarentee the order the requests 
-            // are returned – so older requests may be returned after newer requests. We are also setting a token to be matched 
+            // kill any in-progress price preview requests. This is important because we can't guarentee the order the requests
+            // are returned – so older requests may be returned after newer requests. We are also setting a token to be matched
             // later if and when the submissions complete.
             this._killRequestPrice();
             this._previewCount++;
@@ -23829,7 +23829,7 @@ $(document).ready(function(){
                 contentType: "application/json",
                 dataType: "json",
                 success: function(data) {
-                    // only update if the captured token matches the model's previewCount. If they are different, this callback 
+                    // only update if the captured token matches the model's previewCount. If they are different, this callback
                     // is being envoked from an older (not the most current) request.
                     if (previewToken == self._previewCount){
                         if (data.hasOwnProperty("final_price")){
@@ -23841,7 +23841,7 @@ $(document).ready(function(){
                     }
                 },
                 error: function(){
-                    // only update if the captured token matches the model's previewCount. If they are different, this callback 
+                    // only update if the captured token matches the model's previewCount. If they are different, this callback
                     // is being envoked from an older (not the most current) request.
                     if (previewToken == self._previewCount){
                         self.$dispatcher.trigger(_EVENTS.preview.complete);
@@ -23852,10 +23852,10 @@ $(document).ready(function(){
         },
 
         /**
-         * Makes and executes the actual form submission via AJAX. Please note, the request endpoint is expecting data to be 
-         * formatted as JSON – which is different than many other BentoBox endpoints. To format this correctly, are NOT utilizing 
-         * the form itself (ie...$form.submit()) – instead we are creating a separate AJAX request by collecting all the necessary 
-         * inputs into a `data` object that will be submitted as json instead. This also means that our `csrftoken` can't be 
+         * Makes and executes the actual form submission via AJAX. Please note, the request endpoint is expecting data to be
+         * formatted as JSON – which is different than many other BentoBox endpoints. To format this correctly, are NOT utilizing
+         * the form itself (ie...$form.submit()) – instead we are creating a separate AJAX request by collecting all the necessary
+         * inputs into a `data` object that will be submitted as json instead. This also means that our `csrftoken` can't be
          * submitted as an `<input>` and instead needs to be added as a `x-CSRFToken` RequestHeader.
          * @access public
          */
@@ -23895,8 +23895,8 @@ $(document).ready(function(){
                         }
                     },
 
-                    // Its possible that a response returns `status=200` even though the form submission has failed...so, we need to check 
-                    // the actual `data.success` value. Please note, BentoBox responses can be `true` or "true", so we need to explicitly 
+                    // Its possible that a response returns `status=200` even though the form submission has failed...so, we need to check
+                    // the actual `data.success` value. Please note, BentoBox responses can be `true` or "true", so we need to explicitly
                     // check for both data types to accurately capture a successful response.
                     success: function(data, textStatus){
                         if (data.success == "true" || data.success == true){
@@ -23918,13 +23918,13 @@ $(document).ready(function(){
 
                             // update inventory: will auto-update quantity if necessary.
                             self.setInventory(self.getInventory() - quantityAdded);
-                            
+
                             // update quantity
                             self.setQuantity(self.getQuantity());
 
                             // dispatch complete/success events
                             self.$dispatcher.trigger(_EVENTS.submit.complete);
-                            self.$dispatcher.trigger(_EVENTS.submit.success);   
+                            self.$dispatcher.trigger(_EVENTS.submit.success);
                         }
 
                         // if the truthy check fails, we have an error of some sort...
@@ -23933,16 +23933,23 @@ $(document).ready(function(){
                             // user to add items to their cart if the quantity is higher than the available stock (on the server side),
                             // so, we need to check. Unfortunately, once we've determined its an inventory problem, there's no way to
                             // tell a user exactly how many items are actually in stock...so we pop a relatively generic message.
-                            var isInventoryError = (data.error && 
-                                                    data.error.__all__ && 
-                                                    data.error.__all__.length > 0 && 
+                            var isInventoryError = (data.error &&
+                                                    data.error.__all__ &&
+                                                    data.error.__all__.length > 0 &&
                                                     data.error.__all__[0] == "There is not enough inventory left.");
 
-                            // If its an inventory error, we want to show our inventory error message. If not, a generic message. I'm
-                            // not sure what the use-cases are for the generic message, but we're including it just in case.
-                            self._errorMessage = (isInventoryError) 
-                                ? "There is not enough inventory left to complete your order. Please try again." 
-                                : "An error occurred while placing your order. Please try again."; 
+                            // If it's an inventory error, we want to show our inventory error message. If not, we show the message
+                            // returned by the server (e.g., when there is a shipping method conflict). If a message is not returned
+                            // for some reason, we show a generic message. I'm not sure what the use-cases are for the generic message,
+                            // but we're including it just in case.
+
+                            if (isInventoryError){
+                                self._errorMessage = "There is not enough inventory left to complete your order. Please try again.";
+                            } else if (data.message) {
+                                self._errorMessage = data.message;
+                            } else {
+                                self._errorMessage = "An error occurred while placing your order. Please try again.";
+                            }
 
                             // dispatch complete/error events.
                             self.$dispatcher.trigger(_EVENTS.submit.complete);
@@ -23966,8 +23973,8 @@ $(document).ready(function(){
         },
 
         /**
-         * Sets the quantity. First, the value is normalized so it can't be more than the inventory. This also attempts to set the 
-         * value to "at least 1" unless "1" is higher than the current inventory. If a change occurs, dispatch a change event to 
+         * Sets the quantity. First, the value is normalized so it can't be more than the inventory. This also attempts to set the
+         * value to "at least 1" unless "1" is higher than the current inventory. If a change occurs, dispatch a change event to
          * all subscribing views.
          * @access public
          * @param {Int} value - The current quantity.
@@ -23990,7 +23997,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Sets the inventory. If a change occurs, dispatch a change event to all subscribing views. Also, if the current quantity 
+         * Sets the inventory. If a change occurs, dispatch a change event to all subscribing views. Also, if the current quantity
          * is higher than the current inventory, update the quantity too!
          * @access public
          * @param {Int} value - The current inventory.
@@ -24014,15 +24021,15 @@ $(document).ready(function(){
         },
 
         /**
-         * Sets the current price-per-unit (single). Please note, we also have to check if this is a valid number because it could be 
+         * Sets the current price-per-unit (single). Please note, we also have to check if this is a valid number because it could be
          * a string – "0.00". Hopefully, we've ensured that is isn't before calling this method, but just in case.
          * @access public
          * @param {Number} value - The current price-per-unit (1.25).
          */
         setPricePerUnit: function(value){
             if (!isNaN(value) && this._pricePerUnit != value){
-                this._pricePerUnit = value; 
-                this.$dispatcher.trigger(_EVENTS.price.change);           
+                this._pricePerUnit = value;
+                this.$dispatcher.trigger(_EVENTS.price.change);
             }
         },
 
@@ -24039,10 +24046,10 @@ $(document).ready(function(){
         },
 
         /**
-         * Gets the current `Receipt` instance that was created on the last successful submit request. Please note, when new requests are 
+         * Gets the current `Receipt` instance that was created on the last successful submit request. Please note, when new requests are
          * created, the `Receipt` instance gets reset to `null`.
          * @access public
-         * @returns {Receipt} The `Receipt` instanced created on the last successful submit request. If no request was made, or the last 
+         * @returns {Receipt} The `Receipt` instanced created on the last successful submit request. If no request was made, or the last
          *                    request failed, this will return `null`.
          */
         getReceipt: function(){
@@ -24050,21 +24057,21 @@ $(document).ready(function(){
         },
 
         /**
-         * Gets the current error message generated by `submit()` if applicable. If the last request did not result in an error, this will 
+         * Gets the current error message generated by `submit()` if applicable. If the last request did not result in an error, this will
          * return `null`.
          * @access public
-         * @returns {String} Error message resulting from the last failed submit request. Or `null` if the last request was successful or 
-         *                   no requests have been executed yet. 
+         * @returns {String} Error message resulting from the last failed submit request. Or `null` if the last request was successful or
+         *                   no requests have been executed yet.
          */
         getErrorMessage: function(){
             return this._errorMessage;
         },
 
         /**
-         * Before each preview request, we want to kill any in-progress requests. This is because we can't guarentee the order that responses 
-         * are returned. For example, if you clicked a bunch of options quickly – you'd generate a bunch of requests. But, its possible that 
-         * older requests are returned AFTER newer requests – which would ultimately result in showing the incorrect price. So, we need to 
-         * make sure we're killing the previous requests so this doesn't happen. Please note, in the `preview()` method, we're also creating 
+         * Before each preview request, we want to kill any in-progress requests. This is because we can't guarentee the order that responses
+         * are returned. For example, if you clicked a bunch of options quickly – you'd generate a bunch of requests. But, its possible that
+         * older requests are returned AFTER newer requests – which would ultimately result in showing the incorrect price. So, we need to
+         * make sure we're killing the previous requests so this doesn't happen. Please note, in the `preview()` method, we're also creating
          * a previewCount/token that guarentees that we only update based on the newest request.
          * @access private
          */
@@ -24074,8 +24081,8 @@ $(document).ready(function(){
         },
 
         /**
-         * Very simple validation of each "required_field". Basically, we're just checking that none of the max values have been exceeded – 
-         * though this shouldn't be possible via the UI. But, just in case, we're checking to make sure all fields are valid before allowing 
+         * Very simple validation of each "required_field". Basically, we're just checking that none of the max values have been exceeded –
+         * though this shouldn't be possible via the UI. But, just in case, we're checking to make sure all fields are valid before allowing
          * the `submit()` ajax request to proceed.
          * @access private
          * @returns {Boolean} true if all "required_fields" are valid. false if not.
@@ -24089,7 +24096,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Loops through all the "required_fields", gathers their individual JSON values, and compiles them into a single JSON object. This 
+         * Loops through all the "required_fields", gathers their individual JSON values, and compiles them into a single JSON object. This
          * object is then used to populate the AJAX requests `data` property.
          * @access private
          * @returns {Object} The individual "required_fields" json combined into a single json object.
@@ -24108,10 +24115,10 @@ $(document).ready(function(){
     // =============== COMPONENT : PRODUCT QUANTITY ===============================================================
     // ============================================================================================================
     /**
-     * The Quantity class represents the single `ProductConfigForm` `.product-quantity` element and is responsible 
-     * for updating the model and responding to the appropriate change events. Please note, this class utilizes the 
+     * The Quantity class represents the single `ProductConfigForm` `.product-quantity` element and is responsible
+     * for updating the model and responding to the appropriate change events. Please note, this class utilizes the
      * `[data-incrementer]` component, so the markup must be configured correctly for this to work.
-     * 
+     *
      * @constructor
      * @access internal
      * @param {jQuery} $el - jQuery object representing the single `.product-quantity` instance.
@@ -24138,7 +24145,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Listens to the `<input>` for changes and notifies the model so it updates and dispatches the appropriate 
+         * Listens to the `<input>` for changes and notifies the model so it updates and dispatches the appropriate
          * change events (when applicable).
          * @access private
          */
@@ -24150,8 +24157,8 @@ $(document).ready(function(){
         },
 
         /**
-         * Listens to the model for "quantity change" events and updates accordingly. Please note, we are checking 
-         * that the model's value does not equal the input's value before updating so that we don't end up with a 
+         * Listens to the model for "quantity change" events and updates accordingly. Please note, we are checking
+         * that the model's value does not equal the input's value before updating so that we don't end up with a
          * potentially infinite loop.
          * @access private
          */
@@ -24164,15 +24171,15 @@ $(document).ready(function(){
                 // update min/max based on current quantity and inventory
                 self.$input.attr("min", (quantity == 0) ? 0 : 1).attr("max", self.model.getInventory());
 
-                // if the model's value doesn't equal the input's current value, update it and manually dispatch a 
+                // if the model's value doesn't equal the input's current value, update it and manually dispatch a
                 // change event so the +/- buttons update accordingly.
                 if (quantity != curVal) self.$input.val(quantity).change();
             });
         },
 
         /**
-         * On startup, we need to "prime" the model with the current quantity and inventory values. Otherwise, we 
-         * would have to assume `quantity=1` and `inventory=???` doesn't really matter yet. Its just better (and 
+         * On startup, we need to "prime" the model with the current quantity and inventory values. Otherwise, we
+         * would have to assume `quantity=1` and `inventory=???` doesn't really matter yet. Its just better (and
          * safer) to explicitly set these values.
          * @access private
          */
@@ -24187,9 +24194,9 @@ $(document).ready(function(){
     // =============== COMPONENT : SUBMIT BUTTON ==================================================================
     // ============================================================================================================
     /**
-     * The SubmitButton class represents the single `ProductConfigForm` `<button type="submit">` and is responsible 
-     * for enabling/disabling updating the button's message when necessarily. 
-     * 
+     * The SubmitButton class represents the single `ProductConfigForm` `<button type="submit">` and is responsible
+     * for enabling/disabling updating the button's message when necessarily.
+     *
      * @constructor
      * @access internal
      * @param {jQuery} $el - jQuery object representing the single `<button type="submit">` instance.
@@ -24215,7 +24222,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Listens to the button element for click events, and notifies the model that we need to 
+         * Listens to the button element for click events, and notifies the model that we need to
          * submit our form.
          * @access private
          */
@@ -24246,7 +24253,7 @@ $(document).ready(function(){
                     self.$el.prop("disabled", false);
                     self.$el.text(self._defaultLabel);
                 }
-                // If there is no more inventory available, ensure the button is disabled and showing the 
+                // If there is no more inventory available, ensure the button is disabled and showing the
                 // "Out of Stock" message.
                 else {
                     self.$el.prop("disabled", true);
@@ -24260,10 +24267,10 @@ $(document).ready(function(){
     // =============== COMPONENT : PRODUCT MESSAGE ================================================================
     // ============================================================================================================
     /**
-     * The Message class represents the single `ProductConfigForm` `.product-config__message` element that is 
-     * responsible for updating and displaying the various error messages that may result from unsuccessful form 
+     * The Message class represents the single `ProductConfigForm` `.product-config__message` element that is
+     * responsible for updating and displaying the various error messages that may result from unsuccessful form
      * submission.
-     * 
+     *
      * @constructor
      * @access internal
      * @param {jQuery} $el - jQuery object representing the single `.product-config__message` instance.
@@ -24299,7 +24306,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Updates the message element's message and visibility based on whether the model's error message is 
+         * Updates the message element's message and visibility based on whether the model's error message is
          * currently defined. Meaning, if its defined – we set and show it. If its not defined – we reset and hide it.
          * @access private
          */
@@ -24314,13 +24321,13 @@ $(document).ready(function(){
     // =============== COMPONENT : PRICES =========================================================================
     // ============================================================================================================
     /**
-     * The Prices class represents all `.price--single` instances on this page and is responsible for updating each 
-     * when necessary. Please note, `.price--single` instances always represent a single price-per-unit and are not 
+     * The Prices class represents all `.price--single` instances on this page and is responsible for updating each
+     * when necessary. Please note, `.price--single` instances always represent a single price-per-unit and are not
      * multiplied by the quantity. (ie...this is not a total purchase price)
-     *     
-     * Also, `.price` elements are not technically "in the <form>", but it is part of the functionality...so, we're 
-     * adding it to this file for clarity and convenience. 
-     * 
+     *
+     * Also, `.price` elements are not technically "in the <form>", but it is part of the functionality...so, we're
+     * adding it to this file for clarity and convenience.
+     *
      * @constructor
      * @access internal
      * @param {jQuery} $els - jQuery object representing all `.price--single` instances.
@@ -24365,7 +24372,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Changes all price elements while a preview request is pending. This allows the user to get a little 
+         * Changes all price elements while a preview request is pending. This allows the user to get a little
          * bit of feedback that something is "happening" or is "in progress".
          * @access private
          */
@@ -24374,8 +24381,8 @@ $(document).ready(function(){
         },
 
         /**
-         * Updates all price instances with the current formatted price-per-unit. Generally occurs only after a 
-         * successful preview request has completed. Please note, excluding the `this.model.getPriceFormatted()` 
+         * Updates all price instances with the current formatted price-per-unit. Generally occurs only after a
+         * successful preview request has completed. Please note, excluding the `this.model.getPriceFormatted()`
          * parameter gets only the  single `pricePerUnit` price – not including the quantity multiplier.
          * @access private
          */
@@ -24384,7 +24391,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Shows a generic error message when the preview request fails. The next successful request will replace 
+         * Shows a generic error message when the preview request fails. The next successful request will replace
          * this message.
          * @access private
          */
@@ -24397,12 +24404,12 @@ $(document).ready(function(){
     // =============== COMPONENT : MODAL ==========================================================================
     // ============================================================================================================
     /**
-     * The Modal class represents the modal window that pops up after a succesful "Add To Cart", and displays all 
-     * the user's selections, total price, images, etc. Please note, Juno uses Bootstrap's modal component and is 
-     * automatically initialized via `window.STORE.initialize()`. Also, the Modal element is not technically "in 
-     * the <form>", but it is part of the functionality...so, we're adding it to this file for clarity and 
+     * The Modal class represents the modal window that pops up after a succesful "Add To Cart", and displays all
+     * the user's selections, total price, images, etc. Please note, Juno uses Bootstrap's modal component and is
+     * automatically initialized via `window.STORE.initialize()`. Also, the Modal element is not technically "in
+     * the <form>", but it is part of the functionality...so, we're adding it to this file for clarity and
      * convenience.
-     * 
+     *
      * @constructor
      * @access internal
      * @param {jQuery} $el - jQuery object representing a single `#added-to-cart.modal` instance.
@@ -24439,8 +24446,8 @@ $(document).ready(function(){
         },
 
         /**
-         * Updates and shows the modal immediately after a successful "add to cart" action. Please note, this 
-         * method retrieves the model's `Receipt` instance which contains a snapshot of the successful order and 
+         * Updates and shows the modal immediately after a successful "add to cart" action. Please note, this
+         * method retrieves the model's `Receipt` instance which contains a snapshot of the successful order and
          * all the necessary data to render the modal.
          * @access private
          */
@@ -24456,12 +24463,12 @@ $(document).ready(function(){
     // =============== COMPONENT : RECEIPT ========================================================================
     // ============================================================================================================
     /**
-     * The Receipt class used as a helper/utility class. Once a product/variant has been successfully added to a 
-     * user's cart, all of the relevant "order" information (that will later be displayed in the modal window) is 
+     * The Receipt class used as a helper/utility class. Once a product/variant has been successfully added to a
+     * user's cart, all of the relevant "order" information (that will later be displayed in the modal window) is
      * captured and saved in a Receipt object – essentially, the Receipt object is a "snapshot" of the user's last
-     * successful order. This allows the modal window to easily retrieve the Receipt and use its values to populate 
+     * successful order. This allows the modal window to easily retrieve the Receipt and use its values to populate
      * itself.
-     * 
+     *
      * @constructor
      * @access internal
      * @param {String} pricePerUnit - The current variant's price...not (yet) a total price.
@@ -24489,7 +24496,7 @@ $(document).ready(function(){
         },
 
         /**
-         * Returns the formatted total price. This method is provided to make it a little clearer (per the method 
+         * Returns the formatted total price. This method is provided to make it a little clearer (per the method
          * name) that it is a FORMATTED price.
          * @access public
          * @returns {String} Formatted price-per-unit multiplied by the quantityAdded. ("$27.25")
@@ -24517,7 +24524,7 @@ $(document).ready(function(){
         }
     };
 
-    // Startup! If we find a `[data-product-config]` instance, its ok to create our `ProductConfigForm`! We're also 
+    // Startup! If we find a `[data-product-config]` instance, its ok to create our `ProductConfigForm`! We're also
     // pushing everything to the bottom of the call stack to ensure everything else has properly loaded.
     setTimeout(function(){
         var $form = $("[data-product-config]").first();
