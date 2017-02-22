@@ -51,22 +51,10 @@
 
         <!-- Resy -->
         {% if account.services.resy.api_key %}
-            <div id="BookWithResy"></div>
+            <div id="BookWithResy"{% if account.services.resy.venue_id %} data-resy-venue="{{ account.services.resy.venue_id }}"{% endif %}></div>
             <script src="https://widgets.resy.com/embed.js"></script>
             <script>
               resyWidget.addButton(document.getElementById('BookWithResy'), { 'venueId': {{ account.services.resy.venue_id }}, 'apiKey': '{{ account.services.resy.api_key }}' });
-              // enable resyWidget GA Tracking
-              if (window.ga){
-                window.addEventListener('message', function(message){
-                  if (message.data.type === 'ResyWidgetEvent') {
-                    ga("send", "event", {
-                      eventCategory: "Resy: {{ account.services.resy.venue_id }}",
-                      eventAction: message.data.name,
-                      eventLabel: message.data.properties.label || "n/a"
-                    });
-                  }
-                });
-              }
             </script>
         {% endif %}
         <!-- end Resy -->

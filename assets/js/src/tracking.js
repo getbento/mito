@@ -2,13 +2,18 @@
 // =============== BENTOBOX TRACKING ==========================================================================
 // ============================================================================================================
 /**
- * This object provides shortcuts and validation for sending Google Analytics tracking events. It also provides 
- * the ability to automatically send button clicks and form submissions on elements that have the proper 
- * data-attributes on them (listed below).
+ * This object provides shortcuts and validation for sending Google Analytics and BentoAnalytics tracking 
+ * events. It also provides the ability to automatically send button clicks and form submissions on elements 
+ * that have the proper data-attributes on them (listed below).
  *
  * IMPORTANT: Most forms are tracked via the API and called from other files (main.js and ticketing.js). You 
  * should only apply the form data-attributes (via macro) to elements that do not use any JavaScript/Ajax, and 
  * therefore do not provide any callbacks that can be directly hooked into.
+ *
+ * IMPORTANT: Please note, it is possible that Google Analytics isn't enabled and BentoAnalytics is. For this 
+ * reason – we are always initializing this library and then only checking if either exists in the final 
+ * `sendEvent()` method. If neither Google Analytics or BentoAnalytics exists – this method will basically be 
+ * a `noop()` method that does nothing at all.
  * 
  * Buttons
  *
@@ -55,19 +60,15 @@ var TRACKING = {
 	},
 
 	/**
-     * Startup and initialize. Finds all of the button and form instances that should be tracked – only if Google Analytics 
-     * is defined. By using the $context parameter, we can attempt to initialize only the elements found within that context, 
-     * and not every button/form on the page again. 
+     * Startup and initialize. Finds all of the button and form instances that should be tracked. By using the $context 
+     * parameter, we can attempt to initialize only the elements found within that context, and not every button/form on 
+     * the page again.
      * @access public
      * @param {jQuery|Optional} $context - A jQuery object that is the equivalent of $($context).find()
      */
 	initialize: function($context) {
-		if (window.ga !== undefined) {
-			this._initButtons($context);
-			this._initForms($context);
-		} else {
-			// console.warn('Analytics is not enabled');
-		}
+		this._initButtons($context);
+		this._initForms($context);
 	},
 
 	/**
@@ -181,12 +182,12 @@ var TRACKING = {
      * @returns {Boolean} true if all the required data is popuplated, false if not.
      */
 	_validateEvent: function(category, action, label, value){
-		return (window.ga && category && action && label) ? true : false;
+		return (category && action && label) ? true : false;
 	},
 
 	/**
      * Validates that the required event parameters are populated, creates the object formatting that Google Analytics expects,
-     * and finally sends the event via Google Analytics API.
+     * and finally sends the event via Google Analytics API and BentoAnalytics.
      * @access public
      * @param {String} category - Required. Google Analytics Event Category.
      * @param {String} action - Required. Google Analytics Event Action.
@@ -205,7 +206,8 @@ var TRACKING = {
 			if (value && (typeof value === "number")) params.eventValue = value;
 			// if (beacon === true) params.transport = "beacon";
 			// finally, send it!
-			window.ga("send", "event", params);
+			if (window.ga) window.ga("send", "event", params);
+			if (window.BentoAnalytics) window.BentoAnalytics.trackEvent(category, action, label, value);
 		}
 	}
 };
@@ -215,7 +217,21 @@ $(document).ready(function(){
 	TRACKING.initialize();
 
 	// Special case: Resy creates its own button and is only used in the footer.
-	$("#BookWithResy").click(function(e){
-		window.TRACKING.sendEvent("Reservations Trigger Button", "Click", "Button, Footer");
-	});
+	var $resy = $("#BookWithResy");
+	if ($resy.length > 0){
+		var venueId = $resy.data("resy-venue") || null;
+		// track button trigger click
+		$resy.click(function(e){
+			window.TRACKING.sendEvent("Reservations Trigger Button", "Click", "Button, Footer");
+		});
+
+		// if valid venue id, track resyWidget events
+		if (venueId && !isNaN(venueId)){
+			window.addEventListener("message", function(msg){
+				if (msg.data.type == "ResyWidgetEvent"){
+					window.TRACKING.sendEvent(("Resy: " + venueId), msg.data.name, (msg.data.properties.label || "n/a"));
+				}
+			});
+		}
+	}
 });
