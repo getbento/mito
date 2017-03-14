@@ -37,7 +37,6 @@ $(document).ready(function () {
       belowNav = $window.scrollTop() > ($nav_wrapper.height() + $nav_wrapper.offset().top) - 50;
     }
 
-    console.log(belowNav);
     if (belowNav && !$sticky_header.hasClass('show')) {
       $sticky_header.addClass('show');
 
@@ -88,7 +87,5 @@ $(document).ready(function () {
   $document.on('scroll', $.throttle(15, function () {
     toggleStickyHeader();
     scrollMobileHeader();
-    console.log('hello');
   }));
 });
-
