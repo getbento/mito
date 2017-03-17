@@ -1,7 +1,7 @@
 {% extends 'store/index.html' %}
 
 {% block products %}
-  {% with products = store.custom_products %}
+  {% with products = store.catering_products %}
     {% include 'store/index_inner.html' %}
   {% endwith %}
 {% endblock %}
