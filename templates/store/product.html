@@ -31,13 +31,13 @@
   <div class="container-fluid max-width">
     <div class="row">
         <div class="col-xs-6">
-            {% if current.product_type == 'basic' %}
+            {% if current.product_type in ['basic', 'custom'] %}
                 {% set shop_landing_url = pages.all|selectattr("template","equalto","store/index.html")|list|first  %}
                 {% if shop_landing %}
                     <a class="back" href="{{ shop_landing_url }}">Back to shop</a>
                 {% endif %}
-            {% else %}
-                <a class="back" href="/store/custom/">Back to shop</a>
+            {% elif current.product_type == 'catering' %}
+                <a class="back" href="/store/catering/">Back to shop</a>
             {% endif %}
 
         </div>
@@ -119,7 +119,7 @@
                     <div id="errorContainer"></div>
                 </form>
 
-            {% elif current.product_type == "configurable" %}
+            {% elif current.product_type in ["configurable", "catering"] %}
                 {#
                     Note: configurable products don't currently have variants, but our data is in the current.variant.0 slot. So,
                     its ok to assume its populated.
