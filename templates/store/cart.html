@@ -117,14 +117,67 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12 hidden-sm hidden-xs">
+            <div class="cart-links">
+                {% if store.settings.refund_policy %}
+                <a href="#" data-toggle="modal" data-target="#modal-refund">Refund Policy</a>
+                |  
+                {% endif %}
+                {% if store.settings.shipping_information %}
+                <a href="#" data-toggle="modal" data-target="#modal-shipping">Shipping Information</a>
+                |  
+                {% endif %}
+                <a href="http://getbento.com/terms" target="_blank">Terms of Service</a>
+                |  
+                <a href="http://getbento.com/privacy" target="_blank">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
 </div>
+</div>
+
+
 
 <div class="push"></div>
 </div>
+
+<div id="cart-modals">
+    <div class="modal fade refund" id="modal-refund" tabindex="-1" role="dialog" aria-labelledby="modal-refund-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h2>Refund Policy</h2>
+                <p>{{ store.settings.refund_policy }}</p>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade shipping" id="modal-shipping" tabindex="-1" role="dialog" aria-labelledby="modal-shipping-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h2>Shipping Information</h2>
+                <p>{{ store.settings.shipping_information }}</p>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block initScripts %}
 <script>
+function pushFooter() {
+    footerStart = $(window).innerHeight() -;
+    $('.cart-links').css({
+        "margin-top": footerStart + "px"
+    });
+};
+pushFooter();
+$(window).resize(function() {
+    pushFooter();   
+});
 
 $('#go-back').on('click', function () {
   console.log('going back');

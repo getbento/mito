@@ -32,7 +32,6 @@
 .store.cart {
 	text-align: left;
 	margin-top: 100px;
-
 	h1 {
 		margin-top:60px;
 	}
@@ -96,6 +95,20 @@
 
 	}
 }
+
+.cart-links {
+    text-align: left;
+    a:first-child{
+        padding: 0 10px 0 0;
+    }
+    a {
+        color: #000000;
+        padding: 0 10px 0 10px;
+        text-decoration: none;
+    }
+}
+
+
 nav#mobile-header .cart-icon {
 	margin-top:9px;
 	margin-right:5px;
