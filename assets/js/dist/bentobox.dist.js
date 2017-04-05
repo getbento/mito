@@ -132,7 +132,7 @@
 		};
 
 		reservations.handleOpentable = function(event) {
-			var reserveUrl = 'http://www.opentable.com/single.aspx?rid=' + options.opentable_id + '&restref=' + options.opentable_id;
+			var reserveUrl = 'https://www.opentable.com/single.aspx?rid=' + options.opentable_id + '&restref=' + options.opentable_id;
 
 			if (Utils.isMobile()) {
 				window.location.href = reserveUrl;
@@ -180,7 +180,7 @@
 
 	var Utils = (function() {
 		var utils = {};
-		
+
 		utils.isMobile = function() {
 			return (window.matchMedia("(max-width: 800px)").matches);
 		}

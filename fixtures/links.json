@@ -1,5 +1,0 @@
-[
-    {"order": 10, "classes": "facebook", "text": "facebook", "target": "https://www.facebook.com"},
-    {"order": 20, "classes": "twitter", "text": "twitter", "target": "https://twitter.com"},
-    {"order": 30, "classes": "instagram", "text": "instagram", "target": "http://instagram.com"}
-]
