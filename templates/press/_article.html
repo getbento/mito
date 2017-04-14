@@ -1,4 +1,4 @@
-<div class="team-member col-md-{{ 12 // theme.options.press.columns }}">
+<div class="team-member col-md-{{ 12 // theme.options.press.columns|int }}">
   <div class="caption">
     {% if article.file %}
       <h3><a class="lightbox" href="{{article.file}}" data-slug="{{ article.slug }}" data-section="{{ section.slug }}" data-lightbox-type="iframe">{{ article.title }}</a></h3>
