@@ -1,4 +1,4 @@
-{% import 'forms.html' as forms with context %}
+{% import '_macros/_forms.platform.html' as forms with context %}
 {% call forms.email_form('info') %}
 
   {% if theme.options.private_events.form.contact_email %}

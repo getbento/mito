@@ -12,7 +12,7 @@
 
     <div class="row">
       <div class="{% if theme.options.contact.one_column %}col-sm-12{% else %}col-sm-6{% endif %}">
-        {% import 'forms.html' as forms with context %}
+        {% import '_macros/_forms.platform.html' as forms with context %}
         {% call forms.email_form(theme.options.contact.email) %}
           <div id="form_error" style="display:none;">Please correct the errors below:<br><br></div>
 
