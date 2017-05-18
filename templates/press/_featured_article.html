@@ -3,18 +3,18 @@
       {% if article.file %}
         <div class="thumbnail">
           <a class="lightbox" href="{{ article.file }}" data-slug="{{ article.slug }}" data-section="{{ section.slug }}" data-lightbox-type="iframe">
-            <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')" alt="{{ article.name }} image"></div>
+            <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')" alt="{{ article.name }} Image"></div>
           </a>
         </div>
       {% elif article.external_url %}
         <a href="{{article.external_url}}" target="_blank">
           <div class="thumbnail">
-            <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')" alt="{{ article.name }} image"></div>
+            <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}')" alt="{{ article.name }} Image"></div>
           </div>
         </a>
       {% else %}
         <div class="thumbnail">
-          <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}'')" alt="{{ article.name }} image"></div>
+          <div class="pressthumb image-stroke" style="background-image: url('{{ article.image }}'')" alt="{{ article.name }} Image"></div>
         </div>
       {% endif %}
     {% endif %}
