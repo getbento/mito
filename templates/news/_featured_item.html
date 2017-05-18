@@ -3,7 +3,7 @@
 
     {% if item.image %}
       <div class="thumbnail" data-toggle="modal" data-target="#modal-news-{{item.slug}}">
-        <div class="newsthumb image-stroke" style="background-image: url('{{ item.image }}')"></div>
+        <div class="newsthumb image-stroke" style="background-image: url('{{ item.image }}')" alt="{{ item.name }}"></div>
       </div>
     {% endif %}
 
