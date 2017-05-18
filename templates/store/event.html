@@ -52,12 +52,10 @@
                 <div class="col-md-12">
                     <form method="POST" action="" id="event-form">
                         {% csrf_token %}
-                        <label for="ticketed_event_id" class="sr-only">EVENT ID</label>
                         <input type="hidden" id="ticketed_event_id" name="ticketed_event_id" value="{{ current.id }}">
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="variant_id" class="sr-only">VARIANT ID</label>
                                 <select id="variant_id" name="variant_id" class="variants-dropdown">
                                     {% for variant in current.variants %}
                                         <option value="{{ variant.id }}" data-remaining="{{ variant.remaining }}">{{ variant.name }} - ${{ variant.price }}</option>
@@ -75,8 +73,7 @@
                                         {% set input_type = 'text' %}
                                     {% endif %}
                                     <div class="{% if row|length ==1 %}col-md-12{% else %}col-md-6{% endif %}">
-                                        <label for="required_fields" class="sr-only">REQUIRED FIELDS</label>
-                                        <input class="required-fields" id="required_fields" name="{{ field.slug }}" placeholder="{{ field.name }}" type="{{ input_type }}"></input>
+                                        <input class="required-fields" name="{{ field.slug }}" placeholder="{{ field.name }}" type="{{ input_type }}"></input>
                                     </div>
                                 {% endfor %}
                             </div>
