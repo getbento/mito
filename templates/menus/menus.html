@@ -165,7 +165,8 @@
         <div class="row visible-xs hidden-print">
           <div class="col-xs-12">
             {% if boxes.menus.all|rejectattr('file')|list|length > 0 %}
-              <select class="form-control tab-select">
+              <label for="menu-select" class="sr-only">Menu Select</label>
+              <select class="form-control tab-select" id="menu-select">
                 {% for menu in boxes.menus.all %}
                   <option value="{{menu.slug}}" {% if menu.file %}file="{{ menu.file }}"{% endif %}>{{menu.name}}</option>
                 {% endfor %}

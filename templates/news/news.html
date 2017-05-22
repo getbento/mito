@@ -64,7 +64,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h1>{{ item.title }}</h1>
         {% if item.image %}
-          <img src="{{ item.image }}">
+          <img src="{{ item.image }}" alt="{{ item.title }}">
         {% endif %}
         {% if item.content %}
           <div class="wysiwyg">{{ item.content|safe }}</div>
