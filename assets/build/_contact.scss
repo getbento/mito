@@ -1,0 +1,31 @@
+.contact-section {
+  
+
+  
+
+  
+
+  h2 {
+    margin: 40px 0 10px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    margin: 0 0 8px 0;
+  }
+
+  .row {
+    margin-bottom: 45px;
+
+    &:last-child, &:first-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .checkbox label .label-text {
+    
+  }
+}

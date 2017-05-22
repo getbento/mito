@@ -7,7 +7,7 @@
     {% endfor %}
   </div>
 
-  {% if venue.images > 1 %}
+  {% if venue.images|length > 1 %}
     <!-- Controls -->
     <a class="left carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="prev">
       <span></span>

@@ -15,10 +15,10 @@
 
   {% if gallery.images|length > 1 %}
     <!-- Controls -->
-    <a class="left carousel-control" href="#{{gallery.slug}}-carousel" data-slide="prev">
+    <a class="left carousel-control sr-only" href="#{{gallery.slug}}-carousel" data-slide="prev">prev
       <span></span>
     </a>
-    <a class="right carousel-control" href="#{{gallery.slug}}-carousel" data-slide="next">
+    <a class="right carousel-control sr-only" href="#{{gallery.slug}}-carousel" data-slide="next">next
       <span></span>
     </a>
   {% endif %}

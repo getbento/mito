@@ -1,0 +1,193 @@
+footer {
+  z-index: 1020; // increased from 200 to address hero overlay issue. Refer: https://app.asana.com/0/164883087213679/164671092599685
+  background-color: #ffffff;
+
+  
+    background-image: url('//getbento.imgix.net/');
+  
+
+  @media (min-width: 768px) {
+    min-height: 75px;
+  }
+
+  #main-footer-content {
+    height: 75px;
+    overflow: hidden;
+    text-align: right;
+    position: relative;
+    padding-top: 12.5px;
+
+    .left-content {
+      position: absolute;
+      left: 0;
+      top: 12.5px;
+    }
+  }
+
+  label, a, .social-links {
+    color: #3d6e8d;
+
+    &:hover, &:focus {
+      color: #000000;
+    }
+  }
+
+  .btn {
+    text-transform: uppercase;
+    width: auto;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    white-space: normal;
+    background: #ffffff;
+    color: #000000 ;
+    border-color: rgba(0,0,0,0);
+    border-width: 0px;
+    margin: 0 15px;
+
+    &:hover, &:focus {
+      color: #000000;
+      
+        background: darken(#ffffff, 10%);
+      
+    }
+  }
+
+  #signup-btn {
+    display: inline-block;
+    margin-left: 0;
+  }
+
+  // These are styled to look/behave like footer buttons
+  .social-links {
+    width: auto;
+    text-align: left;
+    margin: 0 15px;
+    position: relative;
+    display: inline-block;
+
+    a {
+      @include transition(all .4s);
+      text-decoration: none;
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      /*
+      The goal here is to make the switch to font-awesome as
+      backwards compatible as possible with existing Mito sites.
+      The footer's background color must be defined, even when
+      the background is image-based.
+      */
+
+      // icon background
+      color: #3d6e8d;
+      &:hover, &:focus {
+        color: #000000;
+      }
+    }
+
+    // icon foreground
+    i:last-child {
+        color: #ffffff;
+      &:hover, &:focus {
+        color: #ffffff;
+      }
+    }
+  }
+
+  #footer-text {
+    display: inline-block;
+    line-height: 50px;
+    margin: 0 15px;
+  }
+
+  #footerform {
+    margin: 0 15px;
+    height: 0;
+    overflow: hidden;
+
+    &.in {
+      height: auto;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    .close {
+      margin: 15px 0;
+    }
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    .send {
+      text-align: right;
+
+      .btn {
+        margin: 0;
+      }
+    }
+  }
+
+  // mobile
+  @media (max-width: 767px) {
+    #main-footer-content {
+      height: auto;
+      padding-top: 20px;
+      padding-bottom: 10px;
+
+      .left-content {
+        position: static;
+      }
+
+      .btn, #signup-btn {
+        display: block;
+        margin: 0 auto 20px;
+      }
+
+      .social-links, #footer-text {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.OTButton {
+  display: none!important;
+}
+
+#powered-by {
+  height: 30px;
+  line-height: 30px;
+  color: #3d6e8d !important;
+  text-align: center;
+
+  
+    background-color: darken(#ffffff, 15%);
+  
+
+  .wrapper {
+    margin: 0 15px;
+  }
+
+  a {
+    color: #3d6e8d !important;
+
+    &:hover, &:active, &:focus {
+      color: darken(#3d6e8d, 15%) !important;
+    }
+  }
+}
+
+#BookWithResy {
+  span {
+    bottom: 0 !important;
+  }
+}

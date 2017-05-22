@@ -52,12 +52,12 @@
   </div>
   <div class="form-group row">
     <div class="col-sm-6">
-      <label for="date" class="sr-only">Date*</label>
+      <label for="datepicker" class="sr-only">Date*</label>
       <input type='text' name="date" class="form-control" id="datepicker" placeholder="Date*" />
       <!-- <input type="date" class="form-control" id="date" placeholder="Date"> -->
     </div>
     <div class="col-sm-6">
-      <label for="date" class="sr-only">Time*</label>
+      <label for="timepicker" class="sr-only">Time*</label>
       <input type='text' name="time" class="form-control" id="timepicker" placeholder="Time*" />
       <!-- <label for="time" class="sr-only">Time</label>
       <input type="time" class="form-control" id="time" placeholder="time"> -->
@@ -65,10 +65,10 @@
   </div>
   <div class="form-group row">
     <div class="col-sm-12">
-      <label for="event-type" class="sr-only">Type of Event</label>
       <div class="input-icon-wrapper">
         <b class="caret"></b>
-        <select name="event-type" class="form-control">
+        <label for="event-type" class="sr-only">Type of Event</label>
+        <select name="event-type" id="event-type" class="form-control">
           <option selected="selected" disabled>Type of event</option>
           {% if theme.options.private_events.form.event_types %}
             {% for option in theme.options.private_events.form.event_types.split(',') %}

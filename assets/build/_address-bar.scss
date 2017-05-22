@@ -1,0 +1,114 @@
+#address-bar {
+  background-color: #3d6e8d;
+  margin-bottom: 0;
+  max-width: 100%;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 0;
+  color: #ffffff;
+  height:  auto;
+  text-align: center;
+  position: relative;
+  z-index: 1200;
+
+  
+    background-image: url('//getbento.imgix.net/');
+  
+
+  
+
+  @media (min-width: 768px) {
+    height: 42px;
+    padding: 0;
+
+    
+      text-align: left;
+    
+  }
+
+  a, a:hover, a:focus {
+    text-decoration: none !important;
+  }
+
+  a:not(.btn) {
+    
+      font-family: Roboto;
+    
+    color: #ffffff;
+    line-height: 42px;
+    margin-right: 10px;
+    display: block;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover, &:active, &:focus {
+      color: #ffffff;
+      text-decoration: none;
+
+      
+    }
+
+    @media (min-width: 768px) {
+      display: inline-block;
+    }
+  }
+
+  // These are styled to look/behave like buttons
+  .social-links {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 15px;
+    margin: 0;
+    z-index: 10;
+
+    a {
+      @include transition(all .4s);
+
+      /*
+      The goal here is to make the switch to font-awesome as
+      backwards compatible as possible with existing Mito sites.
+      The footer's background color must be defined, even when
+      the background is image-based.
+      */
+
+      // icon background
+      color: #ffffff;
+      &:hover, &:focus {
+        color: #ffffff;
+      }
+    }
+
+    // icon foreground
+    i:last-child {
+        color: #3d6e8d;
+      &:hover, &:focus {
+        color: #3d6e8d;
+      }
+    }
+  }
+
+  .btn {
+    margin: 6px auto;
+    color: #ffffff;
+    background-color: darken(#3d6e8d, 10%);
+    width: 90%;
+    @media (min-width: 768px) {
+      width: auto;
+    }
+  }
+}
+
+.address-bar-sticky {
+  #address-bar {
+    @media (min-width: 768px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1200;
+      width: 100%;
+    }
+  }
+}
