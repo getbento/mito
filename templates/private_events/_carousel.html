@@ -10,9 +10,11 @@
   {% if venue.images|length > 1 %}
     <!-- Controls -->
     <a class="left carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="prev">
+      <noscript>prev</noscript>
       <span></span>
     </a>
     <a class="right carousel-control" href="#carousel-venue-{{ venue.slug }}" data-slide="next">
+      <noscript>next</noscript>
       <span></span>
     </a>
   {% endif %}
