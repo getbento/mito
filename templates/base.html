@@ -106,5 +106,13 @@
       </script>
     {% endif %}
 
+    {% if account.reservations.provider == "opentable" and account.reservations.id %}
+      <script>
+      $(document).ready(function() {
+        Reservations.initializeOpenTableFireFoxFix('{{ account.services.opentable.id }}')
+      });
+      </script>
+    {% endif %}
+
   </body>
 </html>

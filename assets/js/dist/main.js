@@ -22440,9 +22440,32 @@ $(document).ready(function() {
         scrolling: 'no'
       });
       modalBody.append(seatmeIframe);
-    }
-  };
+    },
 
+    initializeOpenTableFireFoxFix: function(opentableId) {
+      // check if firefox
+      // if not firefox, return
+      // find ALL reservations buttons and nav links
+      // handle the event hopefully BEFORE modal triggers
+      // event.stopPropagation() should keep modal from firing after you do your thing.
+      // window.something should open a new tab.
+      var isFirefox = typeof InstallTrigger !== 'undefined';
+      if (isFirefox !== true) {
+        return;
+      }
+
+      var OTButton = $('[data-target="#modal-opentable"]');
+
+      var url = "https://www.opentable.com/single.aspx?rid=" + opentableId + "&restref=" + opentableId + "&rtype=ism";
+
+      $(OTButton).click(function(event) {
+        var link  = $(this).find(OTButton);
+        event.stopPropagation();
+        link.attr("target", "_blank");
+        window.open(url);
+      });
+    },
+  };
 });
 
 function export_productconfig_events(){
