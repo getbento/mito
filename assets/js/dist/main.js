@@ -22443,25 +22443,21 @@ $(document).ready(function() {
     },
 
     initializeOpenTableFireFoxFix: function(opentableId) {
-      // check if firefox
-      // if not firefox, return
-      // find ALL reservations buttons and nav links
-      // handle the event hopefully BEFORE modal triggers
-      // event.stopPropagation() should keep modal from firing after you do your thing.
-      // window.something should open a new tab.
+      // check if browser is Firefox - return if not
       var isFirefox = typeof InstallTrigger !== 'undefined';
       if (isFirefox !== true) {
         return;
       }
 
+      // create variable targeting every element that opens opentable modal
       var OTButton = $('[data-target="#modal-opentable"]');
 
+      // url to opentable page with custom opentable ID
       var url = "https://www.opentable.com/single.aspx?rid=" + opentableId + "&restref=" + opentableId + "&rtype=ism";
 
+      //opens opentable page in new tab
       $(OTButton).click(function(event) {
-        var link  = $(this).find(OTButton);
         event.stopPropagation();
-        link.attr("target", "_blank");
         window.open(url);
       });
     },
