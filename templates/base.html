@@ -46,7 +46,7 @@
         <script async src='https://www.google-analytics.com/analytics{% if current.request.is_preview or current.request.is_development %}_debug{% endif %}.js'></script>
     {% endif %}
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCZuKldDXCVJzpNy-iz4PyhaefWyzWQ8k">
+      src="https://maps.googleapis.com/maps/api/js?key={{ account.services.google_maps.api_key }}">
     </script>
 
     {% if theme.options.other.head_code %}
