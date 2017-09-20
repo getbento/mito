@@ -47,7 +47,8 @@
     </script>
   {% endif %}
 
-  <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=17" target="_blank" {{ bbTrack.button_address(placement="Map") }}>
+  <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=17" target="_blank" {{ bbTrack.button_address(placement="Map") }} style="line-height: 0;font-size: 0;color: transparent;">
     <button class="btn wide">Get Directions</button>
+    Get Directions
   </a>
 </div>
