@@ -5,12 +5,13 @@
   <div class="content-wrapper max-width">
 
     <div id="sticky-logo-wrapper">
-      <a href="{% if absolute_nav %}{{ account.site.url }}{% else %}#{% endif %}">
+      <a href="{% if absolute_nav %}{{ account.site.url }}{% else %}#{% endif %}" style="line-height: 0;font-size: 0;color: transparent;">
         {% if theme.options.header.sticky.logo %}
           <img src="{{ theme.options.header.sticky.logo }}" alt="{{ account.site.title }}">
         {% else %}
           <img src="{{ account.logo }}" alt="{{ account.site.title }}">
         {% endif %}
+        sticky logo
       </a>
     </div>
 
