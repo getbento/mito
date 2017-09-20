@@ -99,7 +99,9 @@
           <div class="col-md-{{12 // theme.options.menus.columns }}">
             <!-- mobile -->
             <a class="visible-xs" href="{{ menu.file }}" target="_blank">
+              {% if menu.name %}
               <h2>{{menu.name}}</h2>
+              {% endif %}
               {% if menu.image %}
                 <img src="{{ menu.image }}" alt="{{ menu.name }}">
               {% endif %}
@@ -107,7 +109,9 @@
 
             <!-- desktop -->
             <div class="hidden-xs">
+              {% if menu.name %}
               <h2><a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">{{ menu.name }}</a></h2>
+              {% endif %}
 
               {% if menu.image %}
                 <a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">
@@ -211,7 +215,10 @@
           {% if not menu.file %}
             <div class="tab-pane {% if loop.first %}active{% endif %}" id="{{menu.slug}}">
               <div class=" col-xs-12 visible-print-block text-center">
+                {% if menu.name %}
                 <h2>{{menu.name}}</h2>
+                {% endif %}
+                }
               </div>
 
               <div class="col-xs-12 text-right hidden-print hidden-xs">
