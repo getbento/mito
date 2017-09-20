@@ -22433,11 +22433,10 @@ $(document).ready(function() {
 
       var seatmeIframe = $('<iframe>', {
         src: url,
-        id:  'seatmeIframe',
+        id: 'seatmeIframe',
         width: '100%',
         height: '570px',
         frameborder: 0,
-        scrolling: 'no'
       });
       modalBody.append(seatmeIframe);
     },
