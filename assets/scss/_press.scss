@@ -17,6 +17,22 @@
     }
   }
 
+  .featured-press {
+    .thumbnail {
+       a{
+          line-height: 0;
+          font-size: 0;
+          color: transparent;
+        }
+    }
+
+    .featured-link {
+      line-height: 0;
+          font-size: 0;
+          color: transparent;
+    }
+  }
+
   .unfeatured {
     margin-top: 15px;
   }
