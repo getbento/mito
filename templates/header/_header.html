@@ -35,7 +35,7 @@
                 <div class="wysiwyg">{{ slide.fields.text|safe }}</div>
               {% endif %}
               {% if slide.fields.button_text %}
-                <a href="{{ slide.fields.button_target }}"><button class="btn">{{ slide.fields.button_text }}</button></a>
+                <a href="{{ slide.fields.button_target }}" ><button class="btn">{{ slide.fields.button_text }}</button></a>
               {% endif %}
             </div>
             {% endif %}
@@ -46,11 +46,13 @@
 
     {% if boxes.header_gallery.all|length > 1 %}
       <!-- Controls -->
-      <a class="left carousel-control" href="#header-carousel" data-slide="prev">
+      <a class="left carousel-control" href="#header-carousel" data-slide="prev" style="line-height: 0;font-size: 0;color: transparent;">
         <span></span>
+        header-carousel
       </a>
-      <a class="right carousel-control" href="#header-carousel" data-slide="next">
+      <a class="right carousel-control" href="#header-carousel" data-slide="next" style="line-height: 0;font-size: 0;color: transparent;">
         <span></span>
+        header-carousel
       </a>
     {% endif %}
   </div>
