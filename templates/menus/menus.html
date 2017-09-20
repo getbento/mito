@@ -98,13 +98,14 @@
         {% for menu in boxes.menus.all %}
           <div class="col-md-{{12 // theme.options.menus.columns }}">
             <!-- mobile -->
-            <a class="visible-xs" href="{{ menu.file }}" target="_blank">
+            <a class="visible-xs" href="{{ menu.file }}" target="_blank" style="line-height: 0;font-size: 0;color: transparent;">
               {% if menu.name %}
               <h2>{{menu.name}}</h2>
               {% endif %}
               {% if menu.image %}
                 <img src="{{ menu.image }}" alt="{{ menu.name }}">
               {% endif %}
+              menu name
             </a>
 
             <!-- desktop -->
@@ -114,8 +115,9 @@
               {% endif %}
 
               {% if menu.image %}
-                <a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe">
+                <a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe" style="line-height:0;font-size: 0;color: transparent;" >
                   <img src="{{ menu.image }}" alt="{{ menu.name }}">
+                  menu image
                 </a>
               {% endif %}
             </div>
