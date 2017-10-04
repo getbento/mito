@@ -93,8 +93,9 @@
         <div class="row cart-details">
             <div class="col-sm-6">
 
-
-            <a id="go-back" class="back">Go Back</a>
+            {% if store.home %}
+              <a id="go-back" href="{{ store.home }}" class="back">Go Back</a>
+            {% endif %}
 
             </div>
             <div class="col-sm-6 text-right">
@@ -177,11 +178,6 @@ function pushFooter() {
 pushFooter();
 $(window).resize(function() {
     pushFooter();   
-});
-
-$('#go-back').on('click', function () {
-  console.log('going back');
-  window.history.back();
 });
 </script>
 {% endblock %}
