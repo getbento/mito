@@ -2,7 +2,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     {% for image in venue.images %}
-      <div class="item {% if loop.index0 == 0 %}active{% endif %}" style="background-image: url('{{ image }}')">
+      <div class="item {% if loop.index0 == 0 %}active{% endif %}" style="background-image: url('{{ image|image_url }}')" role="img" aria-label="{{ image|image_alt }}">
       </div>
     {% endfor %}
   </div>

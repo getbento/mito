@@ -46,14 +46,14 @@
         {% if current.images|length > 0 %}
         <div class="col-md-8">
             <div class="feature-image-wrap">
-            <div class="feature-image" style="background-image:url('{{ current.image }}')"></div>
+            <div class="feature-image" style="background-image:url('{{ current.image|image_url }}')" role="img" aria-label="{{ current.image|image_alt }}"></div>
 
             {% if current.images|length > 1 %}
                 {% for group in current.images|batch(3) %}
                   <div class="row">
                     {% for image in group %}
                       <div class="col-xs-4">
-                        <div class="image-option" style="background-image:url('{{ image }}')"></div>
+                        <div class="image-option" style="background-image:url('{{ image|image_url }}')" role="img" aria-label="{{ image|image_alt }}"></div>
                       </div>
                     {% endfor %}
                   </div>
@@ -241,7 +241,7 @@
         <div class="row">
             <a class="x remove">&times;</a>
             <div class="col-md-6">
-                <div class="img" style="background-image: url('{{ current.image }}');"></div>
+                <div class="img" style="background-image: url('{{ current.image|image_url }}');" role="img" aria-label="{{ current.image|image_alt }}"></div>
             </div>
             <div class="col-md-6 text-left">
                 <h2>{{ current.name }}</h2>
