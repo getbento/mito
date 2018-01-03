@@ -3,7 +3,7 @@
 <article class="team-member col-md-{{12 // theme.options.team.columns }}">
   <div {% if theme.options.team.columns == 1 %}class="col-sm-6"{% endif %}>
     {% if person.image %}
-      <div class="person-image image-stroke" style="background-image: url('{{person.image}}')">
+      <div class="person-image image-stroke" style="background-image: url('{{person.image|image_url}}')">
       </div>
     {% endif %}
 
