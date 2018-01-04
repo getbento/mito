@@ -103,7 +103,7 @@
               <h2>{{menu.name}}</h2>
               {% endif %}
               {% if menu.image %}
-                <img src="{{ menu.image }}" alt="{{ menu.name }}">
+                <img src="{{ menu.image|image_url }}" alt="{{ menu.image|image_alt }}">
               {% endif %}
               menu name
             </a>
@@ -116,7 +116,7 @@
 
               {% if menu.image %}
                 <a class="lightbox" href="{{ menu.file }}" data-slug="{{ menu.slug }}" data-section="{{ section.url|replace('/','') }}" data-lightbox-type="iframe" style="line-height:0;font-size: 0;color: transparent;" >
-                  <img src="{{ menu.image }}" alt="{{ menu.name }}">
+                  <img src="{{ menu.image|image_url }}" alt="{{ menu.image|image_alt }}">
                   menu image
                 </a>
               {% endif %}
