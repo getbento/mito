@@ -37,19 +37,19 @@
                     "section_underlines_image": {
                         "title": "Section Underline Image",
                         "type": "image",
-                        "display_logic":"layout.section_underlines"
+                        "display_logic": "layout.section_underlines"
                     },
                     "section_underline_color": {
                         "title": "Section Underline Color",
                         "type": "color",
                         "default": "#282828",
-                        "display_logic":"layout.section_underlines"
+                        "display_logic": "layout.section_underlines"
                     },
                     "section_underline_stroke": {
                         "title": "Section Underline Stroke",
                         "type": "text",
                         "default": "2px",
-                        "display_logic":"layout.section_underlines"
+                        "display_logic": "layout.section_underlines"
                     },
                     "fade_carousel": {
                         "title": "Fade Carousels",
@@ -64,13 +64,13 @@
                         "title": "Image Stroke Color",
                         "type": "color",
                         "default": "#282828",
-                        "display_logic":"layout.image_stroke"
+                        "display_logic": "layout.image_stroke"
                     },
                     "image_stroke_weight": {
                         "title": "Image Stroke Weight",
                         "type": "text",
                         "default": "2px",
-                        "display_logic":"layout.image_stroke"
+                        "display_logic": "layout.image_stroke"
                     }
                 }
             },
@@ -90,9 +90,7 @@
                     "alignment": {
                         "title": "Align",
                         "type": "dropdown",
-                        "options": [
-                            "left", "center", "right"
-                        ]
+                        "options": ["left", "center", "right"]
                     },
                     "font_size": {
                         "title": "Font Size",
@@ -469,7 +467,7 @@
                                 "type": "text",
                                 "default": "18px"
                             },
-                            "text_shadow" : {
+                            "text_shadow": {
                                 "title": "Text Shadow",
                                 "type": "boolean",
                                 "default": false
@@ -763,7 +761,8 @@
                             "event_types": {
                                 "title": "Event Types",
                                 "type": "text",
-                                "default": "Alumni,Bachelor / Bachelorette,Birthday,Cocktail Reception,Corporate Lunch,Engagement,Fundraiser,Graduation,Holiday,Meeting / Presentation,Photo / Film Shoot,Private Dinner,Rehearsal Dinner,Shower,Sporting Event,Wedding,Other"
+                                "default":
+                                    "Alumni,Bachelor / Bachelorette,Birthday,Cocktail Reception,Corporate Lunch,Engagement,Fundraiser,Graduation,Holiday,Meeting / Presentation,Photo / Film Shoot,Private Dinner,Rehearsal Dinner,Shower,Sporting Event,Wedding,Other"
                             }
                         }
                     }
@@ -1033,8 +1032,8 @@
                 }
             },
             "footer": {
-                "title":"Footer",
-                "type":"section",
+                "title": "Footer",
+                "type": "section",
                 "items": {
                     "custom_text": {
                         "title": "text",
@@ -1069,7 +1068,7 @@
                         "title": "Sticky (powered by bento)",
                         "type": "boolean",
                         "default": true,
-                        "display_logic":"footer.powered_by_bento"
+                        "display_logic": "footer.powered_by_bento"
                     },
                     "bg_color": {
                         "title": "Background Color",
@@ -1133,57 +1132,77 @@
                             "fonttype": {
                                 "title": "Type",
                                 "type": "dropdown",
-                                "options": [
-                                    {"selfhosted": "Self Hosted"}
-                                ],
+                                "options": [{ "selfhosted": "Self Hosted" }],
                                 "default": "selfhosted"
                             },
                             "selfhosted_name": {
                                 "title": "Font Family",
                                 "type": "text",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             },
                             "selfhosted_eot": {
                                 "title": "EOT",
                                 "type": "file",
                                 "helper": "Optional. Browser Support: IE6-9",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             },
                             "selfhosted_woff2": {
                                 "title": "WOFF2",
                                 "type": "file",
-                                "helper": "Optional. Browser Support: Chrome 36.0+, Firefox 35.0+, Opera 26.0+",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "helper":
+                                    "Optional. Browser Support: Chrome 36.0+, Firefox 35.0+, Opera 26.0+",
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             },
                             "selfhosted_woff": {
                                 "title": "WOFF",
                                 "type": "file",
-                                "helper": "Recommended. Browser Support: Chrome 5.0+, IE9+, Firefox 3.6+, Safari 5.1+, Opera 11.1+",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "helper":
+                                    "Recommended. Browser Support: Chrome 5.0+, IE9+, Firefox 3.6+, Safari 5.1+, Opera 11.1+",
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             },
                             "selfhosted_ttf": {
                                 "title": "TTF",
                                 "type": "file",
-                                "helper": "Recommended. Browser Support: Chrome 4.0+, IE9+, Firefox, 4.5+, Safari 3.1+, Opera 10.0+, iOS, Android",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "helper":
+                                    "Recommended. Browser Support: Chrome 4.0+, IE9+, Firefox, 4.5+, Safari 3.1+, Opera 10.0+, iOS, Android",
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             },
                             "selfhosted_otf": {
                                 "title": "OTF",
                                 "type": "file",
-                                "helper": "Optional. Browser Support: Chrome 4.0+, IE9+, Firefox, 4.5+, Safari 3.1+, Opera 10.0+",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "helper":
+                                    "Optional. Browser Support: Chrome 4.0+, IE9+, Firefox, 4.5+, Safari 3.1+, Opera 10.0+",
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             },
                             "selfhosted_style": {
                                 "title": "Font Style",
                                 "type": "text",
-                                "helper": "Optional. Inaccurate values may cause the font to fail to load. If you are unsure, leave this blank.",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "helper":
+                                    "Optional. Inaccurate values may cause the font to fail to load. If you are unsure, leave this blank.",
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             },
                             "selfhosted_weight": {
                                 "title": "Font Weight",
                                 "type": "text",
-                                "helper": "Optional. Inaccurate values may cause the font to fail to load. If you are unsure, leave this blank.",
-                                "display_logic": { "fonttype": { "value": "selfhosted" } }
+                                "helper":
+                                    "Optional. Inaccurate values may cause the font to fail to load. If you are unsure, leave this blank.",
+                                "display_logic": {
+                                    "fonttype": { "value": "selfhosted" }
+                                }
                             }
                         }
                     }
@@ -1205,7 +1224,12 @@
         {
             "name": "Private Events",
             "slug": "private-events",
-            "engine": "private_events"
-        },
-    ],
+            "engine": "private_events",
+            "fields": {
+                "email": {
+                    "required": true
+                }
+            }
+        }
+    ]
 }
