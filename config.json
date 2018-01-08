@@ -1219,7 +1219,12 @@
     "forms": [
         {
             "name": "Contact Form",
-            "slug": "contact"
+            "slug": "contact",
+            "fields": {
+                "email": {
+                    "required": true
+                }
+            }
         },
         {
             "name": "Private Events",
