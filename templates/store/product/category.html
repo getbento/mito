@@ -7,7 +7,7 @@
     <a class="product" href="{{ product.url }}">
         {% if product.image %}
           <div class="product-image-wrap">
-            <div class="product-image image-stroke" style="background-image: url('{{product.image}}')">
+            <div class="product-image image-stroke" style="background-image: url('{{ product.image|image_url }}')">
             </div>
           </div>
         {% endif %}
