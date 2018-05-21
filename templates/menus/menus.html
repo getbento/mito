@@ -19,7 +19,7 @@
                 <div class="col-sm-6 columns">
                   {% if item.image %}
                     <span class="th" style="float:left;max-width:90px;margin:0 10px 10px 0;">
-                      <img src="{{ item.image }}" alt="{{ item.name }}">
+                      <img src="{{ item.image|image_url }}" alt="{{ item.name }}">
                     </span>
                   {% endif %}
 
