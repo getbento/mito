@@ -61,11 +61,12 @@
 
         {% if account.services.seatme %}
         <!-- Desktop -->
-          <button class="btn hidden-xs" data-toggle="modal" data-target="#modal-seatme" {{ footer_reservations_tracking }}>Make a Reservation</button>
-
+          <a href="https://www.yelp.com/reservations/{{account.services.seatme.id }}" target="_blank" {{ footer_reservations_tracking }}>
+            <button class="btn hidden-xs">Make a Reservation</button>
+          </a>
           <!-- Mobile -->
           <div class="btn-wrapper visible-xs">
-            <a href="{{ account.reservations.url }}" target="_blank" class="btn" {{ footer_reservations_tracking }}>Make a Reservation</a>
+            <a href="https://www.yelp.com/reservations/{{account.services.seatme.id }}" target="_blank" class="btn" {{ footer_reservations_tracking }}>Make a Reservation</a>
           </div>
         {% endif %}
 
