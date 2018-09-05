@@ -1,10 +1,9 @@
 {% import "_macros/_tracking.html" as bbTrack %}
 
 <div class="google-map hidden-print{% if not (location.fields.custom_map or location.image) %} transparent{% endif %}{% if full_width == 'true' %} map-full-width{% endif %}">
-  {% if location.fields.custom_map or location.image %}
+  {% if location.fields.custom_map %}
     <a href="http://www.google.com/maps/dir//{{location.name}}+{{location.address}}?zoom=15" target="_blank" {{ bbTrack.button_address(placement="Map") }} style="line-height: 0;font-size: 0;color: transparent;">
-      <div class="custom-map" style="background-image: url('{{ location.fields.custom_map or location.image }}')"></div>
-      <!-- <img class="custom-map" src="{{ location.image }}" alt="{{location.name}} Map" /> -->
+      <div class="custom-map" style="background-image: url('{{ location.fields.custom_map|image_url }}')"></div>
       Custom Map
     </a>
   {% else %}
