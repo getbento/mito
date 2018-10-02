@@ -43,7 +43,11 @@
         </li>
         {% endfor %}
         {% if theme.options.header.nav.reservations_link and not theme.options.address_bar.mobile_reservation_btn %}
-          <li><a href="{{ account.reservations.url }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
+          {% if account.reservations and account.reservations.provider == 'seatme' %}
+              <li><a href="https://www.yelp.com/reservations/{{account.services.seatme.id }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
+          {% else %}
+            <li><a href="{{ account.reservations.url }}" target="_blank" data-toggle="collapse" data-target="#mobile-nav-dropdown" {{ bbTrack.button(category="Reservations Trigger Button", label="Navigation, Header") }}>Reservations</a></li>
+          {% endif %}
         {% endif %}
         {% if theme.options.address_bar.social_icons or theme.options.footer.social_links %}
           <div class="social-links text-center">
