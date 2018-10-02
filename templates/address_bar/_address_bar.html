@@ -44,6 +44,8 @@
         <div class="col-xs-12 visible-xs">
         {% if account.reservations.provider == "reserve" and account.reservations.id %}
           <a href="{{ account.reservations.url }}" class="rsrv-link btn visible-xs reservations-link" target="_blank" class="btn" {{ bbTrack.button(category="Reservations Trigger Button", label="Mobile Address Bar") }}>Make a Reservation</a>
+        {% elif account.reservations.provider == "seatme" %}
+          <a href="https://www.yelp.com/reservations/{{ account.services.seatme.id }}" class="rsrv-link btn visible-xs reservations-link" target="_blank" class="btn" {{ bbTrack.button(category="Reservations Trigger Button", label="Mobile Address Bar") }}>Make a Reservation</a>
         {% else %}
           <a href="{{ account.reservations.url }}" target="_blank" class="btn visible-xs reservations-link" {{ bbTrack.button(category="Reservations Trigger Button", label="Mobile Address Bar") }}>Make a Reservation</a>
         {% endif %}
