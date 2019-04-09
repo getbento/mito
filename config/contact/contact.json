@@ -9,5 +9,5 @@
       }
     }   
   },
-  "wireframe": "section-description"
+  "wireframe": ["section-description", ]
 }
