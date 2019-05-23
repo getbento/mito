@@ -91,6 +91,9 @@ $(document).ready(function () {
     } else {
       var datastring = $form.serialize();
 
+      // disable button to prevent multiple submissions
+      $this.attr('disabled', true);
+
       $.ajax({
           type: 'POST',
           url: $form.attr("action"),
