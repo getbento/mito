@@ -92,7 +92,7 @@ $(document).ready(function () {
       var datastring = $form.serialize();
 
       // disable button to prevent multiple submissions
-      $this.attr('disabled', true);
+      $this.prop('disabled', true);
 
       $.ajax({
           type: 'POST',
@@ -136,7 +136,7 @@ $(document).ready(function () {
             error = 'A server error occured. Please try again later.';
             $error_msg.html(error).show();
             // enable the button
-            $this.attr('disabled', false);
+            $this.prop('disabled', false);
           }
       });
     }

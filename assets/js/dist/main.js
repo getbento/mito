@@ -21592,7 +21592,7 @@ $(document).ready(function () {
   $footer_form.on('shown.bs.collapse', onShowForm);
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
   var $timepicker = $('#timepicker');
   var $datepicker = $('#datepicker');
   var $select_menu = $('select');
@@ -21601,14 +21601,15 @@ $(document).ready(function() {
 
   // initialize bootstrap timepicker
   $timepicker.datetimepicker({
-    pickDate: false,
-    minuteStepping: 30,
-    debug: true
+      pickDate: false,
+      minuteStepping: 30,
+      debug: true
   });
+
 
   var dateOptions = {
     pickTime: false,
-    debug: true
+    debug: true,
   };
 
   if ($datepicker.data('min-date') === 'today') {
@@ -21623,7 +21624,7 @@ $(document).ready(function() {
   });
 
   // on select dropdown change mobile, e.g. menus
-  $tab_select.on('change', function() {
+  $tab_select.on('change', function () {
     var $this = $(this);
     var file = $this.find(':selected').attr('file');
 
@@ -21632,19 +21633,16 @@ $(document).ready(function() {
       return true;
     }
 
-    $this
-      .parents('section')
-      .find('.nav a[href=#' + $this.val().replace(/ /g, '') + ']')
-      .tab('show');
+    $this.parents('section').find('.nav a[href=#'+$this.val().replace(/ /g,'')+']').tab('show');
   });
 
-  function validateEmail(email) {
+  function validateEmail (email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return re.test(email);
   }
 
   // submit form
-  $submit_btn.click(function(e) {
+  $submit_btn.click(function (e) {
     e.preventDefault();
     var $this = $(this);
     var $form = $this.parents('form');
@@ -21663,17 +21661,10 @@ $(document).ready(function() {
     //Validations
     resetErrors();
 
-    var required = [
-      'email',
-      'firstName',
-      'lastName',
-      'contact-email',
-      'name',
-      'datepicker'
-    ];
+    var required = ['email', 'firstName', 'lastName', 'contact-email', 'name', 'datepicker'];
 
-    _.each(required, function(requiredId) {
-      var $input = $form.find('#' + requiredId);
+    _.each(required, function (requiredId) {
+      var $input = $form.find('#'+requiredId);
 
       if ($input.length > 0 && $input.val() === '') {
         $input.parent().addClass('error');
@@ -21681,13 +21672,9 @@ $(document).ready(function() {
       }
     });
 
-    var $emailInput = $form.find('#contact-email').length
-      ? $form.find('#contact-email')
-      : $form.find('#email').length
-      ? $form.find('#email')
-      : null;
+    var $emailInput = $form.find('#contact-email').length ? $form.find('#contact-email') : $form.find('#email').length ? $form.find('#email') : null;
 
-    if ($emailInput && $emailInput.val() && !validateEmail($emailInput.val())) {
+    if ( $emailInput && $emailInput.val() && !validateEmail($emailInput.val()) ) {
       $emailInput.parent().addClass('error');
       error = 'Please enter a valid email';
     }
@@ -21699,66 +21686,56 @@ $(document).ready(function() {
       var datastring = $form.serialize();
 
       // disable button to prevent multiple submissions
-      $this.attr('disabled', true);
+      $this.prop('disabled', true);
 
       $.ajax({
-        type: 'POST',
-        url: $form.attr('action'),
-        data: datastring,
-        success: function(data, textStatus) {
-          resetErrors();
-          $this.hide();
-          $success_msg.show();
+          type: 'POST',
+          url: $form.attr("action"),
+          data: datastring,
+          success: function(data, textStatus) {
+            resetErrors();
+            $this.hide();
+            $success_msg.show();
 
-          // Bento Tracking
-          // Notes:
-          //  - Some forms return "true", and some return true, so we're checking for both before submitting a tracking request.
-          //  - We have to identify which form has been submitted using the below if/else/switch, and attempt
-          //    to return; as soon as we find it.
-          //  - #product-form: This is tracked in store.js > addToCart()
-          //  - #event-form: This is tracked in ticketed_events.js > onSubmit()
-          //  - gift cards are tracked in /templates/store/gift_cards.html > Bento.GiftCards.initialize()
-          if (data.success == 'true' || data.success === true) {
-            // If this is the newsletter form...
-            if ($form.is('#newsletter')) {
-              window.TRACKING.sendEvent('Forms', 'Submit', 'Email Sign Up');
-              return;
-            }
-            // Else, if it exists, we're going to look for the value of <input type="hidden" name="form" value="?">
-            // to identify the form.
-            else {
-              switch (
-                $form
-                  .find("input[name='form']")
-                  .first()
-                  .val()
-              ) {
-                case 'private-events':
-                  window.TRACKING.sendEvent(
-                    'Forms',
-                    'Submit',
-                    'Private Events'
-                  );
-                  break;
+            // Bento Tracking
+            // Notes:
+              //  - Some forms return "true", and some return true, so we're checking for both before submitting a tracking request.
+              //  - We have to identify which form has been submitted using the below if/else/switch, and attempt
+              //    to return; as soon as we find it.
+              //  - #product-form: This is tracked in store.js > addToCart()
+              //  - #event-form: This is tracked in ticketed_events.js > onSubmit()
+              //  - gift cards are tracked in /templates/store/gift_cards.html > Bento.GiftCards.initialize()
+            if (data.success == "true" || data.success === true){
+              // If this is the newsletter form...
+              if ($form.is("#newsletter")){
+                window.TRACKING.sendEvent("Forms", "Submit", "Email Sign Up");
+                return;
+              }
+              // Else, if it exists, we're going to look for the value of <input type="hidden" name="form" value="?">
+              // to identify the form.
+              else {
+                switch ($form.find("input[name='form']").first().val()) {
+                  case "private-events":
+                    window.TRACKING.sendEvent("Forms", "Submit", "Private Events");
+                    break;
 
-                case 'contact':
-                  window.TRACKING.sendEvent('Forms', 'Submit', 'Contact');
-                  break;
+                  case "contact":
+                    window.TRACKING.sendEvent("Forms", "Submit", "Contact");
+                    break;
+                }
               }
             }
+          },
+          error: function(xhr, status, error){
+            error = 'A server error occured. Please try again later.';
+            $error_msg.html(error).show();
+            // enable the button
+            $this.prop('disabled', false);
           }
-        },
-        error: function(xhr, status, error) {
-          error = 'A server error occured. Please try again later.';
-          $error_msg.html(error).show();
-          // enable the button
-          $this.attr('disabled', false);
-        }
       });
     }
   });
 });
-
 // $(document).ready(function () {
 
 //   $('.show-giftcard-form').on('click', function(event) {
