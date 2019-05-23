@@ -135,6 +135,8 @@ $(document).ready(function () {
           error: function(xhr, status, error){
             error = 'A server error occured. Please try again later.';
             $error_msg.html(error).show();
+            // enable the button
+            $this.attr('disabled', false);
           }
       });
     }
