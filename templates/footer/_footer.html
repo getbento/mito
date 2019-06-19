@@ -2,8 +2,10 @@
 {% from '_social-icons.html' import social_icons %}
 {% import "_macros/_tracking.html" as bbTrack %}
 
-<!-- Opentable Modal -->
+<!-- Modals -->
 <div id="footer-modals">
+  {% if account.services.opentable.id %}
+  <!-- Opentable -->  
   <div class="modal fade opentable" id="modal-opentable" tabindex="-1" role="dialog" aria-label="Opentable Reservations Modal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -12,14 +14,18 @@
       </div>
     </div>
   </div>
+  {% endif %}
 
-   <div class="modal fade seatme" id="modal-seatme" tabindex="-1" role="dialog" aria-label="Seatme Reservations Modal" aria-hidden="true">
+  {% if account.services.seatme %}
+  <!-- Seatme -->  
+  <div class="modal fade seatme" id="modal-seatme" tabindex="-1" role="dialog" aria-label="Seatme Reservations Modal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 
 <footer id="footer" class="hidden-print">
