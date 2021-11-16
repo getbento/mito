@@ -254,9 +254,7 @@
                   {% else %}
                     
                     {%- if menu.layout.rows is defined %}
-                      <div class="container">
                         {%- for columns in menu.layout['rows'] %}
-                          <div class="row">
                             {% if menu.layout.slug == "two_columns" %}
                               {% set number_of_columns = 2 %}
                             {% elif menu.layout.slug == "three_columns" %}
@@ -271,9 +269,7 @@
                                 {%- endif %}
                               </div>
                             {%- endfor %}
-                          </div>
                         {%- endfor %}
-                      </div>
                             
                     {% else %}
 
