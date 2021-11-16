@@ -6,7 +6,8 @@
         "one_column": [{"column_one":"Menu"}],
         "two_columns": [{"column_one":"Menu"}],
         "three_columns": [{"column_one":"Menu"}]
-      }
+      },
+      "layouts_v2": ["two_columns", "three_columns"]
     }
   },
   "has_categories": true
