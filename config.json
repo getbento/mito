@@ -2,6 +2,7 @@
     "theme": {
         "name": "Turnkey Two",
         "author": "Christopher Sanson",
+        "is_single_page": false,
         "fields": {
             "layout": {
                 "title": "Style Settings",
