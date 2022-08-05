@@ -1,0 +1,29 @@
+{
+  "parser": "@babel/eslint-parser",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaversion": 2018,
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "standard"],
+  "plugins": ["prettier"],
+  "rules": {
+    "no-undef": "off",
+    "no-console": [
+      2,
+      {
+        "allow": ["warn", "error", "info"]
+      }
+    ],
+    "space-before-function-paren": 0,
+    "semi": [2, "always"],
+    "camelcase": 0,
+    "curly": [2, "all"],
+    "no-import-assign": 1
+  }
+}
