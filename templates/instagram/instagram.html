@@ -1,7 +1,9 @@
 <section id="{{ section.slug }}" class="generic-section hidden-print instagram-section">
   {% if account.services.instagram.media and account.services.instagram.media|length > 0 %}
     {% for media in account.services.instagram.media %}
-      <a target="_blank" href="{{ media.link }}" class="photo" style="background-image:url('{{ media.images.standard_resolution.url }}')"></a>
+      <a target="_blank" href="{{ media.link }}" class="photo" style="background-image:url('{{ media.images.standard_resolution.url }}')">
+        <img class="sr-only" alt="Instagram Photo number {{ loop.index }}. Click to be redirected to the image on Instagram.">
+      </a>
     {% endfor %}
   {% endif %}
 </section>
