@@ -8,10 +8,10 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "eslint": "eslint",
-    "prettier": "prettier",
+    "eslint": "eslint --fix",
+    "prettier": "prettier --write .",
     "lint-staged": "lint-staged",
-    "lint": "npm run eslint src --fix && npm run prettier --write",
+    "lint": "npm run eslint && npm run prettier",
     "start": "grunt watch"
   },
   "devDependencies": {
