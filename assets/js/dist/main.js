@@ -21362,7 +21362,6 @@ var TRACKING = {
 			if (value && (typeof value === "number")) params.eventValue = value;
 			// if (beacon === true) params.transport = "beacon";
 			// finally, send it!
-			if (window.ga) window.ga("send", "event", params);
 			if (window.BentoAnalytics) window.BentoAnalytics.trackEvent(category, action, label, value);
 		}
 	}
@@ -21475,16 +21474,6 @@ $(document).ready(function () {
     // remove hash if undefined
     hash = hash || window.location.pathname;
 
-    // Register 'fake' page view for Google Analytics dashboard
-    var page_name = capitalizeFirstLetter(hash.substr(1).replace(/-/g, " "));
-    if (window.ga){
-      window.ga("set", "title", page_name);
-      window.ga("send", "pageview");
-      // legacy ga
-      // _gaq.push(["_set", "title", page_name]);
-      // _gaq.push(['_trackPageview', page_name]);
-    }
-
     // use pushstate to prevent jumping on hash change
     if (history.pushState) {
         history.pushState(null, null, hash);
@@ -21575,6 +21564,7 @@ $(document).ready(function () {
     window.location.hash = menuIdentifier + '/' + currentMenu;
   });
 });
+
 $(document).ready(function () {
   var $html = $('html, body');
   var $window = $(window);

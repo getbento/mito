@@ -37,14 +37,6 @@
     <![endif]-->
     <script src="{{ static('js/dist/modernizr.min.js') }}"></script>
     <link rel="icon" href="{{ account.site.favicon }}" />
-    {% if account.services.google_analytics %}
-        <script>
-            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', '{{ account.services.google_analytics.tracking_code }}', 'auto');
-            ga('send', 'pageview');
-        </script>
-        <script async src='https://www.google-analytics.com/analytics{% if current.request.is_preview or current.request.is_development %}_debug{% endif %}.js'></script>
-    {% endif %}
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key={{ account.services.google_maps.api_key }}">
     </script>
