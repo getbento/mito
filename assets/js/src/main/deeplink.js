@@ -14,16 +14,6 @@ $(document).ready(function () {
     // remove hash if undefined
     hash = hash || window.location.pathname;
 
-    // Register 'fake' page view for Google Analytics dashboard
-    var page_name = capitalizeFirstLetter(hash.substr(1).replace(/-/g, " "));
-    if (window.ga){
-      window.ga("set", "title", page_name);
-      window.ga("send", "pageview");
-      // legacy ga
-      // _gaq.push(["_set", "title", page_name]);
-      // _gaq.push(['_trackPageview', page_name]);
-    }
-
     // use pushstate to prevent jumping on hash change
     if (history.pushState) {
         history.pushState(null, null, hash);

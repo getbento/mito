@@ -206,7 +206,6 @@ var TRACKING = {
 			if (value && (typeof value === "number")) params.eventValue = value;
 			// if (beacon === true) params.transport = "beacon";
 			// finally, send it!
-			if (window.ga) window.ga("send", "event", params);
 			if (window.BentoAnalytics) window.BentoAnalytics.trackEvent(category, action, label, value);
 		}
 	}
