@@ -341,6 +341,7 @@
 	        var form = button.closest('form');
 	        var dataString = form.serialize();
 	        var successCallback = options.successCallback || gc.formSubmitSuccess;
+			var csrfHeaders = {};
 
 	        gc.clearErrors(form);
 
@@ -348,12 +349,24 @@
 	            return false;
 	        }
 
+			$.ajax({
+				type: 'GET',
+				url: '/csrf',
+				contentType: 'application/json',
+				async: false,
+				error: gc.formSubmitError,
+				success: function(csrfData) {
+				  csrfHeaders = { 'X-CSRFToken': csrfData.token };
+				}
+			  });
+
 	        $.ajax({
 	            type: "POST",
 	            url: form.attr('action'),
 	            data: dataString,
 	            success: successCallback,
-	            error: gc.formSubmitError
+	            error: gc.formSubmitError,
+				headers: csrfHeaders
 	        });
 
 	        gc.currentForm = form;
