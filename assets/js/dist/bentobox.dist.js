@@ -341,7 +341,6 @@
 	        var form = button.closest('form');
 	        var dataString = form.serialize();
 	        var successCallback = options.successCallback || gc.formSubmitSuccess;
-			var csrfHeaders = {};
 
 	        gc.clearErrors(form);
 
@@ -349,24 +348,32 @@
 	            return false;
 	        }
 
-			$.ajax({
-				type: 'GET',
-				url: '/csrf',
-				contentType: 'application/json',
-				async: false,
-				error: gc.formSubmitError,
-				success: function(csrfData) {
-				  csrfHeaders = { 'X-CSRFToken': csrfData.token };
-				}
-			  });
-
 	        $.ajax({
 	            type: "POST",
 	            url: form.attr('action'),
 	            data: dataString,
+				beforeSend: function(xhr, settings){
+					var csrfToken = '';
+			
+					$.ajax({
+						type: 'GET',
+						url: '/csrf',
+						contentType: 'application/json',
+						async: false,
+						error: gc.formSubmitError,
+						success: function(csrfData) {
+							csrfToken = csrfData.token;
+						}
+					});
+			
+					var csrfSafeMethod = (/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type));
+			
+					if (!csrfSafeMethod && !this.crossDomain) {
+					  xhr.setRequestHeader("X-CSRFToken", csrfToken);
+					}
+				  },
 	            success: successCallback,
 	            error: gc.formSubmitError,
-				headers: csrfHeaders
 	        });
 
 	        gc.currentForm = form;
