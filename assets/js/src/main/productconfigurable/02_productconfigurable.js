@@ -301,13 +301,24 @@ $(document).ready(function(){
 
                     // we need to add the `csrftoken` as a RequestHeader due to our json payload format.
                     beforeSend: function(xhr, settings){
-                        var csrftoken = self.$form.find("input[name='csrfmiddlewaretoken']").first().val();
+                        var csrfToken = '';
+                
+                        $.ajax({
+                            type: 'GET',
+                            url: '/csrf',
+                            contentType: 'application/json',
+                            async: false,
+                            success: function(csrfData) {
+                                csrfToken = csrfData.token;
+                            }
+                        });
+                
                         var csrfSafeMethod = (/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type));
-
+                
                         if (!csrfSafeMethod && !this.crossDomain) {
-                          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                          xhr.setRequestHeader("X-CSRFToken", csrfToken);
                         }
-                    },
+                      },
 
                     // Its possible that a response returns `status=200` even though the form submission has failed...so, we need to check
                     // the actual `data.success` value. Please note, BentoBox responses can be `true` or "true", so we need to explicitly
